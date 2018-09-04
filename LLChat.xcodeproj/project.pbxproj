@@ -26,6 +26,11 @@
 		75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7DD213E682100492ED8 /* LLChatBtn.m */; };
 		75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */; };
 		75F9E7E4213E71F400492ED8 /* LLImageMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E3213E71F400492ED8 /* LLImageMessageTableViewCell.m */; };
+		75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E6213E7C7F00492ED8 /* LLIMService.m */; };
+		75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E9213E7D2A00492ED8 /* LLIMMessage.m */; };
+		75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7ED213E805200492ED8 /* LLIMServiceHelper.m */; };
+		75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7F1213E80D600492ED8 /* LLSqliteManager.m */; };
+		75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +73,16 @@
 		75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LLChat.m"; sourceTree = "<group>"; };
 		75F9E7E2213E71F400492ED8 /* LLImageMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLImageMessageTableViewCell.h; sourceTree = "<group>"; };
 		75F9E7E3213E71F400492ED8 /* LLImageMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLImageMessageTableViewCell.m; sourceTree = "<group>"; };
+		75F9E7E5213E7C7F00492ED8 /* LLIMService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMService.h; sourceTree = "<group>"; };
+		75F9E7E6213E7C7F00492ED8 /* LLIMService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMService.m; sourceTree = "<group>"; };
+		75F9E7E8213E7D2A00492ED8 /* LLIMMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMMessage.h; sourceTree = "<group>"; };
+		75F9E7E9213E7D2A00492ED8 /* LLIMMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMMessage.m; sourceTree = "<group>"; };
+		75F9E7EC213E805200492ED8 /* LLIMServiceHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMServiceHelper.h; sourceTree = "<group>"; };
+		75F9E7ED213E805200492ED8 /* LLIMServiceHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMServiceHelper.m; sourceTree = "<group>"; };
+		75F9E7F0213E80D600492ED8 /* LLSqliteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSqliteManager.h; sourceTree = "<group>"; };
+		75F9E7F1213E80D600492ED8 /* LLSqliteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSqliteManager.m; sourceTree = "<group>"; };
+		75F9E7F3213E8BB400492ED8 /* NSString+LLChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+LLChat.h"; sourceTree = "<group>"; };
+		75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LLChat.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +218,7 @@
 		75F9E7B7213D226B00492ED8 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				75F9E7EB213E803200492ED8 /* LLIMService */,
 				75F9E7D7213E3E1300492ED8 /* Common */,
 				75F9E7CD213E19B200492ED8 /* View */,
 				75F9E7B8213D227900492ED8 /* Model */,
@@ -261,10 +277,13 @@
 		75F9E7D7213E3E1300492ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				75F9E7EF213E80CA00492ED8 /* LLSqliteManager */,
 				75F9E7D8213E4C5500492ED8 /* LLChatHelper.h */,
 				75F9E7D9213E4C5500492ED8 /* LLChatHelper.m */,
 				75F9E7DF213E6B6900492ED8 /* UIView+LLChat.h */,
 				75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */,
+				75F9E7F3213E8BB400492ED8 /* NSString+LLChat.h */,
+				75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -276,6 +295,28 @@
 				75F9E7DD213E682100492ED8 /* LLChatBtn.m */,
 			);
 			path = LLChatBtn;
+			sourceTree = "<group>";
+		};
+		75F9E7EB213E803200492ED8 /* LLIMService */ = {
+			isa = PBXGroup;
+			children = (
+				75F9E7E5213E7C7F00492ED8 /* LLIMService.h */,
+				75F9E7E6213E7C7F00492ED8 /* LLIMService.m */,
+				75F9E7E8213E7D2A00492ED8 /* LLIMMessage.h */,
+				75F9E7E9213E7D2A00492ED8 /* LLIMMessage.m */,
+				75F9E7EC213E805200492ED8 /* LLIMServiceHelper.h */,
+				75F9E7ED213E805200492ED8 /* LLIMServiceHelper.m */,
+			);
+			path = LLIMService;
+			sourceTree = "<group>";
+		};
+		75F9E7EF213E80CA00492ED8 /* LLSqliteManager */ = {
+			isa = PBXGroup;
+			children = (
+				75F9E7F0213E80D600492ED8 /* LLSqliteManager.h */,
+				75F9E7F1213E80D600492ED8 /* LLSqliteManager.m */,
+			);
+			path = LLSqliteManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,8 +393,13 @@
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLImageMessageTableViewCell.m in Sources */,
+				75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */,
+				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
+				75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */,
+				75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */,
 				75F9E78F21391C6B00492ED8 /* LLIMBaseModel.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
+				75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */,
 				75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */,
 				75F9E7D3213E1A0200492ED8 /* LLTextMessageTableViewCell.m in Sources */,
 				75F9E7C1213D24E800492ED8 /* LLImageMessageModel.m in Sources */,

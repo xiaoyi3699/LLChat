@@ -12,6 +12,7 @@
 
 + (instancetype)shareInstance;
 
+//聊天气泡
 - (UIImage *)senderBubbleImage;
 - (UIImage *)receiverBubbleImage;
 

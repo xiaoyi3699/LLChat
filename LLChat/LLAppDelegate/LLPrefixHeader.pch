@@ -10,21 +10,27 @@
 #define PrefixHeader_pch
 #ifdef __OBJC__
 
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 ///基类
 #import "LLIMBaseModel.h"
 
 ///工具类
 #import "LLAVLameManager.h"
+#import "LLSqliteManager.h"
 
 //全局类
-#import "LLChatViewController.h"
-
 #import "LLChatHelper.h"
 #import "UIView+LLChat.h"
+#import "NSString+LLChat.h"
 #import "LLTextMessageModel.h"
 #import "LLImageMessageModel.h"
 #import "LLVoiceMessageModel.h"
 #import "LLVideoMessageModel.h"
+
+#import "LLIMService.h"
+#import "LLChatViewController.h"
 
 #define LL_SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
 #define LL_SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height

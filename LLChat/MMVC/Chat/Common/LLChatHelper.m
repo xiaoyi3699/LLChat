@@ -22,14 +22,7 @@
     return instance;
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
+//聊天气泡
 - (UIImage *)senderBubbleImage {
     if (_senderBubbleImage == nil) {
         UIImage *image = [UIImage imageNamed:@"ll_chat_bj2"];
