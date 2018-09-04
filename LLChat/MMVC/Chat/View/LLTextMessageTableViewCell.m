@@ -1,0 +1,35 @@
+//
+//  LLTextMessageTableViewCell.m
+//  LLChat
+//
+//  Created by WangZhaomeng on 2018/9/4.
+//  Copyright © 2018年 WangZhaomeng. All rights reserved.
+//
+
+#import "LLTextMessageTableViewCell.h"
+
+@implementation LLTextMessageTableViewCell {
+    UILabel *_contentLabel;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        _contentLabel = [[UILabel alloc] init];
+        _contentLabel.textColor = [UIColor darkTextColor];
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+        _contentLabel.font = LL_TEXT_CONTENT_F;
+        _contentLabel.numberOfLines = 0;
+        [self addSubview:_contentLabel];
+    }
+    return self;
+}
+
+- (void)setConfig:(LLTextMessageModel *)model {
+    [super setConfig:model];
+    
+    _contentLabel.frame = _contentRect;
+    _contentLabel.text = model.content;
+}
+
+@end

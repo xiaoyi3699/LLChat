@@ -1,0 +1,43 @@
+//
+//  PrefixHeader.pch
+//  LLChat
+//
+//  Created by WangZhaomeng on 2018/8/31.
+//  Copyright © 2018年 WangZhaomeng. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#ifdef __OBJC__
+
+///基类
+#import "LLIMBaseModel.h"
+
+///工具类
+#import "LLAVLameManager.h"
+
+//全局类
+#import "LLChatViewController.h"
+
+#import "LLChatHelper.h"
+#import "UIView+LLChat.h"
+#import "LLTextMessageModel.h"
+#import "LLImageMessageModel.h"
+#import "LLVoiceMessageModel.h"
+#import "LLVideoMessageModel.h"
+
+#define LL_SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
+#define LL_SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
+
+#define LL_IS_iPhone  (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define LL_iPhoneX    (LL_IS_iPhone && LL_SCREEN_HEIGHT==812)
+#define LL_NAV_TOP_H  (LL_iPhoneX ? 88:64)
+#define LL_BAR_BOT_H  (LL_iPhoneX ? 83:49)
+
+//聊天界面底部视图高度
+#define LL_INPUT_H    (LL_iPhoneX ? 83:49)
+
+#define THEME_COLOR [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1]
+
+#endif
+#endif /* PrefixHeader_pch */
