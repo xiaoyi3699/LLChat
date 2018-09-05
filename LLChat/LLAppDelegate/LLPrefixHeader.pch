@@ -39,6 +39,7 @@
 #define LL_iPhoneX    (LL_IS_iPhone && LL_SCREEN_HEIGHT==812)
 #define LL_NAV_TOP_H  (LL_iPhoneX ? 88:64)
 #define LL_BAR_BOT_H  (LL_iPhoneX ? 83:49)
+#define LL_IPHONE_X_BOT_H  (LL_iPhoneX ? 34:0)
 
 //聊天界面底部视图高度
 #define LL_INPUT_H    (LL_iPhoneX ? 83:49)

@@ -7,15 +7,15 @@
 //
 
 #import "LLChatViewController.h"
+#import "LLInputView.h"
 #import "LLTextMessageTableViewCell.h"
 #import "LLImageMessageTableViewCell.h"
+
 
 @interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIView *inputView;
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) UIButton *sendBtn;
+@property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
 
 @end
@@ -39,13 +39,14 @@
                                              selector:@selector(keyboardValueChange:)
                                                  name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)setupUI {
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.inputView];
-    [self.inputView addSubview:self.textView];
-    [self.inputView addSubview:self.sendBtn];
 }
 
 //监听键盘的frame
@@ -102,7 +103,6 @@
 - (void)sendMessageModel:(LLBaseMessageModel *)model {
     [self.messageModels addObject:model];
     [_tableView reloadData];
-    //    [self.textView reloadInputViews];
 }
 
 - (LLTextMessageModel *)createTextModel {
@@ -113,7 +113,7 @@
     model.toNick = @"大弈";
     model.fromAvatar = @"";
     model.toAvatar = @"";
-    model.content = self.textView.text;
+//    model.content = self.textView.text;
     model.timestamp = [[NSDate date] timeIntervalSince1970];
     model.isSender = YES;
     model.isGroup = NO;
@@ -135,7 +135,7 @@
     model.toNick = @"大弈";
     model.fromAvatar = @"";
     model.toAvatar = @"";
-    model.content = self.textView.text;
+//    model.content = self.textView.text;
     model.timestamp = [[NSDate date] timeIntervalSince1970];
     model.isSender = YES;
     model.isGroup = NO;
@@ -153,7 +153,7 @@
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
+    [self.inputView chatResignFirstResponder];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -246,44 +246,11 @@
     return _tableView;
 }
 
-- (UIView *)inputView {
+- (LLInputView *)inputView {
     if (_inputView == nil) {
-        _inputView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), LL_SCREEN_WIDTH, LL_INPUT_H)];
-        _inputView.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
-        
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, LL_SCREEN_WIDTH, 0.5)];
-        lineView.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
-        [_inputView addSubview:lineView];
+        _inputView = [[LLInputView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), LL_SCREEN_WIDTH, LL_INPUT_H)];
     }
     return _inputView;
-}
-
-- (UITextView *)textView {
-    if (_textView == nil) {
-        _textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 7, LL_SCREEN_WIDTH-70, 35)];
-        _textView.font = [UIFont systemFontOfSize:13];
-        _textView.textColor = [UIColor darkTextColor];
-        _textView.layer.masksToBounds = YES;
-        _textView.layer.cornerRadius = 2;
-        _textView.layer.borderWidth = 0.5;
-        _textView.layer.borderColor = [UIColor colorWithRed:200/255. green:200/255. blue:200/255. alpha:1].CGColor;
-    }
-    return _textView;
-}
-
-- (UIButton *)sendBtn {
-    if (_sendBtn == nil) {
-        _sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _sendBtn.frame = CGRectMake(CGRectGetMaxX(self.textView.frame), 7, 70, 35);
-        _sendBtn.backgroundColor = THEME_COLOR;
-        _sendBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        _sendBtn.layer.masksToBounds = YES;
-        _sendBtn.layer.cornerRadius = 2;
-        [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
-        [_sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_sendBtn addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _sendBtn;
 }
 
 - (NSMutableArray *)messageModels {
@@ -291,6 +258,11 @@
         _messageModels = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return _messageModels;
+}
+
+#pragma mark - super method
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

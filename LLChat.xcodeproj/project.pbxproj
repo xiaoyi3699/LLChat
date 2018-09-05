@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
+		75614246213F6F7B004CC91B /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* EmojisList.plist */; };
+		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
+		7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424B213F79A3004CC91B /* LLEmojisCell.m */; };
+		7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424E213F79BF004CC91B /* LLDeleteCell.m */; };
+		75614252213F7E79004CC91B /* LLInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614251213F7E79004CC91B /* LLInputView.m */; };
 		75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */; };
 		75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F9E6F821391B4E00492ED8 /* Assets.xcassets */; };
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
@@ -34,6 +40,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
+		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
+		75614245213F6F7B004CC91B /* EmojisList.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = EmojisList.plist; sourceTree = "<group>"; };
+		75614247213F6F9A004CC91B /* LLEmojisKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLEmojisKeyboard.h; sourceTree = "<group>"; };
+		75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLEmojisKeyboard.m; sourceTree = "<group>"; };
+		7561424A213F79A3004CC91B /* LLEmojisCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLEmojisCell.h; sourceTree = "<group>"; };
+		7561424B213F79A3004CC91B /* LLEmojisCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLEmojisCell.m; sourceTree = "<group>"; };
+		7561424D213F79BF004CC91B /* LLDeleteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLDeleteCell.h; sourceTree = "<group>"; };
+		7561424E213F79BF004CC91B /* LLDeleteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLDeleteCell.m; sourceTree = "<group>"; };
+		75614250213F7E79004CC91B /* LLInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLInputView.h; sourceTree = "<group>"; };
+		75614251213F7E79004CC91B /* LLInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLInputView.m; sourceTree = "<group>"; };
 		75F9E6F221391B4D00492ED8 /* LLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F9E6F521391B4D00492ED8 /* LLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLAppDelegate.h; sourceTree = "<group>"; };
 		75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLAppDelegate.m; sourceTree = "<group>"; };
@@ -96,6 +113,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75614241213F6D47004CC91B /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				75614245213F6F7B004CC91B /* EmojisList.plist */,
+				75614250213F7E79004CC91B /* LLInputView.h */,
+				75614251213F7E79004CC91B /* LLInputView.m */,
+				75614247213F6F9A004CC91B /* LLEmojisKeyboard.h */,
+				75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */,
+				75614243213F6D65004CC91B /* LLHorizontalLayout.h */,
+				75614242213F6D65004CC91B /* LLHorizontalLayout.m */,
+				7561424A213F79A3004CC91B /* LLEmojisCell.h */,
+				7561424B213F79A3004CC91B /* LLEmojisCell.m */,
+				7561424D213F79BF004CC91B /* LLDeleteCell.h */,
+				7561424E213F79BF004CC91B /* LLDeleteCell.m */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
 		75F9E6E921391B4D00492ED8 = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +298,7 @@
 		75F9E7CD213E19B200492ED8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				75614241213F6D47004CC91B /* Keyboard */,
 				75F9E7DB213E680500492ED8 /* LLChatBtn */,
 				75F9E7CE213E19E400492ED8 /* LLBaseMessageTableViewCell.h */,
 				75F9E7CF213E19E400492ED8 /* LLBaseMessageTableViewCell.m */,
@@ -377,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */,
+				75614246213F6F7B004CC91B /* EmojisList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */,
 				75F9E7D0213E19E400492ED8 /* LLBaseMessageTableViewCell.m in Sources */,
 				75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */,
 				75F9E7A621391C6B00492ED8 /* LLAVLameManager.m in Sources */,
@@ -396,16 +434,20 @@
 				75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
 				75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */,
+				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */,
 				75F9E78F21391C6B00492ED8 /* LLIMBaseModel.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
+				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
 				75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */,
 				75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */,
 				75F9E7D3213E1A0200492ED8 /* LLTextMessageTableViewCell.m in Sources */,
+				75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */,
 				75F9E7C1213D24E800492ED8 /* LLImageMessageModel.m in Sources */,
 				75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */,
 				75F9E7C4213D24F500492ED8 /* LLVoiceMessageModel.m in Sources */,
 				75F9E7CC213E18DF00492ED8 /* LLChatViewController.m in Sources */,
+				75614252213F7E79004CC91B /* LLInputView.m in Sources */,
 				75F9E7BE213D24CE00492ED8 /* LLTextMessageModel.m in Sources */,
 				75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */,
 				75F9E7BB213D229D00492ED8 /* LLBaseMessageModel.m in Sources */,

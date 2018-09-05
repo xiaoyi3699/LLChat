@@ -31,6 +31,10 @@
             //实际应用中要根据情况，返回所需的frame
             return CGRectMake(12.5, 12.5, 15, 15);
         }
+        if (_type == LLChatButtonTypeInput) {
+            //实际应用中要根据情况，返回所需的frame
+            return CGRectMake(5, 5, 30, 30);
+        }
     }
     return [super imageRectForContentRect:contentRect];
 }
