@@ -29,7 +29,7 @@
     [super setConfig:model];
     
     _contentLabel.frame = _contentRect;
-    _contentLabel.text = model.content;
+    _contentLabel.text = model.text;
 }
 
 @end

@@ -12,11 +12,12 @@
 #import "LLImageMessageTableViewCell.h"
 
 
-@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
+@property (nonatomic, assign) BOOL isEditing;
 
 @end
 
@@ -40,115 +41,20 @@
                                                  name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
-- (void)setupUI {
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.inputView];
-}
-
-//监听键盘的frame
-- (void)keyboardValueChange:(NSNotification *)notification{
-    NSDictionary *dic = notification.userInfo;
-    CGFloat duration = [dic[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
-    CGRect endFrame = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    CGRect frame = [self.view convertRect:endFrame fromView:self.view.window];
-    
-    CGRect rect = self.inputView.frame;
-    rect.origin.y = (frame.origin.y-rect.size.height);
-    self.inputView.frame = rect;
-    
-    CGFloat TContentH = self.tableView.contentSize.height;
-    CGFloat tableViewH = self.tableView.bounds.size.height;
-    CGFloat keyboardH = frame.size.height;
-    
-    CGFloat offsetY = 0;
-    if (TContentH < tableViewH) {
-        offsetY = TContentH+keyboardH-tableViewH;
-        if (offsetY < 0) {
-            offsetY = 0;
-        }
-    }
-    else {
-        offsetY = keyboardH;
-    }
-    
-    if (offsetY > 0) {
-        CGRect TRect = self.tableView.frame;
-        if (frame.origin.y == self.view.bounds.size.height) {
-            //键盘收回
-            TRect.origin.y = LL_NAV_TOP_H;
-            [UIView animateWithDuration:duration animations:^{
-                self.tableView.frame = TRect;
-            }];
-        }
-        else {
-            //键盘谈起
-            TRect.origin.y = LL_NAV_TOP_H-offsetY;
-            [UIView animateWithDuration:duration animations:^{
-                self.tableView.frame = TRect;
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            }];
-        }
-    }
-}
-
-- (void)sendMessage:(UIButton *)btn {
-    
-    [self sendMessageModel:[self createTextModel]];
-}
-
-- (void)sendMessageModel:(LLBaseMessageModel *)model {
-    [self.messageModels addObject:model];
-    [_tableView reloadData];
-}
-
-- (LLTextMessageModel *)createTextModel {
-    LLTextMessageModel *model = [[LLTextMessageModel alloc] init];
-    model.fromId = @"1";
-    model.toId = @"2";
-    model.fromNick = @"小弈";
-    model.toNick = @"大弈";
-    model.fromAvatar = @"";
-    model.toAvatar = @"";
-//    model.content = self.textView.text;
-    model.timestamp = [[NSDate date] timeIntervalSince1970];
-    model.isSender = YES;
-    model.isGroup = NO;
-    model.sendType = (LLMessageSendType)arc4random()%3;
-    
-    //测试
-    static BOOL isSender = NO;
-    model.isSender = isSender;
-    isSender = !isSender;
-    
-    return model;
-}
-
-- (LLImageMessageModel *)createImageModel {
-    LLImageMessageModel *model = [[LLImageMessageModel alloc] init];
-    model.fromId = @"1";
-    model.toId = @"2";
-    model.fromNick = @"小弈";
-    model.toNick = @"大弈";
-    model.fromAvatar = @"";
-    model.toAvatar = @"";
-//    model.content = self.textView.text;
-    model.timestamp = [[NSDate date] timeIntervalSince1970];
-    model.isSender = YES;
-    model.isGroup = NO;
-    model.sendType = (LLMessageSendType)arc4random()%3;
-    model.imgW = 20+arc4random()%200;
-    model.imgH = 20+arc4random()%200;
-    
-    //测试
-    static BOOL isSender = NO;
-    model.isSender = isSender;
-    isSender = !isSender;
-    
-    return model;
+#pragma mark - 输入框代理
+- (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
+    [self sendMessageModel:[LLIMServiceHelper createTextModelWithText:message]];
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -249,6 +155,7 @@
 - (LLInputView *)inputView {
     if (_inputView == nil) {
         _inputView = [[LLInputView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), LL_SCREEN_WIDTH, LL_INPUT_H)];
+        _inputView.delegate = self;
     }
     return _inputView;
 }
@@ -258,6 +165,101 @@
         _messageModels = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return _messageModels;
+}
+
+#pragma mark - 监听键盘状态
+- (void)keyboardWillShow:(NSNotification *)notification {
+    self.isEditing = YES;
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    self.isEditing = NO;
+}
+
+- (void)keyboardValueChange:(NSNotification *)notification{
+    NSDictionary *dic = notification.userInfo;
+    CGFloat duration = [dic[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+    CGRect endFrame = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    CGRect frame = [self.view convertRect:endFrame fromView:self.view.window];
+    
+    CGRect rect = self.inputView.frame;
+    rect.origin.y = (frame.origin.y-rect.size.height);
+    self.inputView.frame = rect;
+    
+    CGFloat TContentH = self.tableView.contentSize.height;
+    CGFloat tableViewH = self.tableView.bounds.size.height;
+    CGFloat keyboardH = frame.size.height;
+    
+    CGFloat offsetY = 0;
+    if (TContentH < tableViewH) {
+        offsetY = TContentH+keyboardH-tableViewH;
+        if (offsetY < 0) {
+            offsetY = 0;
+        }
+    }
+    else {
+        offsetY = keyboardH;
+    }
+    
+    if (offsetY > 0) {
+        CGRect TRect = self.tableView.frame;
+        if (frame.origin.y == self.view.bounds.size.height) {
+            //键盘收回
+            TRect.origin.y = LL_NAV_TOP_H;
+            [UIView animateWithDuration:duration animations:^{
+                self.tableView.frame = TRect;
+            }];
+        }
+        else {
+            //键盘谈起
+            TRect.origin.y = LL_NAV_TOP_H-offsetY;
+            [UIView animateWithDuration:duration animations:^{
+                self.tableView.frame = TRect;
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }];
+        }
+    }
+}
+
+#pragma mark - private method
+- (void)sendMessageModel:(LLBaseMessageModel *)model {
+    [self.messageModels addObject:model];
+    [_tableView reloadData];
+    [self tableViewScrollToBottom];
+}
+
+- (void)setupUI {
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.inputView];
+}
+
+- (void)tableViewScrollToBottom {
+    if (self.isEditing) {
+        CGFloat TContentH = self.tableView.contentSize.height;
+        CGFloat tableViewH = self.tableView.bounds.size.height;
+        
+        CGFloat keyboardH = LL_SCREEN_HEIGHT-self.inputView.maxY;
+        
+        CGFloat offsetY = 0;
+        if (TContentH < tableViewH) {
+            offsetY = TContentH+keyboardH-tableViewH;
+            if (offsetY < 0) {
+                offsetY = 0;
+            }
+        }
+        else {
+            offsetY = keyboardH;
+        }
+        
+        if (offsetY > 0) {
+            CGRect TRect = self.tableView.frame;
+            TRect.origin.y = LL_NAV_TOP_H-offsetY;
+            [UIView animateWithDuration:0.25 animations:^{
+                self.tableView.frame = TRect;
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }];
+        }
+    }
 }
 
 #pragma mark - super method

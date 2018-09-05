@@ -13,7 +13,7 @@
 
 #define key_rows  3
 #define key_nums  7
-#define key_itemW 30
+#define key_itemW 40
 @interface LLEmojisKeyboard ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @end
@@ -83,7 +83,6 @@
 
 #define mark - UICollectionViewDataSource,UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
     return _peopleEmojis.count;
 }
 
@@ -104,11 +103,18 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.item < _peopleEmojis.count) {
+        NSString *text = [_peopleEmojis objectAtIndex:indexPath.item];
+        if ([self.delegate respondsToSelector:@selector(emojisKeyboardSelectedText:)]) {
+            [self.delegate emojisKeyboardSelectedText:text];
+        }
+    }
 }
 
 - (void)sendBtnClick:(UIButton *)btn {
-    
+    if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendMessage)]) {
+        [self.delegate emojisKeyboardSendMessage];
+    }
 }
 
 @end

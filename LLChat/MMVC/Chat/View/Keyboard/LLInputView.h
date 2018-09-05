@@ -7,9 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol LLInputViewDelegate;
 
 @interface LLInputView : UIView
 
+@property (nonatomic, weak) id<LLInputViewDelegate> delegate;
+
+- (void)chatBecomeFirstResponder;
 - (void)chatResignFirstResponder;
+
+@end
+
+@protocol LLInputViewDelegate <NSObject>
+
+@optional
+- (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message;
 
 @end

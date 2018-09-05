@@ -23,10 +23,10 @@
     if (self.modelH == -1 || self.modelW == -1) {
         if ([self isKindOfClass:[LLTextMessageModel class]]) {
             LLTextMessageModel *model = (LLTextMessageModel *)self;
-            CGSize size = [model.content boundingRectWithSize:CGSizeMake(LL_TEXT_CONTENT_W, CGFLOAT_MAX)
-                                                      options:NSStringDrawingUsesLineFragmentOrigin
-                                                   attributes:[model contentAttributes]
-                                                      context:nil].size;
+            CGSize size = [model.text boundingRectWithSize:CGSizeMake(LL_TEXT_CONTENT_W, CGFLOAT_MAX)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                attributes:[model contentAttributes]
+                                                   context:nil].size;
             self.modelH = ceil(size.height);
             self.modelW = MAX(ceil(size.width), 30);
         }

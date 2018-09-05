@@ -15,7 +15,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _deleteImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _deleteImgView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 3, 35, 35)];
         _deleteImgView.image = [UIImage imageNamed:@"ll_chat_delete"];
         [self addSubview:_deleteImgView];
     }

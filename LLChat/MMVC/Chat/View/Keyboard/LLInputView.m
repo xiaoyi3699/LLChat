@@ -9,10 +9,20 @@
 #import "LLInputView.h"
 #import "LLChatBtn.h"
 #import "LLEmojisKeyboard.h"
+#import "LLMoreKeyboard.h"
 
-@interface LLInputView ()<UITextViewDelegate>
+typedef enum : NSInteger {
+    LLInputViewTypeNone = 0,
+    LLInputViewTypeKeyboard,
+    LLInputViewTypeVoice,
+    LLInputViewTypeemotion,
+    LLInputViewTypeMore,
+}LLInputType;
+@interface LLInputView ()<UITextViewDelegate,LLEmojisKeyboardDelegate>
 
+@property (nonatomic, strong) LLMoreKeyboard *moreKeyboard;
 @property (nonatomic, strong) LLEmojisKeyboard *emojisKeyboard;
+@property (nonatomic, assign) LLInputType type;
 
 @end
 
@@ -20,12 +30,16 @@
     LLChatBtn *_voiceBtn;
     LLChatBtn *_emotionBtn;
     LLChatBtn *_moreBtn;
+    NSArray *_inputBtns;
     UITextView *_textView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.type = LLInputViewTypeNone;
+        
         CGFloat w = frame.size.width;
         self.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
         
@@ -33,6 +47,7 @@
         lineView.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
         [self addSubview:lineView];
         
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:3];
         NSArray *images = @[@"ll_chat_voice",@"ll_chat_emotion",@"ll_chat_more"];//ll_chat_board
         UIImage *keyboardImg = [UIImage imageNamed:@"ll_chat_board"];
         for (NSInteger i = 0; i < 3; i ++) {
@@ -56,7 +71,10 @@
             [btn setImage:keyboardImg forState:UIControlStateSelected];
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:btn];
+            
+            [array addObject:btn];
         }
+        _inputBtns = [array copy];
         
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(40, 7, w-120, 35)];
         _textView.font = [UIFont systemFontOfSize:13];
@@ -72,56 +90,115 @@
     return self;
 }
 
+#pragma mark - 用户交互事件
 - (void)btnClick:(UIButton *)btn {
-    if (btn.tag == 0) {
-        //声音按钮
-        
+    
+    if (btn.isSelected) {
+        [self chatBecomeFirstResponder];
     }
-    else if (btn.tag == 1) {
-        //表情按钮
-        if (btn.selected) {
-            btn.selected = NO;
+    else {
+        btn.selected = YES;
+        if (btn.tag == 0) {
+            //声音按钮
+            _moreBtn.selected = NO;
+            _emotionBtn.selected = NO;
             _textView.inputView = nil;
+            [_textView resignFirstResponder];
+            [_textView reloadInputViews];
+        }
+        else if (btn.tag == 1) {
+            //表情按钮
+            _voiceBtn.selected = NO;
+            _moreBtn.selected = NO;
+            _textView.inputView = self.emojisKeyboard;
+            [_textView reloadInputViews];
+            [_textView becomeFirstResponder];
         }
         else {
-            btn.selected = YES;
-            _textView.inputView = self.emojisKeyboard;
-        }
-        [_textView reloadInputViews];
-        if ([_textView isFirstResponder] == NO) {
+            //加号按钮
+            _voiceBtn.selected = NO;
+            _emotionBtn.selected = NO;
+            _textView.inputView = self.moreKeyboard;
+            [_textView reloadInputViews];
             [_textView becomeFirstResponder];
         }
     }
-    else {
-        //加号按钮
-    }
+}
+
+#pragma mark - public method
+- (void)chatBecomeFirstResponder {
+    _voiceBtn.selected = NO;
+    _emotionBtn.selected = NO;
+    _moreBtn.selected = NO;
+    _textView.inputView = nil;
+    [_textView reloadInputViews];
+    [_textView becomeFirstResponder];
 }
 
 - (void)chatResignFirstResponder {
-    if ([_textView isFirstResponder]) {
-        [_textView resignFirstResponder];
-        _voiceBtn.selected = NO;
-        _emotionBtn.selected = NO;
-        _moreBtn.selected = NO;
+    [_textView resignFirstResponder];
+    _voiceBtn.selected = NO;
+    _emotionBtn.selected = NO;
+    _moreBtn.selected = NO;
+    _textView.inputView = nil;
+}
+
+#pragma mark - private method
+- (void)sendMessage {
+    if (_textView.text.length > 0) {
+        if ([self.delegate respondsToSelector:@selector(inputView:sendMessage:)]) {
+            [self.delegate inputView:self sendMessage:_textView.text];
+        }
     }
 }
 
+#pragma mark - delegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"] ||
         [text isEqualToString:@"\n\n"] ||
         [text isEqualToString:@"\r"] ||
         [text isEqualToString:@"\r\r"]) {
+        
+        [self sendMessage];
         return NO;
     }
     return YES;
+}
+
+- (void)emojisKeyboardSelectedText:(NSString *)text {
+    if ([text isEqualToString:@"-1"]) {
+        if (_textView.text.length > 0) {
+            [_textView deleteBackward];
+        }
+    }
+    else {
+        if (_textView.text.length == 0) {
+            _textView.text = text;
+        }
+        else {
+            _textView.text = [NSString stringWithFormat:@"%@%@",_textView.text,text];
+        }
+    }
+}
+
+- (void)emojisKeyboardSendMessage {
+    [self sendMessage];
 }
 
 #pragma mark - getter
 - (LLEmojisKeyboard *)emojisKeyboard {
     if (_emojisKeyboard == nil) {
         _emojisKeyboard = [[LLEmojisKeyboard alloc] init];
+        _emojisKeyboard.delegate = self;
     }
     return _emojisKeyboard;
+}
+
+- (LLMoreKeyboard *)moreKeyboard {
+    if (_moreKeyboard == nil) {
+        _moreKeyboard = [[LLMoreKeyboard alloc] init];
+    }
+    return _moreKeyboard;
 }
 
 @end

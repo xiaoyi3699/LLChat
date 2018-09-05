@@ -13,6 +13,7 @@
 		7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424B213F79A3004CC91B /* LLEmojisCell.m */; };
 		7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424E213F79BF004CC91B /* LLDeleteCell.m */; };
 		75614252213F7E79004CC91B /* LLInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614251213F7E79004CC91B /* LLInputView.m */; };
+		75614257213FA2C9004CC91B /* LLMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614256213FA2C9004CC91B /* LLMoreKeyboard.m */; };
 		75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */; };
 		75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F9E6F821391B4E00492ED8 /* Assets.xcassets */; };
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
@@ -51,6 +52,8 @@
 		7561424E213F79BF004CC91B /* LLDeleteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLDeleteCell.m; sourceTree = "<group>"; };
 		75614250213F7E79004CC91B /* LLInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLInputView.h; sourceTree = "<group>"; };
 		75614251213F7E79004CC91B /* LLInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLInputView.m; sourceTree = "<group>"; };
+		75614255213FA2C9004CC91B /* LLMoreKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMoreKeyboard.h; sourceTree = "<group>"; };
+		75614256213FA2C9004CC91B /* LLMoreKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMoreKeyboard.m; sourceTree = "<group>"; };
 		75F9E6F221391B4D00492ED8 /* LLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F9E6F521391B4D00492ED8 /* LLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLAppDelegate.h; sourceTree = "<group>"; };
 		75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLAppDelegate.m; sourceTree = "<group>"; };
@@ -116,9 +119,17 @@
 		75614241213F6D47004CC91B /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
-				75614245213F6F7B004CC91B /* EmojisList.plist */,
+				75614254213FA29B004CC91B /* LLMoreKeyboard */,
+				75614253213FA286004CC91B /* LLEmojisKeyboard */,
 				75614250213F7E79004CC91B /* LLInputView.h */,
 				75614251213F7E79004CC91B /* LLInputView.m */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		75614253213FA286004CC91B /* LLEmojisKeyboard */ = {
+			isa = PBXGroup;
+			children = (
 				75614247213F6F9A004CC91B /* LLEmojisKeyboard.h */,
 				75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */,
 				75614243213F6D65004CC91B /* LLHorizontalLayout.h */,
@@ -127,8 +138,18 @@
 				7561424B213F79A3004CC91B /* LLEmojisCell.m */,
 				7561424D213F79BF004CC91B /* LLDeleteCell.h */,
 				7561424E213F79BF004CC91B /* LLDeleteCell.m */,
+				75614245213F6F7B004CC91B /* EmojisList.plist */,
 			);
-			path = Keyboard;
+			path = LLEmojisKeyboard;
+			sourceTree = "<group>";
+		};
+		75614254213FA29B004CC91B /* LLMoreKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				75614255213FA2C9004CC91B /* LLMoreKeyboard.h */,
+				75614256213FA2C9004CC91B /* LLMoreKeyboard.m */,
+			);
+			path = LLMoreKeyboard;
 			sourceTree = "<group>";
 		};
 		75F9E6E921391B4D00492ED8 = {
@@ -434,6 +455,7 @@
 				75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
 				75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */,
+				75614257213FA2C9004CC91B /* LLMoreKeyboard.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */,
 				75F9E78F21391C6B00492ED8 /* LLIMBaseModel.m in Sources */,

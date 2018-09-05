@@ -1,5 +1,5 @@
 //
-//  LLEmojisKeyboard.h
+//  LLMoreKeyboard.h
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/5.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LLEmojisKeyboard : UIView
+@interface LLMoreKeyboard : UIView
 
 @end

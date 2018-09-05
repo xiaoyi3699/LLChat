@@ -19,4 +19,8 @@
 //将字典转化为LLBaseMessageModel对象
 + (LLBaseMessageModel *)createMessageModelWithDic:(NSDictionary *)dic;
 
++ (LLTextMessageModel *)createTextModelWithText:(NSString *)text;
+
++ (LLImageMessageModel *)createImageModelWithText:(NSString *)text;
+
 @end

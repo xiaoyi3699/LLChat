@@ -49,4 +49,50 @@
     return model;
 }
 
++ (LLTextMessageModel *)createTextModelWithText:(NSString *)text {
+    LLTextMessageModel *model = [[LLTextMessageModel alloc] init];
+    model.fromId = @"1";
+    model.toId = @"2";
+    model.fromNick = @"小弈";
+    model.toNick = @"大弈";
+    model.fromAvatar = @"";
+    model.toAvatar = @"";
+    model.text = text;
+    model.timestamp = [[NSDate date] timeIntervalSince1970];
+    model.isSender = YES;
+    model.isGroup = NO;
+    model.sendType = (LLMessageSendType)arc4random()%3;
+    
+    //测试
+    static BOOL isSender = NO;
+    model.isSender = isSender;
+    isSender = !isSender;
+    
+    return model;
+}
+
++ (LLImageMessageModel *)createImageModelWithText:(NSString *)text {
+    LLImageMessageModel *model = [[LLImageMessageModel alloc] init];
+    model.fromId = @"1";
+    model.toId = @"2";
+    model.fromNick = @"小弈";
+    model.toNick = @"大弈";
+    model.fromAvatar = @"";
+    model.toAvatar = @"";
+    model.text = text;
+    model.timestamp = [[NSDate date] timeIntervalSince1970];
+    model.isSender = YES;
+    model.isGroup = NO;
+    model.sendType = (LLMessageSendType)arc4random()%3;
+    model.imgW = 20+arc4random()%200;
+    model.imgH = 20+arc4random()%200;
+    
+    //测试
+    static BOOL isSender = NO;
+    model.isSender = isSender;
+    isSender = !isSender;
+    
+    return model;
+}
+
 @end
