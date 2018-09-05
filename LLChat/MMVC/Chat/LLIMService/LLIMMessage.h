@@ -6,9 +6,9 @@
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLIMBaseModel.h"
+#import <Foundation/Foundation.h>
 
-@interface LLIMMessage : LLIMBaseModel
+@interface LLIMMessage : NSObject
 
 @property (nonatomic, strong) NSString *fromId;
 @property (nonatomic, strong) NSString *toId;

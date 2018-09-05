@@ -22,6 +22,8 @@ typedef enum : NSInteger {
 
 @property (nonatomic, weak) id<LLIMServiceDelegate> delegate;
 
++ (instancetype)shareInstance;
+
 - (void)sendMessage:(LLIMMessage *)message;
 
 @end

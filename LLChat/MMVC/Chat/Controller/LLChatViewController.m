@@ -11,8 +11,7 @@
 #import "LLTextMessageTableViewCell.h"
 #import "LLImageMessageTableViewCell.h"
 
-
-@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate>
+@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate,LLIMServiceDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) LLInputView *inputView;
@@ -50,6 +49,21 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    [LLIMService shareInstance].delegate = self;;
+}
+
+- (void)onSendMessageSuccess:(LLIMMessage *)message {
+    
+}
+
+- (void)onSendMessageFailed:(LLIMMessage *)message {
+    
+}
+
+- (void)onReceiveMessage:(LLIMMessage *)message {
+    LLBaseMessageModel *model = [LLIMServiceHelper createModelWithIMMessage:message];
+    [self sendMessageModel:model];
 }
 
 #pragma mark - 输入框代理

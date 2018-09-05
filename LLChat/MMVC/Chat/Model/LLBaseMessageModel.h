@@ -6,7 +6,7 @@
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLIMBaseModel.h"
+#import <Foundation/Foundation.h>
 
 typedef enum : NSInteger {
     LLMessageTypeText = 0, //文本
@@ -21,7 +21,7 @@ typedef enum : NSInteger {
     LLMessageSendTypeFailed,     //发送失败
 }LLMessageSendType;
 
-@interface LLBaseMessageModel : LLIMBaseModel
+@interface LLBaseMessageModel : NSObject
 
 @property (nonatomic, strong) NSString *fromId;
 @property (nonatomic, strong) NSString *toId;

@@ -10,7 +10,7 @@
 
 @implementation LLIMServiceHelper
 
-+ (LLIMMessage *)createMessageWithModel:(LLBaseMessageModel *)model {
++ (LLIMMessage *)createIMMessageWithModel:(LLBaseMessageModel *)model {
     LLIMMessage *message = [[LLIMMessage alloc] init];
     message.fromId = model.fromId;
     message.toId = model.toId;
@@ -20,15 +20,15 @@
     return message;
 }
 
-+ (LLBaseMessageModel *)createMessageModelWithMessage:(LLIMMessage *)message {
++ (LLBaseMessageModel *)createModelWithIMMessage:(LLIMMessage *)message {
     NSData *jsonData = [message.content dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
                                                         options:NSJSONReadingMutableLeaves
                                                           error:nil];
-    return [self createMessageModelWithDic:dic];
+    return [self createModelWithDic:dic];
 }
 
-+ (LLBaseMessageModel *)createMessageModelWithDic:(NSDictionary *)dic {
++ (LLBaseMessageModel *)createModelWithDic:(NSDictionary *)dic {
     LLMessageType type = (LLMessageType)[[dic objectForKey:@"type"] integerValue];
     LLBaseMessageModel *model;
     if (type == LLMessageTypeText) {

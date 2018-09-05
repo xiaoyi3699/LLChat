@@ -11,16 +11,16 @@
 @interface LLIMServiceHelper : NSObject
 
 //将LLBaseMessageModel对象转化为LLIMMessage对象
-+ (LLIMMessage *)createMessageWithModel:(LLBaseMessageModel *)model;
++ (LLIMMessage *)createIMMessageWithModel:(LLBaseMessageModel *)model;
 
 //将LLIMMessage对象转化为LLBaseMessageModel对象
-+ (LLBaseMessageModel *)createMessageModelWithMessage:(LLIMMessage *)message;
++ (LLBaseMessageModel *)createModelWithIMMessage:(LLIMMessage *)message;
 
 //将字典转化为LLBaseMessageModel对象
-+ (LLBaseMessageModel *)createMessageModelWithDic:(NSDictionary *)dic;
++ (LLBaseMessageModel *)createModelWithDic:(NSDictionary *)dic;
 
+//消息模型
 + (LLTextMessageModel *)createTextModelWithText:(NSString *)text;
-
 + (LLImageMessageModel *)createImageModelWithText:(NSString *)text;
 
 @end

@@ -17,7 +17,6 @@
 		75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */; };
 		75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F9E6F821391B4E00492ED8 /* Assets.xcassets */; };
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
-		75F9E78F21391C6B00492ED8 /* LLIMBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E74021391C6A00492ED8 /* LLIMBaseModel.m */; };
 		75F9E7A621391C6B00492ED8 /* LLAVLameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E77A21391C6A00492ED8 /* LLAVLameManager.m */; };
 		75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */; };
 		75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7B121391E9300492ED8 /* LLMessageViewController.m */; };
@@ -61,8 +60,6 @@
 		75F9E6FD21391B4E00492ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75F9E6FE21391B4F00492ED8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		75F9E70D21391BFC00492ED8 /* LLPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLPrefixHeader.pch; sourceTree = "<group>"; };
-		75F9E73F21391C6A00492ED8 /* LLIMBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLIMBaseModel.h; sourceTree = "<group>"; };
-		75F9E74021391C6A00492ED8 /* LLIMBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLIMBaseModel.m; sourceTree = "<group>"; };
 		75F9E77A21391C6A00492ED8 /* LLAVLameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVLameManager.m; sourceTree = "<group>"; };
 		75F9E77B21391C6A00492ED8 /* LLAVLameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVLameManager.h; sourceTree = "<group>"; };
 		75F9E7AD21391E2800492ED8 /* LLFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLFriendViewController.h; sourceTree = "<group>"; };
@@ -173,7 +170,6 @@
 			children = (
 				75F9E70621391B9B00492ED8 /* LLAppDelegate */,
 				75F9E7A821391DB800492ED8 /* MMVC */,
-				75F9E71821391C6A00492ED8 /* LLBaseClass */,
 				75F9E77821391C6A00492ED8 /* LLTools */,
 			);
 			path = LLChat;
@@ -190,23 +186,6 @@
 				75F9E6FE21391B4F00492ED8 /* main.m */,
 			);
 			path = LLAppDelegate;
-			sourceTree = "<group>";
-		};
-		75F9E71821391C6A00492ED8 /* LLBaseClass */ = {
-			isa = PBXGroup;
-			children = (
-				75F9E73E21391C6A00492ED8 /* LLIMBaseModel */,
-			);
-			path = LLBaseClass;
-			sourceTree = "<group>";
-		};
-		75F9E73E21391C6A00492ED8 /* LLIMBaseModel */ = {
-			isa = PBXGroup;
-			children = (
-				75F9E73F21391C6A00492ED8 /* LLIMBaseModel.h */,
-				75F9E74021391C6A00492ED8 /* LLIMBaseModel.m */,
-			);
-			path = LLIMBaseModel;
 			sourceTree = "<group>";
 		};
 		75F9E77821391C6A00492ED8 /* LLTools */ = {
@@ -458,7 +437,6 @@
 				75614257213FA2C9004CC91B /* LLMoreKeyboard.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */,
-				75F9E78F21391C6B00492ED8 /* LLIMBaseModel.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
 				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
 				75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */,

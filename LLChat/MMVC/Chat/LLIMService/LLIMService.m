@@ -40,7 +40,7 @@
         if ([self.delegate respondsToSelector:@selector(onReceiveMessage:)]) {
             
             //将发送方和接收方互换, 模拟真实数据
-            LLBaseMessageModel *model = [LLIMServiceHelper createMessageModelWithMessage:message];
+            LLBaseMessageModel *model = [LLIMServiceHelper createModelWithIMMessage:message];
             
             NSString *fromId = model.fromId;
             NSString *toId = model.toId;
@@ -60,7 +60,7 @@
             model.fromNick = toNick;
             model.toNick = fromNick;
             
-            LLIMMessage *sendMessage = [LLIMServiceHelper createMessageWithModel:model];
+            LLIMMessage *sendMessage = [LLIMServiceHelper createIMMessageWithModel:model];
             
             //将受到的消息发回去
             [self.delegate onReceiveMessage:sendMessage];

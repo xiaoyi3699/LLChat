@@ -13,9 +13,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-///基类
-#import "LLIMBaseModel.h"
-
 ///工具类
 #import "LLAVLameManager.h"
 #import "LLSqliteManager.h"
