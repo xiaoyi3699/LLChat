@@ -15,7 +15,7 @@
     message.fromId = model.fromId;
     message.toId = model.toId;
     message.timestamp = model.timestamp;
-    NSDictionary *dic = [[LLSqliteManager defaultManager] DictionaryFromModel:model];
+    NSDictionary *dic = [model transfromDictionary];
     message.content = [NSString ll_getJsonByObj:dic];
     return message;
 }
@@ -61,12 +61,7 @@
     model.timestamp = [[NSDate date] timeIntervalSince1970];
     model.isSender = YES;
     model.isGroup = NO;
-    model.sendType = (LLMessageSendType)arc4random()%3;
-    
-    //测试
-    static BOOL isSender = NO;
-    model.isSender = isSender;
-    isSender = !isSender;
+    model.sendType = LLMessageSendTypeWaiting;
     
     return model;
 }
@@ -83,14 +78,9 @@
     model.timestamp = [[NSDate date] timeIntervalSince1970];
     model.isSender = YES;
     model.isGroup = NO;
-    model.sendType = (LLMessageSendType)arc4random()%3;
+    model.sendType = LLMessageSendTypeWaiting;
     model.imgW = 20+arc4random()%200;
     model.imgH = 20+arc4random()%200;
-    
-    //测试
-    static BOOL isSender = NO;
-    model.isSender = isSender;
-    isSender = !isSender;
     
     return model;
 }

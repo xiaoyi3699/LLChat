@@ -43,6 +43,14 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) NSInteger modelW;
 @property (nonatomic, assign) NSInteger modelH;
 
+/*
+ 缓存model的高度
+ */
 - (void)cacheModelSize;
+
+/*
+ 对象转换为字典
+ */
+- (NSDictionary *)transfromDictionary;
 
 @end

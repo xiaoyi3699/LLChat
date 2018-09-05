@@ -4,7 +4,7 @@
 //
 //  Created by WangZhaomeng on 2018/9/4.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
-//
+//  IM服务, 使用延时操作来模拟登录、退出、收发消息等功能
 
 #import <Foundation/Foundation.h>
 #import "LLIMMessage.h"
@@ -23,7 +23,11 @@ typedef enum : NSInteger {
 @property (nonatomic, weak) id<LLIMServiceDelegate> delegate;
 
 + (instancetype)shareInstance;
-
+///登录IM
+- (void)loginIM;
+///退出
+- (void)logoutIM;
+///发消息
 - (void)sendMessage:(LLIMMessage *)message;
 
 @end

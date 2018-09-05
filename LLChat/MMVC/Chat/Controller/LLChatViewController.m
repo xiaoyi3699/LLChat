@@ -50,25 +50,30 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    [LLIMService shareInstance].delegate = self;;
+    [LLIMServiceObserver shareInstance].delegate3 = self;;
 }
 
 - (void)onSendMessageSuccess:(LLIMMessage *)message {
-    
+    [_tableView reloadData];
 }
 
 - (void)onSendMessageFailed:(LLIMMessage *)message {
-    
+    [_tableView reloadData];
 }
 
 - (void)onReceiveMessage:(LLIMMessage *)message {
     LLBaseMessageModel *model = [LLIMServiceHelper createModelWithIMMessage:message];
-    [self sendMessageModel:model];
+    [self addMessageModel:model];
 }
 
 #pragma mark - 输入框代理
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
-    [self sendMessageModel:[LLIMServiceHelper createTextModelWithText:message]];
+    
+    LLTextMessageModel *model = [LLIMServiceHelper createTextModelWithText:message];
+    [self addMessageModel:model];
+    
+    LLIMMessage *IMMessage = [LLIMServiceHelper createIMMessageWithModel:model];
+    [[LLIMService shareInstance] sendMessage:IMMessage];
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -236,7 +241,7 @@
 }
 
 #pragma mark - private method
-- (void)sendMessageModel:(LLBaseMessageModel *)model {
+- (void)addMessageModel:(LLBaseMessageModel *)model {
     [self.messageModels addObject:model];
     [_tableView reloadData];
     [self tableViewScrollToBottom];

@@ -7,6 +7,7 @@
 //
 
 #import "LLBaseMessageModel.h"
+#import <objc/runtime.h>
 
 @implementation LLBaseMessageModel
 
@@ -46,5 +47,39 @@
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
+
+- (NSDictionary *)transfromDictionary {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    Class modelClass = object_getClass(self);
+    unsigned int count = 0;
+    objc_property_t *pros = class_copyPropertyList(modelClass, &count);
+    
+    for (int i = 0; i < count; i++) {
+        objc_property_t pro = pros[i];
+        NSString *name = [NSString stringWithFormat:@"%s", property_getName(pro)] ;
+        id value = [self valueForKey:name];
+        if (value != nil) {
+            [dic setValue:value forKey:name];
+        }
+    }
+    free(pros);
+    
+    Class superClass = [self superclass];
+    unsigned int superCount = 0;
+    objc_property_t *superPros = class_copyPropertyList(superClass, &superCount);
+    
+    for (int i = 0; i < superCount; i++) {
+        objc_property_t pro = superPros[i];
+        NSString *name = [NSString stringWithFormat:@"%s", property_getName(pro)] ;
+        id value = [self valueForKey:name];
+        if (value != nil) {
+            [dic setValue:value forKey:name];
+        }
+    }
+    free(superPros);
+    
+    return dic;
+}
 
 @end

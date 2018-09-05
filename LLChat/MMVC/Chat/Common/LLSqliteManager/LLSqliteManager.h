@@ -12,8 +12,6 @@
 
 + (instancetype)defaultManager;
 
-- (NSDictionary *)DictionaryFromModel:(id)model;
-
 - (BOOL)createTableName:(NSString *)tableName dic:(NSDictionary *)dic;
 - (BOOL)createTableName:(NSString *)tableName modelClass:(Class)modelClass;
 
