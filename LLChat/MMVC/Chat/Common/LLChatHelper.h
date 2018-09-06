@@ -16,4 +16,7 @@
 - (UIImage *)senderBubbleImage;
 - (UIImage *)receiverBubbleImage;
 
+//13位时间戳
++ (NSTimeInterval)nowTimestamp;
+
 @end

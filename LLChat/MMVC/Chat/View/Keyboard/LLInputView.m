@@ -7,9 +7,6 @@
 //
 
 #import "LLInputView.h"
-#import "LLChatBtn.h"
-#import "LLEmojisKeyboard.h"
-#import "LLMoreKeyboard.h"
 
 typedef enum : NSInteger {
     LLInputViewTypeNone = 0,
@@ -18,7 +15,7 @@ typedef enum : NSInteger {
     LLInputViewTypeemotion,
     LLInputViewTypeMore,
 }LLInputType;
-@interface LLInputView ()<UITextViewDelegate,LLEmojisKeyboardDelegate>
+@interface LLInputView ()<UITextViewDelegate,LLEmojisKeyboardDelegate,LLMoreKeyboardDelegate>
 
 @property (nonatomic, strong) LLMoreKeyboard *moreKeyboard;
 @property (nonatomic, strong) LLEmojisKeyboard *emojisKeyboard;
@@ -149,6 +146,7 @@ typedef enum : NSInteger {
         if ([self.delegate respondsToSelector:@selector(inputView:sendMessage:)]) {
             [self.delegate inputView:self sendMessage:_textView.text];
         }
+        _textView.text = @"";
     }
 }
 
@@ -165,6 +163,10 @@ typedef enum : NSInteger {
     return YES;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    _voiceBtn.selected = NO;
+}
+
 - (void)emojisKeyboardSelectedText:(NSString *)text {
     if ([text isEqualToString:@"-1"]) {
         if (_textView.text.length > 0) {
@@ -178,6 +180,12 @@ typedef enum : NSInteger {
         else {
             _textView.text = [NSString stringWithFormat:@"%@%@",_textView.text,text];
         }
+    }
+}
+
+- (void)moreKeyboardSelectedType:(LLMoreType)type {
+    if ([self.delegate respondsToSelector:@selector(inputView:selectedType:)]) {
+        [self.delegate inputView:self selectedType:type];
     }
 }
 
@@ -197,6 +205,7 @@ typedef enum : NSInteger {
 - (LLMoreKeyboard *)moreKeyboard {
     if (_moreKeyboard == nil) {
         _moreKeyboard = [[LLMoreKeyboard alloc] init];
+        _moreKeyboard.delegate = self;
     }
     return _moreKeyboard;
 }

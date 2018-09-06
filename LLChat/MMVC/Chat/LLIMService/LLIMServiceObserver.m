@@ -89,6 +89,7 @@
     }
 }
 
+//消息回调的统一处理
 - (void)ll_onSendMessageSuccess:(LLIMMessage *)message {
     LLBaseMessageModel *model = [self unSendModelFromMessage:message];
     if (model) {
@@ -113,6 +114,7 @@
     self.state = state;
 }
 
+//根据message从消息发送队列中找到对应的model, 改变其状态, 用来刷新UI
 - (LLBaseMessageModel *)unSendModelFromMessage:(LLIMMessage *)message {
     for (LLBaseMessageModel *model in self.unSendMessages) {
         if (model.timestamp == message.timestamp) {

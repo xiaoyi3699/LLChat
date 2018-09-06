@@ -39,10 +39,17 @@
 #define LL_BAR_BOT_H  (LL_iPhoneX ? 83:49)
 #define LL_IPHONE_X_BOT_H  (LL_iPhoneX ? 34:0)
 
+//默认图
+#define LL_DEFAULT_IMAGE [UIImage imageNamed:@"ll_chat_default"]
+
 //聊天界面底部视图高度
 #define LL_INPUT_H    (LL_iPhoneX ? 83:49)
 
 #define THEME_COLOR [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1]
+
+//获取沙盒Cache路径
+#define APP_CachePath     \
+[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
 #endif
 #endif /* PrefixHeader_pch */

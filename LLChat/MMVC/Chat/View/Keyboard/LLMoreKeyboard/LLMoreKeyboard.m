@@ -43,7 +43,10 @@
 }
 
 - (void)btnClick:(UIButton *)btn {
-    
+    LLMoreType type = (LLMoreType)btn.tag;
+    if ([self.delegate respondsToSelector:@selector(moreKeyboardSelectedType:)]) {
+        [self.delegate moreKeyboardSelectedType:type];
+    }
 }
 
 @end

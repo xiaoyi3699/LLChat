@@ -19,8 +19,13 @@
 //将字典转化为LLBaseMessageModel对象
 + (LLBaseMessageModel *)createModelWithDic:(NSDictionary *)dic;
 
-//消息模型
-+ (LLTextMessageModel *)createTextModelWithText:(NSString *)text;
-+ (LLImageMessageModel *)createImageModelWithText:(NSString *)text;
+#pragma mark - 模拟发送与接收的消息模型
+//发送消息模型
++ (LLTextMessageModel *)createSendTextModelWithText:(NSString *)text;
++ (LLImageMessageModel *)createSendImageModel;
+
+//模拟接收消息
++ (LLTextMessageModel *)createReceiveTextModelWithText:(NSString *)text;
++ (LLImageMessageModel *)createReceiveImageModel;
 
 @end

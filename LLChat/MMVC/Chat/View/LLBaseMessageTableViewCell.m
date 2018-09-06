@@ -49,7 +49,8 @@
     if (model.isSender) {
         //头像
         _avatarImageView.frame = CGRectMake(LL_SCREEN_WIDTH-60, 10, 40, 40);
-        _avatarImageView.backgroundColor = [UIColor redColor];
+        //可改成网络图片
+        _avatarImageView.image = [UIImage imageNamed:@"ll_from_avatar"];
         
         //昵称
         _nickLabel.frame = CGRectMake(_avatarImageView.minX-110, 10, 100, 20);
@@ -95,7 +96,8 @@
     }
     else {
         _avatarImageView.frame = CGRectMake(20, 10, 40, 40);
-        _avatarImageView.backgroundColor = [UIColor redColor];
+        //可改成网络图片
+        _avatarImageView.image = [UIImage imageNamed:@"ll_to_avatar"];
         
         _nickLabel.frame = CGRectMake(_avatarImageView.maxX+10, 10, 100, 20);
         _nickLabel.text = model.fromNick;

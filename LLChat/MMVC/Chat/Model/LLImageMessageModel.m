@@ -8,12 +8,15 @@
 
 #import "LLImageMessageModel.h"
 
-@implementation LLImageMessageModel
+@implementation LLImageMessageModel {
+    NSString *_cachePath;
+}
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.msgType = LLMessageTypeImage;
+        _cachePath = APP_CachePath;
     }
     return self;
 }
@@ -41,6 +44,24 @@
     }
     self.imgW = ceil(w);
     self.imgH = ceil(h);
+}
+
+- (NSString *)saveOrImage:(UIImage *)image {
+    NSString *filePath = [NSString stringWithFormat:@"%@/or_%@.png",_cachePath,@(self.timestamp)];
+    NSData *data = UIImagePNGRepresentation(image);
+    if ([data writeToFile:filePath atomically:YES]) {
+        return filePath;
+    }
+    return @"";
+}
+
+- (NSString *)saveThImage:(UIImage *)image {
+    NSString *filePath = [NSString stringWithFormat:@"%@/th_%@.png",_cachePath,@(self.timestamp)];
+    NSData *data = UIImagePNGRepresentation(image);
+    if ([data writeToFile:filePath atomically:YES]) {
+        return filePath;
+    }
+    return @"";
 }
 
 @end

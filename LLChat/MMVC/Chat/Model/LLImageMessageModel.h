@@ -23,5 +23,7 @@
 @property (nonatomic, strong) NSString *thumbnailPath;
 
 - (void)handleImageSize;
+- (NSString *)saveOrImage:(UIImage *)image;
+- (NSString *)saveThImage:(UIImage *)image;
 
 @end

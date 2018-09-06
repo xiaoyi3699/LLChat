@@ -32,7 +32,7 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) NSString *fromAvatar;
 @property (nonatomic, strong) NSString *toAvatar;
 
-@property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *message;
 
 @property (nonatomic, assign) BOOL isGroup;
 @property (nonatomic, assign) BOOL isSender;

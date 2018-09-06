@@ -596,6 +596,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangzhaomeng.LLChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = (
+					"-Wno-implicit-retain-self",
+					"-Wno-deprecated-declarations",
+				);
+				WARNING_LDFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -621,6 +626,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wangzhaomeng.LLChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				WARNING_CFLAGS = (
+					"-Wno-implicit-retain-self",
+					"-Wno-deprecated-declarations",
+				);
+				WARNING_LDFLAGS = "";
 			};
 			name = Release;
 		};

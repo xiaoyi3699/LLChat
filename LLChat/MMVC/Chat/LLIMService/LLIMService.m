@@ -54,11 +54,14 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //发送结果回调
         if (failed == 0) {
+            //模拟发送失败
             if ([self.delegate respondsToSelector:@selector(onSendMessageFailed:)]) {
                 [self.delegate onSendMessageFailed:message];
             }
+            return;
         }
         else {
+            //模拟发送成功
             if ([self.delegate respondsToSelector:@selector(onSendMessageSuccess:)]) {
                 [self.delegate onSendMessageSuccess:message];
             }
@@ -67,35 +70,22 @@
         //模拟服务器接收消息
         if ([self.delegate respondsToSelector:@selector(onReceiveMessage:)]) {
             
-            //将发送方和接收方互换, 模拟真实数据
-            LLBaseMessageModel *model = [LLIMServiceHelper createModelWithIMMessage:message];
+            NSDictionary *dic = [message.content ll_transformToObj];
+            LLMessageType type = (LLMessageType)[[dic objectForKey:@"msgType"] integerValue];
             
-            NSString *fromId = model.fromId;
-            NSString *toId = model.toId;
-            
-            NSString *fromAvatar = model.fromAvatar;
-            NSString *toAvatar = model.toAvatar;
-            
-            NSString *fromNick = model.fromNick;
-            NSString *toNick = model.toNick;
-            
-            model.fromId = toId;
-            model.toId = fromId;
-            
-            model.fromAvatar = toAvatar;
-            model.toAvatar = fromAvatar;
-            
-            model.fromNick = toNick;
-            model.toNick = fromNick;
-            
-            model.isSender = NO;
-            model.timestamp = [[NSDate date] timeIntervalSince1970];
-            model.sendType = LLMessageSendTypeWaiting;
-            
-            LLIMMessage *sendMessage = [LLIMServiceHelper createIMMessageWithModel:model];
-            
-            //收到消息
-            [self.delegate onReceiveMessage:sendMessage];
+            LLBaseMessageModel *model;
+            if (type == LLMessageTypeText) {
+                NSString *t = [NSString stringWithFormat:@"收到：%@",[dic objectForKey:@"message"]];
+                model = [LLIMServiceHelper createReceiveTextModelWithText:t];
+            }
+            else if (type == LLMessageTypeImage) {
+                model = [LLIMServiceHelper createReceiveImageModel];
+            }
+            if (model) {
+                //模拟收到消息
+                LLIMMessage *sendMessage = [LLIMServiceHelper createIMMessageWithModel:model];
+                [self.delegate onReceiveMessage:sendMessage];
+            }
         }
     });
 }

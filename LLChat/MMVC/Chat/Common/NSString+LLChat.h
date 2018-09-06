@@ -10,6 +10,17 @@
 
 @interface NSString (LLChat)
 
+- (id)ll_transformToObj;
 + (NSString *)ll_getJsonByObj:(id)obj;
+
+/**
+ URLEnCode编码
+ */
+- (NSString *)ll_URLEncodedString;
+
+/**
+ URLEnCode解码
+ */
+- (NSString *)ll_URLDecodedString;
 
 @end

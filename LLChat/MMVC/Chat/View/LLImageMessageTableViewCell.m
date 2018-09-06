@@ -25,8 +25,28 @@
     [super setConfig:model];
     
     _contentImageView.frame = _contentRect;
-    _contentImageView.image = [UIImage imageNamed:@""];
-    _contentImageView.backgroundColor = [UIColor redColor];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:model.thumbnailPath]) {
+        _contentImageView.image = [UIImage imageWithContentsOfFile:model.thumbnailPath];
+    }
+    else {
+        if (model.thumbnail) {
+            _contentImageView.image = LL_DEFAULT_IMAGE;
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                NSURL *url = [NSURL URLWithString:[model.thumbnail ll_URLEncodedString]];
+                NSData *data = [NSData dataWithContentsOfURL:url];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIImage *image = [UIImage imageWithData:data];
+                    if (image) {
+                        model.thumbnailPath = [model saveThImage:image];
+                        _contentImageView.image = image;
+                    }
+                });
+            });
+        }
+        else {
+            _contentImageView.image = LL_DEFAULT_IMAGE;
+        }
+    }
 }
 
 @end

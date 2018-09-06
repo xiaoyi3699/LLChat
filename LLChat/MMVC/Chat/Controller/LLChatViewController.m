@@ -17,6 +17,7 @@
 @property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign) BOOL isEditing;
+@property (nonatomic, assign) CGFloat tableViewY;
 
 @end
 
@@ -26,6 +27,7 @@
     self = [super init];
     if (self) {
         self.title = @"消息";
+        self.tableViewY = LL_NAV_TOP_H;
     }
     return self;
 }
@@ -63,17 +65,55 @@
 
 - (void)onReceiveMessage:(LLIMMessage *)message {
     LLBaseMessageModel *model = [LLIMServiceHelper createModelWithIMMessage:message];
-    [self addMessageModel:model];
+    [self receiveMessageModel:model];
 }
 
 #pragma mark - 输入框代理
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
-    
-    LLTextMessageModel *model = [LLIMServiceHelper createTextModelWithText:message];
-    [self addMessageModel:model];
-    
-    LLIMMessage *IMMessage = [LLIMServiceHelper createIMMessageWithModel:model];
-    [[LLIMService shareInstance] sendMessage:IMMessage];
+    LLTextMessageModel *model = [LLIMServiceHelper createSendTextModelWithText:message];
+    [self sendMessageModel:model];
+}
+
+- (void)inputView:(LLInputView *)inputView selectedType:(LLMoreType)type {
+    if (type == LLMoreTypeImage) {
+        //发送图片
+        //选择图片的代码就不多写了, 这里假定已经选择了图片
+        
+        //原图, 用于发送
+        UIImage *orImage = [UIImage imageNamed:@"1.jpg"];
+        
+        //缩略图, 用于展示, 优化消息滑动时的卡顿
+        //将原图按照一定的算法压缩处理成缩略图, 这里直接使用外部生成的缩略图,
+        UIImage *thImage = [UIImage imageNamed:@"1_t.jpg"];
+        
+        //将图片上传到服务器, 图片消息只是把图片的链接发送过去, 接收端根据链接展示图片
+        //上传图片的代码就不多写, 具体上传方式根据自身服务器api决定, 这里假定图片已经上传到服务器上了, 并且返回了两个链接, 原图和缩略图
+        //创建图片model
+        LLImageMessageModel *model = [LLIMServiceHelper createSendImageModel];
+        
+        //原图和缩略图链接
+        model.original = @"http://www.vasueyun.cn/llgit/llchat/1.jpg";
+        model.thumbnail = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
+        
+        //图片尺寸
+        model.imgW = orImage.size.width;
+        model.imgH = orImage.size.height;
+        
+        //原图和缩略图本地路径
+        model.originalPath = [model saveOrImage:orImage];
+        model.thumbnailPath = [model saveThImage:thImage];
+        
+        [self sendMessageModel:model];
+    }
+    else if (type == LLMoreTypeVideo) {
+        //发送视频
+    }
+    else if (type == LLMoreTypeLocation) {
+        //发送定位 - 未实现
+    }
+    else if (type == LLMoreTypeTransfer) {
+        //文件互传 - 未实现
+    }
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -135,20 +175,12 @@
     return cell;
 }
 
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"删除");
-    }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    return @[deleteAction];
-}
-
 #pragma mark - getter
 - (UITableView *)tableView {
     if (_tableView == nil) {
         CGRect rect = self.view.bounds;
-        rect.origin.y = LL_NAV_TOP_H;
-        rect.size.height -= (LL_NAV_TOP_H+LL_INPUT_H);
+        rect.origin.y = self.tableViewY;
+        rect.size.height -= (self.tableViewY+LL_INPUT_H);
         
         _tableView = [[UITableView alloc] initWithFrame:rect];
         _tableView.delegate = self;
@@ -220,27 +252,50 @@
         offsetY = keyboardH;
     }
     
+    CGRect TRect = self.tableView.frame;
     if (offsetY > 0) {
-        CGRect TRect = self.tableView.frame;
         if (frame.origin.y == self.view.bounds.size.height) {
             //键盘收回
-            TRect.origin.y = LL_NAV_TOP_H;
+            TRect.origin.y = self.tableViewY;
             [UIView animateWithDuration:duration animations:^{
                 self.tableView.frame = TRect;
             }];
         }
         else {
             //键盘谈起
-            TRect.origin.y = LL_NAV_TOP_H-offsetY;
+            TRect.origin.y = self.tableViewY-offsetY;
             [UIView animateWithDuration:duration animations:^{
                 self.tableView.frame = TRect;
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             }];
         }
     }
+    else {
+        TRect.origin.y = self.tableViewY;
+        [UIView animateWithDuration:duration animations:^{
+            self.tableView.frame = TRect;
+        }];
+    }
 }
 
 #pragma mark - private method
+- (void)sendMessageModel:(LLBaseMessageModel *)model {
+    [self addMessageModel:model];
+    
+    //加入到发送队列中
+    [[LLIMServiceObserver shareInstance].unSendMessages addObject:model];
+    
+    //发送
+    LLIMMessage *IMMessage = [LLIMServiceHelper createIMMessageWithModel:model];
+    [[LLIMService shareInstance] sendMessage:IMMessage];
+}
+
+//收到消息
+- (void)receiveMessageModel:(LLBaseMessageModel *)model {
+    [self addMessageModel:model];
+}
+
+//加入到消息缓存中
 - (void)addMessageModel:(LLBaseMessageModel *)model {
     [self.messageModels addObject:model];
     [_tableView reloadData];
@@ -272,7 +327,7 @@
         
         if (offsetY > 0) {
             CGRect TRect = self.tableView.frame;
-            TRect.origin.y = LL_NAV_TOP_H-offsetY;
+            TRect.origin.y = self.tableViewY-offsetY;
             [UIView animateWithDuration:0.25 animations:^{
                 self.tableView.frame = TRect;
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];

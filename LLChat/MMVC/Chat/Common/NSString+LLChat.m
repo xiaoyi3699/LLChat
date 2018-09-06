@@ -10,6 +10,11 @@
 
 @implementation NSString (LLChat)
 
+- (id)ll_transformToObj{
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+}
+
 + (NSString *)ll_getJsonByObj:(id)obj {
     NSError *error;
     NSData *data = [NSJSONSerialization dataWithJSONObject:obj options:kNilOptions error:&error];
@@ -20,6 +25,20 @@
         json = [json stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     }
     return json;
+}
+
+/**
+ URLEnCode编码
+ */
+- (NSString *)ll_URLEncodedString {
+    return [self stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
+/**
+ URLEnCode解码
+ */
+- (NSString *)ll_URLDecodedString {
+    return [self stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end
