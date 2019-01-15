@@ -1,14 +1,14 @@
 //
-//  LLImageMessageTableViewCell.m
+//  LLChatImageMessageCell.m
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/4.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLImageMessageTableViewCell.h"
+#import "LLChatImageMessageCell.h"
 
-@implementation LLImageMessageTableViewCell {
+@implementation LLChatImageMessageCell {
     UIImageView *_contentImageView;
 }
 

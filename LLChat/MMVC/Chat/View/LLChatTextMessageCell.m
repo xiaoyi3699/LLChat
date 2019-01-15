@@ -1,14 +1,14 @@
 //
-//  LLTextMessageTableViewCell.m
+//  LLChatTextMessageCell.m
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/4.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLTextMessageTableViewCell.h"
+#import "LLChatTextMessageCell.h"
 
-@implementation LLTextMessageTableViewCell {
+@implementation LLChatTextMessageCell {
     UILabel *_contentLabel;
 }
 

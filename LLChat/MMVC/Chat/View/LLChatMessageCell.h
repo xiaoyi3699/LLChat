@@ -1,14 +1,14 @@
 //
-//  LLBaseMessageTableViewCell.h
+//  LLChatMessageCell.h
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/4.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LLChatBaseCell.h"
 
-@interface LLBaseMessageTableViewCell : UITableViewCell {
+@interface LLChatMessageCell : LLChatBaseCell {
     UILabel *_nickLabel;
     UIImageView *_avatarImageView;
     UIImageView *_bubbleImageView;
@@ -16,7 +16,5 @@
     
     CGRect _contentRect;
 }
-
-- (void)setConfig:(LLBaseMessageModel *)model;
 
 @end

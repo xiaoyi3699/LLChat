@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */; };
+		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
 		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
 		75614246213F6F7B004CC91B /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* EmojisList.plist */; };
 		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
@@ -27,12 +29,12 @@
 		75F9E7C4213D24F500492ED8 /* LLVoiceMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */; };
 		75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */; };
 		75F9E7CC213E18DF00492ED8 /* LLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CB213E18DF00492ED8 /* LLChatViewController.m */; };
-		75F9E7D0213E19E400492ED8 /* LLBaseMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CF213E19E400492ED8 /* LLBaseMessageTableViewCell.m */; };
-		75F9E7D3213E1A0200492ED8 /* LLTextMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7D2213E1A0200492ED8 /* LLTextMessageTableViewCell.m */; };
+		75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CF213E19E400492ED8 /* LLChatMessageCell.m */; };
+		75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7D2213E1A0200492ED8 /* LLChatTextMessageCell.m */; };
 		75F9E7DA213E4C5500492ED8 /* LLChatHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7D9213E4C5500492ED8 /* LLChatHelper.m */; };
 		75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7DD213E682100492ED8 /* LLChatBtn.m */; };
 		75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */; };
-		75F9E7E4213E71F400492ED8 /* LLImageMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E3213E71F400492ED8 /* LLImageMessageTableViewCell.m */; };
+		75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E3213E71F400492ED8 /* LLChatImageMessageCell.m */; };
 		75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E6213E7C7F00492ED8 /* LLIMService.m */; };
 		75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E9213E7D2A00492ED8 /* LLIMMessage.m */; };
 		75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7ED213E805200492ED8 /* LLIMServiceHelper.m */; };
@@ -41,6 +43,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75279F8821ED7CFD00DAE00B /* LLChatSystemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatSystemCell.h; sourceTree = "<group>"; };
+		75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSystemCell.m; sourceTree = "<group>"; };
+		75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseCell.h; sourceTree = "<group>"; };
+		75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatBaseCell.m; sourceTree = "<group>"; };
 		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
 		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
 		75614245213F6F7B004CC91B /* EmojisList.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = EmojisList.plist; sourceTree = "<group>"; };
@@ -81,18 +87,18 @@
 		75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLVideoMessageModel.m; sourceTree = "<group>"; };
 		75F9E7CA213E18DF00492ED8 /* LLChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatViewController.h; sourceTree = "<group>"; };
 		75F9E7CB213E18DF00492ED8 /* LLChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatViewController.m; sourceTree = "<group>"; };
-		75F9E7CE213E19E400492ED8 /* LLBaseMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLBaseMessageTableViewCell.h; sourceTree = "<group>"; };
-		75F9E7CF213E19E400492ED8 /* LLBaseMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLBaseMessageTableViewCell.m; sourceTree = "<group>"; };
-		75F9E7D1213E1A0200492ED8 /* LLTextMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLTextMessageTableViewCell.h; sourceTree = "<group>"; };
-		75F9E7D2213E1A0200492ED8 /* LLTextMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLTextMessageTableViewCell.m; sourceTree = "<group>"; };
+		75F9E7CE213E19E400492ED8 /* LLChatMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMessageCell.h; sourceTree = "<group>"; };
+		75F9E7CF213E19E400492ED8 /* LLChatMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatMessageCell.m; sourceTree = "<group>"; };
+		75F9E7D1213E1A0200492ED8 /* LLChatTextMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatTextMessageCell.h; sourceTree = "<group>"; };
+		75F9E7D2213E1A0200492ED8 /* LLChatTextMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatTextMessageCell.m; sourceTree = "<group>"; };
 		75F9E7D8213E4C5500492ED8 /* LLChatHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatHelper.h; sourceTree = "<group>"; };
 		75F9E7D9213E4C5500492ED8 /* LLChatHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatHelper.m; sourceTree = "<group>"; };
 		75F9E7DC213E682100492ED8 /* LLChatBtn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBtn.h; sourceTree = "<group>"; };
 		75F9E7DD213E682100492ED8 /* LLChatBtn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatBtn.m; sourceTree = "<group>"; };
 		75F9E7DF213E6B6900492ED8 /* UIView+LLChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LLChat.h"; sourceTree = "<group>"; };
 		75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LLChat.m"; sourceTree = "<group>"; };
-		75F9E7E2213E71F400492ED8 /* LLImageMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLImageMessageTableViewCell.h; sourceTree = "<group>"; };
-		75F9E7E3213E71F400492ED8 /* LLImageMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLImageMessageTableViewCell.m; sourceTree = "<group>"; };
+		75F9E7E2213E71F400492ED8 /* LLChatImageMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatImageMessageCell.h; sourceTree = "<group>"; };
+		75F9E7E3213E71F400492ED8 /* LLChatImageMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatImageMessageCell.m; sourceTree = "<group>"; };
 		75F9E7E5213E7C7F00492ED8 /* LLIMService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMService.h; sourceTree = "<group>"; };
 		75F9E7E6213E7C7F00492ED8 /* LLIMService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMService.m; sourceTree = "<group>"; };
 		75F9E7E8213E7D2A00492ED8 /* LLIMMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMMessage.h; sourceTree = "<group>"; };
@@ -303,12 +309,16 @@
 			children = (
 				75614241213F6D47004CC91B /* Keyboard */,
 				75F9E7DB213E680500492ED8 /* LLChatBtn */,
-				75F9E7CE213E19E400492ED8 /* LLBaseMessageTableViewCell.h */,
-				75F9E7CF213E19E400492ED8 /* LLBaseMessageTableViewCell.m */,
-				75F9E7D1213E1A0200492ED8 /* LLTextMessageTableViewCell.h */,
-				75F9E7D2213E1A0200492ED8 /* LLTextMessageTableViewCell.m */,
-				75F9E7E2213E71F400492ED8 /* LLImageMessageTableViewCell.h */,
-				75F9E7E3213E71F400492ED8 /* LLImageMessageTableViewCell.m */,
+				75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */,
+				75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */,
+				75279F8821ED7CFD00DAE00B /* LLChatSystemCell.h */,
+				75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */,
+				75F9E7CE213E19E400492ED8 /* LLChatMessageCell.h */,
+				75F9E7CF213E19E400492ED8 /* LLChatMessageCell.m */,
+				75F9E7D1213E1A0200492ED8 /* LLChatTextMessageCell.h */,
+				75F9E7D2213E1A0200492ED8 /* LLChatTextMessageCell.m */,
+				75F9E7E2213E71F400492ED8 /* LLChatImageMessageCell.h */,
+				75F9E7E3213E71F400492ED8 /* LLChatImageMessageCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,13 +439,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */,
 				7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */,
-				75F9E7D0213E19E400492ED8 /* LLBaseMessageTableViewCell.m in Sources */,
+				75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */,
 				75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */,
 				75F9E7A621391C6B00492ED8 /* LLAVLameManager.m in Sources */,
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
-				75F9E7E4213E71F400492ED8 /* LLImageMessageTableViewCell.m in Sources */,
+				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
 				75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
 				75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */,
@@ -443,10 +454,11 @@
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
+				75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */,
 				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
 				75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */,
 				75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */,
-				75F9E7D3213E1A0200492ED8 /* LLTextMessageTableViewCell.m in Sources */,
+				75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */,
 				75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */,
 				75F9E7C1213D24E800492ED8 /* LLImageMessageModel.m in Sources */,
 				75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */,

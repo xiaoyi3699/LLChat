@@ -8,8 +8,8 @@
 
 #import "LLChatViewController.h"
 #import "LLInputView.h"
-#import "LLTextMessageTableViewCell.h"
-#import "LLImageMessageTableViewCell.h"
+#import "LLChatTextMessageCell.h"
+#import "LLChatImageMessageCell.h"
 
 @interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate,LLIMServiceDelegate>
 
@@ -141,14 +141,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.messageModels.count) {
         
-        LLBaseMessageTableViewCell *cell;
+        LLChatMessageCell *cell;
         LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         
         if ([model isKindOfClass:[LLTextMessageModel class]]) {
             LLTextMessageModel *textModel = (LLTextMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
             if (cell == nil) {
-                cell = [[LLTextMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];
+                cell = [[LLChatTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];
             }
             [cell setConfig:textModel];
         }
@@ -156,7 +156,7 @@
             LLImageMessageModel *imageModel = (LLImageMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
             if (cell == nil) {
-                cell = [[LLImageMessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imageCell"];
+                cell = [[LLChatImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imageCell"];
             }
             [cell setConfig:imageModel];
         }

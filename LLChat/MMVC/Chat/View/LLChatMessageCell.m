@@ -1,15 +1,15 @@
 //
-//  LLBaseMessageTableViewCell.m
+//  LLChatMessageCell.m
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/4.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLBaseMessageTableViewCell.h"
+#import "LLChatMessageCell.h"
 #import "LLChatBtn.h"
 
-@implementation LLBaseMessageTableViewCell {
+@implementation LLChatMessageCell {
     LLChatBtn *_retryBtn;
 }
 
@@ -45,6 +45,7 @@
 }
 
 - (void)setConfig:(LLBaseMessageModel *)model {
+    [super setConfig:model];
     
     if (model.isSender) {
         //头像
