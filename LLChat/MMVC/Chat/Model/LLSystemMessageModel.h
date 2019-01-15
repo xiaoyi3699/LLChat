@@ -7,6 +7,8 @@
 //
 
 #import "LLBaseMessageModel.h"
+
+#define LL_SYSTEM_MSG_FONT [UIFont systemFontOfSize:10]
 @interface LLSystemMessageModel : LLBaseMessageModel
 
 @end

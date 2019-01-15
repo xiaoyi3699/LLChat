@@ -52,7 +52,7 @@
     if ([data writeToFile:filePath atomically:YES]) {
         return filePath;
     }
-    return @"ll_chat_default";
+    return nil;
 }
 
 - (NSString *)saveThImage:(UIImage *)image {
@@ -61,7 +61,7 @@
     if ([data writeToFile:filePath atomically:YES]) {
         return filePath;
     }
-    return @"ll_chat_default";
+    return nil;
 }
 
 @end

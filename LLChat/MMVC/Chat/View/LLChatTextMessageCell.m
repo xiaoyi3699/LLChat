@@ -18,7 +18,7 @@
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.textColor = [UIColor darkTextColor];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        _contentLabel.font = LL_TEXT_CONTENT_F;
+        _contentLabel.font = LL_TEXT_MSG_FONT;
         _contentLabel.numberOfLines = 0;
         [self addSubview:_contentLabel];
     }

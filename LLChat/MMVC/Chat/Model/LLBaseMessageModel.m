@@ -28,7 +28,7 @@
         }
         else if ([self isKindOfClass:[LLTextMessageModel class]]) {
             LLTextMessageModel *model = (LLTextMessageModel *)self;
-            CGSize size = [model.message boundingRectWithSize:CGSizeMake(LL_TEXT_CONTENT_W, CGFLOAT_MAX)
+            CGSize size = [model.message boundingRectWithSize:CGSizeMake(LL_TEXT_MSG_WIDTH, CGFLOAT_MAX)
                                                       options:NSStringDrawingUsesLineFragmentOrigin
                                                    attributes:[model contentAttributes]
                                                       context:nil].size;
