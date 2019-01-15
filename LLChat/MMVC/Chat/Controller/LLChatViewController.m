@@ -301,11 +301,11 @@
     LLIMMessage *IMMessage = [LLIMServiceHelper createIMMessageWithModel:model];
     [[LLIMService shareInstance] sendMessage:IMMessage];
     
-    //
-    LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];
-    sModel.message = @"10:55";
-    [self addMessageModel:sModel];
-    //
+    //添加模拟时间
+//    LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];
+//    sModel.message = @"10:55";
+//    [self addMessageModel:sModel];
+    //end
 }
 
 //收到消息

@@ -11,7 +11,6 @@
 @interface LLMessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIView *inputView;
 
 @end
 
@@ -33,7 +32,6 @@
 
 - (void)setupUI {
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.inputView];
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource

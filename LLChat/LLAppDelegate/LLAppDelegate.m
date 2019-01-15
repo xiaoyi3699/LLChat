@@ -23,6 +23,7 @@
     [self.window makeKeyAndVisible];
     
     UITabBarController *rootVC = [[UITabBarController alloc] init];
+    rootVC.tabBar.translucent = NO;
     
     LLFriendViewController *firstViewController = [[LLFriendViewController alloc] init];
     UINavigationController *firstNav = [[UINavigationController alloc] initWithRootViewController:firstViewController];
