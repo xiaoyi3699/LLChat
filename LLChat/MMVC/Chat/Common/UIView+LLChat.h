@@ -21,7 +21,6 @@
 - (BOOL)ll_isDescendantOfView:(UIView *)otherView;
 
 #pragma mark - 自定义适配
-//设置位置(宽和高保持不变)
 - (CGFloat)minX;
 - (void)setMinX:(CGFloat)minX;
 
@@ -43,7 +42,6 @@
 - (CGPoint)LLPostion;
 - (void)setLLPostion:(CGPoint)LLPostion;
 
-//设置宽和高((位置不变))
 - (CGFloat)LLWidth;
 - (void)setLLWidth:(CGFloat)LLWidth;
 

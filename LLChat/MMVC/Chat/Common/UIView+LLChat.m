@@ -26,7 +26,6 @@
 }
 
 #pragma - mark 自定义适配
-//设置位置(宽和高保持不变)
 - (CGFloat)minX{
     return CGRectGetMinX(self.frame);
 }
@@ -94,7 +93,6 @@
     self.frame = rect;
 }
 
-//设置宽和高(位置不变)
 - (CGFloat)LLWidth{
     return CGRectGetWidth(self.frame);
 }
