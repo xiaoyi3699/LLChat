@@ -133,7 +133,7 @@
     if (indexPath.row < self.messageModels.count) {
         LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         [model cacheModelSize];
-        return model.modelH+60;
+        return model.modelH+40;
     }
     return 0;
 }

@@ -27,7 +27,7 @@
         _nickLabel = [[UILabel alloc] init];
         _nickLabel.textColor = [UIColor grayColor];
         _nickLabel.textAlignment = NSTextAlignmentCenter;
-        _nickLabel.font = [UIFont systemFontOfSize:13];
+        _nickLabel.font = [UIFont systemFontOfSize:12];
         [self addSubview:_nickLabel];
         
         _bubbleImageView = [[UIImageView alloc] init];
@@ -53,12 +53,20 @@
         _avatarImageView.image = [UIImage imageNamed:@"ll_from_avatar"];
         
         //昵称
-        _nickLabel.frame = CGRectMake(_avatarImageView.minX-110, 10, 100, 20);
+        _nickLabel.frame = CGRectMake(_avatarImageView.minX-105, 5, 100, 20);
         _nickLabel.text = model.fromNick;
         _nickLabel.textAlignment = NSTextAlignmentRight;
         
-        //聊天气泡
-        _bubbleImageView.frame = CGRectMake(_avatarImageView.minX-model.modelW-17, _nickLabel.maxY+5, model.modelW+17, model.modelH+10);
+        if (model.isGroup) {
+            _nickLabel.hidden = NO;
+            //聊天气泡
+            _bubbleImageView.frame = CGRectMake(_avatarImageView.minX-model.modelW-22, _nickLabel.maxY, model.modelW+17, model.modelH+10);
+        }
+        else {
+            _nickLabel.hidden = YES;
+            //聊天气泡
+            _bubbleImageView.frame = CGRectMake(_avatarImageView.minX-model.modelW-22, _avatarImageView.minY+5, model.modelW+17, model.modelH+10);
+        }
         _bubbleImageView.image = [[LLChatHelper shareInstance] senderBubbleImage];
         
         //消息内容
@@ -99,11 +107,20 @@
         //可改成网络图片
         _avatarImageView.image = [UIImage imageNamed:@"ll_to_avatar"];
         
-        _nickLabel.frame = CGRectMake(_avatarImageView.maxX+10, 10, 100, 20);
+        _nickLabel.frame = CGRectMake(_avatarImageView.maxX+5, 5, 100, 20);
         _nickLabel.text = model.fromNick;
         _nickLabel.textAlignment = NSTextAlignmentLeft;
         
-        _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX, _nickLabel.maxY+5, model.modelW+17, model.modelH+10);
+        if (model.isGroup){
+            _nickLabel.hidden = NO;
+            //聊天气泡
+            _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX, _nickLabel.maxY, model.modelW+17, model.modelH+10);
+        }
+        else {
+                _nickLabel.hidden = YES;
+                //聊天气泡
+                _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX, _avatarImageView.minY+5, model.modelW+17, model.modelH+10);
+            }
         _bubbleImageView.image = [[LLChatHelper shareInstance] receiverBubbleImage];
         
         CGRect rect = _bubbleImageView.frame;
