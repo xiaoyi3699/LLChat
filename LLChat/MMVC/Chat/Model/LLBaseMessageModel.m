@@ -24,7 +24,7 @@
     if (self.modelH == -1 || self.modelW == -1) {
         if ([self isKindOfClass:[LLSystemMessageModel class]]) {
             self.modelH = 20;
-            self.modelW = LL_SCREEN_WIDTH;
+            self.modelW = LLCHAT_SCREEN_WIDTH;
         }
         else if ([self isKindOfClass:[LLTextMessageModel class]]) {
             LLTextMessageModel *model = (LLTextMessageModel *)self;

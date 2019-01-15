@@ -16,15 +16,15 @@
     self = [super init];
     if (self) {
         self.msgType = LLMessageTypeImage;
-        _cachePath = APP_CachePath;
+        _cachePath = LLCHAT_APP_CACHE_PATH;
     }
     return self;
 }
 
 //图片比例计算
 - (void)handleImageSize {
-    CGFloat maxW = ceil(LL_SCREEN_WIDTH/3.0);
-    CGFloat maxH = ceil(LL_SCREEN_HEIGHT/2.0);
+    CGFloat maxW = ceil(LLCHAT_SCREEN_WIDTH/3.0);
+    CGFloat maxH = ceil(LLCHAT_SCREEN_HEIGHT/2.0);
     
     CGFloat imgScale = self.imgW*1.0/self.imgH;
     CGFloat viewScale = maxW*1.0/maxH;

@@ -28,7 +28,7 @@
     self = [super init];
     if (self) {
         self.title = @"消息";
-        self.tableViewY = LL_NAV_TOP_H;
+        self.tableViewY = LLCHAT_NAV_TOP_H;
     }
     return self;
 }
@@ -192,7 +192,7 @@
     if (_tableView == nil) {
         CGRect rect = self.view.bounds;
         rect.origin.y = self.tableViewY;
-        rect.size.height -= (self.tableViewY+LL_INPUT_H);
+        rect.size.height -= (self.tableViewY+LLCHAT_INPUT_H);
         
         _tableView = [[UITableView alloc] initWithFrame:rect];
         _tableView.delegate = self;
@@ -217,7 +217,7 @@
 
 - (LLInputView *)inputView {
     if (_inputView == nil) {
-        _inputView = [[LLInputView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), LL_SCREEN_WIDTH, LL_INPUT_H)];
+        _inputView = [[LLInputView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), LLCHAT_SCREEN_WIDTH, LLCHAT_INPUT_H)];
         _inputView.delegate = self;
     }
     return _inputView;
@@ -330,7 +330,7 @@
         CGFloat TContentH = self.tableView.contentSize.height;
         CGFloat tableViewH = self.tableView.bounds.size.height;
         
-        CGFloat keyboardH = LL_SCREEN_HEIGHT-self.inputView.maxY;
+        CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.maxY;
         
         CGFloat offsetY = 0;
         if (TContentH < tableViewH) {

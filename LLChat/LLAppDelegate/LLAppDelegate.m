@@ -52,7 +52,7 @@
         UIViewController *viewController = tabBarController.viewControllers[i];
         
         NSDictionary *atts = @{NSForegroundColorAttributeName:[UIColor darkTextColor],NSFontAttributeName:[UIFont systemFontOfSize:12]};
-        NSDictionary *selAtts = @{NSForegroundColorAttributeName:THEME_COLOR,NSFontAttributeName:[UIFont systemFontOfSize:12]};
+        NSDictionary *selAtts = @{NSForegroundColorAttributeName:LLCHAT_THEME_COLOR,NSFontAttributeName:[UIFont systemFontOfSize:12]};
         
         UIImage *img = [[UIImage imageNamed:normalImages[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage *selImg = [[UIImage imageNamed:selectImages[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

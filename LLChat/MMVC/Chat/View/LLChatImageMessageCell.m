@@ -30,7 +30,7 @@
     }
     else {
         if (model.thumbnail) {
-            _contentImageView.image = LL_DEFAULT_IMAGE;
+            _contentImageView.image = LLCHAT_BAD_IMAGE;
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 NSURL *url = [NSURL URLWithString:[model.thumbnail ll_URLEncodedString]];
                 NSData *data = [NSData dataWithContentsOfURL:url];
@@ -44,7 +44,7 @@
             });
         }
         else {
-            _contentImageView.image = LL_DEFAULT_IMAGE;
+            _contentImageView.image = LLCHAT_BAD_IMAGE;
         }
     }
 }

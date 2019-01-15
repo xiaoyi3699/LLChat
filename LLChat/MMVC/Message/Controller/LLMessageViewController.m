@@ -69,8 +69,8 @@
 - (UITableView *)tableView {
     if (_tableView == nil) {
         CGRect rect = self.view.bounds;
-        rect.origin.y = LL_NAV_TOP_H;
-        rect.size.height -= (LL_NAV_TOP_H+LL_BAR_BOT_H);
+        rect.origin.y = LLCHAT_NAV_TOP_H;
+        rect.size.height -= (LLCHAT_NAV_TOP_H+LLCHAT_BAR_BOT_H);
         
         _tableView = [[UITableView alloc] initWithFrame:rect];
         _tableView.delegate = self;

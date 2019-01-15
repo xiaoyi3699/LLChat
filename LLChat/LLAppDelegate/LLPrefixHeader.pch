@@ -31,25 +31,25 @@
 #import "LLIMServiceObserver.h"
 #import "LLChatViewController.h"
 
-#define LL_SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
-#define LL_SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
+#define LLCHAT_SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
+#define LLCHAT_SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
 
-#define LL_IS_iPhone  (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define LL_iPhoneX    (LL_IS_iPhone && LL_SCREEN_HEIGHT==812)
-#define LL_NAV_TOP_H  (LL_iPhoneX ? 88:64)
-#define LL_BAR_BOT_H  (LL_iPhoneX ? 83:49)
-#define LL_IPHONE_X_BOT_H  (LL_iPhoneX ? 34:0)
+#define LLCHAT_IS_IPHONE  (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define LLCHAT_IPHONEX    (LLCHAT_IS_IPHONE && LLCHAT_SCREEN_HEIGHT==812)
+#define LLCHAT_NAV_TOP_H  (LLCHAT_IPHONEX ? 88:64)
+#define LLCHAT_BAR_BOT_H  (LLCHAT_IPHONEX ? 83:49)
+#define LLCHAT_BOTTOM_H   (LLCHAT_IPHONEX ? 34:0)
 
 //默认图
-#define LL_DEFAULT_IMAGE [UIImage imageNamed:@"ll_chat_default"]
+#define LLCHAT_BAD_IMAGE [UIImage imageNamed:@"ll_chat_default"]
 
 //聊天界面底部视图高度
-#define LL_INPUT_H    (LL_iPhoneX ? 83:49)
+#define LLCHAT_INPUT_H    (LLCHAT_IPHONEX ? 83:49)
 
-#define THEME_COLOR [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1]
+#define LLCHAT_THEME_COLOR [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1]
 
 //获取沙盒Cache路径
-#define APP_CachePath     \
+#define LLCHAT_APP_CACHE_PATH     \
 [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
 #endif

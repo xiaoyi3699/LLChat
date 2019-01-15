@@ -12,7 +12,7 @@
 @implementation LLMoreKeyboard
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, LL_SCREEN_WIDTH, 200+LL_IPHONE_X_BOT_H)];
+    self = [super initWithFrame:CGRectMake(0, 0, LLCHAT_SCREEN_WIDTH, 200+LLCHAT_BOTTOM_H)];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         

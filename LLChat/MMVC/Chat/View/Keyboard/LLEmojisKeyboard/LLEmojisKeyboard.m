@@ -24,9 +24,9 @@
 }
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, LL_SCREEN_WIDTH, 200+LL_IPHONE_X_BOT_H)];
+    self = [super initWithFrame:CGRectMake(0, 0, LLCHAT_SCREEN_WIDTH, 200+LLCHAT_BOTTOM_H)];
     if (self) {
-        CGFloat spcing = (LL_SCREEN_WIDTH-key_itemW*key_nums)/(key_nums+1);
+        CGFloat spcing = (LLCHAT_SCREEN_WIDTH-key_itemW*key_nums)/(key_nums+1);
         LLHorizontalLayout *horLayout = [[LLHorizontalLayout alloc] initWithSpacing:spcing rows:key_rows nums:key_nums];
         
         CGRect rect = self.bounds;
@@ -45,14 +45,14 @@
         [_collectionView registerClass:[LLDeleteCell class] forCellWithReuseIdentifier:@"deleteCell"];
         [self addSubview:_collectionView];
         
-        UIView *toolView = [[UIView alloc] initWithFrame:CGRectMake(0, _collectionView.maxY, LL_SCREEN_WIDTH, 40)];
+        UIView *toolView = [[UIView alloc] initWithFrame:CGRectMake(0, _collectionView.maxY, LLCHAT_SCREEN_WIDTH, 40)];
         toolView.backgroundColor = [UIColor colorWithRed:250/255. green:250/255. blue:250/255. alpha:1];
         [self addSubview:toolView];
         
         UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        sendBtn.frame = CGRectMake(LL_SCREEN_WIDTH-80, 0, 80, 40);
+        sendBtn.frame = CGRectMake(LLCHAT_SCREEN_WIDTH-80, 0, 80, 40);
         sendBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        sendBtn.backgroundColor = THEME_COLOR;
+        sendBtn.backgroundColor = LLCHAT_THEME_COLOR;
         [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
         [sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
