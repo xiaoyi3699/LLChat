@@ -16,12 +16,11 @@
 		7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424B213F79A3004CC91B /* LLEmojisCell.m */; };
 		7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424E213F79BF004CC91B /* LLDeleteCell.m */; };
 		75614252213F7E79004CC91B /* LLInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614251213F7E79004CC91B /* LLInputView.m */; };
-		75614257213FA2C9004CC91B /* LLMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614256213FA2C9004CC91B /* LLMoreKeyboard.m */; };
+		75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614256213FA2C9004CC91B /* LLChatMoreKeyboard.m */; };
 		75A81CE4213FC0E0001C5261 /* LLIMServiceObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A81CE3213FC0E0001C5261 /* LLIMServiceObserver.m */; };
 		75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */; };
 		75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F9E6F821391B4E00492ED8 /* Assets.xcassets */; };
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
-		75F9E7A621391C6B00492ED8 /* LLAVLameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E77A21391C6A00492ED8 /* LLAVLameManager.m */; };
 		75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */; };
 		75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7B121391E9300492ED8 /* LLMessageViewController.m */; };
 		75F9E7BB213D229D00492ED8 /* LLBaseMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7BA213D229D00492ED8 /* LLBaseMessageModel.m */; };
@@ -39,7 +38,6 @@
 		75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E6213E7C7F00492ED8 /* LLIMService.m */; };
 		75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E9213E7D2A00492ED8 /* LLIMMessage.m */; };
 		75F9E7EE213E805200492ED8 /* LLIMServiceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7ED213E805200492ED8 /* LLIMServiceHelper.m */; };
-		75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7F1213E80D600492ED8 /* LLSqliteManager.m */; };
 		75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */; };
 /* End PBXBuildFile section */
 
@@ -61,8 +59,8 @@
 		7561424E213F79BF004CC91B /* LLDeleteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLDeleteCell.m; sourceTree = "<group>"; };
 		75614250213F7E79004CC91B /* LLInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLInputView.h; sourceTree = "<group>"; };
 		75614251213F7E79004CC91B /* LLInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLInputView.m; sourceTree = "<group>"; };
-		75614255213FA2C9004CC91B /* LLMoreKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMoreKeyboard.h; sourceTree = "<group>"; };
-		75614256213FA2C9004CC91B /* LLMoreKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMoreKeyboard.m; sourceTree = "<group>"; };
+		75614255213FA2C9004CC91B /* LLChatMoreKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMoreKeyboard.h; sourceTree = "<group>"; };
+		75614256213FA2C9004CC91B /* LLChatMoreKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatMoreKeyboard.m; sourceTree = "<group>"; };
 		75A81CE2213FC0E0001C5261 /* LLIMServiceObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMServiceObserver.h; sourceTree = "<group>"; };
 		75A81CE3213FC0E0001C5261 /* LLIMServiceObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMServiceObserver.m; sourceTree = "<group>"; };
 		75F9E6F221391B4D00492ED8 /* LLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,8 +70,6 @@
 		75F9E6FD21391B4E00492ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75F9E6FE21391B4F00492ED8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		75F9E70D21391BFC00492ED8 /* LLPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLPrefixHeader.pch; sourceTree = "<group>"; };
-		75F9E77A21391C6A00492ED8 /* LLAVLameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLAVLameManager.m; sourceTree = "<group>"; };
-		75F9E77B21391C6A00492ED8 /* LLAVLameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLAVLameManager.h; sourceTree = "<group>"; };
 		75F9E7AD21391E2800492ED8 /* LLFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLFriendViewController.h; sourceTree = "<group>"; };
 		75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLFriendViewController.m; sourceTree = "<group>"; };
 		75F9E7B021391E9300492ED8 /* LLMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMessageViewController.h; sourceTree = "<group>"; };
@@ -108,8 +104,6 @@
 		75F9E7E9213E7D2A00492ED8 /* LLIMMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMMessage.m; sourceTree = "<group>"; };
 		75F9E7EC213E805200492ED8 /* LLIMServiceHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLIMServiceHelper.h; sourceTree = "<group>"; };
 		75F9E7ED213E805200492ED8 /* LLIMServiceHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLIMServiceHelper.m; sourceTree = "<group>"; };
-		75F9E7F0213E80D600492ED8 /* LLSqliteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSqliteManager.h; sourceTree = "<group>"; };
-		75F9E7F1213E80D600492ED8 /* LLSqliteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSqliteManager.m; sourceTree = "<group>"; };
 		75F9E7F3213E8BB400492ED8 /* NSString+LLChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+LLChat.h"; sourceTree = "<group>"; };
 		75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LLChat.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,8 +149,8 @@
 		75614254213FA29B004CC91B /* LLMoreKeyboard */ = {
 			isa = PBXGroup;
 			children = (
-				75614255213FA2C9004CC91B /* LLMoreKeyboard.h */,
-				75614256213FA2C9004CC91B /* LLMoreKeyboard.m */,
+				75614255213FA2C9004CC91B /* LLChatMoreKeyboard.h */,
+				75614256213FA2C9004CC91B /* LLChatMoreKeyboard.m */,
 			);
 			path = LLMoreKeyboard;
 			sourceTree = "<group>";
@@ -203,18 +197,8 @@
 		75F9E77821391C6A00492ED8 /* LLTools */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E77921391C6A00492ED8 /* LLAVLameManager */,
 			);
 			path = LLTools;
-			sourceTree = "<group>";
-		};
-		75F9E77921391C6A00492ED8 /* LLAVLameManager */ = {
-			isa = PBXGroup;
-			children = (
-				75F9E77B21391C6A00492ED8 /* LLAVLameManager.h */,
-				75F9E77A21391C6A00492ED8 /* LLAVLameManager.m */,
-			);
-			path = LLAVLameManager;
 			sourceTree = "<group>";
 		};
 		75F9E7A821391DB800492ED8 /* MMVC */ = {
@@ -331,7 +315,6 @@
 		75F9E7D7213E3E1300492ED8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7EF213E80CA00492ED8 /* LLSqliteManager */,
 				75F9E7D8213E4C5500492ED8 /* LLChatHelper.h */,
 				75F9E7D9213E4C5500492ED8 /* LLChatHelper.m */,
 				75F9E7DF213E6B6900492ED8 /* UIView+LLChat.h */,
@@ -364,15 +347,6 @@
 				75A81CE3213FC0E0001C5261 /* LLIMServiceObserver.m */,
 			);
 			path = LLIMService;
-			sourceTree = "<group>";
-		};
-		75F9E7EF213E80CA00492ED8 /* LLSqliteManager */ = {
-			isa = PBXGroup;
-			children = (
-				75F9E7F0213E80D600492ED8 /* LLSqliteManager.h */,
-				75F9E7F1213E80D600492ED8 /* LLSqliteManager.m */,
-			);
-			path = LLSqliteManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,14 +423,12 @@
 				75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */,
 				75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */,
 				75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */,
-				75F9E7A621391C6B00492ED8 /* LLAVLameManager.m in Sources */,
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
 				75F9E7E7213E7C7F00492ED8 /* LLIMService.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
-				75F9E7F2213E80D600492ED8 /* LLSqliteManager.m in Sources */,
-				75614257213FA2C9004CC91B /* LLMoreKeyboard.m in Sources */,
+				75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E7EA213E7D2A00492ED8 /* LLIMMessage.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,

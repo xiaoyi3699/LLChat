@@ -13,10 +13,6 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-///工具类
-#import "LLAVLameManager.h"
-#import "LLSqliteManager.h"
-
 //全局类
 #import "LLChatHelper.h"
 #import "UIView+LLChat.h"

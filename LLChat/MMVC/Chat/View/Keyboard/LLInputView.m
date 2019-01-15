@@ -15,9 +15,9 @@ typedef enum : NSInteger {
     LLInputViewTypeemotion,
     LLInputViewTypeMore,
 }LLInputType;
-@interface LLInputView ()<UITextViewDelegate,LLEmojisKeyboardDelegate,LLMoreKeyboardDelegate>
+@interface LLInputView ()<UITextViewDelegate,LLEmojisKeyboardDelegate,LLChatMoreKeyboardDelegate>
 
-@property (nonatomic, strong) LLMoreKeyboard *moreKeyboard;
+@property (nonatomic, strong) LLChatMoreKeyboard *moreKeyboard;
 @property (nonatomic, strong) LLEmojisKeyboard *emojisKeyboard;
 @property (nonatomic, assign) LLInputType type;
 
@@ -183,7 +183,7 @@ typedef enum : NSInteger {
     }
 }
 
-- (void)moreKeyboardSelectedType:(LLMoreType)type {
+- (void)moreKeyboardSelectedType:(LLChatMoreType)type {
     if ([self.delegate respondsToSelector:@selector(inputView:selectedType:)]) {
         [self.delegate inputView:self selectedType:type];
     }
@@ -202,9 +202,9 @@ typedef enum : NSInteger {
     return _emojisKeyboard;
 }
 
-- (LLMoreKeyboard *)moreKeyboard {
+- (LLChatMoreKeyboard *)moreKeyboard {
     if (_moreKeyboard == nil) {
-        _moreKeyboard = [[LLMoreKeyboard alloc] init];
+        _moreKeyboard = [[LLChatMoreKeyboard alloc] init];
         _moreKeyboard.delegate = self;
     }
     return _moreKeyboard;

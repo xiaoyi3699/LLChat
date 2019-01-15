@@ -75,8 +75,8 @@
     [self sendMessageModel:model];
 }
 
-- (void)inputView:(LLInputView *)inputView selectedType:(LLMoreType)type {
-    if (type == LLMoreTypeImage) {
+- (void)inputView:(LLInputView *)inputView selectedType:(LLChatMoreType)type {
+    if (type == LLChatMoreTypeImage) {
         //发送图片
         //选择图片的代码就不多写了, 这里假定已经选择了图片
         
@@ -106,13 +106,13 @@
         
         [self sendMessageModel:model];
     }
-    else if (type == LLMoreTypeVideo) {
+    else if (type == LLChatMoreTypeVideo) {
         //发送视频
     }
-    else if (type == LLMoreTypeLocation) {
+    else if (type == LLChatMoreTypeLocation) {
         //发送定位 - 未实现
     }
-    else if (type == LLMoreTypeTransfer) {
+    else if (type == LLChatMoreTypeTransfer) {
         //文件互传 - 未实现
     }
 }

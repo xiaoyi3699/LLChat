@@ -1,15 +1,15 @@
 //
-//  LLMoreKeyboard.m
+//  LLChatMoreKeyboard.m
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/5.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLMoreKeyboard.h"
+#import "LLChatMoreKeyboard.h"
 #import "LLChatBtn.h"
 
-@implementation LLMoreKeyboard
+@implementation LLChatMoreKeyboard
 
 - (instancetype)init {
     self = [super initWithFrame:CGRectMake(0, 0, LLCHAT_SCREEN_WIDTH, 200+LLCHAT_BOTTOM_H)];
@@ -43,7 +43,7 @@
 }
 
 - (void)btnClick:(UIButton *)btn {
-    LLMoreType type = (LLMoreType)btn.tag;
+    LLChatMoreType type = (LLChatMoreType)btn.tag;
     if ([self.delegate respondsToSelector:@selector(moreKeyboardSelectedType:)]) {
         [self.delegate moreKeyboardSelectedType:type];
     }

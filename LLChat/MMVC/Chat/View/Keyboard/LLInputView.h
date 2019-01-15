@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LLChatBtn.h"
 #import "LLEmojisKeyboard.h"
-#import "LLMoreKeyboard.h"
+#import "LLChatMoreKeyboard.h"
 
 @protocol LLInputViewDelegate;
 
@@ -26,6 +26,6 @@
 
 @optional
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message;
-- (void)inputView:(LLInputView *)inputView selectedType:(LLMoreType)type;
+- (void)inputView:(LLInputView *)inputView selectedType:(LLChatMoreType)type;
 
 @end
