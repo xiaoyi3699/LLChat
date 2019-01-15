@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSInteger {
-    LLMessageTypeText = 0, //文本
-    LLMessageTypeImage,    //图片
-    LLMessageTypeVoice,    //声音
-    LLMessageTypeVideo,    //视频
+    LLMessageTypeSystem = 0, //系统消息
+    LLMessageTypeText,       //文本消息
+    LLMessageTypeImage,      //图片消息
+    LLMessageTypeVoice,      //声音消息
+    LLMessageTypeVideo,      //视频消息
 }LLMessageType;
 
 typedef enum : NSInteger {

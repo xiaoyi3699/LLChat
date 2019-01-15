@@ -25,6 +25,7 @@
 #import "LLImageMessageModel.h"
 #import "LLVoiceMessageModel.h"
 #import "LLVideoMessageModel.h"
+#import "LLSystemMessageModel.h"
 
 #import "LLIMService.h"
 #import "LLIMServiceObserver.h"

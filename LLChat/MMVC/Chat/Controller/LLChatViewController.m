@@ -8,6 +8,7 @@
 
 #import "LLChatViewController.h"
 #import "LLInputView.h"
+#import "LLChatSystemCell.h"
 #import "LLChatTextMessageCell.h"
 #import "LLChatImageMessageCell.h"
 
@@ -133,6 +134,9 @@
     if (indexPath.row < self.messageModels.count) {
         LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         [model cacheModelSize];
+        if ([model isKindOfClass:[LLSystemMessageModel class]]) {
+            return model.modelH;
+        }
         return model.modelH+40;
     }
     return 0;
@@ -141,10 +145,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.messageModels.count) {
         
-        LLChatMessageCell *cell;
+        LLChatBaseCell *cell;
         LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         
-        if ([model isKindOfClass:[LLTextMessageModel class]]) {
+        if ([model isKindOfClass:[LLSystemMessageModel class]]) {
+            LLSystemMessageModel *systemModel = (LLSystemMessageModel *)model;
+            cell = [tableView dequeueReusableCellWithIdentifier:@"systemCell"];
+            if (cell == nil) {
+                cell = [[LLChatSystemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"systemCell"];
+            }
+            [cell setConfig:systemModel];
+        }
+        else if ([model isKindOfClass:[LLTextMessageModel class]]) {
             LLTextMessageModel *textModel = (LLTextMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
             if (cell == nil) {
@@ -288,6 +300,12 @@
     //发送
     LLIMMessage *IMMessage = [LLIMServiceHelper createIMMessageWithModel:model];
     [[LLIMService shareInstance] sendMessage:IMMessage];
+    
+    //
+    LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];
+    sModel.message = @"10:55";
+    [self addMessageModel:sModel];
+    //
 }
 
 //收到消息

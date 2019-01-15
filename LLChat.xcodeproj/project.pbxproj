@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */; };
 		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
+		75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */; };
 		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
 		75614246213F6F7B004CC91B /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* EmojisList.plist */; };
 		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
@@ -47,6 +48,8 @@
 		75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSystemCell.m; sourceTree = "<group>"; };
 		75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseCell.h; sourceTree = "<group>"; };
 		75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatBaseCell.m; sourceTree = "<group>"; };
+		75279F8E21ED803B00DAE00B /* LLSystemMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLSystemMessageModel.h; sourceTree = "<group>"; };
+		75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLSystemMessageModel.m; sourceTree = "<group>"; };
 		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
 		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
 		75614245213F6F7B004CC91B /* EmojisList.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = EmojisList.plist; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */,
 				75F9E7C5213D250200492ED8 /* LLVideoMessageModel.h */,
 				75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */,
+				75279F8E21ED803B00DAE00B /* LLSystemMessageModel.h */,
+				75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */,
 				75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */,
 				75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */,
+				75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */,
 				75F9E7A621391C6B00492ED8 /* LLAVLameManager.m in Sources */,
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
