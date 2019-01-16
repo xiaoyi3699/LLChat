@@ -32,7 +32,7 @@
                                                       options:NSStringDrawingUsesLineFragmentOrigin
                                                    attributes:[model contentAttributes]
                                                       context:nil].size;
-            self.modelH = ceil(size.height);
+            self.modelH = MAX(ceil(size.height), 30);
             self.modelW = MAX(ceil(size.width), 30);
         }
         else if ([self isKindOfClass:[LLImageMessageModel class]]) {

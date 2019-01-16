@@ -47,12 +47,12 @@
     
     if (model.isSender) {
         //头像
-        _avatarImageView.frame = CGRectMake(LLCHAT_SCREEN_WIDTH-60, 10, 40, 40);
+        _avatarImageView.frame = CGRectMake(LLCHAT_SCREEN_WIDTH-50, 10, 40, 40);
         //可改成网络图片
         _avatarImageView.image = [UIImage imageNamed:@"ll_from_avatar"];
         
         //昵称
-        _nickLabel.frame = CGRectMake(_avatarImageView.minX-105, 5, 100, 20);
+        _nickLabel.frame = CGRectMake(_avatarImageView.minX-110, 5, 100, 20);
         _nickLabel.text = model.fromNick;
         _nickLabel.textAlignment = NSTextAlignmentRight;
         
@@ -64,16 +64,16 @@
         else {
             _nickLabel.hidden = YES;
             //聊天气泡
-            _bubbleImageView.frame = CGRectMake(_avatarImageView.minX-model.modelW-22, _avatarImageView.minY+5, model.modelW+17, model.modelH+10);
+            _bubbleImageView.frame = CGRectMake(_avatarImageView.minX-model.modelW-22, _avatarImageView.minY, model.modelW+17, model.modelH+10);
         }
         _bubbleImageView.image = [[LLChatHelper shareInstance] senderBubbleImage];
         
         //消息内容
         CGRect rect = _bubbleImageView.frame;
-        rect.origin.x += 5;
-        rect.origin.y += 5;
-        rect.size.width -= 17;
-        rect.size.height -= 10;
+        if ([model isKindOfClass:[LLTextMessageModel class]]) {
+            rect.origin.x += 5;
+            rect.size.width -= 17;
+        }
         _contentRect = rect;
         
         //正在发送菊花动画
@@ -102,31 +102,31 @@
         _retryBtn.frame = CGRectMake(_activityView.minX, _bubbleImageView.maxY-30, 40, 40);
     }
     else {
-        _avatarImageView.frame = CGRectMake(20, 10, 40, 40);
+        _avatarImageView.frame = CGRectMake(10, 10, 40, 40);
         //可改成网络图片
         _avatarImageView.image = [UIImage imageNamed:@"ll_to_avatar"];
         
-        _nickLabel.frame = CGRectMake(_avatarImageView.maxX+5, 5, 100, 20);
+        _nickLabel.frame = CGRectMake(_avatarImageView.maxX+10, 5, 100, 20);
         _nickLabel.text = model.fromNick;
         _nickLabel.textAlignment = NSTextAlignmentLeft;
         
         if (model.isGroup){
             _nickLabel.hidden = NO;
             //聊天气泡
-            _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX, _nickLabel.maxY, model.modelW+17, model.modelH+10);
+            _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX+5, _nickLabel.maxY, model.modelW+17, model.modelH+10);
         }
         else {
-                _nickLabel.hidden = YES;
-                //聊天气泡
-                _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX, _avatarImageView.minY+5, model.modelW+17, model.modelH+10);
-            }
+            _nickLabel.hidden = YES;
+            //聊天气泡
+            _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX+5, _avatarImageView.minY, model.modelW+17, model.modelH+10);
+        }
         _bubbleImageView.image = [[LLChatHelper shareInstance] receiverBubbleImage];
         
         CGRect rect = _bubbleImageView.frame;
-        rect.origin.x += 12;
-        rect.origin.y += 5;
-        rect.size.width -= 17;
-        rect.size.height -= 10;
+        if ([model isKindOfClass:[LLTextMessageModel class]]) {
+            rect.origin.x += 12;
+            rect.size.width -= 17;
+        }
         _contentRect = rect;
         
         _activityView.hidden = YES;
