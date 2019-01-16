@@ -24,7 +24,6 @@
         
         NSArray *images = @[@"ll_chat_pic",@"ll_chat_video",@"ll_chat_locaion",@"ll_chat_transfer"];
         NSArray *titles = @[@"图片",@"视频",@"位置",@"互传"];
-        UIImage *keyboardImg = [UIImage imageNamed:@"ll_chat_board"];
         for (NSInteger i = 0; i < images.count; i ++) {
             LLChatBtn *btn = [LLChatBtn chatButtonWithType:LLChatButtonTypeMoreKeyboard];
             btn.frame = CGRectMake(left+i%count*(itemW+spacing), i/count*itemH, itemW, itemH);
@@ -32,7 +31,6 @@
             [btn setTitle:titles[i] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:images[i]] forState:UIControlStateNormal];
-            [btn setImage:keyboardImg forState:UIControlStateSelected];
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
             btn.titleLabel.textAlignment = NSTextAlignmentCenter;
             btn.titleLabel.font = [UIFont systemFontOfSize:13];
