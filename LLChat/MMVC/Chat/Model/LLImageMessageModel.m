@@ -50,7 +50,7 @@
     NSString *filePath = [NSString stringWithFormat:@"%@/or_%@.png",_cachePath,@(self.timestamp)];
     NSData *data = UIImagePNGRepresentation(image);
     if ([data writeToFile:filePath atomically:YES]) {
-        return filePath;
+        return filePath.lastPathComponent;
     }
     return nil;
 }
@@ -59,7 +59,7 @@
     NSString *filePath = [NSString stringWithFormat:@"%@/th_%@.png",_cachePath,@(self.timestamp)];
     NSData *data = UIImagePNGRepresentation(image);
     if ([data writeToFile:filePath atomically:YES]) {
-        return filePath;
+        return filePath.lastPathComponent;
     }
     return nil;
 }

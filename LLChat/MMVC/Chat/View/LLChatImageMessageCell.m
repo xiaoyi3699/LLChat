@@ -10,11 +10,13 @@
 
 @implementation LLChatImageMessageCell {
     UIImageView *_contentImageView;
+    NSString *_cachePath;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _cachePath = LLCHAT_APP_CACHE_PATH;
         _contentImageView = [[UIImageView alloc] init];
         _contentImageView.layer.masksToBounds = YES;
         _contentImageView.layer.cornerRadius = 5;
@@ -26,9 +28,11 @@
 - (void)setConfig:(LLImageMessageModel *)model {
     [super setConfig:model];
     
+    NSString *thumbnailPath = [NSString stringWithFormat:@"%@/%@",_cachePath,model.thumbnailPath];
+    //    NSString *originalPath = [NSString stringWithFormat:@"%@/%@",_cachePath,model.originalPath];
     _contentImageView.frame = _contentRect;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:model.thumbnailPath]) {
-        _contentImageView.image = [UIImage imageWithContentsOfFile:model.thumbnailPath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath]) {
+        _contentImageView.image = [UIImage imageWithContentsOfFile:thumbnailPath];
     }
     else {
         if (model.thumbnail) {
