@@ -23,8 +23,8 @@
     UICollectionView *_collectionView;
 }
 
-- (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, LLCHAT_SCREEN_WIDTH, 200+LLCHAT_BOTTOM_H)];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         CGFloat spcing = (LLCHAT_SCREEN_WIDTH-key_itemW*key_nums)/(key_nums+1);
         LLHorizontalLayout *horLayout = [[LLHorizontalLayout alloc] initWithSpacing:spcing rows:key_rows nums:key_nums];

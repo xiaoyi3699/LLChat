@@ -11,8 +11,8 @@
 
 @implementation LLChatMoreKeyboard
 
-- (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, LLCHAT_SCREEN_WIDTH, 200+LLCHAT_BOTTOM_H)];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
         

@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, assign) CGFloat tableViewY;
+@property (nonatomic, assign) CGFloat statusH;
 
 @end
 
@@ -29,6 +30,7 @@
     if (self) {
         self.title = @"消息";
         self.tableViewY = LLCHAT_NAV_TOP_H;
+        self.statusH = 34;
     }
     return self;
 }
@@ -36,22 +38,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self setupUI];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardValueChange:)
-                                                 name:UIKeyboardWillChangeFrameNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardValueChange:)
+//                                                 name:UIKeyboardWillChangeFrameNotification
+//                                               object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillShow:)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillHide:)
+//                                                 name:UIKeyboardWillHideNotification
+//                                               object:nil];
     
     [LLIMServiceObserver shareInstance].delegate3 = self;;
 }
@@ -217,7 +221,7 @@
 
 - (LLInputView *)inputView {
     if (_inputView == nil) {
-        _inputView = [[LLInputView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.tableView.frame), LLCHAT_SCREEN_WIDTH, LLCHAT_INPUT_H)];
+        _inputView = [[LLInputView alloc] init];
         _inputView.delegate = self;
     }
     return _inputView;
@@ -230,29 +234,14 @@
     return _messageModels;
 }
 
-#pragma mark - 监听键盘状态
-- (void)keyboardWillShow:(NSNotification *)notification {
-    self.isEditing = YES;
-}
+#pragma mark - 键盘状态代理
+- (void)inputView:(LLInputView *)inputView frameWillChangeWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
+    self.isEditing = isEditing;
 
-- (void)keyboardWillHide:(NSNotification *)notification {
-    self.isEditing = NO;
-}
-
-- (void)keyboardValueChange:(NSNotification *)notification{
-    NSDictionary *dic = notification.userInfo;
-    CGFloat duration = [dic[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
-    CGRect endFrame = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
-    CGRect frame = [self.view convertRect:endFrame fromView:self.view.window];
-    
-    CGRect rect = self.inputView.frame;
-    rect.origin.y = (frame.origin.y-rect.size.height);
-    self.inputView.frame = rect;
-    
     CGFloat TContentH = self.tableView.contentSize.height;
     CGFloat tableViewH = self.tableView.bounds.size.height;
-    CGFloat keyboardH = frame.size.height;
-    
+    CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
+
     CGFloat offsetY = 0;
     if (TContentH < tableViewH) {
         offsetY = TContentH+keyboardH-tableViewH;
@@ -266,21 +255,11 @@
     
     CGRect TRect = self.tableView.frame;
     if (offsetY > 0) {
-        if (frame.origin.y == self.view.bounds.size.height) {
-            //键盘收回
-            TRect.origin.y = self.tableViewY;
-            [UIView animateWithDuration:duration animations:^{
-                self.tableView.frame = TRect;
-            }];
-        }
-        else {
-            //键盘谈起
-            TRect.origin.y = self.tableViewY-offsetY;
-            [UIView animateWithDuration:duration animations:^{
-                self.tableView.frame = TRect;
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            }];
-        }
+        TRect.origin.y = self.tableViewY-offsetY;
+        [UIView animateWithDuration:duration animations:^{
+            self.tableView.frame = TRect;
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }];
     }
     else {
         TRect.origin.y = self.tableViewY;
@@ -289,6 +268,7 @@
         }];
     }
 }
+
 
 #pragma mark - private method
 - (void)sendMessageModel:(LLBaseMessageModel *)model {
@@ -330,7 +310,7 @@
         CGFloat TContentH = self.tableView.contentSize.height;
         CGFloat tableViewH = self.tableView.bounds.size.height;
         
-        CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.maxY;
+        CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
         
         CGFloat offsetY = 0;
         if (TContentH < tableViewH) {

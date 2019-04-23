@@ -29,15 +29,16 @@ typedef enum : NSInteger {
     LLChatBtn *_moreBtn;
     NSArray *_inputBtns;
     UITextView *_textView;
+    BOOL _isEditing;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super initWithFrame:CGRectMake(0, LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H, LLCHAT_SCREEN_WIDTH, LLCHAT_INPUT_H+LLCHAT_KEYBOARD_H)];
     if (self) {
         
         self.type = LLInputViewTypeNone;
         
-        CGFloat w = frame.size.width;
+        CGFloat w = self.LLWidth;
         self.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
         
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, w, 0.5)];
@@ -83,8 +84,68 @@ typedef enum : NSInteger {
         _textView.delegate = self;
         _textView.layer.borderColor = [UIColor colorWithRed:200/255. green:200/255. blue:200/255. alpha:1].CGColor;
         [self addSubview:_textView];
+        
+        [self addSubview:self.moreKeyboard];
+        [self addSubview:self.emojisKeyboard];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardValueChange:)
+                                                     name:UIKeyboardWillChangeFrameNotification
+                                                   object:nil];
     }
     return self;
+}
+
+#pragma mark - 监听键盘变化
+- (void)keyboardValueChange:(NSNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    CGFloat duration = [dic[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+    CGRect endFrame = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    
+    if (endFrame.origin.y == LLCHAT_SCREEN_HEIGHT) {
+        //键盘收回
+        if (_isEditing) {
+            //弹出自定义键盘
+            CGFloat minY = LLCHAT_SCREEN_HEIGHT-self.LLHeight;
+            [self minYWillChange:minY duration:duration isFinishEditing:NO];
+        }
+        else {
+            //结束编辑
+            CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
+            [self minYWillChange:minY duration:duration isFinishEditing:YES];
+        }
+    }
+    else {
+        //键盘谈起
+        CGFloat minY = endFrame.origin.y-LLCHAT_INPUT_H;
+        [self minYWillChange:minY duration:duration isFinishEditing:NO];
+    }
+}
+
+- (void)minYWillChange:(CGFloat)minY duration:(CGFloat)duration isFinishEditing:(BOOL)isFinishEditing {
+    _isEditing = !isFinishEditing;
+    if (isFinishEditing) {
+        [self recoverSetting:_voiceBtn.selected];;
+    }
+    if (_moreBtn.selected) {
+        //点击了更多按钮
+        self.emojisKeyboard.hidden = YES;
+        self.moreKeyboard.hidden = NO;
+    }
+    else if (_emotionBtn.selected) {
+        //点击了表情按钮
+        self.emojisKeyboard.hidden = NO;
+        self.moreKeyboard.hidden = YES;
+    }
+    
+    CGRect endFrame = self.frame;
+    endFrame.origin.y = minY;
+    [UIView animateWithDuration:duration animations:^{
+        self.frame = endFrame;
+    }];
+    if ([self.delegate respondsToSelector:@selector(inputView:frameWillChangeWithDuration:isEditing:)]) {
+        [self.delegate inputView:self frameWillChangeWithDuration:duration isEditing:_isEditing];
+    }
 }
 
 #pragma mark - 用户交互事件
@@ -99,45 +160,65 @@ typedef enum : NSInteger {
             //声音按钮
             _moreBtn.selected = NO;
             _emotionBtn.selected = NO;
-            _textView.inputView = nil;
-            [_textView resignFirstResponder];
-            [_textView reloadInputViews];
-        }
-        else if (btn.tag == 1) {
-            //表情按钮
-            _voiceBtn.selected = NO;
-            _moreBtn.selected = NO;
-            _textView.inputView = self.emojisKeyboard;
-            [_textView reloadInputViews];
-            [_textView becomeFirstResponder];
+            if (_isEditing) {
+                _isEditing = NO;
+                if (_textView.isFirstResponder) {
+                    [_textView resignFirstResponder];
+                }
+                else {
+                    //结束编辑
+                    CGFloat duration = 0.3;
+                    CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
+                    [self minYWillChange:minY duration:duration isFinishEditing:YES];
+                }
+            }
         }
         else {
-            //加号按钮
-            _voiceBtn.selected = NO;
-            _emotionBtn.selected = NO;
-            _textView.inputView = self.moreKeyboard;
-            [_textView reloadInputViews];
-            [_textView becomeFirstResponder];
+            if (btn.tag == 1) {
+                //表情按钮
+                _voiceBtn.selected = NO;
+                _moreBtn.selected = NO;
+            }
+            else {
+                //加号按钮
+                _voiceBtn.selected = NO;
+                _emotionBtn.selected = NO;
+            }
+            
+            if (_textView.isFirstResponder) {
+                [_textView resignFirstResponder];
+            }
+            else {
+                //弹出自定义键盘
+                CGFloat duration = 0.3;
+                CGFloat minY = LLCHAT_SCREEN_HEIGHT-self.LLHeight;
+                [self minYWillChange:minY duration:duration isFinishEditing:NO];
+            }
         }
     }
 }
 
 #pragma mark - public method
 - (void)chatBecomeFirstResponder {
-    _voiceBtn.selected = NO;
-    _emotionBtn.selected = NO;
-    _moreBtn.selected = NO;
-    _textView.inputView = nil;
-    [_textView reloadInputViews];
-    [_textView becomeFirstResponder];
+    if (!_textView.isFirstResponder) {
+        [_textView becomeFirstResponder];
+    }
+    if (_isEditing == NO) {
+        _isEditing = YES;
+    }
 }
 
 - (void)chatResignFirstResponder {
-    [_textView resignFirstResponder];
-    _voiceBtn.selected = NO;
-    _emotionBtn.selected = NO;
-    _moreBtn.selected = NO;
-    _textView.inputView = nil;
+    if (_textView.isFirstResponder) {
+        [_textView resignFirstResponder];
+    }
+    if (_isEditing) {
+        _isEditing = NO;
+        //结束编辑
+        CGFloat duration = 0.3;
+        CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
+        [self minYWillChange:minY duration:duration isFinishEditing:YES];
+    }
 }
 
 #pragma mark - private method
@@ -148,6 +229,18 @@ typedef enum : NSInteger {
         }
         _textView.text = @"";
     }
+}
+
+//还原按钮状态
+- (void)recoverSetting:(BOOL)isClickVoice {
+    if (isClickVoice == NO) {
+        _voiceBtn.selected = NO;
+    }
+    _emotionBtn.selected = NO;
+    _moreBtn.selected = NO;
+    
+    self.emojisKeyboard.hidden = YES;
+    self.moreKeyboard.hidden = YES;
 }
 
 #pragma mark - delegate
@@ -165,6 +258,11 @@ typedef enum : NSInteger {
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     _voiceBtn.selected = NO;
+    _emotionBtn.selected = NO;
+    _moreBtn.selected = NO;
+    
+    self.moreKeyboard.hidden = YES;
+    self.emojisKeyboard.hidden = YES;
 }
 
 - (void)emojisKeyboardSelectedText:(NSString *)text {
@@ -196,18 +294,24 @@ typedef enum : NSInteger {
 #pragma mark - getter
 - (LLEmojisKeyboard *)emojisKeyboard {
     if (_emojisKeyboard == nil) {
-        _emojisKeyboard = [[LLEmojisKeyboard alloc] init];
+        _emojisKeyboard = [[LLEmojisKeyboard alloc] initWithFrame:CGRectMake(0, LLCHAT_INPUT_H, LLCHAT_SCREEN_WIDTH, LLCHAT_KEYBOARD_H)];
         _emojisKeyboard.delegate = self;
+        _emojisKeyboard.hidden = YES;
     }
     return _emojisKeyboard;
 }
 
 - (LLChatMoreKeyboard *)moreKeyboard {
     if (_moreKeyboard == nil) {
-        _moreKeyboard = [[LLChatMoreKeyboard alloc] init];
+        _moreKeyboard = [[LLChatMoreKeyboard alloc] initWithFrame:CGRectMake(0, LLCHAT_INPUT_H, LLCHAT_SCREEN_WIDTH, LLCHAT_KEYBOARD_H)];
         _moreKeyboard.delegate = self;
+        _moreKeyboard.hidden = YES;
     }
     return _moreKeyboard;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
