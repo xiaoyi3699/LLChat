@@ -39,8 +39,10 @@
 //默认图
 #define LLCHAT_BAD_IMAGE [UIImage imageNamed:@"ll_chat_default"]
 
-//聊天界面底部视图高度
-#define LLCHAT_INPUT_H    (LLCHAT_IPHONEX ? 83:49)
+//输入框inputView的高度
+#define LLCHAT_INPUT_H    49
+//自定义键盘的高度
+#define LLCHAT_KEYBOARD_H (200+LLCHAT_BOTTOM_H)
 
 #define LLCHAT_THEME_COLOR [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1]
 
