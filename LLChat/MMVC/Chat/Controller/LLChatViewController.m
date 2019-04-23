@@ -38,24 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    [self setupUI];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardValueChange:)
-//                                                 name:UIKeyboardWillChangeFrameNotification
-//                                               object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillShow:)
-//                                                 name:UIKeyboardWillShowNotification
-//                                               object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide:)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.inputView];
     
     [LLIMServiceObserver shareInstance].delegate3 = self;;
 }
@@ -298,11 +282,6 @@
     [self.messageModels addObject:model];
     [_tableView reloadData];
     [self tableViewScrollToBottom];
-}
-
-- (void)setupUI {
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.inputView];
 }
 
 - (void)tableViewScrollToBottom {

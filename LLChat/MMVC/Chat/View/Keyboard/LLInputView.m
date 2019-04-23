@@ -125,19 +125,20 @@ typedef enum : NSInteger {
 - (void)minYWillChange:(CGFloat)minY duration:(CGFloat)duration isFinishEditing:(BOOL)isFinishEditing {
     _isEditing = !isFinishEditing;
     if (isFinishEditing) {
-        [self recoverSetting:_voiceBtn.selected];;
+        [self recoverSetting:_voiceBtn.selected];
     }
-    if (_moreBtn.selected) {
-        //点击了更多按钮
-        self.emojisKeyboard.hidden = YES;
-        self.moreKeyboard.hidden = NO;
+    else {
+        if (_moreBtn.selected) {
+            //点击了更多按钮
+            self.emojisKeyboard.hidden = YES;
+            self.moreKeyboard.hidden = NO;
+        }
+        else if (_emotionBtn.selected) {
+            //点击了表情按钮
+            self.emojisKeyboard.hidden = NO;
+            self.moreKeyboard.hidden = YES;
+        }
     }
-    else if (_emotionBtn.selected) {
-        //点击了表情按钮
-        self.emojisKeyboard.hidden = NO;
-        self.moreKeyboard.hidden = YES;
-    }
-    
     CGRect endFrame = self.frame;
     endFrame.origin.y = minY;
     [UIView animateWithDuration:duration animations:^{
@@ -233,9 +234,10 @@ typedef enum : NSInteger {
 
 //还原按钮状态
 - (void)recoverSetting:(BOOL)isClickVoice {
-    if (isClickVoice == NO) {
+    if (!isClickVoice) {
         _voiceBtn.selected = NO;
     }
+    
     _emotionBtn.selected = NO;
     _moreBtn.selected = NO;
     
@@ -257,12 +259,7 @@ typedef enum : NSInteger {
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    _voiceBtn.selected = NO;
-    _emotionBtn.selected = NO;
-    _moreBtn.selected = NO;
-    
-    self.moreKeyboard.hidden = YES;
-    self.emojisKeyboard.hidden = YES;
+    [self recoverSetting:NO];
 }
 
 - (void)emojisKeyboardSelectedText:(NSString *)text {
