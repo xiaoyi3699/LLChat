@@ -27,7 +27,6 @@ typedef enum : NSInteger {
     LLChatBtn *_voiceBtn;
     LLChatBtn *_emotionBtn;
     LLChatBtn *_moreBtn;
-    NSArray *_inputBtns;
     UITextView *_textView;
     BOOL _isEditing;
 }
@@ -72,7 +71,6 @@ typedef enum : NSInteger {
             
             [array addObject:btn];
         }
-        _inputBtns = [array copy];
         
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(40, 7, w-120, 35)];
         _textView.font = [UIFont systemFontOfSize:13];
