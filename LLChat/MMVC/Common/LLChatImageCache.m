@@ -8,7 +8,6 @@
 
 #import "LLChatImageCache.h"
 
-#define LL_DEFAULT_CACHE_IMAGE nil
 @implementation LLChatImageCache{
     NSString            *_cachePath;
     NSMutableDictionary *_memoryCache;
@@ -146,7 +145,7 @@
 
 - (void)getImageWithUrl:(NSString *)url completion:(void(^)(UIImage *image))completion {
     
-    completion(LL_DEFAULT_CACHE_IMAGE);
+    completion(LLCHAT_BAD_IMAGE);
     
     //3、从网络获取
     NSString *urlKey = [url base64EncodedString];

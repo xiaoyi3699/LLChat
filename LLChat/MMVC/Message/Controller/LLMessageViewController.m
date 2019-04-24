@@ -36,7 +36,11 @@
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    LLChatViewController *chatVC = [[LLChatViewController alloc] init];
+    LLChatUserModel *user = [[LLChatUserModel alloc] init];
+    user.uid = @"00002";
+    user.name = @"千年等一回";
+    user.avatar = @"http://www.vasueyun.cn/hzl/logo.png";
+    LLChatViewController *chatVC = [[LLChatViewController alloc] initWithUser:user];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
 }

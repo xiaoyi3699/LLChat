@@ -28,31 +28,11 @@
 - (void)setConfig:(LLImageMessageModel *)model {
     [super setConfig:model];
     
-    NSString *thumbnailPath = [NSString stringWithFormat:@"%@/%@",_cachePath,model.thumbnailPath];
-    //    NSString *originalPath = [NSString stringWithFormat:@"%@/%@",_cachePath,model.originalPath];
     _contentImageView.frame = _contentRect;
-    if ([[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath]) {
-        _contentImageView.image = [UIImage imageWithContentsOfFile:thumbnailPath];
-    }
-    else {
-        if (model.thumbnail) {
-            _contentImageView.image = LLCHAT_BAD_IMAGE;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                NSURL *url = [NSURL URLWithString:[model.thumbnail ll_URLEncodedString]];
-                NSData *data = [NSData dataWithContentsOfURL:url];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIImage *image = [UIImage imageWithData:data];
-                    if (image) {
-                        model.thumbnailPath = [model saveThImage:image];
-                        _contentImageView.image = image;
-                    }
-                });
-            });
-        }
-        else {
-            _contentImageView.image = LLCHAT_BAD_IMAGE;
-        }
-    }
+    
+    [[LLChatImageCache imageCache] getImageWithUrl:model.thumbnail isUseCatch:YES completion:^(UIImage *image) {
+        _contentImageView.image = image;
+    }];
 }
 
 @end

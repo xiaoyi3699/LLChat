@@ -25,14 +25,16 @@
 #import "NSString+LLChat.h"
 #import "NSDateFormatter+LLChat.h"
 
+#import "LLChatUserModel.h"
+
 #import "LLTextMessageModel.h"
 #import "LLImageMessageModel.h"
 #import "LLVoiceMessageModel.h"
 #import "LLVideoMessageModel.h"
 #import "LLSystemMessageModel.h"
 
-#import "LLIMService.h"
-#import "LLIMServiceObserver.h"
+#import "LLChatMessageManager.h"
+
 #import "LLChatViewController.h"
 
 #define LLCHAT_SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width

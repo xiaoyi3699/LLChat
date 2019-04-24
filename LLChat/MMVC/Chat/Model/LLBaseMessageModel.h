@@ -24,23 +24,31 @@ typedef enum : NSInteger {
 
 @interface LLBaseMessageModel : NSObject
 
-@property (nonatomic, strong) NSString *fromId;
-@property (nonatomic, strong) NSString *toId;
-
-@property (nonatomic, strong) NSString *fromNick;
-@property (nonatomic, strong) NSString *toNick;
-
-@property (nonatomic, strong) NSString *fromAvatar;
-@property (nonatomic, strong) NSString *toAvatar;
-
+#pragma mark - 消息基本信息
+///发送人id
+@property (nonatomic, strong) NSString *uid;
+///发送人昵称
+@property (nonatomic, strong) NSString *name;
+///发送人头像
+@property (nonatomic, strong) NSString *avatar;
+///文本内容
 @property (nonatomic, strong) NSString *message;
-
+///消息唯一识别标识
+@property (nonatomic, strong) NSString *messageId;
+///消息组id
+@property (nonatomic, strong) NSString *gid;
+///是否是群聊
 @property (nonatomic, assign) BOOL isGroup;
+///是否是自己发送
 @property (nonatomic, assign) BOOL isSender;
+///消息发送时间戳
 @property (nonatomic, assign) NSInteger timestamp;
+///消息类型
 @property (nonatomic, assign) LLMessageType msgType;
+///消息发送结果
 @property (nonatomic, assign) LLMessageSendType sendType;
 
+#pragma mark - 缓存model宽高, 优化列表滑动
 @property (nonatomic, assign) NSInteger modelW;
 @property (nonatomic, assign) NSInteger modelH;
 
@@ -48,10 +56,5 @@ typedef enum : NSInteger {
  缓存model的高度
  */
 - (void)cacheModelSize;
-
-/*
- 对象转换为字典
- */
-- (NSDictionary *)transfromDictionary;
 
 @end

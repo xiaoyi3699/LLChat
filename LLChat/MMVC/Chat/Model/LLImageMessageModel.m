@@ -23,45 +23,39 @@
 
 //图片比例计算
 - (void)handleImageSize {
-    CGFloat maxW = ceil(LLCHAT_SCREEN_WIDTH/3.0);
-    CGFloat maxH = ceil(LLCHAT_SCREEN_HEIGHT/2.0);
-    
+    CGFloat maxW = ceil(LLCHAT_SCREEN_WIDTH*0.32)*1.0;
+    CGFloat maxH = ceil(LLCHAT_SCREEN_WIDTH*0.32)*1.0;
     CGFloat imgScale = self.imgW*1.0/self.imgH;
     CGFloat viewScale = maxW*1.0/maxH;
     
     CGFloat w, h;
     if (imgScale > viewScale) {
         w = maxW;
-        h = self.imgH*maxW/self.imgW;
+        h = self.imgH*maxW*1.0/self.imgW;
     }
     else if (imgScale < viewScale) {
         h = maxH;
-        w = self.imgW*maxH/self.imgH;
+        w = self.imgW*maxH*1.0/self.imgH;
     }
     else {
         w = maxW;
         h = maxH;
     }
     self.imgW = ceil(w);
-    self.imgH = ceil(h);
-}
-
-- (NSString *)saveOrImage:(UIImage *)image {
-    NSString *filePath = [NSString stringWithFormat:@"%@/or_%@.png",_cachePath,@(self.timestamp)];
-    NSData *data = UIImagePNGRepresentation(image);
-    if ([data writeToFile:filePath atomically:YES]) {
-        return filePath.lastPathComponent;
+    self.imgH = ceil(h)+ceil(17.0/self.imgW*h-10);
+    
+    if (imgScale != viewScale) {
+        if (self.imgW > maxW) {
+            h = self.imgH*maxW*1.0/self.imgW;
+            self.imgW = maxW;
+        }
+        if (self.imgH > maxH) {
+            w = self.imgW*maxH*1.0/self.imgH;
+            h = maxH;
+        }
+        self.imgW = ceil(w);
+        self.imgH = ceil(h);
     }
-    return nil;
-}
-
-- (NSString *)saveThImage:(UIImage *)image {
-    NSString *filePath = [NSString stringWithFormat:@"%@/th_%@.png",_cachePath,@(self.timestamp)];
-    NSData *data = UIImagePNGRepresentation(image);
-    if ([data writeToFile:filePath atomically:YES]) {
-        return filePath.lastPathComponent;
-    }
-    return nil;
 }
 
 @end

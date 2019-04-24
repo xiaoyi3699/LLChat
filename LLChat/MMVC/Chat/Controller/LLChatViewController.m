@@ -12,7 +12,7 @@
 #import "LLChatTextMessageCell.h"
 #import "LLChatImageMessageCell.h"
 
-@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate,LLIMServiceDelegate>
+@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) LLInputView *inputView;
@@ -20,17 +20,19 @@
 @property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, assign) CGFloat tableViewY;
 @property (nonatomic, assign) CGFloat statusH;
+@property (nonatomic, strong) LLChatUserModel *userModel;
 
 @end
 
 @implementation LLChatViewController
 
-- (instancetype)init {
+- (instancetype)initWithUser:(LLChatUserModel *)userModel {
     self = [super init];
     if (self) {
         self.title = @"消息";
         self.tableViewY = LLCHAT_NAV_TOP_H;
         self.statusH = 34;
+        self.userModel = userModel;
     }
     return self;
 }
@@ -40,26 +42,14 @@
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.inputView];
-    
-    [LLIMServiceObserver shareInstance].delegate3 = self;;
-}
-
-- (void)onSendMessageSuccess:(LLIMMessage *)message {
-    [_tableView reloadData];
-}
-
-- (void)onSendMessageFailed:(LLIMMessage *)message {
-    [_tableView reloadData];
-}
-
-- (void)onReceiveMessage:(LLIMMessage *)message {
-    LLBaseMessageModel *model = [LLIMServiceHelper createModelWithIMMessage:message];
-    [self receiveMessageModel:model];
 }
 
 #pragma mark - 输入框代理
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
-    LLTextMessageModel *model = [LLIMServiceHelper createSendTextModelWithText:message];
+    LLTextMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
+                                                                message:message
+                                                               isSender:YES
+                                                                isGroup:NO];
     [self sendMessageModel:model];
 }
 
@@ -77,20 +67,23 @@
         
         //将图片上传到服务器, 图片消息只是把图片的链接发送过去, 接收端根据链接展示图片
         //上传图片的代码就不多写, 具体上传方式根据自身服务器api决定, 这里假定图片已经上传到服务器上了, 并且返回了两个链接, 原图和缩略图
-        //创建图片model
-        LLImageMessageModel *model = [LLIMServiceHelper createSendImageModel];
-        
         //原图和缩略图链接
-        model.original = @"http://www.vasueyun.cn/llgit/llchat/1.jpg";
-        model.thumbnail = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
+        NSString *original = @"http://www.vasueyun.cn/llgit/llchat/1.jpg";
+        NSString *thumbnail = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
+        
+        [[LLChatImageCache imageCache] storeImage:orImage forKey:original];
+        [[LLChatImageCache imageCache] storeImage:thImage forKey:thumbnail];
+        
+        //创建图片model
+        LLImageMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
+                                                                    thumbnail:thumbnail
+                                                                     original:original
+                                                                     isSender:YES
+                                                                      isGroup:NO];
         
         //图片尺寸
         model.imgW = orImage.size.width;
         model.imgH = orImage.size.height;
-        
-        //原图和缩略图本地路径
-        model.originalPath = [model saveOrImage:orImage];
-        model.thumbnailPath = [model saveThImage:thImage];
         
         [self sendMessageModel:model];
     }
@@ -257,13 +250,6 @@
 #pragma mark - private method
 - (void)sendMessageModel:(LLBaseMessageModel *)model {
     [self addMessageModel:model];
-    
-    //加入到发送队列中
-    [[LLIMServiceObserver shareInstance].unSendMessages addObject:model];
-    
-    //发送
-    LLIMMessage *IMMessage = [LLIMServiceHelper createIMMessageWithModel:model];
-    [[LLIMService shareInstance] sendMessage:IMMessage];
     
     //添加模拟时间
 //    LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];

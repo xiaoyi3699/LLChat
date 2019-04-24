@@ -10,4 +10,6 @@
 
 @interface LLChatViewController : UIViewController
 
+- (instancetype)initWithUser:(LLChatUserModel *)userModel;
+
 @end

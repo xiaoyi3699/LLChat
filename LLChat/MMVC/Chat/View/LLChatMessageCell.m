@@ -49,11 +49,13 @@
         //头像
         _avatarImageView.frame = CGRectMake(LLCHAT_SCREEN_WIDTH-50, 10, 40, 40);
         //可改成网络图片
-        _avatarImageView.image = [UIImage imageNamed:@"ll_from_avatar"];
+        [[LLChatImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES completion:^(UIImage *image) {
+            _avatarImageView.image = image;
+        }];
         
         //昵称
         _nickLabel.frame = CGRectMake(_avatarImageView.minX-110, 5, 100, 20);
-        _nickLabel.text = model.fromNick;
+        _nickLabel.text = model.name;
         _nickLabel.textAlignment = NSTextAlignmentRight;
         
         if (model.isGroup) {
@@ -104,10 +106,12 @@
     else {
         _avatarImageView.frame = CGRectMake(10, 10, 40, 40);
         //可改成网络图片
-        _avatarImageView.image = [UIImage imageNamed:@"ll_to_avatar"];
+        [[LLChatImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES completion:^(UIImage *image) {
+            _avatarImageView.image = image;
+        }];
         
         _nickLabel.frame = CGRectMake(_avatarImageView.maxX+10, 5, 100, 20);
-        _nickLabel.text = model.fromNick;
+        _nickLabel.text = model.name;
         _nickLabel.textAlignment = NSTextAlignmentLeft;
         
         if (model.isGroup){
