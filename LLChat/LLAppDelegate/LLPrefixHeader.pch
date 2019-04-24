@@ -14,9 +14,17 @@
 #import <Foundation/Foundation.h>
 
 //全局类
+#import "LLChatLog.h"
+#import "LLChatBase64.h"
+#import "LLChatLogView.h"
 #import "LLChatHelper.h"
+#import "LLChatImageCache.h"
+#import "LLChatSqliteManager.h"
+
 #import "UIView+LLChat.h"
 #import "NSString+LLChat.h"
+#import "NSDateFormatter+LLChat.h"
+
 #import "LLTextMessageModel.h"
 #import "LLImageMessageModel.h"
 #import "LLVoiceMessageModel.h"
@@ -50,6 +58,18 @@
 //获取沙盒Cache路径
 #define LLCHAT_APP_CACHE_PATH     \
 [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
+//当前时间
+#define LL_TIME [[NSDateFormatter ll_dateFormatter:@"HH:mm:ss.SSS"] stringFromDate:[NSDate date]]
+
+//日志打印
+#ifdef DEBUG
+#define __LLFILE__ [[NSString stringWithFormat:@"%s",__FILE__] lastPathComponent]
+#define __LLTIME__ [[LL_TIME componentsSeparatedByString:@" "] lastObject]
+#define NSLog(format, ...) printf("%s\n\n",[[LLChatLogView outputString:[NSString stringWithFormat:@"时间：%@\n文件：%@\n行数：第%d行\n方法：%@\n输出：%@",LL_TIME,[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[NSString stringWithUTF8String:__FUNCTION__],[NSString stringWithFormat:format, ## __VA_ARGS__]]] UTF8String])
+#else
+#define NSLog(format, ...)
+#endif
 
 #endif
 #endif /* PrefixHeader_pch */

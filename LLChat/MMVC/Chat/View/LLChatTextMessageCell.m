@@ -28,8 +28,10 @@
 - (void)setConfig:(LLTextMessageModel *)model {
     [super setConfig:model];
     
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:model.message attributes:[model contentAttributes]];
+    
     _contentLabel.frame = _contentRect;
-    _contentLabel.text = model.message;
+    _contentLabel.attributedText = str;
 }
 
 @end

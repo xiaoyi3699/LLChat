@@ -39,6 +39,12 @@
     //禁止多点触控
     [[UIView appearance] setExclusiveTouch:YES];
     
+#if DEBUG
+    //打开控制台
+    [LLChatLogView startLog];
+    ll_openLogEnable(YES);
+#endif
+    
     return YES;
 }
 
