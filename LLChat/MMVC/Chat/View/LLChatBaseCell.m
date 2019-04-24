@@ -20,5 +20,6 @@
 }
 
 - (void)setConfig:(LLBaseMessageModel *)model {}
+- (void)setConfig:(LLBaseMessageModel *)model isShowName:(BOOL)isShowName {}
 
 @end

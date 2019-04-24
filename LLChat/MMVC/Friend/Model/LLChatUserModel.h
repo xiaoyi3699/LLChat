@@ -25,6 +25,8 @@
 @property (nonatomic, assign) BOOL isChatted;
 ///是否开启消息免打扰
 @property (nonatomic, assign) BOOL isIgnore;
+///聊天界面是否显示用户昵称
+@property (nonatomic, assign) BOOL isShowName;
 ///最后一条消息
 @property (nonatomic, strong) NSString *lastMsg;
 ///最后一条消息时间

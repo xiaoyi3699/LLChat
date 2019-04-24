@@ -25,8 +25,8 @@
     return self;
 }
 
-- (void)setConfig:(LLImageMessageModel *)model {
-    [super setConfig:model];
+- (void)setConfig:(LLImageMessageModel *)model isShowName:(BOOL)isShowName {
+    [super setConfig:model isShowName:isShowName];
     
     _contentImageView.frame = _contentRect;
     

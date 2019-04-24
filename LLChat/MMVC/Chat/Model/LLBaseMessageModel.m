@@ -9,6 +9,8 @@
 #import "LLBaseMessageModel.h"
 #import <objc/runtime.h>
 
+//文本消息最大宽度
+#define LL_TEXT_MSG_WIDTH (LLCHAT_SCREEN_WIDTH-127)
 @implementation LLBaseMessageModel
 
 - (instancetype)init {

@@ -36,10 +36,13 @@
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row > 1) return;
     LLChatUserModel *user = [[LLChatUserModel alloc] init];
     user.uid = @"00002";
     user.name = @"千年等一回";
-    user.avatar = @"http://www.vasueyun.cn/hzl/logo.png";
+    user.avatar = @"http://www.vasueyun.cn/ttdoll/512.png";
+    user.isShowName = (indexPath.row == 0);
+    
     LLChatViewController *chatVC = [[LLChatViewController alloc] initWithUser:user];
     chatVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chatVC animated:YES];
@@ -57,6 +60,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+    }
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"显示昵称";
+    }
+    else if (indexPath.row == 1) {
+        cell.textLabel.text = @"不显示昵称";
     }
     return cell;
 }

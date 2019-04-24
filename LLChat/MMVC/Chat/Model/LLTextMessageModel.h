@@ -8,8 +8,6 @@
 
 #import "LLBaseMessageModel.h"
 
-#define LL_TEXT_MSG_WIDTH (LLCHAT_SCREEN_WIDTH-127)
-#define LL_TEXT_MSG_FONT  [UIFont systemFontOfSize:15]
 @interface LLTextMessageModel : LLBaseMessageModel
 
 - (NSDictionary<NSAttributedStringKey,id> *)contentAttributes;

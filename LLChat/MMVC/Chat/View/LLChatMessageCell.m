@@ -42,8 +42,8 @@
     return self;
 }
 
-- (void)setConfig:(LLBaseMessageModel *)model {
-    [super setConfig:model];
+- (void)setConfig:(LLBaseMessageModel *)model isShowName:(BOOL)isShowName {
+    [super setConfig:model isShowName:isShowName];
     
     if (model.isSender) {
         //头像
@@ -58,7 +58,7 @@
         _nickLabel.text = model.name;
         _nickLabel.textAlignment = NSTextAlignmentRight;
         
-        if (model.isGroup) {
+        if (isShowName) {
             _nickLabel.hidden = NO;
             //聊天气泡
             _bubbleImageView.frame = CGRectMake(_avatarImageView.minX-model.modelW-22, _nickLabel.maxY, model.modelW+17, model.modelH+10);
@@ -114,7 +114,7 @@
         _nickLabel.text = model.name;
         _nickLabel.textAlignment = NSTextAlignmentLeft;
         
-        if (model.isGroup){
+        if (isShowName){
             _nickLabel.hidden = NO;
             //聊天气泡
             _bubbleImageView.frame = CGRectMake(_avatarImageView.maxX+5, _nickLabel.maxY, model.modelW+17, model.modelH+10);

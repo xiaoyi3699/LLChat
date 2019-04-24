@@ -18,15 +18,14 @@
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.textColor = [UIColor darkTextColor];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        _contentLabel.font = LL_TEXT_MSG_FONT;
         _contentLabel.numberOfLines = 0;
         [self addSubview:_contentLabel];
     }
     return self;
 }
 
-- (void)setConfig:(LLTextMessageModel *)model {
-    [super setConfig:model];
+- (void)setConfig:(LLTextMessageModel *)model isShowName:(BOOL)isShowName {
+    [super setConfig:model isShowName:isShowName];
     
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:model.message attributes:[model contentAttributes]];
     

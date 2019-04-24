@@ -46,9 +46,16 @@
 
 #pragma mark - 输入框代理
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
+    
+    //模拟发送与接收消息
+    //更改isSender参数值
+    static BOOL isSender = NO;
+    isSender = !isSender;
+    //end
+    
     LLTextMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
                                                                 message:message
-                                                               isSender:YES
+                                                               isSender:isSender
                                                                 isGroup:NO];
     [self sendMessageModel:model];
 }
@@ -118,7 +125,12 @@
         if ([model isKindOfClass:[LLSystemMessageModel class]]) {
             return model.modelH;
         }
-        return model.modelH+40;
+        if (self.userModel.isShowName) {
+            return model.modelH+45;
+        }
+        else {
+            return model.modelH+32;
+        }
     }
     return 0;
 }
@@ -143,7 +155,7 @@
             if (cell == nil) {
                 cell = [[LLChatTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];
             }
-            [cell setConfig:textModel];
+            [cell setConfig:textModel isShowName:self.userModel.isShowName];
         }
         else if ([model isKindOfClass:[LLImageMessageModel class]]) {
             LLImageMessageModel *imageModel = (LLImageMessageModel *)model;
@@ -151,7 +163,7 @@
             if (cell == nil) {
                 cell = [[LLChatImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imageCell"];
             }
-            [cell setConfig:imageModel];
+            [cell setConfig:imageModel isShowName:self.userModel.isShowName];
         }
         else if ([model isKindOfClass:[LLVoiceMessageModel class]]) {
             LLVoiceMessageModel *voiceModel = (LLVoiceMessageModel *)model;
@@ -214,7 +226,7 @@
 #pragma mark - 键盘状态代理
 - (void)inputView:(LLInputView *)inputView frameWillChangeWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
     self.isEditing = isEditing;
-
+    
     CGFloat TContentH = self.tableView.contentSize.height;
     CGFloat tableViewH = self.tableView.bounds.size.height;
     CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
@@ -249,13 +261,18 @@
 
 #pragma mark - private method
 - (void)sendMessageModel:(LLBaseMessageModel *)model {
-    [self addMessageModel:model];
     
     //添加模拟时间
-//    LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];
-//    sModel.message = @"10:55";
-//    [self addMessageModel:sModel];
+    static NSInteger i = 0;
+    if (i%3 == 0) {
+        LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];
+        sModel.message = @"10:55";
+        [self addMessageModel:sModel];
+    }
+    i ++;
     //end
+    
+    [self addMessageModel:model];
 }
 
 //收到消息
