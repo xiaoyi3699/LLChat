@@ -253,6 +253,8 @@
 				75F9E7A921391DD300492ED8 /* Friend */,
 				75F9E7AA21391DE500492ED8 /* Message */,
 				75F9E7B7213D226B00492ED8 /* Chat */,
+				75F9E7D7213E3E1300492ED8 /* Common */,
+				75F9E7EB213E803200492ED8 /* LLIMService */,
 			);
 			path = MMVC;
 			sourceTree = "<group>";
@@ -295,8 +297,6 @@
 		75F9E7B7213D226B00492ED8 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7EB213E803200492ED8 /* LLIMService */,
-				75F9E7D7213E3E1300492ED8 /* Common */,
 				75F9E7CD213E19B200492ED8 /* View */,
 				75F9E7B8213D227900492ED8 /* Model */,
 				75F9E7C9213E18CC00492ED8 /* Controller */,
