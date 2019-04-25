@@ -96,6 +96,7 @@ typedef enum : NSInteger {
 
 #pragma mark - 监听键盘变化
 - (void)keyboardValueChange:(NSNotification *)notification {
+    if (_textView.isFirstResponder == NO) return;
     NSDictionary *dic = notification.userInfo;
     CGFloat duration = [dic[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
     CGRect endFrame = [dic[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
@@ -107,11 +108,11 @@ typedef enum : NSInteger {
             CGFloat minY = LLCHAT_SCREEN_HEIGHT-self.LLHeight;
             [self minYWillChange:minY duration:duration isFinishEditing:NO];
         }
-        else {
-            //结束编辑
-            CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
-            [self minYWillChange:minY duration:duration isFinishEditing:YES];
-        }
+//        else {
+//            //结束编辑
+//            CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
+//            [self minYWillChange:minY duration:duration isFinishEditing:YES];
+//        }
     }
     else {
         //键盘谈起
@@ -199,24 +200,20 @@ typedef enum : NSInteger {
 
 #pragma mark - public method
 - (void)chatBecomeFirstResponder {
-    if (!_textView.isFirstResponder) {
-        [_textView becomeFirstResponder];
-    }
     if (_isEditing == NO) {
         _isEditing = YES;
+        [_textView becomeFirstResponder];
     }
 }
 
 - (void)chatResignFirstResponder {
-    if (_textView.isFirstResponder) {
-        [_textView resignFirstResponder];
-    }
     if (_isEditing) {
         _isEditing = NO;
         //结束编辑
         CGFloat duration = 0.3;
         CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
         [self minYWillChange:minY duration:duration isFinishEditing:YES];
+        [_textView resignFirstResponder];
     }
 }
 
