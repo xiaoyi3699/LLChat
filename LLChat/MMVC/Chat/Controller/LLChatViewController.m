@@ -21,7 +21,7 @@
 @property (nonatomic, assign) CGFloat tableViewY;
 @property (nonatomic, assign) CGFloat statusH;
 @property (nonatomic, strong) LLChatUserModel *userModel;
-
+@property (nonatomic, assign) CGFloat iPhoneXBottomH;
 @end
 
 @implementation LLChatViewController
@@ -33,6 +33,7 @@
         self.tableViewY = LLCHAT_NAV_TOP_H;
         self.statusH = 34;
         self.userModel = userModel;
+        self.iPhoneXBottomH = LLCHAT_BOTTOM_H;;
     }
     return self;
 }
@@ -185,7 +186,7 @@
     if (_tableView == nil) {
         CGRect rect = self.view.bounds;
         rect.origin.y = self.tableViewY;
-        rect.size.height -= (self.tableViewY+LLCHAT_INPUT_H);
+        rect.size.height -= (self.tableViewY+LLCHAT_INPUT_H+self.iPhoneXBottomH);
         
         _tableView = [[UITableView alloc] initWithFrame:rect];
         _tableView.delegate = self;
@@ -244,7 +245,7 @@
     
     CGRect TRect = self.tableView.frame;
     if (offsetY > 0) {
-        TRect.origin.y = self.tableViewY-offsetY;
+        TRect.origin.y = self.tableViewY-offsetY+self.iPhoneXBottomH;
         [UIView animateWithDuration:duration animations:^{
             self.tableView.frame = TRect;
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -307,7 +308,7 @@
         
         if (offsetY > 0) {
             CGRect TRect = self.tableView.frame;
-            TRect.origin.y = self.tableViewY-offsetY;
+            TRect.origin.y = self.tableViewY-offsetY+self.iPhoneXBottomH;
             [UIView animateWithDuration:0.25 animations:^{
                 self.tableView.frame = TRect;
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];

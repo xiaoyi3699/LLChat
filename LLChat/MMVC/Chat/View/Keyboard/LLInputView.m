@@ -29,12 +29,13 @@ typedef enum : NSInteger {
     LLChatBtn *_moreBtn;
     UITextView *_textView;
     BOOL _isEditing;
+    CGFloat _iPhoneXBottomH;
 }
 
 - (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H, LLCHAT_SCREEN_WIDTH, LLCHAT_INPUT_H+LLCHAT_KEYBOARD_H)];
+    _iPhoneXBottomH = LLCHAT_BOTTOM_H;
+    self = [super initWithFrame:CGRectMake(0, LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H-_iPhoneXBottomH, LLCHAT_SCREEN_WIDTH, LLCHAT_INPUT_H+LLCHAT_KEYBOARD_H)];
     if (self) {
-        
         self.type = LLInputViewTypeNone;
         
         CGFloat w = self.LLWidth;
@@ -124,6 +125,7 @@ typedef enum : NSInteger {
 - (void)minYWillChange:(CGFloat)minY duration:(CGFloat)duration isFinishEditing:(BOOL)isFinishEditing {
     _isEditing = !isFinishEditing;
     if (isFinishEditing) {
+        minY -= _iPhoneXBottomH;
         [self recoverSetting:_voiceBtn.selected];
     }
     else {
@@ -160,18 +162,8 @@ typedef enum : NSInteger {
             //声音按钮
             _moreBtn.selected = NO;
             _emotionBtn.selected = NO;
-            if (_isEditing) {
-                _isEditing = NO;
-                if (_textView.isFirstResponder) {
-                    [_textView resignFirstResponder];
-                }
-                else {
-                    //结束编辑
-                    CGFloat duration = 0.3;
-                    CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
-                    [self minYWillChange:minY duration:duration isFinishEditing:YES];
-                }
-            }
+            //结束编辑
+            [self chatResignFirstResponder];
         }
         else {
             if (btn.tag == 1) {
@@ -190,7 +182,7 @@ typedef enum : NSInteger {
             }
             else {
                 //弹出自定义键盘
-                CGFloat duration = 0.3;
+                CGFloat duration = 0.25;
                 CGFloat minY = LLCHAT_SCREEN_HEIGHT-self.LLHeight;
                 [self minYWillChange:minY duration:duration isFinishEditing:NO];
             }
@@ -202,19 +194,19 @@ typedef enum : NSInteger {
 - (void)chatBecomeFirstResponder {
     if (_isEditing == NO) {
         _isEditing = YES;
-        [_textView becomeFirstResponder];
     }
+    [_textView becomeFirstResponder];
 }
 
 - (void)chatResignFirstResponder {
     if (_isEditing) {
         _isEditing = NO;
         //结束编辑
-        CGFloat duration = 0.3;
+        CGFloat duration = 0.25;
         CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
         [self minYWillChange:minY duration:duration isFinishEditing:YES];
-        [_textView resignFirstResponder];
     }
+    [_textView resignFirstResponder];
 }
 
 #pragma mark - private method
