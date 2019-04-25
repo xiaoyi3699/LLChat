@@ -310,7 +310,16 @@
             TRect.origin.y = self.tableViewY-offsetY;
             [UIView animateWithDuration:0.25 animations:^{
                 self.tableView.frame = TRect;
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+            }];
+        }
+    }
+    else {
+        CGFloat TContentH = self.tableView.contentSize.height;
+        CGFloat tableViewH = self.tableView.bounds.size.height;
+        if (TContentH > tableViewH) {
+            [UIView animateWithDuration:0.25 animations:^{
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
             }];
         }
     }
