@@ -8,15 +8,12 @@
 
 #import "LLImageMessageModel.h"
 
-@implementation LLImageMessageModel {
-    NSString *_cachePath;
-}
+@implementation LLImageMessageModel 
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         self.msgType = LLMessageTypeImage;
-        _cachePath = LLCHAT_APP_CACHE_PATH;
     }
     return self;
 }

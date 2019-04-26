@@ -12,6 +12,25 @@
 
 + (instancetype)shareInstance;
 
+///是否是iPhoneX
+- (BOOL)iPhoneX;
+///导航高
+- (CGFloat)navBarH;
+///taBar高
+- (CGFloat)tabBarH;
+///屏幕宽
+- (CGFloat)screenW;
+///屏幕高
+- (CGFloat)screenH;
+///输入框高度
+- (CGFloat)inputH;
+///键盘高度
+- (CGFloat)keyboardH;
+///输入框和键盘的高度和
+- (CGFloat)inputKeyboardH;
+///iPhoneX底部高度
+- (CGFloat)iPhoneXBottomH;
+
 //聊天气泡
 - (UIImage *)senderBubbleImage;
 - (UIImage *)receiverBubbleImage;

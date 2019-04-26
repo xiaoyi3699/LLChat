@@ -20,7 +20,7 @@
         CGFloat itemW = 60;
         CGFloat itemH = 80;
         CGFloat left = 20;
-        CGFloat spacing = (self.LLWidth-itemW*count-left*2)/3;
+        CGFloat spacing = (frame.size.width-itemW*count-left*2)/3;
         
         NSArray *images = @[@"ll_chat_pic",@"ll_chat_video",@"ll_chat_locaion",@"ll_chat_transfer"];
         NSArray *titles = @[@"图片",@"视频",@"位置",@"互传"];

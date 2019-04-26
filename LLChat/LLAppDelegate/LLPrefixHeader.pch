@@ -16,7 +16,6 @@
 //全局类
 #import "LLChatLog.h"
 #import "LLChatBase64.h"
-#import "LLChatLogView.h"
 #import "LLChatHelper.h"
 #import "LLChatImageCache.h"
 #import "LLChatSqliteManager.h"
@@ -37,41 +36,21 @@
 
 #import "LLChatViewController.h"
 
-#define LLCHAT_SCREEN_WIDTH   [UIScreen mainScreen].bounds.size.width
-#define LLCHAT_SCREEN_HEIGHT  [UIScreen mainScreen].bounds.size.height
+#define LLCHAT_SCREEN_WIDTH   [[LLChatHelper shareInstance] screenW]
+#define LLCHAT_SCREEN_HEIGHT  [[LLChatHelper shareInstance] screenH]
 
-#define LLCHAT_IS_IPHONE  (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define LLCHAT_IPHONEX    (LLCHAT_IS_IPHONE && LLCHAT_SCREEN_HEIGHT==812)
-#define LLCHAT_STATUS_H   (LLCHAT_IPHONEX ? 34:0)
-#define LLCHAT_NAV_TOP_H  (LLCHAT_IPHONEX ? 88:64)
-#define LLCHAT_BAR_BOT_H  (LLCHAT_IPHONEX ? 83:49)
-#define LLCHAT_BOTTOM_H   (LLCHAT_IPHONEX ? 34:0)
+#define LLCHAT_IPHONEX    [[LLChatHelper shareInstance] iPhoneX]
+#define LLCHAT_NAV_TOP_H  [[LLChatHelper shareInstance] navBarH]
+#define LLCHAT_BAR_BOT_H  [[LLChatHelper shareInstance] tabBarH]
+#define LLCHAT_BOTTOM_H   [[LLChatHelper shareInstance] iPhoneXBottomH]
+
+//输入框的高度
+#define LLCHAT_INPUT_H    [[LLChatHelper shareInstance] inputH]
+//自定义键盘的高度(不包含输入框)
+#define LLCHAT_KEYBOARD_H [[LLChatHelper shareInstance] keyboardH]
 
 //默认图
 #define LLCHAT_BAD_IMAGE [UIImage imageNamed:@"ll_chat_default"]
-
-//输入框inputView的高度
-#define LLCHAT_INPUT_H    49
-//自定义键盘的高度
-#define LLCHAT_KEYBOARD_H (200+LLCHAT_BOTTOM_H)
-
-#define LLCHAT_THEME_COLOR [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1]
-
-//获取沙盒Cache路径
-#define LLCHAT_APP_CACHE_PATH     \
-[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
-
-//当前时间
-#define LL_TIME [[NSDateFormatter ll_dateFormatter:@"HH:mm:ss.SSS"] stringFromDate:[NSDate date]]
-
-//日志打印
-#ifdef DEBUG
-#define __LLFILE__ [[NSString stringWithFormat:@"%s",__FILE__] lastPathComponent]
-#define __LLTIME__ [[LL_TIME componentsSeparatedByString:@" "] lastObject]
-#define NSLog(format, ...) printf("%s\n\n",[[LLChatLogView outputString:[NSString stringWithFormat:@"时间：%@\n文件：%@\n行数：第%d行\n方法：%@\n输出：%@",LL_TIME,[[NSString stringWithUTF8String:__FILE__] lastPathComponent],__LINE__,[NSString stringWithUTF8String:__FUNCTION__],[NSString stringWithFormat:format, ## __VA_ARGS__]]] UTF8String])
-#else
-#define NSLog(format, ...)
-#endif
 
 #endif
 #endif /* PrefixHeader_pch */

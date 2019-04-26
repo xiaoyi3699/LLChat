@@ -10,13 +10,11 @@
 
 @implementation LLChatImageMessageCell {
     UIImageView *_contentImageView;
-    NSString *_cachePath;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _cachePath = LLCHAT_APP_CACHE_PATH;
         _contentImageView = [[UIImageView alloc] init];
         _contentImageView.layer.masksToBounds = YES;
         _contentImageView.layer.cornerRadius = 5;

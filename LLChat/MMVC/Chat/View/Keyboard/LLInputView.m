@@ -29,17 +29,15 @@ typedef enum : NSInteger {
     LLChatBtn *_moreBtn;
     UITextView *_textView;
     BOOL _isEditing;
-    CGFloat _iPhoneXBottomH;
 }
 
 - (instancetype)init {
-    _iPhoneXBottomH = LLCHAT_BOTTOM_H;
-    self = [super initWithFrame:CGRectMake(0, LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H-_iPhoneXBottomH, LLCHAT_SCREEN_WIDTH, LLCHAT_INPUT_H+LLCHAT_KEYBOARD_H)];
+    self = [super initWithFrame:CGRectMake(0, LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H-LLCHAT_BOTTOM_H, LLCHAT_SCREEN_WIDTH, [[LLChatHelper shareInstance] inputKeyboardH]+150)];
     if (self) {
         self.type = LLInputViewTypeNone;
         
         CGFloat w = self.LLWidth;
-        self.backgroundColor = [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1];
+        self.backgroundColor = [UIColor whiteColor];
         
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, w, 0.5)];
         lineView.backgroundColor = [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1];
@@ -106,14 +104,9 @@ typedef enum : NSInteger {
         //键盘收回
         if (_isEditing) {
             //弹出自定义键盘
-            CGFloat minY = LLCHAT_SCREEN_HEIGHT-self.LLHeight;
+            CGFloat minY = LLCHAT_SCREEN_HEIGHT-[[LLChatHelper shareInstance] inputKeyboardH];
             [self minYWillChange:minY duration:duration isFinishEditing:NO];
         }
-//        else {
-//            //结束编辑
-//            CGFloat minY = LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H;
-//            [self minYWillChange:minY duration:duration isFinishEditing:YES];
-//        }
     }
     else {
         //键盘谈起
@@ -125,7 +118,7 @@ typedef enum : NSInteger {
 - (void)minYWillChange:(CGFloat)minY duration:(CGFloat)duration isFinishEditing:(BOOL)isFinishEditing {
     _isEditing = !isFinishEditing;
     if (isFinishEditing) {
-        minY -= _iPhoneXBottomH;
+        minY -= LLCHAT_BOTTOM_H;
         [self recoverSetting:_voiceBtn.selected];
     }
     else {
@@ -145,8 +138,8 @@ typedef enum : NSInteger {
     [UIView animateWithDuration:duration animations:^{
         self.frame = endFrame;
     }];
-    if ([self.delegate respondsToSelector:@selector(inputView:frameWillChangeWithDuration:isEditing:)]) {
-        [self.delegate inputView:self frameWillChangeWithDuration:duration isEditing:_isEditing];
+    if ([self.delegate respondsToSelector:@selector(inputView:willChangeFrameWithDuration:isEditing:)]) {
+        [self.delegate inputView:self willChangeFrameWithDuration:duration isEditing:_isEditing];
     }
 }
 
@@ -183,7 +176,7 @@ typedef enum : NSInteger {
             else {
                 //弹出自定义键盘
                 CGFloat duration = 0.25;
-                CGFloat minY = LLCHAT_SCREEN_HEIGHT-self.LLHeight;
+                CGFloat minY = LLCHAT_SCREEN_HEIGHT-[[LLChatHelper shareInstance] inputKeyboardH];
                 [self minYWillChange:minY duration:duration isFinishEditing:NO];
             }
         }

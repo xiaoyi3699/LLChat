@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7510EA2C226FF499000B58D9 /* NSDateFormatter+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA2B226FF499000B58D9 /* NSDateFormatter+LLChat.m */; };
-		7510EA34226FFD32000B58D9 /* LLChatLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA30226FFD32000B58D9 /* LLChatLogTableViewCell.m */; };
-		7510EA35226FFD32000B58D9 /* LLChatLogView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA31226FFD32000B58D9 /* LLChatLogView.m */; };
-		7510EA36226FFD32000B58D9 /* LLChatLogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA32226FFD32000B58D9 /* LLChatLogModel.m */; };
 		7510EA39226FFD50000B58D9 /* LLChatSqliteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */; };
 		7510EA3C226FFD5B000B58D9 /* LLChatImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA3A226FFD5B000B58D9 /* LLChatImageCache.m */; };
 		7510EA3F226FFD8B000B58D9 /* LLChatLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA3D226FFD8B000B58D9 /* LLChatLog.m */; };
@@ -50,12 +47,6 @@
 /* Begin PBXFileReference section */
 		7510EA2A226FF499000B58D9 /* NSDateFormatter+LLChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+LLChat.h"; sourceTree = "<group>"; };
 		7510EA2B226FF499000B58D9 /* NSDateFormatter+LLChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+LLChat.m"; sourceTree = "<group>"; };
-		7510EA2E226FFD32000B58D9 /* LLChatLogModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLChatLogModel.h; sourceTree = "<group>"; };
-		7510EA2F226FFD32000B58D9 /* LLChatLogView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLChatLogView.h; sourceTree = "<group>"; };
-		7510EA30226FFD32000B58D9 /* LLChatLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatLogTableViewCell.m; sourceTree = "<group>"; };
-		7510EA31226FFD32000B58D9 /* LLChatLogView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatLogView.m; sourceTree = "<group>"; };
-		7510EA32226FFD32000B58D9 /* LLChatLogModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatLogModel.m; sourceTree = "<group>"; };
-		7510EA33226FFD32000B58D9 /* LLChatLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLChatLogTableViewCell.h; sourceTree = "<group>"; };
 		7510EA37226FFD50000B58D9 /* LLChatSqliteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLChatSqliteManager.h; sourceTree = "<group>"; };
 		7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatSqliteManager.m; sourceTree = "<group>"; };
 		7510EA3A226FFD5B000B58D9 /* LLChatImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatImageCache.m; sourceTree = "<group>"; };
@@ -137,19 +128,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7510EA2D226FFD32000B58D9 /* LLChatLogView */ = {
-			isa = PBXGroup;
-			children = (
-				7510EA2F226FFD32000B58D9 /* LLChatLogView.h */,
-				7510EA31226FFD32000B58D9 /* LLChatLogView.m */,
-				7510EA2E226FFD32000B58D9 /* LLChatLogModel.h */,
-				7510EA32226FFD32000B58D9 /* LLChatLogModel.m */,
-				7510EA33226FFD32000B58D9 /* LLChatLogTableViewCell.h */,
-				7510EA30226FFD32000B58D9 /* LLChatLogTableViewCell.m */,
-			);
-			path = LLChatLogView;
-			sourceTree = "<group>";
-		};
 		7510EA40226FFEBA000B58D9 /* LLChatBase64 */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				7510EA40226FFEBA000B58D9 /* LLChatBase64 */,
-				7510EA2D226FFD32000B58D9 /* LLChatLogView */,
 				7510EA3E226FFD8B000B58D9 /* LLChatLog.h */,
 				7510EA3D226FFD8B000B58D9 /* LLChatLog.m */,
 				75F9E7D8213E4C5500492ED8 /* LLChatHelper.h */,
@@ -476,17 +453,14 @@
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
 				7510EA2C226FF499000B58D9 /* NSDateFormatter+LLChat.m in Sources */,
 				75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */,
-				7510EA34226FFD32000B58D9 /* LLChatLogTableViewCell.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
 				75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */,
 				7510EA43226FFEBB000B58D9 /* LLChatBase64.m in Sources */,
 				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
-				7510EA35226FFD32000B58D9 /* LLChatLogView.m in Sources */,
 				7510EA3C226FFD5B000B58D9 /* LLChatImageCache.m in Sources */,
 				75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */,
 				75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */,
-				7510EA36226FFD32000B58D9 /* LLChatLogModel.m in Sources */,
 				7510EA39226FFD50000B58D9 /* LLChatSqliteManager.m in Sources */,
 				7510EA4B22704068000B58D9 /* LLChatUserModel.m in Sources */,
 				75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */,

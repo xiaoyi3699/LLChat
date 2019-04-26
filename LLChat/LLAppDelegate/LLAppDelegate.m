@@ -40,8 +40,6 @@
     [[UIView appearance] setExclusiveTouch:YES];
     
 #if DEBUG
-    //打开控制台
-    [LLChatLogView startLog];
     ll_openLogEnable(YES);
 #endif
     
@@ -57,8 +55,9 @@
         
         UIViewController *viewController = tabBarController.viewControllers[i];
         
+        UIColor *color = [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1];
         NSDictionary *atts = @{NSForegroundColorAttributeName:[UIColor darkTextColor],NSFontAttributeName:[UIFont systemFontOfSize:12]};
-        NSDictionary *selAtts = @{NSForegroundColorAttributeName:LLCHAT_THEME_COLOR,NSFontAttributeName:[UIFont systemFontOfSize:12]};
+        NSDictionary *selAtts = @{NSForegroundColorAttributeName:color,NSFontAttributeName:[UIFont systemFontOfSize:12]};
         
         UIImage *img = [[UIImage imageNamed:normalImages[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage *selImg = [[UIImage imageNamed:selectImages[i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

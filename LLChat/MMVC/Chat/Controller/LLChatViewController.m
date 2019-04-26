@@ -18,10 +18,8 @@
 @property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign) BOOL isEditing;
-@property (nonatomic, assign) CGFloat tableViewY;
-@property (nonatomic, assign) CGFloat statusH;
 @property (nonatomic, strong) LLChatUserModel *userModel;
-@property (nonatomic, assign) CGFloat iPhoneXBottomH;
+
 @end
 
 @implementation LLChatViewController
@@ -30,10 +28,7 @@
     self = [super init];
     if (self) {
         self.title = @"消息";
-        self.tableViewY = LLCHAT_NAV_TOP_H;
-        self.statusH = 34;
         self.userModel = userModel;
-        self.iPhoneXBottomH = LLCHAT_BOTTOM_H;;
     }
     return self;
 }
@@ -185,8 +180,8 @@
 - (UITableView *)tableView {
     if (_tableView == nil) {
         CGRect rect = self.view.bounds;
-        rect.origin.y = self.tableViewY;
-        rect.size.height -= (self.tableViewY+LLCHAT_INPUT_H+self.iPhoneXBottomH);
+        rect.origin.y = LLCHAT_NAV_TOP_H;
+        rect.size.height -= (LLCHAT_NAV_TOP_H+LLCHAT_INPUT_H+LLCHAT_BOTTOM_H);
         
         _tableView = [[UITableView alloc] initWithFrame:rect];
         _tableView.delegate = self;
@@ -225,7 +220,7 @@
 }
 
 #pragma mark - 键盘状态代理
-- (void)inputView:(LLInputView *)inputView frameWillChangeWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
+- (void)inputView:(LLInputView *)inputView willChangeFrameWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
     self.isEditing = isEditing;
     
     CGFloat TContentH = self.tableView.contentSize.height;
@@ -245,14 +240,14 @@
     
     CGRect TRect = self.tableView.frame;
     if (offsetY > 0) {
-        TRect.origin.y = self.tableViewY-offsetY+self.iPhoneXBottomH;
+        TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
         [UIView animateWithDuration:duration animations:^{
             self.tableView.frame = TRect;
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }];
     }
     else {
-        TRect.origin.y = self.tableViewY;
+        TRect.origin.y = LLCHAT_NAV_TOP_H;
         [UIView animateWithDuration:duration animations:^{
             self.tableView.frame = TRect;
         }];
@@ -308,7 +303,7 @@
         
         if (offsetY > 0) {
             CGRect TRect = self.tableView.frame;
-            TRect.origin.y = self.tableViewY-offsetY+self.iPhoneXBottomH;
+            TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
             [UIView animateWithDuration:0.25 animations:^{
                 self.tableView.frame = TRect;
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];

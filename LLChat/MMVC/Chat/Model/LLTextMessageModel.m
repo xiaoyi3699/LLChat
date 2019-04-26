@@ -8,8 +8,6 @@
 
 #import "LLTextMessageModel.h"
 
-//文本消息字体
-#define LL_TEXT_MSG_FONT  [UIFont systemFontOfSize:15]
 @implementation LLTextMessageModel
 
 - (instancetype)init {
@@ -23,7 +21,7 @@
 - (NSDictionary<NSAttributedStringKey,id> *)contentAttributes {
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.lineSpacing = 5;
-    return @{NSFontAttributeName:LL_TEXT_MSG_FONT,NSParagraphStyleAttributeName:[style copy]};
+    return @{NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:[style copy]};
 }
 
 @end

@@ -9,6 +9,20 @@
 #import "LLChatHelper.h"
 
 @implementation LLChatHelper {
+    
+    NSInteger _iPhoneX;
+    
+    CGFloat _navBarH;
+    CGFloat _tabBarH;
+    
+    CGFloat _screenH;
+    CGFloat _screenW;
+    
+    CGFloat _inputH;
+    CGFloat _keyboardH;
+    CGFloat _inputKeyboardH;
+    CGFloat _iPhoneXBottomH;
+    
     UIImage *_senderBubbleImage;
     UIImage *_receiverBubbleImage;
 }
@@ -20,6 +34,95 @@
         instance = [[LLChatHelper alloc] init];
     });
     return instance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _iPhoneX = -1;
+        _navBarH = 0;
+        _tabBarH = 0;
+        _screenW = 0;
+        _screenH = 0;
+        _inputH = 0;
+        _keyboardH = 0;
+        _inputKeyboardH = 0;
+        _iPhoneXBottomH = 0;
+    }
+    return self;
+}
+
+///是否是iPhoneX
+- (BOOL)iPhoneX {
+    if (_iPhoneX == -1) {
+        BOOL iPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
+        _iPhoneX = (iPhone && [UIScreen mainScreen].bounds.size.height==812);
+    }
+    return (_iPhoneX == 1);
+}
+
+///导航高
+- (CGFloat)navBarH {
+    if (_navBarH == 0) {
+        _navBarH = ([self iPhoneX] ? 88:64);
+    }
+    return _navBarH;
+}
+
+///taBar高
+- (CGFloat)tabBarH {
+    if (_tabBarH == 0) {
+        _tabBarH = ([self iPhoneX] ? 83:49);
+    }
+    return _tabBarH;
+}
+
+///屏幕宽
+- (CGFloat)screenW {
+    if (_screenW == 0) {
+        _screenW = [UIScreen mainScreen].bounds.size.width;
+    }
+    return _screenW;
+}
+
+///屏幕高
+- (CGFloat)screenH {
+    if (_screenH == 0) {
+        _screenH = [UIScreen mainScreen].bounds.size.height;
+    }
+    return _screenH;
+}
+
+///输入框高度
+- (CGFloat)inputH {
+    if (_inputH == 0) {
+        _inputH = 49;
+    }
+    return _inputH;
+}
+
+///键盘高度
+- (CGFloat)keyboardH {
+    if (_keyboardH == 0) {
+        _keyboardH = (200+[self iPhoneXBottomH]);
+    }
+    return _keyboardH;
+}
+
+///输入框和键盘的高度和
+- (CGFloat)inputKeyboardH {
+    if (_inputKeyboardH == 0) {
+        _inputKeyboardH = [self inputH]+[self keyboardH];
+    }
+    return _inputKeyboardH;
+}
+
+///iPhoneX底部高度
+- (CGFloat)iPhoneXBottomH {
+    if (_iPhoneXBottomH == 0) {
+        _iPhoneXBottomH = ([self iPhoneX] ? 34:0);
+    }
+    return _iPhoneXBottomH;
 }
 
 //聊天气泡

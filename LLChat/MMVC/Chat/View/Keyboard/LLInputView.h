@@ -30,6 +30,6 @@
 ///自定义键盘点击事件
 - (void)inputView:(LLInputView *)inputView selectedType:(LLChatMoreType)type;
 ///输入框frame改变
-- (void)inputView:(LLInputView *)inputView frameWillChangeWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing;
+- (void)inputView:(LLInputView *)inputView willChangeFrameWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing;
 
 @end
