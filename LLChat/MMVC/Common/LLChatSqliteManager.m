@@ -316,10 +316,6 @@
     
     for (int i = 0; i < count; i++) {
         objc_property_t pro = pros[i];
-//        NSString *attributes = [NSString stringWithFormat:@"%s", property_getAttributes(pro)];
-//        if ([attributes containsString:@",R,"]) {
-//            continue;
-//        }
         NSString *name = [NSString stringWithFormat:@"%s", property_getName(pro)];
         id value = [model valueForKey:name];
         if (value != nil) {

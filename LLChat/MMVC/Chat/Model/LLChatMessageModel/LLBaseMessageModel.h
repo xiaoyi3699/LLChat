@@ -6,7 +6,7 @@
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LLChatBaseModel.h"
 
 typedef enum : NSInteger {
     LLMessageTypeSystem = 0, //系统消息
@@ -22,7 +22,7 @@ typedef enum : NSInteger {
     LLMessageSendTypeFailed,     //发送失败
 }LLMessageSendType;
 
-@interface LLBaseMessageModel : NSObject
+@interface LLBaseMessageModel : LLChatBaseModel
 
 #pragma mark - 消息基本信息
 ///发送人id
@@ -52,9 +52,7 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) NSInteger modelW;
 @property (nonatomic, assign) NSInteger modelH;
 
-/*
- 缓存model的高度
- */
+///缓存model的高度
 - (void)cacheModelSize;
 
 @end

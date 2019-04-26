@@ -6,9 +6,9 @@
 //  Copyright © 2019 WangZhaomeng. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "LLChatBaseModel.h"
 
-@interface LLChatUserModel : NSObject
+@interface LLChatUserModel : LLChatBaseModel
 
 #pragma mark - 用户基本信息
 ///id

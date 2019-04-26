@@ -38,6 +38,7 @@
 		7510EA8D2272D38E000B58D9 /* ll_chat_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510EA742272D38D000B58D9 /* ll_chat_delete@2x.png */; };
 		7510EA8E2272D38E000B58D9 /* ll_chat_board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510EA752272D38E000B58D9 /* ll_chat_board@2x.png */; };
 		7510EA8F2272D38E000B58D9 /* ll_chat_bj1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510EA762272D38E000B58D9 /* ll_chat_bj1@3x.png */; };
+		7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA942272E2BA000B58D9 /* LLChatBaseModel.m */; };
 		75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */; };
 		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
 		75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */; };
@@ -110,6 +111,8 @@
 		7510EA742272D38D000B58D9 /* ll_chat_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll_chat_delete@2x.png"; sourceTree = "<group>"; };
 		7510EA752272D38E000B58D9 /* ll_chat_board@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll_chat_board@2x.png"; sourceTree = "<group>"; };
 		7510EA762272D38E000B58D9 /* ll_chat_bj1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll_chat_bj1@3x.png"; sourceTree = "<group>"; };
+		7510EA932272E2BA000B58D9 /* LLChatBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseModel.h; sourceTree = "<group>"; };
+		7510EA942272E2BA000B58D9 /* LLChatBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatBaseModel.m; sourceTree = "<group>"; };
 		75279F8821ED7CFD00DAE00B /* LLChatSystemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatSystemCell.h; sourceTree = "<group>"; };
 		75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSystemCell.m; sourceTree = "<group>"; };
 		75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseCell.h; sourceTree = "<group>"; };
@@ -200,8 +203,6 @@
 		7510EA4822704010000B58D9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7510EA4922704068000B58D9 /* LLChatUserModel.h */,
-				7510EA4A22704068000B58D9 /* LLChatUserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +247,43 @@
 				7510EA682272D38D000B58D9 /* ll_chat_voice@3x.png */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		7510EA902272E279000B58D9 /* LLChatMessageModel */ = {
+			isa = PBXGroup;
+			children = (
+				75F9E7B9213D229D00492ED8 /* LLBaseMessageModel.h */,
+				75F9E7BA213D229D00492ED8 /* LLBaseMessageModel.m */,
+				75F9E7BC213D24CE00492ED8 /* LLTextMessageModel.h */,
+				75F9E7BD213D24CE00492ED8 /* LLTextMessageModel.m */,
+				75F9E7BF213D24E800492ED8 /* LLImageMessageModel.h */,
+				75F9E7C0213D24E800492ED8 /* LLImageMessageModel.m */,
+				75F9E7C2213D24F500492ED8 /* LLVoiceMessageModel.h */,
+				75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */,
+				75F9E7C5213D250200492ED8 /* LLVideoMessageModel.h */,
+				75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */,
+				75279F8E21ED803B00DAE00B /* LLSystemMessageModel.h */,
+				75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */,
+			);
+			path = LLChatMessageModel;
+			sourceTree = "<group>";
+		};
+		7510EA912272E28F000B58D9 /* LLChatUserModel */ = {
+			isa = PBXGroup;
+			children = (
+				7510EA4922704068000B58D9 /* LLChatUserModel.h */,
+				7510EA4A22704068000B58D9 /* LLChatUserModel.m */,
+			);
+			path = LLChatUserModel;
+			sourceTree = "<group>";
+		};
+		7510EA922272E2A0000B58D9 /* LLChatBaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				7510EA932272E2BA000B58D9 /* LLChatBaseModel.h */,
+				7510EA942272E2BA000B58D9 /* LLChatBaseModel.m */,
+			);
+			path = LLChatBaseModel;
 			sourceTree = "<group>";
 		};
 		75614241213F6D47004CC91B /* Keyboard */ = {
@@ -387,18 +425,9 @@
 		75F9E7B8213D227900492ED8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7B9213D229D00492ED8 /* LLBaseMessageModel.h */,
-				75F9E7BA213D229D00492ED8 /* LLBaseMessageModel.m */,
-				75F9E7BC213D24CE00492ED8 /* LLTextMessageModel.h */,
-				75F9E7BD213D24CE00492ED8 /* LLTextMessageModel.m */,
-				75F9E7BF213D24E800492ED8 /* LLImageMessageModel.h */,
-				75F9E7C0213D24E800492ED8 /* LLImageMessageModel.m */,
-				75F9E7C2213D24F500492ED8 /* LLVoiceMessageModel.h */,
-				75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */,
-				75F9E7C5213D250200492ED8 /* LLVideoMessageModel.h */,
-				75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */,
-				75279F8E21ED803B00DAE00B /* LLSystemMessageModel.h */,
-				75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */,
+				7510EA922272E2A0000B58D9 /* LLChatBaseModel */,
+				7510EA912272E28F000B58D9 /* LLChatUserModel */,
+				7510EA902272E279000B58D9 /* LLChatMessageModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -569,6 +598,7 @@
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
+				7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */,
 				7510EA2C226FF499000B58D9 /* NSDateFormatter+LLChat.m in Sources */,
 				75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
