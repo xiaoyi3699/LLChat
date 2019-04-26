@@ -30,7 +30,7 @@
         LLHorizontalLayout *horLayout = [[LLHorizontalLayout alloc] initWithSpacing:spcing rows:key_rows nums:key_nums];
         
         CGRect rect = self.bounds;
-        rect.size.height -= 40;
+        rect.size.height -= (40+LLCHAT_BOTTOM_H);
         _collectionView = [[UICollectionView alloc] initWithFrame:rect collectionViewLayout:horLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
