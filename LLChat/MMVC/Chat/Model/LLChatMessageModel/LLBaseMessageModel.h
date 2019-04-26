@@ -47,11 +47,32 @@ typedef enum : NSInteger {
 @property (nonatomic, assign) LLMessageType msgType;
 ///消息发送结果
 @property (nonatomic, assign) LLMessageSendType sendType;
-
-#pragma mark - 缓存model宽高, 优化列表滑动
+///缓存model宽, 优化列表滑动
 @property (nonatomic, assign) NSInteger modelW;
+///缓存model高, 优化列表滑动
 @property (nonatomic, assign) NSInteger modelH;
 
+#pragma mark - 图片消息
+//图片宽高
+@property (nonatomic, assign) NSInteger imgW;
+@property (nonatomic, assign) NSInteger imgH;
+//原图和缩略图
+@property (nonatomic, strong) NSString *original;
+@property (nonatomic, strong) NSString *thumbnail;
+
+#pragma mark - 声音消息
+//声音地址
+@property (nonatomic, strong) NSString *voiceUrl;
+//声音时长
+@property (nonatomic, assign) NSInteger duration;
+
+#pragma mark - 视频消息
+//视频地址
+@property (nonatomic, strong) NSString *videoUrl;
+//视频封面地址
+@property (nonatomic, strong) NSString *coverUrl;
+
+#pragma mark -
 ///缓存model的高度
 - (void)cacheModelSize;
 

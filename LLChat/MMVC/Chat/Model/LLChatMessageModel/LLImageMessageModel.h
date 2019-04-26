@@ -10,14 +10,6 @@
 
 @interface LLImageMessageModel : LLBaseMessageModel
 
-//图片宽高
-@property (nonatomic, assign) NSInteger imgW;
-@property (nonatomic, assign) NSInteger imgH;
-
-//原图和缩略图
-@property (nonatomic, strong) NSString *original;
-@property (nonatomic, strong) NSString *thumbnail;
-
 - (void)handleImageSize;
 
 @end
