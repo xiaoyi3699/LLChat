@@ -59,9 +59,6 @@
                                                                isSender:isSender
                                                                 isGroup:NO];
     [self sendMessageModel:model];
-    [[LLChatSqliteManager defaultManager] createTableName:@"messagelist" modelClass:[LLBaseMessageModel class]];
-    [[LLChatSqliteManager defaultManager] insertModel:model tableName:@"messagelist"];
-    NSLog(@"%@",NSHomeDirectory());
 }
 
 //其他自定义消息, 如: 图片、视频、位置等等
