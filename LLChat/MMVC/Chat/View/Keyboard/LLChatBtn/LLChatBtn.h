@@ -14,6 +14,7 @@ typedef enum {
     LLChatButtonTypeInput,        //键盘工具按钮
     LLChatButtonTypeMoreKeyboard, //加号键盘按钮
 }LLChatButtonType;
+
 @interface LLChatBtn : UIButton
 
 + (instancetype)chatButtonWithType:(LLChatButtonType)type;

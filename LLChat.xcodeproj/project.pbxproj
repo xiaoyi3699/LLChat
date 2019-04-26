@@ -158,6 +158,7 @@
 		75614241213F6D47004CC91B /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				75F9E7DB213E680500492ED8 /* LLChatBtn */,
 				75614254213FA29B004CC91B /* LLMoreKeyboard */,
 				75614253213FA286004CC91B /* LLEmojisKeyboard */,
 				75614250213F7E79004CC91B /* LLInputView.h */,
@@ -326,7 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				75614241213F6D47004CC91B /* Keyboard */,
-				75F9E7DB213E680500492ED8 /* LLChatBtn */,
 				75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */,
 				75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */,
 				75279F8821ED7CFD00DAE00B /* LLChatSystemCell.h */,

@@ -40,7 +40,8 @@
     [self.view addSubview:self.inputView];
 }
 
-#pragma mark - 输入框代理
+#pragma mark - 发送消息
+//文本消息
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
     
     //模拟发送与接收消息
@@ -56,6 +57,7 @@
     [self sendMessageModel:model];
 }
 
+//其他自定义消息, 如: 图片、视频、位置等等
 - (void)inputView:(LLInputView *)inputView selectedType:(LLChatMoreType)type {
     if (type == LLChatMoreTypeImage) {
         //发送图片
@@ -74,6 +76,7 @@
         NSString *original = @"http://www.vasueyun.cn/llgit/llchat/1.jpg";
         NSString *thumbnail = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
         
+        //将图片保存到本地
         [[LLChatImageCache imageCache] storeImage:orImage forKey:original];
         [[LLChatImageCache imageCache] storeImage:thImage forKey:thumbnail];
         
@@ -84,20 +87,23 @@
                                                                      isSender:YES
                                                                       isGroup:NO];
         
-        //图片尺寸
+        //图片尺寸 - 为了缓存图片高度, 使消息列表滑动更流畅
         model.imgW = orImage.size.width;
         model.imgH = orImage.size.height;
         
         [self sendMessageModel:model];
     }
     else if (type == LLChatMoreTypeVideo) {
-        //发送视频
+        //发送视频 - 未实现
+        
     }
     else if (type == LLChatMoreTypeLocation) {
         //发送定位 - 未实现
+        
     }
     else if (type == LLChatMoreTypeTransfer) {
         //文件互传 - 未实现
+        
     }
 }
 
@@ -137,7 +143,7 @@
         LLChatBaseCell *cell;
         LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         
-        if ([model isKindOfClass:[LLSystemMessageModel class]]) {
+        if (model.msgType == LLMessageTypeSystem) {
             LLSystemMessageModel *systemModel = (LLSystemMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"systemCell"];
             if (cell == nil) {
@@ -145,7 +151,7 @@
             }
             [cell setConfig:systemModel];
         }
-        else if ([model isKindOfClass:[LLTextMessageModel class]]) {
+        else if (model.msgType == LLMessageTypeText) {
             LLTextMessageModel *textModel = (LLTextMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
             if (cell == nil) {
@@ -153,7 +159,7 @@
             }
             [cell setConfig:textModel isShowName:self.userModel.isShowName];
         }
-        else if ([model isKindOfClass:[LLImageMessageModel class]]) {
+        else if (model.msgType == LLMessageTypeImage) {
             LLImageMessageModel *imageModel = (LLImageMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
             if (cell == nil) {
@@ -161,10 +167,10 @@
             }
             [cell setConfig:imageModel isShowName:self.userModel.isShowName];
         }
-        else if ([model isKindOfClass:[LLVoiceMessageModel class]]) {
+        else if (model.msgType == LLMessageTypeVoice) {
             LLVoiceMessageModel *voiceModel = (LLVoiceMessageModel *)model;
         }
-        else if ([model isKindOfClass:[LLVideoMessageModel class]]) {
+        else if (model.msgType == LLMessageTypeVideo) {
             LLVideoMessageModel *videoModel = (LLVideoMessageModel *)model;
         }
         return cell;
@@ -256,6 +262,14 @@
 
 
 #pragma mark - private method
+//加入到消息缓存中
+- (void)addMessageModel:(LLBaseMessageModel *)model {
+    [self.messageModels addObject:model];
+    [_tableView reloadData];
+    [self tableViewScrollToBottom];
+}
+
+//发送消息
 - (void)sendMessageModel:(LLBaseMessageModel *)model {
     
     //添加模拟时间
@@ -274,13 +288,6 @@
 //收到消息
 - (void)receiveMessageModel:(LLBaseMessageModel *)model {
     [self addMessageModel:model];
-}
-
-//加入到消息缓存中
-- (void)addMessageModel:(LLBaseMessageModel *)model {
-    [self.messageModels addObject:model];
-    [_tableView reloadData];
-    [self tableViewScrollToBottom];
 }
 
 - (void)tableViewScrollToBottom {

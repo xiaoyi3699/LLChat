@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LLChatBtn.h"
+
 @protocol LLChatMoreKeyboardDelegate;
 
 typedef enum : NSInteger {
@@ -15,6 +17,7 @@ typedef enum : NSInteger {
     LLChatMoreTypeLocation,
     LLChatMoreTypeTransfer,
 }LLChatMoreType;
+
 @interface LLChatMoreKeyboard : UIView
 
 @property (nonatomic, weak) id<LLChatMoreKeyboardDelegate> delegate;
