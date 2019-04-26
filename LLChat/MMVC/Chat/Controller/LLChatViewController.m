@@ -332,9 +332,4 @@
     }
 }
 
-#pragma mark - super method
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 @end
