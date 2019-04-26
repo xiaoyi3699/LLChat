@@ -7,6 +7,7 @@
 //
 
 #import "LLMessageViewController.h"
+#import "LLChat.h"
 
 @interface LLMessageViewController ()<UITableViewDelegate,UITableViewDataSource>
 

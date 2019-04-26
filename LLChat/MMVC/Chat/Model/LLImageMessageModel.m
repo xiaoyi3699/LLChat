@@ -7,8 +7,9 @@
 //
 
 #import "LLImageMessageModel.h"
+#import "LLChatMacro.h"
 
-@implementation LLImageMessageModel 
+@implementation LLImageMessageModel
 
 - (instancetype)init {
     self = [super init];

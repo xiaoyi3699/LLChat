@@ -7,6 +7,8 @@
 //
 
 #import "LLInputView.h"
+#import "LLChatMacro.h"
+#import "UIView+LLChat.h"
 
 typedef enum : NSInteger {
     LLInputViewTypeNone = 0,

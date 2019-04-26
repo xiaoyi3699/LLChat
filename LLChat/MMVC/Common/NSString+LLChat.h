@@ -23,6 +23,4 @@
  */
 - (NSString *)ll_URLDecodedString;
 
-- (CGFloat)ll_heightWithWidth:(CGFloat)width font:(UIFont *)font;
-
 @end

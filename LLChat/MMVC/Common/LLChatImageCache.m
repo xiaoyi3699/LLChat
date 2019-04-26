@@ -7,6 +7,8 @@
 //
 
 #import "LLChatImageCache.h"
+#import "LLChatBase64.h"
+#import "LLChatMacro.h"
 
 //获取沙盒Document路径
 #define APP_DocumentPath  \
@@ -311,7 +313,7 @@
 - (NSString *)storeImage:(UIImage *)image forKey:(NSString *)key {
     
     if (image == nil || key.length == 0) {
-        ll_log(@"键值不能为空");
+        NSLog(@"键值不能为空");
         return @"";
     }
     
@@ -343,7 +345,7 @@
 - (NSString *)storeData:(NSData *)data forKey:(NSString *)key {
     
     if (data == nil || key.length == 0) {
-        ll_log(@"键值不能为空");
+        NSLog(@"键值不能为空");
         return @"";
     }
     
@@ -403,7 +405,7 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         return YES;
     }
-    ll_log(@"fileExistsAtPath:文件未找到");
+    NSLog(@"fileExistsAtPath:文件未找到");
     return NO;
 }
 
@@ -421,7 +423,7 @@
                                                                      attributes:nil
                                                                           error:&error];
             if (error) {
-                ll_log(@"创建文件夹失败:%@",error);
+                NSLog(@"创建文件夹失败:%@",error);
             }
             return result;
         }
@@ -433,7 +435,7 @@
                                                                  attributes:nil
                                                                       error:&error];
         if (error) {
-            ll_log(@"创建文件夹失败:%@",error);
+            NSLog(@"创建文件夹失败:%@",error);
         }
         return result;
     }
@@ -441,7 +443,7 @@
 
 - (BOOL)writeFile:(id)file toPath:(NSString *)path{
     BOOL isOK = [file writeToFile:path atomically:YES];
-    ll_log(@"文件存储路径为:%@",path);
+    NSLog(@"文件存储路径为:%@",path);
     return isOK;
 }
 
@@ -449,7 +451,7 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]){
         return [[NSFileManager defaultManager] removeItemAtPath:filePath error:error];
     }
-    ll_log(@"deleteFileAtPath:error:路径未找到");
+    NSLog(@"deleteFileAtPath:error:路径未找到");
     return YES;
 }
 

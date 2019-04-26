@@ -51,7 +51,7 @@
             int result = sqlite3_exec(_sql3, sql.UTF8String, NULL, NULL, NULL);
             if (result != SQLITE_OK) {
                 //NSAssert(NO, @"数据库-创建-失败");
-                ll_log(@"数据库-创建-失败");
+                NSLog(@"数据库-创建-失败");
             }
             [self closeDataBase];
             return (result == SQLITE_OK);
@@ -104,11 +104,11 @@
         }
     }
     if (keySql == nil) {
-        ll_log(@"数据库删除失败:字段[%@]不存在",primkey);
+        NSLog(@"数据库删除失败:字段[%@]不存在",primkey);
         return NO;
     }
     NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@",tableName,keySql];
-    ll_log(@"%@",sql);
+    NSLog(@"%@",sql);
     return ![self execute:sql];
 }
 
@@ -134,11 +134,11 @@
         [values appendFormat:@"`%@`='%@',", key, value];
     }
     if (keySql == nil) {
-        ll_log(@"数据库更新失败:字段[%@]不存在",primkey);
+        NSLog(@"数据库更新失败:字段[%@]不存在",primkey);
         return NO;
     }
     NSString *sql = [NSString stringWithFormat:@"update %@ set %@ where %@",tableName,[values substringToIndex:values.length - 1], keySql];
-    ll_log(@"%@",sql);
+    NSLog(@"%@",sql);
     return ![self execute:sql];
 }
 
@@ -229,7 +229,7 @@
     else{
         sqlite3_close(_sql3);
         //NSAssert(NO, @"数据库-打开-失败");
-        ll_log(@"数据库-打开-失败");
+        NSLog(@"数据库-打开-失败");
         return NO;
     }
 }

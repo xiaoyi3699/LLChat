@@ -7,6 +7,10 @@
 //
 
 #import "LLChatViewController.h"
+#import "LLChatTool.h"
+#import "LLChatModel.h"
+#import "LLChatMacro.h"
+#import "LLChatMessageManager.h"
 #import "LLInputView.h"
 #import "LLChatSystemCell.h"
 #import "LLChatTextMessageCell.h"
@@ -308,7 +312,7 @@
             offsetY = keyboardH;
         }
         
-        if (offsetY > 0) {
+        if (offsetY > LLCHAT_BOTTOM_H) {
             CGRect TRect = self.tableView.frame;
             TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
             [UIView animateWithDuration:0.25 animations:^{

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LLChatModel.h"
 
 @interface LLChatMessageManager : NSObject
 

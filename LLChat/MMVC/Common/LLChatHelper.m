@@ -7,6 +7,7 @@
 //
 
 #import "LLChatHelper.h"
+#import "NSDateFormatter+LLChat.h"
 
 @implementation LLChatHelper {
     
@@ -144,9 +145,15 @@
     return _receiverBubbleImage;
 }
 
-//当前时间戳
+//获取当前时间戳
 + (NSTimeInterval)nowTimestamp {
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval time = [date timeIntervalSince1970]*1000;
+    return time;
+}
+
+//获取指定时间戳
++ (NSTimeInterval)timestampFromDate:(NSDate *)date {
     NSTimeInterval time = [date timeIntervalSince1970]*1000;
     return time;
 }
@@ -160,12 +167,6 @@
     NSTimeInterval time = [timeStamp integerValue]/scale;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
     return date;
-}
-
-//获取指定时间戳
-+ (NSTimeInterval)timestampFromDate:(NSDate *)date {
-    NSTimeInterval time = [date timeIntervalSince1970]*1000;
-    return time;
 }
 
 //时间格式化

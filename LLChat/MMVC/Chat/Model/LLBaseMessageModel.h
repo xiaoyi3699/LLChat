@@ -6,7 +6,7 @@
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef enum : NSInteger {
     LLMessageTypeSystem = 0, //系统消息

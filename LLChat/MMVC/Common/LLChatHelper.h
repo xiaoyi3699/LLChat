@@ -6,7 +6,7 @@
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface LLChatHelper : NSObject
 
@@ -35,14 +35,14 @@
 - (UIImage *)senderBubbleImage;
 - (UIImage *)receiverBubbleImage;
 
-//当前时间戳
+//获取当前时间戳
 + (NSTimeInterval)nowTimestamp;
-
-//获取指定日期
-+ (NSDate *)dateFromTimeStamp:(NSString *)timeStamp;
 
 //获取指定时间戳
 + (NSTimeInterval)timestampFromDate:(NSDate *)date;
+
+//获取指定日期
++ (NSDate *)dateFromTimeStamp:(NSString *)timeStamp;
 
 //时间格式化
 + (NSString *)timeFromTimeStamp:(NSString *)timeStamp;

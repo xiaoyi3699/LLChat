@@ -13,44 +13,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
-//全局类
-#import "LLChatLog.h"
-#import "LLChatBase64.h"
-#import "LLChatHelper.h"
-#import "LLChatImageCache.h"
-#import "LLChatSqliteManager.h"
 
-#import "UIView+LLChat.h"
-#import "NSString+LLChat.h"
-#import "NSDateFormatter+LLChat.h"
-
-#import "LLChatUserModel.h"
-
-#import "LLTextMessageModel.h"
-#import "LLImageMessageModel.h"
-#import "LLVoiceMessageModel.h"
-#import "LLVideoMessageModel.h"
-#import "LLSystemMessageModel.h"
-
-#import "LLChatMessageManager.h"
-
-#import "LLChatViewController.h"
-
-#define LLCHAT_SCREEN_WIDTH   [[LLChatHelper shareInstance] screenW]
-#define LLCHAT_SCREEN_HEIGHT  [[LLChatHelper shareInstance] screenH]
-
-#define LLCHAT_IPHONEX    [[LLChatHelper shareInstance] iPhoneX]
-#define LLCHAT_NAV_TOP_H  [[LLChatHelper shareInstance] navBarH]
-#define LLCHAT_BAR_BOT_H  [[LLChatHelper shareInstance] tabBarH]
-#define LLCHAT_BOTTOM_H   [[LLChatHelper shareInstance] iPhoneXBottomH]
-
-//输入框的高度
-#define LLCHAT_INPUT_H    [[LLChatHelper shareInstance] inputH]
-//自定义键盘的高度(不包含输入框)
-#define LLCHAT_KEYBOARD_H [[LLChatHelper shareInstance] keyboardH]
-
-//默认图
-#define LLCHAT_BAD_IMAGE [UIImage imageNamed:@"ll_chat_default"]
 
 #endif
 #endif /* PrefixHeader_pch */

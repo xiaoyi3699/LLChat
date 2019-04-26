@@ -8,6 +8,8 @@
 
 #import "LLChatMessageCell.h"
 #import "LLChatBtn.h"
+#import "LLChatTool.h"
+#import "LLChatMacro.h"
 
 @implementation LLChatMessageCell {
     LLChatBtn *_retryBtn;

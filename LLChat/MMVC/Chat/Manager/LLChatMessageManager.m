@@ -7,6 +7,7 @@
 //
 
 #import "LLChatMessageManager.h"
+#import "LLChatHelper.h"
 
 @implementation LLChatMessageManager
 

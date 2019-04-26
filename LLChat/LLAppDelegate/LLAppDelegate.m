@@ -39,10 +39,6 @@
     //禁止多点触控
     [[UIView appearance] setExclusiveTouch:YES];
     
-#if DEBUG
-    ll_openLogEnable(YES);
-#endif
-    
     return YES;
 }
 
