@@ -13,8 +13,8 @@
 ///将model转化为字典
 - (NSDictionary *)transfromDictionary;
 
-///获取类的所有属性名称与类型
-- (NSArray *)allPropertyName;
+///获取类的所有属性名称与类型, 使用LLChatBaseModel的子类调用
++ (NSArray *)allPropertyName;
 
 ///解档
 + (instancetype)ll_unarchiveObjectWithData:(NSData *)data;

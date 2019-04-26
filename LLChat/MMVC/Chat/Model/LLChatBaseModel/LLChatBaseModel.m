@@ -84,12 +84,12 @@
 }
 
 ///获取类的所有属性名称与类型
-- (NSArray *)allPropertyName {
++ (NSArray *)allPropertyName {
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:0];
     return [self allPropertyName:arr class:[self class]];
 }
 
-- (NSArray *)allPropertyName:(NSMutableArray *)arr class:(Class)class {
++ (NSArray *)allPropertyName:(NSMutableArray *)arr class:(Class)class {
     Class superclass = [self _allPropertyName:arr class:class];
     if ([superclass isSubclassOfClass:[LLChatBaseModel class]]) {
         [self allPropertyName:arr class:superclass];
@@ -97,7 +97,7 @@
     return [arr copy];
 }
 
-- (Class)_allPropertyName:(NSMutableArray *)arr class:(Class)class {
++ (Class)_allPropertyName:(NSMutableArray *)arr class:(Class)class {
     unsigned int count;
     objc_property_t *pros = class_copyPropertyList(class, &count);
     for (int i = 0; i < count; i++) {
@@ -120,7 +120,7 @@
     return [class superclass];
 }
 
-- (NSString*)attrValueWithName:(NSString*)name InProperty:(objc_property_t)pro{
++ (NSString*)attrValueWithName:(NSString*)name InProperty:(objc_property_t)pro{
     unsigned int count = 0;
     objc_property_attribute_t *attrs = property_copyAttributeList(pro, &count);
     for (int i = 0; i < count; i++) {

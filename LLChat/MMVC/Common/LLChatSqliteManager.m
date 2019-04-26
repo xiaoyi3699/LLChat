@@ -7,6 +7,7 @@
 //
 
 #import "LLChatSqliteManager.h"
+#import "LLChatBaseModel.h"
 #import <objc/runtime.h>
 #import <sqlite3.h>
 
@@ -263,6 +264,9 @@
  获取类的所有属性名称与类型
  */
 - (NSArray *)allPropertyNameInClass:(Class)cls{
+    if ([cls isSubclassOfClass:[LLChatBaseModel class]]) {
+        return [cls allPropertyName];
+    }
     NSMutableArray *arr = [NSMutableArray array];
     unsigned int count;
     objc_property_t *pros = class_copyPropertyList(cls, &count);
@@ -309,6 +313,9 @@
  对象转换为字典
  */
 - (NSDictionary *)DictionaryFromModel:(id)model{
+    if ([model isKindOfClass:[LLChatBaseModel class]]) {
+        return [model transfromDictionary];
+    }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     Class modelClass = object_getClass(model);
     unsigned int count = 0;
