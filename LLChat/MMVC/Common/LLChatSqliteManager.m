@@ -283,6 +283,8 @@
             type = @"integer";
         }else if([type isEqualToString:@"f"] || [type isEqualToString:@"d"]){
             type = @"real";
+        }else if([type isEqualToString:@"b"]){
+            type = @"boolean";
         }else{
             type = @"text";
         }
