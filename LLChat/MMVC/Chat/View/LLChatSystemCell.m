@@ -7,7 +7,6 @@
 //
 
 #import "LLChatSystemCell.h"
-#import "LLChatModel.h"
 #import "LLChatMacro.h"
 
 @implementation LLChatSystemCell {

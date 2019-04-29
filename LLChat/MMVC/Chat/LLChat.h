@@ -12,6 +12,7 @@
 #import "LLChatTool.h"
 #import "LLChatModel.h"
 #import "LLChatMacro.h"
+#import "LLChatDBManager.h"
 #import "LLChatMessageManager.h"
 #import "LLChatViewController.h"
 

@@ -4,7 +4,7 @@
 //
 //  Created by WangZhaomeng on 2019/4/24.
 //  Copyright © 2019 WangZhaomeng. All rights reserved.
-//
+//  消息管理
 
 #import <Foundation/Foundation.h>
 #import "LLChatModel.h"

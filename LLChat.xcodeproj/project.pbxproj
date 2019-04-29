@@ -39,6 +39,9 @@
 		7510EA8E2272D38E000B58D9 /* ll_chat_board@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510EA752272D38E000B58D9 /* ll_chat_board@2x.png */; };
 		7510EA8F2272D38E000B58D9 /* ll_chat_bj1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7510EA762272D38E000B58D9 /* ll_chat_bj1@3x.png */; };
 		7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA942272E2BA000B58D9 /* LLChatBaseModel.m */; };
+		7510EA9B2276A5C6000B58D9 /* LLChatDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA9A2276A5C6000B58D9 /* LLChatDBManager.m */; };
+		7510EA9E2276A704000B58D9 /* LLChatSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA9D2276A704000B58D9 /* LLChatSessionModel.m */; };
+		7510EAA12276AAFD000B58D9 /* LLChatGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EAA02276AAFD000B58D9 /* LLChatGroupModel.m */; };
 		75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */; };
 		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
 		75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */; };
@@ -113,6 +116,12 @@
 		7510EA762272D38E000B58D9 /* ll_chat_bj1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll_chat_bj1@3x.png"; sourceTree = "<group>"; };
 		7510EA932272E2BA000B58D9 /* LLChatBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseModel.h; sourceTree = "<group>"; };
 		7510EA942272E2BA000B58D9 /* LLChatBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatBaseModel.m; sourceTree = "<group>"; };
+		7510EA992276A5C6000B58D9 /* LLChatDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatDBManager.h; sourceTree = "<group>"; };
+		7510EA9A2276A5C6000B58D9 /* LLChatDBManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatDBManager.m; sourceTree = "<group>"; };
+		7510EA9C2276A704000B58D9 /* LLChatSessionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatSessionModel.h; sourceTree = "<group>"; };
+		7510EA9D2276A704000B58D9 /* LLChatSessionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSessionModel.m; sourceTree = "<group>"; };
+		7510EA9F2276AAFD000B58D9 /* LLChatGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatGroupModel.h; sourceTree = "<group>"; };
+		7510EAA02276AAFD000B58D9 /* LLChatGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatGroupModel.m; sourceTree = "<group>"; };
 		75279F8821ED7CFD00DAE00B /* LLChatSystemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatSystemCell.h; sourceTree = "<group>"; };
 		75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSystemCell.m; sourceTree = "<group>"; };
 		75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseCell.h; sourceTree = "<group>"; };
@@ -194,6 +203,8 @@
 		7510EA4422703F19000B58D9 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				7510EA992276A5C6000B58D9 /* LLChatDBManager.h */,
+				7510EA9A2276A5C6000B58D9 /* LLChatDBManager.m */,
 				7510EA4522703F4F000B58D9 /* LLChatMessageManager.h */,
 				7510EA4622703F4F000B58D9 /* LLChatMessageManager.m */,
 			);
@@ -273,6 +284,10 @@
 			children = (
 				7510EA4922704068000B58D9 /* LLChatUserModel.h */,
 				7510EA4A22704068000B58D9 /* LLChatUserModel.m */,
+				7510EA9F2276AAFD000B58D9 /* LLChatGroupModel.h */,
+				7510EAA02276AAFD000B58D9 /* LLChatGroupModel.m */,
+				7510EA9C2276A704000B58D9 /* LLChatSessionModel.h */,
+				7510EA9D2276A704000B58D9 /* LLChatSessionModel.m */,
 			);
 			path = LLChatUserModel;
 			sourceTree = "<group>";
@@ -598,8 +613,10 @@
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
+				7510EA9B2276A5C6000B58D9 /* LLChatDBManager.m in Sources */,
 				7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */,
 				7510EA2C226FF499000B58D9 /* NSDateFormatter+LLChat.m in Sources */,
+				7510EA9E2276A704000B58D9 /* LLChatSessionModel.m in Sources */,
 				75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
@@ -622,6 +639,7 @@
 				75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */,
 				75F9E7BB213D229D00492ED8 /* LLBaseMessageModel.m in Sources */,
 				75F9E7DA213E4C5500492ED8 /* LLChatHelper.m in Sources */,
+				7510EAA12276AAFD000B58D9 /* LLChatGroupModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,7 +42,6 @@
     user.uid = @"00002";
     user.name = @"千年等一回";
     user.avatar = @"http://www.vasueyun.cn/ttdoll/512.png";
-    user.isShowName = (indexPath.row == 0);
     
     LLChatViewController *chatVC = [[LLChatViewController alloc] initWithUser:user];
     chatVC.hidesBottomBarWhenPushed = YES;

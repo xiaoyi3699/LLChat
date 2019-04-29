@@ -1,25 +1,22 @@
 //
-//  LLChatUserModel.h
+//  LLChatGroupModel.h
 //  LLChat
 //
-//  Created by WangZhaomeng on 2019/4/24.
+//  Created by WangZhaomeng on 2019/4/29.
 //  Copyright © 2019 WangZhaomeng. All rights reserved.
-//  聊天用户
+//  聊天群
 
 #import "LLChatBaseModel.h"
 
-@interface LLChatUserModel : LLChatBaseModel
+@interface LLChatGroupModel : LLChatBaseModel
 
-///用户id
-@property (nonatomic, strong) NSString *uid;
-///昵称
+///群id
+@property (nonatomic, strong) NSString *gid;
+///群昵称
 @property (nonatomic, strong) NSString *name;
-///头像
+///群头像
 @property (nonatomic, strong) NSString *avatar;
 ///聊天界面是否显示用户昵称
 @property (nonatomic, assign) BOOL isShowName;
-
-///默认登录用户
-+ (instancetype)shareInfo;
 
 @end

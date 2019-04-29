@@ -10,7 +10,10 @@
 #define LLChatModel_h
 
 #import "LLChatUserModel.h"
+#import "LLChatGroupModel.h"
+#import "LLChatSessionModel.h"
 
+#import "LLChatGroupModel.h"
 #import "LLTextMessageModel.h"
 #import "LLImageMessageModel.h"
 #import "LLVoiceMessageModel.h"

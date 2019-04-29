@@ -22,7 +22,10 @@
 @property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign) BOOL isEditing;
+@property (nonatomic, assign) BOOL isShowName;
 @property (nonatomic, strong) LLChatUserModel *userModel;
+@property (nonatomic, strong) LLChatGroupModel *groupModel;
+@property (nonatomic, strong) LLChatSessionModel *sessionModel;
 
 @end
 
@@ -31,10 +34,41 @@
 - (instancetype)initWithUser:(LLChatUserModel *)userModel {
     self = [super init];
     if (self) {
-        self.title = @"消息";
-        self.userModel = userModel;
+        [self setConfig:userModel];
     }
     return self;
+}
+
+- (instancetype)initWithGroup:(LLChatGroupModel *)groupModel {
+    self = [super init];
+    if (self) {
+        [self setConfig:groupModel];
+    }
+    return self;
+}
+
+- (instancetype)initWithSession:(LLChatSessionModel *)sessionModel {
+    self = [super init];
+    if (self) {
+        [self setConfig:sessionModel];
+    }
+    return self;
+}
+
+- (void)setConfig:(LLChatBaseModel *)model {
+    if ([model isKindOfClass:[LLChatUserModel class]]) {
+        self.userModel = (LLChatUserModel *)model;
+    }
+    else if ([model isKindOfClass:[LLChatGroupModel class]]) {
+        self.groupModel = (LLChatGroupModel *)model;
+    }
+    else {
+        LLChatSessionModel *sessionModel = (LLChatSessionModel *)model;
+        //从数据库中查询该sid对应的用户或者群
+        
+    }
+    self.title = @"消息";
+    self.isShowName = (self.userModel.isShowName || self.groupModel.isShowName);
 }
 
 - (void)viewDidLoad {
@@ -131,7 +165,7 @@
         if ([model isKindOfClass:[LLSystemMessageModel class]]) {
             return model.modelH;
         }
-        if (self.userModel.isShowName) {
+        if (self.isShowName) {
             return model.modelH+45;
         }
         else {
@@ -161,7 +195,7 @@
             if (cell == nil) {
                 cell = [[LLChatTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];
             }
-            [cell setConfig:textModel isShowName:self.userModel.isShowName];
+            [cell setConfig:textModel isShowName:self.isShowName];
         }
         else if (model.msgType == LLMessageTypeImage) {
             LLImageMessageModel *imageModel = (LLImageMessageModel *)model;
@@ -169,7 +203,7 @@
             if (cell == nil) {
                 cell = [[LLChatImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imageCell"];
             }
-            [cell setConfig:imageModel isShowName:self.userModel.isShowName];
+            [cell setConfig:imageModel isShowName:self.isShowName];
         }
         else if (model.msgType == LLMessageTypeVoice) {
             LLVoiceMessageModel *voiceModel = (LLVoiceMessageModel *)model;
