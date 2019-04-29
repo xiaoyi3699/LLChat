@@ -105,10 +105,12 @@
         NSString *name =[NSString stringWithFormat:@"%s",property_getName(pro)];
         NSString *type = [self attrValueWithName:@"T" InProperty:pros[i]];
         //类型转换
-        if ([type isEqualToString:@"q"]||[type isEqualToString:@"i"]) {
+        if ([type isEqualToString:@"q"]||[type isEqualToString:@"i"]||[type isEqualToString:@"I"]) {
             type = @"integer";
         }else if([type isEqualToString:@"f"] || [type isEqualToString:@"d"]){
             type = @"real";
+        }else if([type isEqualToString:@"B"]){
+            type = @"boolean";
         }else{
             type = @"text";
         }
