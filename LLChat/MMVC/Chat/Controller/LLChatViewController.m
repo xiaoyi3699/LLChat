@@ -347,6 +347,19 @@
 //发送消息
 - (void)sendMessageModel:(LLChatMessageModel *)model {
     [self addMessageModel:model];
+    
+    //模拟消息发送中、发送成功、发送失败
+    //根据需要可以将消息默认值设置为发送成功, 此处是为了演示效果
+    NSInteger i = arc4random()%3;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (i == 0) {
+            model.sendType = LLMessageSendTypeFailed;
+        }
+        else {
+            model.sendType = LLMessageSendTypeSuccess;
+        }
+        [self.tableView reloadData];
+    });
 }
 
 //收到消息
