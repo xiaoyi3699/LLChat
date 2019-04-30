@@ -53,6 +53,7 @@
 		75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614256213FA2C9004CC91B /* LLChatMoreKeyboard.m */; };
 		75A6568C22782C15001138E2 /* LLUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A6568B22782C15001138E2 /* LLUserTableViewCell.m */; };
 		75A6569022783682001138E2 /* LLSessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A6568F22783682001138E2 /* LLSessionTableViewCell.m */; };
+		75A6569222784171001138E2 /* ll_chat_bell_not.png in Resources */ = {isa = PBXBuildFile; fileRef = 75A6569122784171001138E2 /* ll_chat_bell_not.png */; };
 		75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */; };
 		75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F9E6F821391B4E00492ED8 /* Assets.xcassets */; };
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
@@ -140,6 +141,7 @@
 		75A6568B22782C15001138E2 /* LLUserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLUserTableViewCell.m; sourceTree = "<group>"; };
 		75A6568E22783682001138E2 /* LLSessionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLSessionTableViewCell.h; sourceTree = "<group>"; };
 		75A6568F22783682001138E2 /* LLSessionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLSessionTableViewCell.m; sourceTree = "<group>"; };
+		75A6569122784171001138E2 /* ll_chat_bell_not.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_bell_not.png; sourceTree = "<group>"; };
 		75F9E6F221391B4D00492ED8 /* LLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F9E6F521391B4D00492ED8 /* LLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLAppDelegate.h; sourceTree = "<group>"; };
 		75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLAppDelegate.m; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		7510EA5D2272D35D000B58D9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				75A6569122784171001138E2 /* ll_chat_bell_not.png */,
 				7510EA6E2272D38D000B58D9 /* ll_chat_bj1@2x.png */,
 				7510EA762272D38E000B58D9 /* ll_chat_bj1@3x.png */,
 				7510EA5E2272D38C000B58D9 /* ll_chat_bj2@2x.png */,
@@ -576,6 +579,7 @@
 				7510EA8F2272D38E000B58D9 /* ll_chat_bj1@3x.png in Resources */,
 				7510EA7A2272D38E000B58D9 /* ll_chat_retry@3x.png in Resources */,
 				7510EA7E2272D38E000B58D9 /* ll_chat_video@3x.png in Resources */,
+				75A6569222784171001138E2 /* ll_chat_bell_not.png in Resources */,
 				75614246213F6F7B004CC91B /* EmojisList.plist in Resources */,
 				7510EA842272D38E000B58D9 /* ll_chat_video@2x.png in Resources */,
 				7510EA7B2272D38E000B58D9 /* ll_chat_emotion@3x.png in Resources */,

@@ -68,7 +68,55 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.inputView];
     [self loadMessage:0];
+    [self setRightItem];
 }
+
+#pragma mark - 模拟收到消息
+- (void)setRightItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"模拟收到消息" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemClick)];
+    self.navigationItem.rightBarButtonItem = item;
+}
+
+- (void)rightItemClick {
+    static BOOL isText = YES;
+    if (isText) {
+        LLChatMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
+                                                                    message:@"我收到了一条文本消息"
+                                                                   isSender:NO];
+        [self receiveMessageModel:model];
+    }
+    else {
+        //收到图片
+        //原图和缩略图链接
+        NSString *original = @"http://www.vasueyun.cn/llgit/llchat/2.jpg";
+        NSString *thumbnail = @"http://www.vasueyun.cn/llgit/llchat/2_t.jpg";
+        
+        //图片下载的代码就不多写, 这里默认下载完成
+        //原图
+        UIImage *orImage = [UIImage imageNamed:@"2.jpg"];
+        
+        //缩略图, 用于展示, 优化消息滑动时的卡顿
+        UIImage *thImage = [UIImage imageNamed:@"2_t.jpg"];
+        
+        //将图片保存到本地
+        [[LLChatImageCache imageCache] storeImage:orImage forKey:original];
+        [[LLChatImageCache imageCache] storeImage:thImage forKey:thumbnail];
+        
+        //创建图片model
+        LLChatMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
+                                                                   thumbnail:thumbnail
+                                                                    original:original
+                                                                    isSender:NO];
+        
+        //图片尺寸 - 为了缓存图片高度, 使消息列表滑动更流畅
+        model.imgW = orImage.size.width;
+        model.imgH = orImage.size.height;
+        
+        [self receiveMessageModel:model];
+    }
+    isText = !isText;
+}
+#pragma mark -
 
 - (void)loadMessage:(NSInteger)page {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{

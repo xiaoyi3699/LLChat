@@ -31,6 +31,7 @@
     
     [self setupUI];
     [self loadSession];
+    [self setRightItem];
 }
 
 - (void)setupUI {
@@ -45,6 +46,40 @@
         });
     });
 }
+
+#pragma mark - 模拟消息免打扰、显示未读未读消息数等
+- (void)setRightItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"更改样式" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemClick)];
+    self.navigationItem.rightBarButtonItem = item;
+}
+
+- (void)rightItemClick {
+    static NSInteger type = 1;
+    if (type == 4) {
+        type = 0;
+    }
+    for (LLChatSessionModel *session in self.sessions) {
+        if (type == 0) {
+            session.unreadNum = @"0";
+            session.isIgnore = NO;
+        }
+        else if (type == 1) {
+            session.unreadNum = @"18";
+            session.isIgnore = NO;
+        }
+        else if (type == 2) {
+            session.unreadNum = @"18";
+            session.isIgnore = YES;
+        }
+        else if (type == 3) {
+            session.unreadNum = @"100";
+            session.isIgnore = NO;
+        }
+    }
+    [self.tableView reloadData];
+    type ++;
+}
+#pragma mark -
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

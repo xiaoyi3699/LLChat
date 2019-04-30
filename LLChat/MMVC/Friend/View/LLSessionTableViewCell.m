@@ -122,7 +122,7 @@
     [[LLChatImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES completion:^(UIImage *image) {
         _avatarImageView.image = image;
     }];
-    _notiImageView.image = [UIImage imageNamed:@"wechat_bell_not"];
+    _notiImageView.image = [UIImage imageNamed:@"ll_chat_bell_not"];
     _nameLabel.text = model.name;
     _messageLabel.text = lastMsg;
     _timeLabel.text = [LLChatHelper timeFromTimeStamp:[NSString stringWithFormat:@"%@",@(lastTimestamp)]];
