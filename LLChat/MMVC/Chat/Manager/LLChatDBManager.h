@@ -14,6 +14,8 @@
 + (instancetype)DBManager;
 
 #pragma mark - user表操纵
+///所有用户
+- (NSMutableArray *)users;
 ///添加用户
 - (void)insertUserModel:(LLChatUserModel *)model;
 ///更新用户
@@ -24,6 +26,8 @@
 - (void)deleteUserModel:(NSString *)uid;
 
 #pragma mark - group表操纵
+///所有群
+- (NSMutableArray *)groups;
 ///添加群
 - (void)insertGroupModel:(LLChatGroupModel *)model;
 ///更新群
@@ -34,6 +38,8 @@
 - (void)deleteGroupModel:(NSString *)gid;
 
 #pragma mark - session表操纵
+///所有会话
+- (NSMutableArray *)sessions;
 ///添加会话
 - (void)insertSessionModel:(LLChatSessionModel *)model;
 ///更新会话

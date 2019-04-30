@@ -35,7 +35,30 @@ NSString *const LL_SESSION = @"ll_session";
     return self;
 }
 
+- (void)autoCreateUser:(NSInteger)count {
+    for (NSInteger i = 0; i < count; i ++) {
+        LLChatUserModel *model = [[LLChatUserModel alloc] init];
+        model.uid = [NSString stringWithFormat:@"%05ld",(long)(i+1)];
+        model.name = model.uid;
+        model.avatar = @"http://www.vasueyun.cn/ttdoll/512.png";
+        model.isShowName = YES;
+        [self insertUserModel:model];
+    }
+}
+
 #pragma mark - user表操纵
+//所有用户
+- (NSMutableArray *)users {
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@",LL_USER];
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:list.count];
+    for (NSDictionary *dic in list) {
+        LLChatUserModel *model = [LLChatUserModel modelWithDic:dic];
+        [arr addObject:model];
+    }
+    return arr;
+}
+
 //添加用户
 - (void)insertUserModel:(LLChatUserModel *)model {
     [[LLChatSqliteManager defaultManager] insertModel:model tableName:LL_USER];
@@ -49,9 +72,9 @@ NSString *const LL_SESSION = @"ll_session";
 //查询用户
 - (LLChatUserModel *)selectUserModel:(NSString *)uid {
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE uid = '%@'",LL_USER,uid];
-    NSArray *groups = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
-    if (groups.count > 0) {
-        LLChatUserModel *model = [LLChatUserModel modelWithDic:groups.firstObject];
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    if (list.count > 0) {
+        LLChatUserModel *model = [LLChatUserModel modelWithDic:list.firstObject];
         return model;
     }
     return nil;
@@ -66,6 +89,18 @@ NSString *const LL_SESSION = @"ll_session";
 }
 
 #pragma mark - group表操纵
+//所有群
+- (NSMutableArray *)groups {
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@",LL_GROUP];
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:list.count];
+    for (NSDictionary *dic in list) {
+        LLChatGroupModel *model = [LLChatGroupModel modelWithDic:dic];
+        [arr addObject:model];
+    }
+    return arr;
+}
+
 //添加群
 - (void)insertGroupModel:(LLChatGroupModel *)model {
     [[LLChatSqliteManager defaultManager] insertModel:model tableName:LL_GROUP];
@@ -79,9 +114,9 @@ NSString *const LL_SESSION = @"ll_session";
 //查询群
 - (LLChatGroupModel *)selectGroupModel:(NSString *)gid {
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE gid = '%@'",LL_GROUP,gid];
-    NSArray *groups = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
-    if (groups.count > 0) {
-        LLChatGroupModel *model = [LLChatGroupModel modelWithDic:groups.firstObject];
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    if (list.count > 0) {
+        LLChatGroupModel *model = [LLChatGroupModel modelWithDic:list.firstObject];
         return model;
     }
     return nil;
@@ -95,8 +130,19 @@ NSString *const LL_SESSION = @"ll_session";
     [self deleteSessionModel:gid];
 }
 
-
 #pragma mark - session表操纵
+//所有会话
+- (NSMutableArray *)sessions {
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@",LL_SESSION];
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:list.count];
+    for (NSDictionary *dic in list) {
+        LLChatSessionModel *model = [LLChatSessionModel modelWithDic:dic];
+        [arr addObject:model];
+    }
+    return arr;
+}
+
 //添加会话
 - (void)insertSessionModel:(LLChatSessionModel *)model {
     [[LLChatSqliteManager defaultManager] insertModel:model tableName:LL_SESSION];
@@ -135,10 +181,10 @@ NSString *const LL_SESSION = @"ll_session";
         isGroup = YES;
     }
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,gid];
-    NSArray *groups = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
     LLChatSessionModel *session;
-    if (groups.count > 0) {
-        session = [LLChatSessionModel modelWithDic:groups.firstObject];
+    if (list.count > 0) {
+        session = [LLChatSessionModel modelWithDic:list.firstObject];
     }
     else {
         //创建会话,并插入数据库
@@ -193,9 +239,9 @@ NSString *const LL_SESSION = @"ll_session";
 - (NSMutableArray *)messagesWithModel:(LLChatBaseModel *)model {
     NSString *tableName = [self tableNameWithModel:model];
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ ORDER BY timestamp DESC LIMIT 100",tableName];
-    NSArray *msgList = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
-    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:msgList.count];
-    for (NSDictionary *dic in msgList) {
+    NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    NSMutableArray *arr = [NSMutableArray arrayWithCapacity:list.count];
+    for (NSDictionary *dic in list) {
         LLChatMessageModel *model = [LLChatMessageModel modelWithDic:dic];
         [arr insertObject:model atIndex:0];
     }
@@ -235,6 +281,5 @@ NSString *const LL_SESSION = @"ll_session";
         return [NSString stringWithFormat:@"group_%@",group.gid];
     }
 }
-
 
 @end
