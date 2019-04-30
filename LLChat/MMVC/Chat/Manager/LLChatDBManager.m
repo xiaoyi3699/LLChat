@@ -12,7 +12,7 @@
 
 NSString *const LL_USER    = @"ll_user";
 NSString *const LL_GROUP   = @"ll_group";
-NSString *const LL_SESSION = @"lll_session";
+NSString *const LL_SESSION = @"ll_session";
 
 @implementation LLChatDBManager
 
@@ -62,6 +62,8 @@ NSString *const LL_SESSION = @"lll_session";
 - (void)deleteUserModel:(NSString *)uid {
     NSString *sql = [NSString stringWithFormat:@"DELETE * FROM %@ WHERE uid = '%@'",LL_USER,uid];
     [[LLChatSqliteManager defaultManager] execute:sql];
+    //同时删除对应的会话
+    [self deleteSessionModel:uid];
 }
 
 #pragma mark - group表操纵
@@ -90,7 +92,10 @@ NSString *const LL_SESSION = @"lll_session";
 - (void)deleteGroupModel:(NSString *)gid {
     NSString *sql = [NSString stringWithFormat:@"DELETE * FROM %@ WHERE gid = '%@'",LL_GROUP,gid];
     [[LLChatSqliteManager defaultManager] execute:sql];
+    //同时删除对应的会话
+    [self deleteSessionModel:gid];
 }
+
 
 #pragma mark - session表操纵
 //添加会话
@@ -98,25 +103,60 @@ NSString *const LL_SESSION = @"lll_session";
     [[LLChatSqliteManager defaultManager] insertModel:model tableName:LL_SESSION];
 }
 
+//更新会话
 - (void)updateSessionModel:(LLChatSessionModel *)model {
     [[LLChatSqliteManager defaultManager] updateModel:model tableName:LL_SESSION primkey:@"sid"];
 }
 
-//查询会话
-- (LLChatSessionModel *)selectSessionModel:(NSString *)sid {
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,sid];
+//查询私聊会话
+- (LLChatSessionModel *)selectSessionModelWithUser:(LLChatUserModel *)userModel {
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,userModel.uid];
     NSArray *groups = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    LLChatSessionModel *model;
     if (groups.count > 0) {
-        LLChatSessionModel *model = [LLChatSessionModel modelWithDic:groups.firstObject];
-        return model;
+        model = [LLChatSessionModel modelWithDic:groups.firstObject];
     }
-    return nil;
+    else {
+        //创建会话,并插入数据库
+        model = [[LLChatSessionModel alloc] init];
+        model.sid = userModel.uid;
+        [self insertSessionModel:model];
+    }
+    return model;
+}
+
+//查询群聊会话
+- (LLChatSessionModel *)selectSessionModelWithGroup:(LLChatGroupModel *)groupModel {
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,groupModel.gid];
+    NSArray *groups = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
+    LLChatSessionModel *model;
+    if (groups.count > 0) {
+        model = [LLChatSessionModel modelWithDic:groups.firstObject];
+    }
+    else {
+        //创建会话,并插入数据库
+        model = [[LLChatSessionModel alloc] init];
+        model.sid = groupModel.gid;
+        model.isGroup = YES;
+        [self insertSessionModel:model];
+    }
+    return model;
 }
 
 //删除会话
 - (void)deleteSessionModel:(NSString *)sid {
     NSString *sql = [NSString stringWithFormat:@"DELETE * FROM %@ WHERE sid = '%@'",LL_SESSION,sid];
     [[LLChatSqliteManager defaultManager] execute:sql];
+}
+
+//查询会话对应的用户或者群聊
+- (LLChatBaseModel *)selectChatModel:(LLChatSessionModel *)model {
+    if (model.isGroup) {
+        return [self selectGroupModel:model.sid];
+    }
+    else {
+        return [self selectUserModel:model.sid];
+    }
 }
 
 @end

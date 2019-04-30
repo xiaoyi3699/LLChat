@@ -10,7 +10,7 @@
 
 @interface LLChatSessionModel : LLChatBaseModel
 
-///会话id
+///会话id<若会话为群聊,则sid为群聊gid, 若会话为私聊,则sid为对方uid>
 @property (nonatomic, strong) NSString *sid;
 ///是否是群聊
 @property (nonatomic, assign) BOOL isGroup;

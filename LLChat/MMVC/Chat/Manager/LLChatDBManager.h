@@ -10,6 +10,7 @@
 @class LLChatUserModel;
 @class LLChatGroupModel;
 @class LLChatSessionModel;
+@class LLChatBaseModel;
 
 @interface LLChatDBManager : NSObject
 
@@ -40,9 +41,13 @@
 - (void)insertSessionModel:(LLChatSessionModel *)model;
 ///更新会话
 - (void)updateSessionModel:(LLChatSessionModel *)model;
-///查询会话
-- (LLChatSessionModel *)selectSessionModel:(NSString *)sid;
+///查询私聊会话
+- (LLChatSessionModel *)selectSessionModelWithUser:(LLChatUserModel *)userModel;
+///查询群聊会话
+- (LLChatSessionModel *)selectSessionModelWithGroup:(LLChatGroupModel *)groupModel;
 ///删除会话
 - (void)deleteSessionModel:(NSString *)sid;
+///查询会话对应的用户或者群聊
+- (LLChatBaseModel *)selectChatModel:(LLChatSessionModel *)model;
 
 @end
