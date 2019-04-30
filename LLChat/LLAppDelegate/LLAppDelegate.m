@@ -39,6 +39,8 @@
     //禁止多点触控
     [[UIView appearance] setExclusiveTouch:YES];
     
+    NSLog(@"%@",NSHomeDirectory());
+    
     return YES;
 }
 

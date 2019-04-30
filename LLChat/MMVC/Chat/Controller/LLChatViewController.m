@@ -72,21 +72,26 @@
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.inputView];
+    [self loadMessage:0];
+}
+
+- (void)loadMessage:(NSInteger)page {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        self.messageModels = [[LLChatDBManager DBManager] messagesWithUser:self.userModel];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self tableViewScrollToBottom:NO];
+        });
+    });
 }
 
 #pragma mark - 发送消息
 //文本消息
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
     
-    //模拟发送与接收消息
-    //更改isSender参数值
-    static BOOL isSender = NO;
-    isSender = !isSender;
-    //end
-    
     LLChatMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
                                                                 message:message
-                                                               isSender:isSender];
+                                                               isSender:YES];
     [self sendMessageModel:model];
 }
 
@@ -289,29 +294,9 @@
     }
 }
 
-
 #pragma mark - private method
-//加入到消息缓存中
-- (void)addMessageModel:(LLChatMessageModel *)model {
-    [self.messageModels addObject:model];
-    [_tableView reloadData];
-    [self tableViewScrollToBottom];
-}
-
 //发送消息
 - (void)sendMessageModel:(LLChatMessageModel *)model {
-    
-    //添加模拟时间
-    static NSInteger i = 0;
-    if (i%3 == 0) {
-        LLChatMessageModel *sModel = [LLChatMessageManager createSystemMessage:self.userModel
-                                                                       message:@"10:55"
-                                                                      isSender:YES];
-        [self addMessageModel:sModel];
-    }
-    i ++;
-    //end
-    
     [self addMessageModel:model];
 }
 
@@ -320,40 +305,61 @@
     [self addMessageModel:model];
 }
 
-- (void)tableViewScrollToBottom {
-    if (self.isEditing) {
-        CGFloat TContentH = self.tableView.contentSize.height;
-        CGFloat tableViewH = self.tableView.bounds.size.height;
-        
-        CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
-        
-        CGFloat offsetY = 0;
-        if (TContentH < tableViewH) {
-            offsetY = TContentH+keyboardH-tableViewH;
-            if (offsetY < 0) {
-                offsetY = 0;
+//消息存储
+- (void)addMessageModel:(LLChatMessageModel *)model {
+    [self.messageModels addObject:model];
+    [_tableView reloadData];
+    [self tableViewScrollToBottom:YES];
+    
+    if (self.userModel) {
+        [[LLChatDBManager DBManager] insertMessage:model chatWithUser:self.userModel];
+    }
+    else {
+        [[LLChatDBManager DBManager] insertMessage:model chatWithGroup:self.groupModel];
+    }
+}
+
+- (void)tableViewScrollToBottom:(BOOL)animated {
+    if (animated) {
+        if (self.isEditing) {
+            CGFloat TContentH = self.tableView.contentSize.height;
+            CGFloat tableViewH = self.tableView.bounds.size.height;
+            
+            CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
+            
+            CGFloat offsetY = 0;
+            if (TContentH < tableViewH) {
+                offsetY = TContentH+keyboardH-tableViewH;
+                if (offsetY < 0) {
+                    offsetY = 0;
+                }
+            }
+            else {
+                offsetY = keyboardH;
+            }
+            
+            if (offsetY > LLCHAT_BOTTOM_H) {
+                CGRect TRect = self.tableView.frame;
+                TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.tableView.frame = TRect;
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                }];
             }
         }
         else {
-            offsetY = keyboardH;
-        }
-        
-        if (offsetY > LLCHAT_BOTTOM_H) {
-            CGRect TRect = self.tableView.frame;
-            TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
-            [UIView animateWithDuration:0.25 animations:^{
-                self.tableView.frame = TRect;
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-            }];
+            CGFloat TContentH = self.tableView.contentSize.height;
+            CGFloat tableViewH = self.tableView.bounds.size.height;
+            if (TContentH > tableViewH) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                }];
+            }
         }
     }
     else {
-        CGFloat TContentH = self.tableView.contentSize.height;
-        CGFloat tableViewH = self.tableView.bounds.size.height;
-        if (TContentH > tableViewH) {
-            [UIView animateWithDuration:0.25 animations:^{
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-            }];
+        if (self.messageModels.count) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
     }
 }

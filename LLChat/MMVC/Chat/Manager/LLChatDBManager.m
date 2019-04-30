@@ -174,17 +174,17 @@ NSString *const LL_SESSION = @"ll_session";
 
 #pragma mark - message表操纵
 //私聊消息
-- (NSArray *)messagesWithUser:(LLChatUserModel *)model {
+- (NSMutableArray *)messagesWithUser:(LLChatUserModel *)model {
     return [self messagesWithModel:model];
 }
 
 //群聊消息
-- (NSArray *)messagesWithGroup:(LLChatUserModel *)model {
+- (NSMutableArray *)messagesWithGroup:(LLChatUserModel *)model {
     return [self messagesWithModel:model];
 }
 
 //private
-- (NSArray *)messagesWithModel:(LLChatBaseModel *)model {
+- (NSMutableArray *)messagesWithModel:(LLChatBaseModel *)model {
     NSString *tableName = [self tableNameWithModel:model];
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ ORDER BY timestamp DESC LIMIT 100",tableName];
     NSArray *msgList = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
@@ -193,21 +193,21 @@ NSString *const LL_SESSION = @"ll_session";
         LLChatMessageModel *model = [LLChatMessageModel modelWithDic:dic];
         [arr insertObject:model atIndex:0];
     }
-    return [arr copy];
+    return arr;
 }
 
 //插入私聊消息
 - (void)insertMessage:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model {
-    [self chatWithModel:model message:message];
+    [self insertMessage:message chatWithModel:model];
 }
 
 //插入群聊消息
 - (void)insertMessage:(LLChatMessageModel *)message chatWithGroup:(LLChatGroupModel *)model {
-    [self chatWithModel:model message:message];
+    [self insertMessage:message chatWithModel:model];
 }
 
 //private
-- (void)chatWithModel:(LLChatBaseModel *)model message:(LLChatMessageModel *)message {
+- (void)insertMessage:(LLChatMessageModel *)message chatWithModel:(LLChatBaseModel *)model{
     LLChatSessionModel *session = [self selectSessionModel:model];
     session.lastMsg = message.message;
     session.lastTimestamp = message.timestamp;
@@ -215,7 +215,7 @@ NSString *const LL_SESSION = @"ll_session";
     
     NSString *tableName = [self tableNameWithModel:model];
     [[LLChatSqliteManager defaultManager] createTableName:tableName modelClass:[message class]];
-    [[LLChatSqliteManager defaultManager] insertModel:model tableName:tableName];
+    [[LLChatSqliteManager defaultManager] insertModel:message tableName:tableName];
 }
 
 //private

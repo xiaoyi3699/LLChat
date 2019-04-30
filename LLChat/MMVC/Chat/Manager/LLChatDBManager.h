@@ -53,9 +53,9 @@
 
 #pragma mark - message表操纵
 //私聊消息列表
-- (NSArray *)messagesWithUser:(LLChatUserModel *)model;
+- (NSMutableArray *)messagesWithUser:(LLChatUserModel *)model;
 //群聊消息列表
-- (NSArray *)messagesWithGroup:(LLChatUserModel *)model;
+- (NSMutableArray *)messagesWithGroup:(LLChatUserModel *)model;
 ///插入私聊消息
 - (void)insertMessage:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model;
 ///插入群聊消息
