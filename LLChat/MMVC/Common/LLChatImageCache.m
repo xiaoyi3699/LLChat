@@ -11,7 +11,7 @@
 #import "LLChatMacro.h"
 
 //获取沙盒Document路径
-#define APP_DocumentPath  \
+#define LL_CHAT_APP_DocumentPath  \
 [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
 @implementation LLChatImageCache{
     NSString            *_cachePath;
@@ -30,7 +30,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _cachePath = [APP_DocumentPath stringByAppendingPathComponent:@"LLChatImageCache"];
+        _cachePath = [LL_CHAT_APP_DocumentPath stringByAppendingPathComponent:@"LLChatImageCache"];
         _memoryCache = [[NSMutableDictionary alloc] initWithCapacity:0];
         [self createDirectoryAtPath:_cachePath];
     }
