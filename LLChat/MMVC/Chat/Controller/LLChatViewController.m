@@ -240,6 +240,7 @@
         _tableView.estimatedSectionFooterHeight = 0;
         _tableView.tableFooterView = [UIView new];
         _tableView.backgroundColor = [UIColor colorWithRed:240/255. green:240/255. blue:240/255. alpha:1];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
