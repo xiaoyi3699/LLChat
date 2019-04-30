@@ -70,7 +70,7 @@ NSString *const LL_SESSION = @"ll_session";
 
 //删除用户
 - (void)deleteUserModel:(NSString *)uid {
-    NSString *sql = [NSString stringWithFormat:@"DELETE * FROM %@ WHERE uid = '%@'",LL_USER,uid];
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE uid = '%@'",LL_USER,uid];
     [[LLChatSqliteManager defaultManager] execute:sql];
     //同时删除对应的会话
     [self deleteSessionModel:uid];
@@ -112,7 +112,7 @@ NSString *const LL_SESSION = @"ll_session";
 
 //删除群
 - (void)deleteGroupModel:(NSString *)gid {
-    NSString *sql = [NSString stringWithFormat:@"DELETE * FROM %@ WHERE gid = '%@'",LL_GROUP,gid];
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE gid = '%@'",LL_GROUP,gid];
     [[LLChatSqliteManager defaultManager] execute:sql];
     //同时删除对应的会话
     [self deleteSessionModel:gid];
@@ -188,7 +188,7 @@ NSString *const LL_SESSION = @"ll_session";
 
 //删除会话
 - (void)deleteSessionModel:(NSString *)sid {
-    NSString *sql = [NSString stringWithFormat:@"DELETE * FROM %@ WHERE sid = '%@'",LL_SESSION,sid];
+    NSString *sql = [NSString stringWithFormat:@"DELETE FROM %@ WHERE sid = '%@'",LL_SESSION,sid];
     [[LLChatSqliteManager defaultManager] execute:sql];
 }
 

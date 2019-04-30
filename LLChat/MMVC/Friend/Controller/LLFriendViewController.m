@@ -104,12 +104,18 @@
     return cell;
 }
 
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"删除");
-    }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    return @[deleteAction];
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < self.users.count) {
+        LLChatUserModel *model = [self.users objectAtIndex:indexPath.row];
+        UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            [[LLChatDBManager DBManager] deleteUserModel:model.uid];
+            [self.users removeObject:model];
+            [self.tableView reloadData];
+        }];
+        deleteAction.backgroundColor = [UIColor redColor];
+        return @[deleteAction];
+    }
+    return nil;
 }
 
 #pragma mark - getter
