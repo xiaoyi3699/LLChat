@@ -35,7 +35,7 @@
     [self loadSession];
     [self setRightItem];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSession) name:@"session" object:nil];
+    [LLChatNotificationManager observerSessionNotification:self sel:@selector(receiveSessionNotification)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -50,11 +50,6 @@
     [self.view addSubview:self.tableView];
 }
 
-//收到刷新session的通知
-- (void)observerSessionNotification {
-    self.isRefreshSession = YES;
-}
-
 - (void)loadSession {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         self.sessions = [[LLChatDBManager DBManager] sessions];
@@ -62,6 +57,11 @@
             [self.tableView reloadData];
         });
     });
+}
+
+//收到刷新session的通知
+- (void)receiveSessionNotification {
+    self.isRefreshSession = YES;
 }
 
 #pragma mark - 模拟消息免打扰、显示未读未读消息数等
@@ -172,7 +172,7 @@
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [LLChatNotificationManager removeObserver:self];
 }
 
 @end

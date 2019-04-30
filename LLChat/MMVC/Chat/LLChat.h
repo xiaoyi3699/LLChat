@@ -14,6 +14,9 @@
 #import "LLChatMacro.h"
 #import "LLChatDBManager.h"
 #import "LLChatMessageManager.h"
+#import "LLChatNotificationManager.h"
+
+
 #import "LLChatViewController.h"
 
 #endif /* LLChat_h */

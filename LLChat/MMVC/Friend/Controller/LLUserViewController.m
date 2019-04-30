@@ -33,11 +33,6 @@
     [self loadUser];
 }
 
-//发送刷新session的通知
-- (void)postSessionNotification {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"session" object:nil];
-}
-
 - (void)setupUI {
     [self setRightItem];
     [self.view addSubview:self.tableView];
@@ -116,7 +111,7 @@
             [self.users removeObject:model];
             [self.tableView reloadData];
             [[LLChatDBManager DBManager] deleteUserModel:model.uid];
-            [self postSessionNotification];
+            [LLChatNotificationManager postSessionNotification];
         }];
         deleteAction.backgroundColor = [UIColor redColor];
         return @[deleteAction];

@@ -71,11 +71,6 @@
     [self setRightItem];
 }
 
-//发送刷新session的通知
-- (void)postSessionNotification {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"session" object:nil];
-}
-
 #pragma mark - 模拟收到消息
 - (void)setRightItem {
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"模拟收到消息" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemClick)];
@@ -372,14 +367,14 @@
         [self.tableView reloadData];
     });
     
-    [self postSessionNotification];
+    [LLChatNotificationManager postSessionNotification];
 }
 
 //收到消息
 - (void)receiveMessageModel:(LLChatMessageModel *)model {
     [self addMessageModel:model];
     
-    [self postSessionNotification];
+    [LLChatNotificationManager postSessionNotification];
 }
 
 //消息存储
