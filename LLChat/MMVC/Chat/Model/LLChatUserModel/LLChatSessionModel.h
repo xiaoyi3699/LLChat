@@ -21,4 +21,7 @@
 ///最后一条消息时间
 @property (nonatomic, assign) NSInteger lastTimestamp;
 
+///将字典转化为model
++ (instancetype)modelWithDic:(NSDictionary *)dic;
+
 @end

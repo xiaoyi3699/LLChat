@@ -52,15 +52,6 @@
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key {}
 
 #pragma mark - <model/字典>数据转换
-///将字典转化为model
-+ (instancetype)modelWithDic:(NSDictionary *)dic {
-    LLChatBaseModel *model = [[LLChatBaseModel alloc] init];
-    for (NSString *key in dic.allKeys) {
-        [model setValue:[dic objectForKey:key] forKey:key];
-    }
-    return model;
-}
-
 ///将model转化为字典
 - (NSDictionary *)transfromDictionary {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:0];

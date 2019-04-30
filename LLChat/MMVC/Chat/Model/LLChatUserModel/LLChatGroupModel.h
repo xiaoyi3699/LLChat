@@ -19,4 +19,7 @@
 ///聊天界面是否显示用户昵称
 @property (nonatomic, assign) BOOL isShowName;
 
+///将字典转化为model
++ (instancetype)modelWithDic:(NSDictionary *)dic;
+
 @end

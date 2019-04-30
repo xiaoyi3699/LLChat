@@ -10,6 +10,7 @@
 #import "LLChatTool.h"
 #import "LLChatModel.h"
 #import "LLChatMacro.h"
+#import "LLChatDBManager.h"
 #import "LLChatMessageManager.h"
 #import "LLInputView.h"
 #import "LLChatSystemCell.h"
@@ -25,7 +26,6 @@
 @property (nonatomic, assign) BOOL isShowName;
 @property (nonatomic, strong) LLChatUserModel *userModel;
 @property (nonatomic, strong) LLChatGroupModel *groupModel;
-@property (nonatomic, strong) LLChatSessionModel *sessionModel;
 
 @end
 
@@ -50,25 +50,21 @@
 - (instancetype)initWithSession:(LLChatSessionModel *)sessionModel {
     self = [super init];
     if (self) {
-        [self setConfig:sessionModel];
+        [self setConfig:[[LLChatDBManager DBManager] selectChatModel:sessionModel]];
     }
     return self;
 }
 
 - (void)setConfig:(LLChatBaseModel *)model {
+    self.title = @"消息";
     if ([model isKindOfClass:[LLChatUserModel class]]) {
         self.userModel = (LLChatUserModel *)model;
-    }
-    else if ([model isKindOfClass:[LLChatGroupModel class]]) {
-        self.groupModel = (LLChatGroupModel *)model;
+        self.isShowName = self.userModel.isShowName;
     }
     else {
-        LLChatSessionModel *sessionModel = (LLChatSessionModel *)model;
-        //从数据库中查询该sid对应的用户或者群
-        
+        self.groupModel = (LLChatGroupModel *)model;
+        self.isShowName = self.groupModel.isShowName;
     }
-    self.title = @"消息";
-    self.isShowName = (self.userModel.isShowName || self.groupModel.isShowName);
 }
 
 - (void)viewDidLoad {
@@ -88,10 +84,9 @@
     isSender = !isSender;
     //end
     
-    LLTextMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
+    LLChatMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
                                                                 message:message
-                                                               isSender:isSender
-                                                                isGroup:NO];
+                                                               isSender:isSender];
     [self sendMessageModel:model];
 }
 
@@ -119,11 +114,10 @@
         [[LLChatImageCache imageCache] storeImage:thImage forKey:thumbnail];
         
         //创建图片model
-        LLImageMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
-                                                                    thumbnail:thumbnail
-                                                                     original:original
-                                                                     isSender:YES
-                                                                      isGroup:NO];
+        LLChatMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
+                                                                   thumbnail:thumbnail
+                                                                    original:original
+                                                                    isSender:YES];
         
         //图片尺寸 - 为了缓存图片高度, 使消息列表滑动更流畅
         model.imgW = orImage.size.width;
@@ -160,9 +154,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < self.messageModels.count) {
-        LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
+        LLChatMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         [model cacheModelSize];
-        if ([model isKindOfClass:[LLSystemMessageModel class]]) {
+        if (model.msgType == LLMessageTypeSystem) {
             return model.modelH;
         }
         if (self.isShowName) {
@@ -179,37 +173,34 @@
     if (indexPath.row < self.messageModels.count) {
         
         LLChatBaseCell *cell;
-        LLBaseMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
+        LLChatMessageModel *model = [self.messageModels objectAtIndex:indexPath.row];
         
         if (model.msgType == LLMessageTypeSystem) {
-            LLSystemMessageModel *systemModel = (LLSystemMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"systemCell"];
             if (cell == nil) {
                 cell = [[LLChatSystemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"systemCell"];
             }
-            [cell setConfig:systemModel];
+            [cell setConfig:model];
         }
         else if (model.msgType == LLMessageTypeText) {
-            LLTextMessageModel *textModel = (LLTextMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
             if (cell == nil) {
                 cell = [[LLChatTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];
             }
-            [cell setConfig:textModel isShowName:self.isShowName];
+            [cell setConfig:model isShowName:self.isShowName];
         }
         else if (model.msgType == LLMessageTypeImage) {
-            LLImageMessageModel *imageModel = (LLImageMessageModel *)model;
             cell = [tableView dequeueReusableCellWithIdentifier:@"imageCell"];
             if (cell == nil) {
                 cell = [[LLChatImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"imageCell"];
             }
-            [cell setConfig:imageModel isShowName:self.isShowName];
+            [cell setConfig:model isShowName:self.isShowName];
         }
         else if (model.msgType == LLMessageTypeVoice) {
-            LLVoiceMessageModel *voiceModel = (LLVoiceMessageModel *)model;
+            
         }
         else if (model.msgType == LLMessageTypeVideo) {
-            LLVideoMessageModel *videoModel = (LLVideoMessageModel *)model;
+            
         }
         return cell;
     }
@@ -301,20 +292,21 @@
 
 #pragma mark - private method
 //加入到消息缓存中
-- (void)addMessageModel:(LLBaseMessageModel *)model {
+- (void)addMessageModel:(LLChatMessageModel *)model {
     [self.messageModels addObject:model];
     [_tableView reloadData];
     [self tableViewScrollToBottom];
 }
 
 //发送消息
-- (void)sendMessageModel:(LLBaseMessageModel *)model {
+- (void)sendMessageModel:(LLChatMessageModel *)model {
     
     //添加模拟时间
     static NSInteger i = 0;
     if (i%3 == 0) {
-        LLSystemMessageModel *sModel = [[LLSystemMessageModel alloc] init];
-        sModel.message = @"10:55";
+        LLChatMessageModel *sModel = [LLChatMessageManager createSystemMessage:self.userModel
+                                                                       message:@"10:55"
+                                                                      isSender:YES];
         [self addMessageModel:sModel];
     }
     i ++;
@@ -324,7 +316,7 @@
 }
 
 //收到消息
-- (void)receiveMessageModel:(LLBaseMessageModel *)model {
+- (void)receiveMessageModel:(LLChatMessageModel *)model {
     [self addMessageModel:model];
 }
 

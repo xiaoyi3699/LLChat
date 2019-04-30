@@ -12,37 +12,50 @@
 @implementation LLChatMessageManager
 
 #pragma mark - 创建消息模型
-//创建文本消息
-+ (LLTextMessageModel *)createTextMessage:(LLChatUserModel *)userModel
-                                  message:(NSString *)message
-                                 isSender:(BOOL)isSender
-                                  isGroup:(BOOL)isGroup {
+//创建系统消息
++ (LLChatMessageModel *)createSystemMessage:(LLChatUserModel *)userModel
+                                    message:(NSString *)message
+                                   isSender:(BOOL)isSender {
     
-    LLTextMessageModel *msgModel = [[LLTextMessageModel alloc] init];
+    LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
+    msgModel.msgType = LLMessageTypeSystem;
     msgModel.message = message;
-    [self setConfig:msgModel userModel:userModel isSender:isSender isGroup:isGroup];
+    [self setConfig:msgModel userModel:userModel isSender:isSender];
+    
+    return msgModel;
+}
+
+//创建文本消息
++ (LLChatMessageModel *)createTextMessage:(LLChatUserModel *)userModel
+                                  message:(NSString *)message
+                                 isSender:(BOOL)isSender {
+    
+    LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
+    msgModel.msgType = LLMessageTypeText;
+    msgModel.message = message;
+    [self setConfig:msgModel userModel:userModel isSender:isSender];
     
     return msgModel;
 }
 
 //创建图片消息
-+ (LLImageMessageModel *)createImageMessage:(LLChatUserModel *)userModel
-                                  thumbnail:(NSString *)thumbnail
-                                   original:(NSString *)original
-                                   isSender:(BOOL)isSender
-                                    isGroup:(BOOL)isGroup {
++ (LLChatMessageModel *)createImageMessage:(LLChatUserModel *)userModel
+                                 thumbnail:(NSString *)thumbnail
+                                  original:(NSString *)original
+                                  isSender:(BOOL)isSender {
     
-    LLImageMessageModel *msgModel = [[LLImageMessageModel alloc] init];
+    LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
+    msgModel.msgType = LLMessageTypeImage;
     msgModel.message   = @"[图片]";
     msgModel.thumbnail = thumbnail;
     msgModel.original  = original;
-    [self setConfig:msgModel userModel:userModel isSender:isSender isGroup:isGroup];
+    [self setConfig:msgModel userModel:userModel isSender:isSender];
     
     return msgModel;
 }
 
 #pragma mark - pravite
-+ (void)setConfig:(LLBaseMessageModel *)msgModel userModel:(LLChatUserModel *)userModel isSender:(BOOL)isSender isGroup:(BOOL)isGroup {
++ (void)setConfig:(LLChatMessageModel *)msgModel userModel:(LLChatUserModel *)userModel isSender:(BOOL)isSender {
     if (isSender) {
         msgModel.uid    = [LLChatUserModel shareInfo].uid;
         msgModel.name   = [LLChatUserModel shareInfo].name;
@@ -53,7 +66,6 @@
         msgModel.name   = userModel.name;
         msgModel.avatar = userModel.avatar;
     }
-    msgModel.isGroup   = isGroup;
     msgModel.isSender  = isSender;
     msgModel.sendType  = LLMessageSendTypeWaiting;
     msgModel.timestamp = [LLChatHelper nowTimestamp];

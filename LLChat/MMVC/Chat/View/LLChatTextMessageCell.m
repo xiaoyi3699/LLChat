@@ -24,7 +24,7 @@
     return self;
 }
 
-- (void)setConfig:(LLTextMessageModel *)model isShowName:(BOOL)isShowName {
+- (void)setConfig:(LLChatMessageModel *)model isShowName:(BOOL)isShowName {
     [super setConfig:model isShowName:isShowName];
     
     NSAttributedString *str = [[NSAttributedString alloc] initWithString:model.message attributes:[model contentAttributes]];

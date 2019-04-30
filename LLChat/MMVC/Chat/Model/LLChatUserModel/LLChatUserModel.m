@@ -23,4 +23,13 @@
     return userInfo;
 }
 
+///将字典转化为model
++ (instancetype)modelWithDic:(NSDictionary *)dic {
+    LLChatUserModel *model = [[LLChatUserModel alloc] init];
+    for (NSString *key in dic.allKeys) {
+        [model setValue:[dic objectForKey:key] forKey:key];
+    }
+    return model;
+}
+
 @end

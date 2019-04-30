@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)setConfig:(LLBaseMessageModel *)model {}
-- (void)setConfig:(LLBaseMessageModel *)model isShowName:(BOOL)isShowName {}
+- (void)setConfig:(LLChatMessageModel *)model {}
+- (void)setConfig:(LLChatMessageModel *)model isShowName:(BOOL)isShowName {}
 
 @end

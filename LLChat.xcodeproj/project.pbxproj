@@ -44,7 +44,6 @@
 		7510EAA12276AAFD000B58D9 /* LLChatGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EAA02276AAFD000B58D9 /* LLChatGroupModel.m */; };
 		75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */; };
 		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
-		75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */; };
 		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
 		75614246213F6F7B004CC91B /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* EmojisList.plist */; };
 		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
@@ -57,11 +56,7 @@
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
 		75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */; };
 		75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7B121391E9300492ED8 /* LLMessageViewController.m */; };
-		75F9E7BB213D229D00492ED8 /* LLBaseMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7BA213D229D00492ED8 /* LLBaseMessageModel.m */; };
-		75F9E7BE213D24CE00492ED8 /* LLTextMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7BD213D24CE00492ED8 /* LLTextMessageModel.m */; };
-		75F9E7C1213D24E800492ED8 /* LLImageMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7C0213D24E800492ED8 /* LLImageMessageModel.m */; };
-		75F9E7C4213D24F500492ED8 /* LLVoiceMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */; };
-		75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */; };
+		75F9E7BB213D229D00492ED8 /* LLChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7BA213D229D00492ED8 /* LLChatMessageModel.m */; };
 		75F9E7CC213E18DF00492ED8 /* LLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CB213E18DF00492ED8 /* LLChatViewController.m */; };
 		75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CF213E19E400492ED8 /* LLChatMessageCell.m */; };
 		75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7D2213E1A0200492ED8 /* LLChatTextMessageCell.m */; };
@@ -126,8 +121,6 @@
 		75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSystemCell.m; sourceTree = "<group>"; };
 		75279F8B21ED7D3000DAE00B /* LLChatBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatBaseCell.h; sourceTree = "<group>"; };
 		75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatBaseCell.m; sourceTree = "<group>"; };
-		75279F8E21ED803B00DAE00B /* LLSystemMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLSystemMessageModel.h; sourceTree = "<group>"; };
-		75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLSystemMessageModel.m; sourceTree = "<group>"; };
 		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
 		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
 		75614245213F6F7B004CC91B /* EmojisList.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = EmojisList.plist; sourceTree = "<group>"; };
@@ -152,16 +145,8 @@
 		75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLFriendViewController.m; sourceTree = "<group>"; };
 		75F9E7B021391E9300492ED8 /* LLMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMessageViewController.h; sourceTree = "<group>"; };
 		75F9E7B121391E9300492ED8 /* LLMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMessageViewController.m; sourceTree = "<group>"; };
-		75F9E7B9213D229D00492ED8 /* LLBaseMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLBaseMessageModel.h; sourceTree = "<group>"; };
-		75F9E7BA213D229D00492ED8 /* LLBaseMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLBaseMessageModel.m; sourceTree = "<group>"; };
-		75F9E7BC213D24CE00492ED8 /* LLTextMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLTextMessageModel.h; sourceTree = "<group>"; };
-		75F9E7BD213D24CE00492ED8 /* LLTextMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLTextMessageModel.m; sourceTree = "<group>"; };
-		75F9E7BF213D24E800492ED8 /* LLImageMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLImageMessageModel.h; sourceTree = "<group>"; };
-		75F9E7C0213D24E800492ED8 /* LLImageMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLImageMessageModel.m; sourceTree = "<group>"; };
-		75F9E7C2213D24F500492ED8 /* LLVoiceMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLVoiceMessageModel.h; sourceTree = "<group>"; };
-		75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLVoiceMessageModel.m; sourceTree = "<group>"; };
-		75F9E7C5213D250200492ED8 /* LLVideoMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLVideoMessageModel.h; sourceTree = "<group>"; };
-		75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLVideoMessageModel.m; sourceTree = "<group>"; };
+		75F9E7B9213D229D00492ED8 /* LLChatMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMessageModel.h; sourceTree = "<group>"; };
+		75F9E7BA213D229D00492ED8 /* LLChatMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatMessageModel.m; sourceTree = "<group>"; };
 		75F9E7CA213E18DF00492ED8 /* LLChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatViewController.h; sourceTree = "<group>"; };
 		75F9E7CB213E18DF00492ED8 /* LLChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatViewController.m; sourceTree = "<group>"; };
 		75F9E7CE213E19E400492ED8 /* LLChatMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMessageCell.h; sourceTree = "<group>"; };
@@ -263,18 +248,8 @@
 		7510EA902272E279000B58D9 /* LLChatMessageModel */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7B9213D229D00492ED8 /* LLBaseMessageModel.h */,
-				75F9E7BA213D229D00492ED8 /* LLBaseMessageModel.m */,
-				75F9E7BC213D24CE00492ED8 /* LLTextMessageModel.h */,
-				75F9E7BD213D24CE00492ED8 /* LLTextMessageModel.m */,
-				75F9E7BF213D24E800492ED8 /* LLImageMessageModel.h */,
-				75F9E7C0213D24E800492ED8 /* LLImageMessageModel.m */,
-				75F9E7C2213D24F500492ED8 /* LLVoiceMessageModel.h */,
-				75F9E7C3213D24F500492ED8 /* LLVoiceMessageModel.m */,
-				75F9E7C5213D250200492ED8 /* LLVideoMessageModel.h */,
-				75F9E7C6213D250200492ED8 /* LLVideoMessageModel.m */,
-				75279F8E21ED803B00DAE00B /* LLSystemMessageModel.h */,
-				75279F8F21ED803B00DAE00B /* LLSystemMessageModel.m */,
+				75F9E7B9213D229D00492ED8 /* LLChatMessageModel.h */,
+				75F9E7BA213D229D00492ED8 /* LLChatMessageModel.m */,
 			);
 			path = LLChatMessageModel;
 			sourceTree = "<group>";
@@ -608,7 +583,6 @@
 				7561424C213F79A3004CC91B /* LLEmojisCell.m in Sources */,
 				75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */,
 				75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */,
-				75279F9021ED803B00DAE00B /* LLSystemMessageModel.m in Sources */,
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
 				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
@@ -624,20 +598,16 @@
 				7510EA43226FFEBB000B58D9 /* LLChatBase64.m in Sources */,
 				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
 				7510EA3C226FFD5B000B58D9 /* LLChatImageCache.m in Sources */,
-				75F9E7C7213D250200492ED8 /* LLVideoMessageModel.m in Sources */,
 				75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */,
 				7510EA39226FFD50000B58D9 /* LLChatSqliteManager.m in Sources */,
 				7510EA4B22704068000B58D9 /* LLChatUserModel.m in Sources */,
 				75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */,
-				75F9E7C1213D24E800492ED8 /* LLImageMessageModel.m in Sources */,
 				75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */,
 				7510EA4722703F4F000B58D9 /* LLChatMessageManager.m in Sources */,
-				75F9E7C4213D24F500492ED8 /* LLVoiceMessageModel.m in Sources */,
 				75F9E7CC213E18DF00492ED8 /* LLChatViewController.m in Sources */,
 				75614252213F7E79004CC91B /* LLInputView.m in Sources */,
-				75F9E7BE213D24CE00492ED8 /* LLTextMessageModel.m in Sources */,
 				75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */,
-				75F9E7BB213D229D00492ED8 /* LLBaseMessageModel.m in Sources */,
+				75F9E7BB213D229D00492ED8 /* LLChatMessageModel.m in Sources */,
 				75F9E7DA213E4C5500492ED8 /* LLChatHelper.m in Sources */,
 				7510EAA12276AAFD000B58D9 /* LLChatGroupModel.m in Sources */,
 			);

@@ -10,9 +10,6 @@
 
 @interface LLChatBaseModel : NSObject<NSCoding>
 
-///将字典转化为model
-+ (instancetype)modelWithDic:(NSDictionary *)dic;
-
 ///将model转化为字典
 - (NSDictionary *)transfromDictionary;
 

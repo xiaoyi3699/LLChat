@@ -25,7 +25,7 @@
     return self;
 }
 
-- (void)setConfig:(LLBaseMessageModel *)model {
+- (void)setConfig:(LLChatMessageModel *)model {
     _messageLabel.text = model.message;
 }
 

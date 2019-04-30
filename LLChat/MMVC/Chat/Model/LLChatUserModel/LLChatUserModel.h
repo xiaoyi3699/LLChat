@@ -22,4 +22,7 @@
 ///默认登录用户
 + (instancetype)shareInfo;
 
+///将字典转化为model
++ (instancetype)modelWithDic:(NSDictionary *)dic;
+
 @end

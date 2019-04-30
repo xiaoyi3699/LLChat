@@ -13,11 +13,6 @@
 #import "LLChatGroupModel.h"
 #import "LLChatSessionModel.h"
 
-#import "LLChatGroupModel.h"
-#import "LLTextMessageModel.h"
-#import "LLImageMessageModel.h"
-#import "LLVoiceMessageModel.h"
-#import "LLVideoMessageModel.h"
-#import "LLSystemMessageModel.h"
+#import "LLChatMessageModel.h"
 
 #endif /* LLChatModel_h */

@@ -13,13 +13,13 @@
 
 @interface LLChatViewController : UIViewController
 
-///选择用户  -进入-  聊天
+///选择用户进入聊天
 - (instancetype)initWithUser:(LLChatUserModel *)userModel;
 
-///选择群   -进入-  聊天
+///选择群进入聊天
 - (instancetype)initWithGroup:(LLChatGroupModel *)groupModel;
 
-///选择会话 -进入-  聊天
+///选择会话进入聊天
 - (instancetype)initWithSession:(LLChatSessionModel *)sessionModel;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  LLBaseMessageModel.h
+//  LLChatMessageModel.h
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/9/3.
@@ -22,7 +22,7 @@ typedef enum : NSInteger {
     LLMessageSendTypeFailed,     //发送失败
 }LLMessageSendType;
 
-@interface LLBaseMessageModel : LLChatBaseModel
+@interface LLChatMessageModel : LLChatBaseModel
 
 #pragma mark - 消息基本信息
 ///发送人id
@@ -35,10 +35,6 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) NSString *message;
 ///消息唯一识别标识
 @property (nonatomic, strong) NSString *messageId;
-///消息组id
-@property (nonatomic, strong) NSString *gid;
-///是否是群聊
-@property (nonatomic, assign) BOOL isGroup;
 ///是否是自己发送
 @property (nonatomic, assign) BOOL isSender;
 ///消息发送时间戳
@@ -72,8 +68,18 @@ typedef enum : NSInteger {
 //视频封面地址
 @property (nonatomic, strong) NSString *coverUrl;
 
-#pragma mark -
-///缓存model的高度
+///将字典转化为model
++ (instancetype)modelWithDic:(NSDictionary *)dic;
+
+///缓存model尺寸
 - (void)cacheModelSize;
+
+#pragma mark - 文本消息
+//文本样式
+- (NSDictionary<NSAttributedStringKey,id> *)contentAttributes;
+
+#pragma mark - 图片消息
+//缓存图片尺寸
+- (void)handleImageSize;
 
 @end

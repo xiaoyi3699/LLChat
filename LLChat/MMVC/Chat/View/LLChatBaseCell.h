@@ -12,9 +12,9 @@
 @interface LLChatBaseCell : UITableViewCell
 
 ///系统消息 - 比如：时间消息等
-- (void)setConfig:(LLBaseMessageModel *)model;
+- (void)setConfig:(LLChatMessageModel *)model;
 
 ///其他消息 - 比如：文本、图片消息等
-- (void)setConfig:(LLBaseMessageModel *)model isShowName:(BOOL)isShowName;
+- (void)setConfig:(LLChatMessageModel *)model isShowName:(BOOL)isShowName;
 
 @end

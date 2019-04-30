@@ -7,10 +7,7 @@
 //  数据库操纵
 
 #import <Foundation/Foundation.h>
-@class LLChatUserModel;
-@class LLChatGroupModel;
-@class LLChatSessionModel;
-@class LLChatBaseModel;
+#import "LLChatModel.h"
 
 @interface LLChatDBManager : NSObject
 
@@ -49,5 +46,19 @@
 - (void)deleteSessionModel:(NSString *)sid;
 ///查询会话对应的用户或者群聊
 - (LLChatBaseModel *)selectChatModel:(LLChatSessionModel *)model;
+///查询会话对应的用户
+- (LLChatUserModel *)selectChatUserModel:(LLChatSessionModel *)model;
+///查询会话对应的群聊
+- (LLChatGroupModel *)selectChatGroupModel:(LLChatSessionModel *)model;
+
+#pragma mark - message表操纵
+//私聊消息列表
+- (NSArray *)messagesWithUser:(LLChatUserModel *)model;
+//群聊消息列表
+- (NSArray *)messagesWithGroup:(LLChatUserModel *)model;
+///插入私聊消息
+- (void)insertMessage:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model;
+///插入群聊消息
+- (void)insertMessage:(LLChatMessageModel *)message chatWithGroup:(LLChatGroupModel *)model;
 
 @end

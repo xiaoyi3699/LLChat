@@ -44,7 +44,7 @@
     return self;
 }
 
-- (void)setConfig:(LLBaseMessageModel *)model isShowName:(BOOL)isShowName {
+- (void)setConfig:(LLChatMessageModel *)model isShowName:(BOOL)isShowName {
     [super setConfig:model isShowName:isShowName];
     
     if (model.isSender) {
@@ -74,7 +74,7 @@
         
         //消息内容
         CGRect rect = _bubbleImageView.frame;
-        if ([model isKindOfClass:[LLTextMessageModel class]]) {
+        if (model.msgType == LLMessageTypeText) {
             rect.origin.x += 5;
             rect.size.width -= 17;
         }
@@ -129,7 +129,7 @@
         _bubbleImageView.image = [[LLChatHelper shareInstance] receiverBubbleImage];
         
         CGRect rect = _bubbleImageView.frame;
-        if ([model isKindOfClass:[LLTextMessageModel class]]) {
+        if (model.msgType == LLMessageTypeText) {
             rect.origin.x += 12;
             rect.size.width -= 17;
         }
