@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSString *name;
 ///头像
 @property (nonatomic, strong) NSString *avatar;
+///未读消息数
+@property (nonatomic, strong) NSString *unreadNum;
 ///是否是群聊
 @property (nonatomic, assign) BOOL isGroup;
 ///是否开启消息免打扰

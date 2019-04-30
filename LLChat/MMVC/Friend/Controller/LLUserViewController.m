@@ -1,22 +1,22 @@
 //
-//  LLFriendViewController.m
+//  LLUserViewController.m
 //  LLChat
 //
 //  Created by WangZhaomeng on 2018/8/31.
 //  Copyright © 2018年 WangZhaomeng. All rights reserved.
 //
 
-#import "LLFriendViewController.h"
-#import "LLChatUserTableViewCell.h"
+#import "LLUserViewController.h"
+#import "LLUserTableViewCell.h"
 
-@interface LLFriendViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface LLUserViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *users;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation LLFriendViewController
+@implementation LLUserViewController
 
 - (instancetype)init {
     self = [super init];
@@ -93,9 +93,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LLChatUserTableViewCell *cell = (LLChatUserTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    LLUserTableViewCell *cell = (LLUserTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[LLChatUserTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+        cell = [[LLUserTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
     }
     if (indexPath.row < self.users.count) {
         LLChatUserModel *model = [self.users objectAtIndex:indexPath.row];
@@ -108,9 +108,9 @@
     if (indexPath.row < self.users.count) {
         LLChatUserModel *model = [self.users objectAtIndex:indexPath.row];
         UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-            [[LLChatDBManager DBManager] deleteUserModel:model.uid];
             [self.users removeObject:model];
             [self.tableView reloadData];
+            [[LLChatDBManager DBManager] deleteUserModel:model.uid];
         }];
         deleteAction.backgroundColor = [UIColor redColor];
         return @[deleteAction];

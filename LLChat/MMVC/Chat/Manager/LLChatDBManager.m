@@ -153,22 +153,22 @@ NSString *const LL_SESSION = @"ll_session";
 
 //private
 - (LLChatSessionModel *)selectSessionModel:(LLChatBaseModel *)model {
-    NSString *gid, *name, *avatar; BOOL isGroup;
+    NSString *sid, *name, *avatar; BOOL isGroup;
     if ([model isKindOfClass:[LLChatUserModel class]]) {
         LLChatUserModel *user = (LLChatUserModel *)model;
-        gid = user.uid;
+        sid = user.uid;
         name = user.name;
         avatar = user.avatar;
         isGroup = NO;
     }
     else {
         LLChatGroupModel *group = (LLChatGroupModel *)model;
-        gid = group.gid;
+        sid = group.gid;
         name = group.name;
         avatar = group.avatar;
         isGroup = YES;
     }
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,gid];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,sid];
     NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
     LLChatSessionModel *session;
     if (list.count > 0) {
@@ -177,7 +177,7 @@ NSString *const LL_SESSION = @"ll_session";
     else {
         //创建会话,并插入数据库
         session = [[LLChatSessionModel alloc] init];
-        session.sid = gid;
+        session.sid = sid;
         session.name = name;
         session.avatar = avatar;
         session.isGroup = isGroup;

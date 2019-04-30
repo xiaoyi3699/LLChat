@@ -7,9 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-@class LLChatUserModel;
-@class LLChatGroupModel;
-@class LLChatSessionModel;
 
 @interface LLChatViewController : UIViewController
 

@@ -1,14 +1,14 @@
 //
-//  LLChatUserTableViewCell.m
+//  LLUserTableViewCell.m
 //  LLChat
 //
 //  Created by WangZhaomeng on 2019/4/30.
 //  Copyright © 2019 WangZhaomeng. All rights reserved.
 //
 
-#import "LLChatUserTableViewCell.h"
+#import "LLUserTableViewCell.h"
 
-@implementation LLChatUserTableViewCell {
+@implementation LLUserTableViewCell {
     UIImageView *_avatarImageView;
     UILabel *_nameLabel;
 }

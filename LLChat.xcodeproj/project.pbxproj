@@ -51,12 +51,13 @@
 		7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7561424E213F79BF004CC91B /* LLDeleteCell.m */; };
 		75614252213F7E79004CC91B /* LLInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614251213F7E79004CC91B /* LLInputView.m */; };
 		75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614256213FA2C9004CC91B /* LLChatMoreKeyboard.m */; };
-		75A6568C22782C15001138E2 /* LLChatUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A6568B22782C15001138E2 /* LLChatUserTableViewCell.m */; };
+		75A6568C22782C15001138E2 /* LLUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A6568B22782C15001138E2 /* LLUserTableViewCell.m */; };
+		75A6569022783682001138E2 /* LLSessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A6568F22783682001138E2 /* LLSessionTableViewCell.m */; };
 		75F9E6F721391B4D00492ED8 /* LLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */; };
 		75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F9E6F821391B4E00492ED8 /* Assets.xcassets */; };
 		75F9E6FF21391B4F00492ED8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E6FE21391B4F00492ED8 /* main.m */; };
-		75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */; };
-		75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7B121391E9300492ED8 /* LLMessageViewController.m */; };
+		75F9E7AF21391E2800492ED8 /* LLUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7AE21391E2800492ED8 /* LLUserViewController.m */; };
+		75F9E7B221391E9300492ED8 /* LLSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7B121391E9300492ED8 /* LLSessionViewController.m */; };
 		75F9E7BB213D229D00492ED8 /* LLChatMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7BA213D229D00492ED8 /* LLChatMessageModel.m */; };
 		75F9E7CC213E18DF00492ED8 /* LLChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CB213E18DF00492ED8 /* LLChatViewController.m */; };
 		75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7CF213E19E400492ED8 /* LLChatMessageCell.m */; };
@@ -135,8 +136,10 @@
 		75614251213F7E79004CC91B /* LLInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLInputView.m; sourceTree = "<group>"; };
 		75614255213FA2C9004CC91B /* LLChatMoreKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMoreKeyboard.h; sourceTree = "<group>"; };
 		75614256213FA2C9004CC91B /* LLChatMoreKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatMoreKeyboard.m; sourceTree = "<group>"; };
-		75A6568A22782C15001138E2 /* LLChatUserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatUserTableViewCell.h; sourceTree = "<group>"; };
-		75A6568B22782C15001138E2 /* LLChatUserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatUserTableViewCell.m; sourceTree = "<group>"; };
+		75A6568A22782C15001138E2 /* LLUserTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLUserTableViewCell.h; sourceTree = "<group>"; };
+		75A6568B22782C15001138E2 /* LLUserTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLUserTableViewCell.m; sourceTree = "<group>"; };
+		75A6568E22783682001138E2 /* LLSessionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLSessionTableViewCell.h; sourceTree = "<group>"; };
+		75A6568F22783682001138E2 /* LLSessionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLSessionTableViewCell.m; sourceTree = "<group>"; };
 		75F9E6F221391B4D00492ED8 /* LLChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F9E6F521391B4D00492ED8 /* LLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLAppDelegate.h; sourceTree = "<group>"; };
 		75F9E6F621391B4D00492ED8 /* LLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLAppDelegate.m; sourceTree = "<group>"; };
@@ -144,10 +147,10 @@
 		75F9E6FD21391B4E00492ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75F9E6FE21391B4F00492ED8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		75F9E70D21391BFC00492ED8 /* LLPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLPrefixHeader.pch; sourceTree = "<group>"; };
-		75F9E7AD21391E2800492ED8 /* LLFriendViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLFriendViewController.h; sourceTree = "<group>"; };
-		75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLFriendViewController.m; sourceTree = "<group>"; };
-		75F9E7B021391E9300492ED8 /* LLMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLMessageViewController.h; sourceTree = "<group>"; };
-		75F9E7B121391E9300492ED8 /* LLMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLMessageViewController.m; sourceTree = "<group>"; };
+		75F9E7AD21391E2800492ED8 /* LLUserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLUserViewController.h; sourceTree = "<group>"; };
+		75F9E7AE21391E2800492ED8 /* LLUserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLUserViewController.m; sourceTree = "<group>"; };
+		75F9E7B021391E9300492ED8 /* LLSessionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLSessionViewController.h; sourceTree = "<group>"; };
+		75F9E7B121391E9300492ED8 /* LLSessionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLSessionViewController.m; sourceTree = "<group>"; };
 		75F9E7B9213D229D00492ED8 /* LLChatMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMessageModel.h; sourceTree = "<group>"; };
 		75F9E7BA213D229D00492ED8 /* LLChatMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatMessageModel.m; sourceTree = "<group>"; };
 		75F9E7CA213E18DF00492ED8 /* LLChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatViewController.h; sourceTree = "<group>"; };
@@ -319,8 +322,10 @@
 		75A6568D22782C1A001138E2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				75A6568A22782C15001138E2 /* LLChatUserTableViewCell.h */,
-				75A6568B22782C15001138E2 /* LLChatUserTableViewCell.m */,
+				75A6568A22782C15001138E2 /* LLUserTableViewCell.h */,
+				75A6568B22782C15001138E2 /* LLUserTableViewCell.m */,
+				75A6568E22783682001138E2 /* LLSessionTableViewCell.h */,
+				75A6568F22783682001138E2 /* LLSessionTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -367,7 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				75F9E7A921391DD300492ED8 /* Friend */,
-				75F9E7AA21391DE500492ED8 /* Message */,
+				75F9E7AA21391DE500492ED8 /* Session */,
 				75F9E7B7213D226B00492ED8 /* Chat */,
 				75F9E7D7213E3E1300492ED8 /* Common */,
 			);
@@ -384,20 +389,19 @@
 			path = Friend;
 			sourceTree = "<group>";
 		};
-		75F9E7AA21391DE500492ED8 /* Message */ = {
+		75F9E7AA21391DE500492ED8 /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7C8213E153500492ED8 /* View */,
 				75F9E7AC21391E0100492ED8 /* Controller */,
 			);
-			path = Message;
+			path = Session;
 			sourceTree = "<group>";
 		};
 		75F9E7AB21391DF800492ED8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7AD21391E2800492ED8 /* LLFriendViewController.h */,
-				75F9E7AE21391E2800492ED8 /* LLFriendViewController.m */,
+				75F9E7AD21391E2800492ED8 /* LLUserViewController.h */,
+				75F9E7AE21391E2800492ED8 /* LLUserViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -405,8 +409,8 @@
 		75F9E7AC21391E0100492ED8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				75F9E7B021391E9300492ED8 /* LLMessageViewController.h */,
-				75F9E7B121391E9300492ED8 /* LLMessageViewController.m */,
+				75F9E7B021391E9300492ED8 /* LLSessionViewController.h */,
+				75F9E7B121391E9300492ED8 /* LLSessionViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -433,13 +437,6 @@
 				7510EA902272E279000B58D9 /* LLChatMessageModel */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		75F9E7C8213E153500492ED8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		75F9E7C9213E18CC00492ED8 /* Controller */ = {
@@ -597,16 +594,17 @@
 				75F9E7D0213E19E400492ED8 /* LLChatMessageCell.m in Sources */,
 				75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */,
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
-				75F9E7B221391E9300492ED8 /* LLMessageViewController.m in Sources */,
+				75F9E7B221391E9300492ED8 /* LLSessionViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
 				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
 				7510EA9B2276A5C6000B58D9 /* LLChatDBManager.m in Sources */,
+				75A6569022783682001138E2 /* LLSessionTableViewCell.m in Sources */,
 				7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */,
 				7510EA2C226FF499000B58D9 /* NSDateFormatter+LLChat.m in Sources */,
 				7510EA9E2276A704000B58D9 /* LLChatSessionModel.m in Sources */,
 				75614257213FA2C9004CC91B /* LLChatMoreKeyboard.m in Sources */,
 				7561424F213F79BF004CC91B /* LLDeleteCell.m in Sources */,
-				75A6568C22782C15001138E2 /* LLChatUserTableViewCell.m in Sources */,
+				75A6568C22782C15001138E2 /* LLUserTableViewCell.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
 				75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */,
 				7510EA43226FFEBB000B58D9 /* LLChatBase64.m in Sources */,
@@ -620,7 +618,7 @@
 				7510EA4722703F4F000B58D9 /* LLChatMessageManager.m in Sources */,
 				75F9E7CC213E18DF00492ED8 /* LLChatViewController.m in Sources */,
 				75614252213F7E79004CC91B /* LLInputView.m in Sources */,
-				75F9E7AF21391E2800492ED8 /* LLFriendViewController.m in Sources */,
+				75F9E7AF21391E2800492ED8 /* LLUserViewController.m in Sources */,
 				75F9E7BB213D229D00492ED8 /* LLChatMessageModel.m in Sources */,
 				75F9E7DA213E4C5500492ED8 /* LLChatHelper.m in Sources */,
 				7510EAA12276AAFD000B58D9 /* LLChatGroupModel.m in Sources */,

@@ -7,8 +7,8 @@
 //
 
 #import "LLAppDelegate.h"
-#import "LLFriendViewController.h"
-#import "LLMessageViewController.h"
+#import "LLUserViewController.h"
+#import "LLSessionViewController.h"
 
 @interface LLAppDelegate ()
 
@@ -25,10 +25,10 @@
     UITabBarController *rootVC = [[UITabBarController alloc] init];
     rootVC.tabBar.translucent = NO;
     
-    LLFriendViewController *firstViewController = [[LLFriendViewController alloc] init];
+    LLSessionViewController *firstViewController = [[LLSessionViewController alloc] init];
     UINavigationController *firstNav = [[UINavigationController alloc] initWithRootViewController:firstViewController];
     
-    LLMessageViewController *secondViewController = [[LLMessageViewController alloc] init];
+    LLUserViewController *secondViewController = [[LLUserViewController alloc] init];
     UINavigationController *secondNav = [[UINavigationController alloc] initWithRootViewController:secondViewController];
     
     [rootVC setViewControllers:@[firstNav,secondNav]];
@@ -45,9 +45,9 @@
 }
 
 - (void)setConfig:(UITabBarController *)tabBarController {
-    NSArray *titles = @[@"好友",@"消息"];
-    NSArray *normalImages = @[@"chat_tabbar_friend_normal",@"chat_tabbar_msg_normal"];
-    NSArray *selectImages = @[@"chat_tabbar_friend_selected",@"chat_tabbar_msg_selected"];
+    NSArray *titles = @[@"消息",@"好友"];
+    NSArray *normalImages = @[@"chat_tabbar_msg_normal",@"chat_tabbar_friend_normal"];
+    NSArray *selectImages = @[@"chat_tabbar_msg_selected",@"chat_tabbar_friend_selected"];
     
     for (NSInteger i = 0; i < tabBarController.viewControllers.count; i ++) {
         

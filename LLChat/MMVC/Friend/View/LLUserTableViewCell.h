@@ -1,5 +1,5 @@
 //
-//  LLChatUserTableViewCell.h
+//  LLUserTableViewCell.h
 //  LLChat
 //
 //  Created by WangZhaomeng on 2019/4/30.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class LLChatUserModel;
 
-@interface LLChatUserTableViewCell : UITableViewCell
+@interface LLUserTableViewCell : UITableViewCell
 
 - (void)setConfig:(LLChatUserModel *)model;
 
