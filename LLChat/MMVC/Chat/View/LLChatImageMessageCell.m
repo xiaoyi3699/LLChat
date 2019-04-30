@@ -7,7 +7,6 @@
 //
 
 #import "LLChatImageMessageCell.h"
-#import "LLChatImageCache.h"
 
 @implementation LLChatImageMessageCell {
     UIImageView *_contentImageView;

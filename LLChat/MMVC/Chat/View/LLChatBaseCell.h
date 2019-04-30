@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LLChatModel.h"
 
 @interface LLChatBaseCell : UITableViewCell
 

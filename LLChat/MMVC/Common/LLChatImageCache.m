@@ -7,8 +7,6 @@
 //
 
 #import "LLChatImageCache.h"
-#import "LLChatBase64.h"
-#import "LLChatMacro.h"
 
 //获取沙盒Document路径
 #define LL_CHAT_APP_DocumentPath  \

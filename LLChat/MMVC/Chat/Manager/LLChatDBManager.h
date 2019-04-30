@@ -7,7 +7,6 @@
 //  数据库操纵
 
 #import <Foundation/Foundation.h>
-#import "LLChatModel.h"
 
 @interface LLChatDBManager : NSObject
 

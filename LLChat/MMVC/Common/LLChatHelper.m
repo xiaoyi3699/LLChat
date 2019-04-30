@@ -7,7 +7,6 @@
 //
 
 #import "LLChatHelper.h"
-#import "NSDateFormatter+LLChat.h"
 
 @implementation LLChatHelper {
     

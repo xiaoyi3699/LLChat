@@ -7,7 +7,6 @@
 //  消息管理
 
 #import <Foundation/Foundation.h>
-#import "LLChatModel.h"
 
 @interface LLChatMessageManager : NSObject
 

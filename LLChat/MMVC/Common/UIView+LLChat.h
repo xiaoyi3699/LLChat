@@ -51,4 +51,7 @@
 - (CGSize)LLSize;
 - (void)setLLSize:(CGSize)LLSize;
 
+///设置圆角
+- (void)setLLCornerRadius:(CGFloat)LLCornerRadius;
+
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "LLChatSystemCell.h"
-#import "LLChatMacro.h"
 
 @implementation LLChatSystemCell {
     UILabel *_messageLabel;

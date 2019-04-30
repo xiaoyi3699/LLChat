@@ -10,8 +10,6 @@
 #import "LLEmojisCell.h"
 #import "LLDeleteCell.h"
 #import "LLHorizontalLayout.h"
-#import "LLChatMacro.h"
-#import "UIView+LLChat.h"
 
 #define key_rows  3
 #define key_nums  7

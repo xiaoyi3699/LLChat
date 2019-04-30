@@ -124,4 +124,9 @@
     self.frame = rect;
 }
 
+- (void)setLLCornerRadius:(CGFloat)LLCornerRadius{
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = LLCornerRadius;
+}
+
 @end

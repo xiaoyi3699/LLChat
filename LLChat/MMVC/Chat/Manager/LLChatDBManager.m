@@ -7,7 +7,6 @@
 //
 
 #import "LLChatDBManager.h"
-#import "LLChatTool.h"
 
 NSString *const LL_USER    = @"ll_user";
 NSString *const LL_GROUP   = @"ll_group";
@@ -33,17 +32,6 @@ NSString *const LL_SESSION = @"ll_session";
         [[LLChatSqliteManager defaultManager] createTableName:LL_SESSION modelClass:[LLChatSessionModel class]];
     }
     return self;
-}
-
-- (void)autoCreateUser:(NSInteger)count {
-    for (NSInteger i = 0; i < count; i ++) {
-        LLChatUserModel *model = [[LLChatUserModel alloc] init];
-        model.uid = [NSString stringWithFormat:@"%05ld",(long)(i+1)];
-        model.name = model.uid;
-        model.avatar = @"http://www.vasueyun.cn/ttdoll/512.png";
-        model.isShowName = YES;
-        [self insertUserModel:model];
-    }
 }
 
 #pragma mark - user表操纵
