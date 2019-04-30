@@ -10,8 +10,6 @@
 #import "LLChatModel.h"
 #import "LLChatMacro.h"
 
-//文本消息最大宽度
-#define LL_TEXT_MSG_WIDTH (LLCHAT_SCREEN_WIDTH-127)
 @implementation LLChatMessageModel
 
 - (instancetype)init {
@@ -32,6 +30,7 @@
     return model;
 }
 
+#pragma mark - 消息的自定义处理
 ///缓存model尺寸
 - (void)cacheModelSize {
     if (self.modelH == -1 || self.modelW == -1) {
@@ -40,7 +39,7 @@
             self.modelW = LLCHAT_SCREEN_WIDTH;
         }
         else if (self.msgType == LLMessageTypeText) {
-            CGSize size = [self.message boundingRectWithSize:CGSizeMake(LL_TEXT_MSG_WIDTH, CGFLOAT_MAX)
+            CGSize size = [self.message boundingRectWithSize:CGSizeMake((LLCHAT_SCREEN_WIDTH-127), CGFLOAT_MAX)
                                                      options:NSStringDrawingUsesLineFragmentOrigin
                                                   attributes:[self contentAttributes]
                                                      context:nil].size;
@@ -61,7 +60,6 @@
     }
 }
 
-#pragma mark - 文本消息
 //文本样式
 - (NSDictionary<NSAttributedStringKey,id> *)contentAttributes {
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -69,7 +67,6 @@
     return @{NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:[style copy]};
 }
 
-#pragma mark - 图片消息
 //缓存图片尺寸
 - (void)handleImageSize {
     CGFloat maxW = ceil(LLCHAT_SCREEN_WIDTH*0.32)*1.0;

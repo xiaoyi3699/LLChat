@@ -71,15 +71,11 @@ typedef enum : NSInteger {
 ///将字典转化为model
 + (instancetype)modelWithDic:(NSDictionary *)dic;
 
+#pragma mark - 消息的自定义处理
 ///缓存model尺寸
 - (void)cacheModelSize;
 
-#pragma mark - 文本消息
 //文本样式
 - (NSDictionary<NSAttributedStringKey,id> *)contentAttributes;
-
-#pragma mark - 图片消息
-//缓存图片尺寸
-- (void)handleImageSize;
 
 @end
