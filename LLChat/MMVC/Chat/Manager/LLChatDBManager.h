@@ -55,7 +55,7 @@
 //私聊消息列表
 - (NSMutableArray *)messagesWithUser:(LLChatUserModel *)model;
 //群聊消息列表
-- (NSMutableArray *)messagesWithGroup:(LLChatUserModel *)model;
+- (NSMutableArray *)messagesWithGroup:(LLChatGroupModel *)model;
 ///插入私聊消息
 - (void)insertMessage:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model;
 ///插入群聊消息

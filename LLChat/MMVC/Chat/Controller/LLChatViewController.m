@@ -77,7 +77,12 @@
 
 - (void)loadMessage:(NSInteger)page {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        self.messageModels = [[LLChatDBManager DBManager] messagesWithUser:self.userModel];
+        if (self.userModel) {
+            self.messageModels = [[LLChatDBManager DBManager] messagesWithUser:self.userModel];
+        }
+        else {
+            self.messageModels = [[LLChatDBManager DBManager] messagesWithGroup:self.groupModel];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [self tableViewScrollToBottom:NO];

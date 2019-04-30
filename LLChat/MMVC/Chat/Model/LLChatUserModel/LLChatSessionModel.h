@@ -12,6 +12,10 @@
 
 ///会话id<若会话为群聊,则sid为群聊gid, 若会话为私聊,则sid为对方uid>
 @property (nonatomic, strong) NSString *sid;
+///昵称
+@property (nonatomic, strong) NSString *name;
+///头像
+@property (nonatomic, strong) NSString *avatar;
 ///是否是群聊
 @property (nonatomic, assign) BOOL isGroup;
 ///是否开启消息免打扰

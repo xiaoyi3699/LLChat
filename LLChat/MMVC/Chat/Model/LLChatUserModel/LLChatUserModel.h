@@ -12,9 +12,9 @@
 
 ///用户id
 @property (nonatomic, strong) NSString *uid;
-///昵称
+///用户昵称
 @property (nonatomic, strong) NSString *name;
-///头像
+///用户头像
 @property (nonatomic, strong) NSString *avatar;
 ///聊天界面是否显示用户昵称
 @property (nonatomic, assign) BOOL isShowName;

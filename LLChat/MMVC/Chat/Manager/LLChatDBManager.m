@@ -119,15 +119,19 @@ NSString *const LL_SESSION = @"ll_session";
 
 //private
 - (LLChatSessionModel *)selectSessionModel:(LLChatBaseModel *)model {
-    NSString *gid; BOOL isGroup;
+    NSString *gid, *name, *avatar; BOOL isGroup;
     if ([model isKindOfClass:[LLChatUserModel class]]) {
         LLChatUserModel *user = (LLChatUserModel *)model;
         gid = user.uid;
+        name = user.name;
+        avatar = user.avatar;
         isGroup = NO;
     }
     else {
         LLChatGroupModel *group = (LLChatGroupModel *)model;
         gid = group.gid;
+        name = group.name;
+        avatar = group.avatar;
         isGroup = YES;
     }
     NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE sid = '%@'",LL_SESSION,gid];
@@ -140,6 +144,8 @@ NSString *const LL_SESSION = @"ll_session";
         //创建会话,并插入数据库
         session = [[LLChatSessionModel alloc] init];
         session.sid = gid;
+        session.name = name;
+        session.avatar = avatar;
         session.isGroup = isGroup;
         [self insertSessionModel:session];
     }
@@ -179,7 +185,7 @@ NSString *const LL_SESSION = @"ll_session";
 }
 
 //群聊消息
-- (NSMutableArray *)messagesWithGroup:(LLChatUserModel *)model {
+- (NSMutableArray *)messagesWithGroup:(LLChatGroupModel *)model {
     return [self messagesWithModel:model];
 }
 
