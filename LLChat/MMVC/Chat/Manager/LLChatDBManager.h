@@ -65,5 +65,9 @@
 - (void)insertMessage:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model;
 ///插入群聊消息
 - (void)insertMessage:(LLChatMessageModel *)message chatWithGroup:(LLChatGroupModel *)model;
+///更新私聊消息
+- (void)updateMessageModel:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model;
+///更新群聊消息
+- (void)updateMessageModel:(LLChatMessageModel *)message chatWithGroup:(LLChatGroupModel *)model;
 
 @end

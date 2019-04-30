@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSMutableArray *sessions;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, assign) BOOL isRefreshSession;
 
 @end
 
@@ -22,6 +23,7 @@
     self = [super init];
     if (self) {
         self.title = @"消息";
+        self.isRefreshSession = NO;
     }
     return self;
 }
@@ -32,10 +34,25 @@
     [self setupUI];
     [self loadSession];
     [self setRightItem];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSession) name:@"session" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.isRefreshSession) {
+        self.isRefreshSession = NO;
+        [self loadSession];
+    }
 }
 
 - (void)setupUI {
     [self.view addSubview:self.tableView];
+}
+
+//收到刷新session的通知
+- (void)observerSessionNotification {
+    self.isRefreshSession = YES;
 }
 
 - (void)loadSession {
@@ -152,6 +169,10 @@
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

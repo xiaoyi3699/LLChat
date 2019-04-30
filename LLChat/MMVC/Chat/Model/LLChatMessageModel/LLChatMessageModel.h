@@ -25,6 +25,8 @@ typedef enum : NSInteger {
 @interface LLChatMessageModel : LLChatBaseModel
 
 #pragma mark - 消息基本信息
+///消息id
+@property (nonatomic, strong) NSString *mid;
 ///发送人id
 @property (nonatomic, strong) NSString *uid;
 ///发送人昵称
@@ -33,8 +35,6 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) NSString *avatar;
 ///文本内容
 @property (nonatomic, strong) NSString *message;
-///消息唯一识别标识
-@property (nonatomic, strong) NSString *messageId;
 ///是否是自己发送
 @property (nonatomic, assign) BOOL isSender;
 ///消息发送时间戳

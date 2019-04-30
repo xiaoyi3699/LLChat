@@ -15,6 +15,7 @@
     if (self) {
         self.modelH = -1;
         self.modelW = -1;
+        self.mid = [NSString stringWithFormat:@"%@",@([LLChatHelper nowTimestamp])];
     }
     return self;
 }

@@ -258,6 +258,18 @@ NSString *const LL_SESSION = @"ll_session";
     [[LLChatSqliteManager defaultManager] insertModel:message tableName:tableName];
 }
 
+//更新私聊消息
+- (void)updateMessageModel:(LLChatMessageModel *)message chatWithUser:(LLChatUserModel *)model {
+    NSString *tableName = [self tableNameWithModel:model];
+    [[LLChatSqliteManager defaultManager] updateModel:message tableName:tableName primkey:@"mid"];
+}
+
+//更新群聊消息
+- (void)updateMessageModel:(LLChatMessageModel *)message chatWithGroup:(LLChatGroupModel *)model {
+    NSString *tableName = [self tableNameWithModel:model];
+    [[LLChatSqliteManager defaultManager] updateModel:message tableName:tableName primkey:@"mid"];
+}
+
 //private
 - (NSString *)tableNameWithModel:(LLChatBaseModel *)model {
     if ([model isKindOfClass:[LLChatUserModel class]]) {

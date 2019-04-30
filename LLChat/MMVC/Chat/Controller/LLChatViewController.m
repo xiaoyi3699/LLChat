@@ -71,6 +71,11 @@
     [self setRightItem];
 }
 
+//发送刷新session的通知
+- (void)postSessionNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"session" object:nil];
+}
+
 #pragma mark - 模拟收到消息
 - (void)setRightItem {
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"模拟收到消息" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemClick)];
@@ -350,7 +355,7 @@
     
     //模拟消息发送中、发送成功、发送失败
     //根据需要可以将消息默认值设置为发送成功, 此处是为了演示效果
-    NSInteger i = arc4random()%3;
+    NSInteger i = arc4random()%2;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (i == 0) {
             model.sendType = LLMessageSendTypeFailed;
@@ -358,13 +363,23 @@
         else {
             model.sendType = LLMessageSendTypeSuccess;
         }
+        if (self.userModel) {
+            [[LLChatDBManager DBManager] updateMessageModel:model chatWithUser:self.userModel];
+        }
+        else {
+            [[LLChatDBManager DBManager] updateMessageModel:model chatWithGroup:self.groupModel];
+        }
         [self.tableView reloadData];
     });
+    
+    [self postSessionNotification];
 }
 
 //收到消息
 - (void)receiveMessageModel:(LLChatMessageModel *)model {
     [self addMessageModel:model];
+    
+    [self postSessionNotification];
 }
 
 //消息存储
