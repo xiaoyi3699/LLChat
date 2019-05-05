@@ -12,7 +12,7 @@ typedef enum : NSInteger {
     LLInputViewTypeNone = 0,
     LLInputViewTypeKeyboard,
     LLInputViewTypeVoice,
-    LLInputViewTypeemotion,
+    LLInputViewTypeEmotion,
     LLInputViewTypeMore,
 }LLInputType;
 @interface LLInputView ()<UITextViewDelegate,LLEmojisKeyboardDelegate,LLChatMoreKeyboardDelegate>
