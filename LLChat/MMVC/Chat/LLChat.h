@@ -16,7 +16,6 @@
 #import "LLChatMessageManager.h"
 #import "LLChatNotificationManager.h"
 
-
 #import "LLChatViewController.h"
 
 #endif /* LLChat_h */
