@@ -128,6 +128,7 @@ NSString *const LL_SESSION = @"ll_session";
         LLChatSessionModel *model = [LLChatSessionModel modelWithDic:dic];
         [arr addObject:model];
     }
+    [arr sortUsingSelector:@selector(compareOtherModel:)];
     return arr;
 }
 

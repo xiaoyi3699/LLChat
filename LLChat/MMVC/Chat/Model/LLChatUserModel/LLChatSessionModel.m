@@ -19,4 +19,9 @@
     return model;
 }
 
+///时间戳排序
+- (NSComparisonResult)compareOtherModel:(LLChatSessionModel *)model {
+    return self.lastTimestamp < model.lastTimestamp;
+}
+
 @end
