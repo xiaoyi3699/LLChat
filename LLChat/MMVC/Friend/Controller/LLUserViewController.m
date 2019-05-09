@@ -63,7 +63,7 @@
     LLChatUserModel *model = [[LLChatUserModel alloc] init];
     model.uid = uid;
     model.name = [NSString stringWithFormat:@"用户:%@",uid];
-    model.avatar = @"http://www.vasueyun.cn/ttdoll/512.png";
+    model.avatar = @"http://sqb.wowozhe.com/images/touxiangs/10026820.jpg";
     model.isShowName = YES;
     //加入列表
     [self.users addObject:model];

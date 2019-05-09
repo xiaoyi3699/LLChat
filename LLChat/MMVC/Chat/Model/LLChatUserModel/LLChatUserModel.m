@@ -18,7 +18,7 @@
         userInfo = [[LLChatUserModel alloc] init];
         userInfo.uid = @"00001";
         userInfo.name = @"无敌是多么的寂寞";
-        userInfo.avatar = @"http://www.vasueyun.cn/hzl/logo.png";
+        userInfo.avatar = @"http://sqb.wowozhe.com/images/home/wx_appicon.png";
     });
     return userInfo;
 }
