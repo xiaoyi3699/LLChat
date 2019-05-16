@@ -46,7 +46,6 @@
 		75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7DD213E682100492ED8 /* LLChatBtn.m */; };
 		75F9E7E1213E6B6900492ED8 /* UIView+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */; };
 		75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7E3213E71F400492ED8 /* LLChatImageMessageCell.m */; };
-		75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,8 +129,6 @@
 		75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LLChat.m"; sourceTree = "<group>"; };
 		75F9E7E2213E71F400492ED8 /* LLChatImageMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatImageMessageCell.h; sourceTree = "<group>"; };
 		75F9E7E3213E71F400492ED8 /* LLChatImageMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatImageMessageCell.m; sourceTree = "<group>"; };
-		75F9E7F3213E8BB400492ED8 /* NSString+LLChat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+LLChat.h"; sourceTree = "<group>"; };
-		75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+LLChat.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,8 +413,6 @@
 				7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */,
 				75F9E7DF213E6B6900492ED8 /* UIView+LLChat.h */,
 				75F9E7E0213E6B6900492ED8 /* UIView+LLChat.m */,
-				75F9E7F3213E8BB400492ED8 /* NSString+LLChat.h */,
-				75F9E7F4213E8BB400492ED8 /* NSString+LLChat.m */,
 				7510EA2A226FF499000B58D9 /* NSDateFormatter+LLChat.h */,
 				7510EA2B226FF499000B58D9 /* NSDateFormatter+LLChat.m */,
 			);
@@ -513,7 +508,6 @@
 				75F9E7DE213E682100492ED8 /* LLChatBtn.m in Sources */,
 				75F9E7B221391E9300492ED8 /* LLSessionViewController.m in Sources */,
 				75F9E7E4213E71F400492ED8 /* LLChatImageMessageCell.m in Sources */,
-				75F9E7F5213E8BB400492ED8 /* NSString+LLChat.m in Sources */,
 				7510EA9B2276A5C6000B58D9 /* LLChatDBManager.m in Sources */,
 				75A6569022783682001138E2 /* LLSessionTableViewCell.m in Sources */,
 				7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */,

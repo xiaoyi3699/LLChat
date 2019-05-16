@@ -16,7 +16,6 @@
 #import "LLChatSqliteManager.h"
 
 #import "UIView+LLChat.h"
-#import "NSString+LLChat.h"
 #import "NSDateFormatter+LLChat.h"
 
 #endif /* LLChatTool_h */
