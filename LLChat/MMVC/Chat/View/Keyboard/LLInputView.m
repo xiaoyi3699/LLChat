@@ -242,19 +242,25 @@ typedef enum : NSInteger {
     [self recoverSetting:NO];
 }
 
+//发送按钮
+- (void)emojisKeyboardSendMessage {
+    [self sendMessage];
+}
+
+//删除按钮
+- (void)emojisKeyboardDelete {
+    if (_textView.text.length > 0) {
+        [_textView deleteBackward];
+    }
+}
+
+//输入文本
 - (void)emojisKeyboardSelectedText:(NSString *)text {
-    if ([text isEqualToString:@"-1"]) {
-        if (_textView.text.length > 0) {
-            [_textView deleteBackward];
-        }
+    if (_textView.text.length == 0) {
+        _textView.text = text;
     }
     else {
-        if (_textView.text.length == 0) {
-            _textView.text = text;
-        }
-        else {
-            _textView.text = [NSString stringWithFormat:@"%@%@",_textView.text,text];
-        }
+        _textView.text = [NSString stringWithFormat:@"%@%@",_textView.text,text];
     }
 }
 
@@ -262,10 +268,6 @@ typedef enum : NSInteger {
     if ([self.delegate respondsToSelector:@selector(inputView:selectedType:)]) {
         [self.delegate inputView:self selectedType:type];
     }
-}
-
-- (void)emojisKeyboardSendMessage {
-    [self sendMessage];
 }
 
 #pragma mark - getter

@@ -15,8 +15,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _emojisLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        _emojisLabel.font = [UIFont systemFontOfSize:30];
+        _emojisLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _emojisLabel.font = [UIFont systemFontOfSize:35];
         _emojisLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_emojisLabel];
     }

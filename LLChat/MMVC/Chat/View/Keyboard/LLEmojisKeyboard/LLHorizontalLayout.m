@@ -30,7 +30,7 @@
         _items = nums*rows;
         _keyboardW = [UIScreen mainScreen].bounds.size.width;
         CGFloat itemWidth = (_keyboardW-(_nums+1)*_spacing)/_nums;
-        CGFloat itemHeight = itemWidth*0.8;
+        CGFloat itemHeight = itemWidth*0.9;
         _LLItemSize = CGSizeMake(itemWidth, itemHeight);
     }
     return self;
