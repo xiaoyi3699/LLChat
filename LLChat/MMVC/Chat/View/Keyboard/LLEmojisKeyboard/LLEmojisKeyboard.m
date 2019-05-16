@@ -68,22 +68,21 @@
         
         //1、初始化
         _emoticons = [[NSMutableArray alloc] initWithCapacity:0];
-        //2、加载图片表情
-        NSString *bundle = [[NSBundle mainBundle] pathForResource:@"LLExpression" ofType:@"bundle"];
-        NSString *path = [bundle stringByAppendingPathComponent:@"emoticons.plist"];
-        NSArray  *list = [[NSArray alloc] initWithContentsOfFile:path];
-        for (NSDictionary *dic in list) {
-            NSBundle *abundle = [NSBundle bundleWithPath:[bundle stringByAppendingPathComponent:[dic objectForKey:@"path"]]];
-            NSString *apath = [abundle pathForResource:@"a_info" ofType:@"plist"];
-            NSDictionary *adic = [[NSDictionary alloc] initWithContentsOfFile:apath];
-            [_emoticons addObject:adic];
-        }
-        //3、加载emojis表情
+        //2、加载表情
+        //默认表情
+        NSString *path1 = [[NSBundle mainBundle] pathForResource:@"LLEmoticon1" ofType:@"plist"];
+        NSDictionary *dic1 = [[NSDictionary alloc] initWithContentsOfFile:path1];
+        [_emoticons addObject:dic1];
+        //浪小花
+        NSString *path2 = [[NSBundle mainBundle] pathForResource:@"LLEmoticon2" ofType:@"plist"];
+        NSDictionary *dic2 = [[NSDictionary alloc] initWithContentsOfFile:path2];
+        [_emoticons addObject:dic2];
+        //emojis
         _emojisSection = _emoticons.count;
-        NSString *peoplePath = [[NSBundle mainBundle] pathForResource:@"LLEmojisList" ofType:@"plist"];
+        NSString *peoplePath = [[NSBundle mainBundle] pathForResource:@"LLEmojis" ofType:@"plist"];
         NSDictionary *emojis = [NSDictionary dictionaryWithContentsOfFile:peoplePath];
         NSArray *peopleEmojis = [emojis objectForKey:@"People"];
-        //4、添加数据, 刷新表
+        //3、添加数据, 刷新表
         [_emoticons addObject:peopleEmojis];
         [_collectionView reloadData];
     }
@@ -150,7 +149,6 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     if ([self isDelete:indexPath.item]) {
         if ([self.delegate respondsToSelector:@selector(emojisKeyboardDelete)]) {
             [self.delegate emojisKeyboardDelete];
