@@ -24,7 +24,7 @@
 		753D4ECF228CF7C900668B54 /* ll_chat_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC1228CF7C800668B54 /* ll_chat_pic.png */; };
 		753D4ED0228CF7C900668B54 /* ll_chat_transfer.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC2228CF7C900668B54 /* ll_chat_transfer.png */; };
 		753D4ED1228CF7C900668B54 /* ll_chat_video.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC3228CF7C900668B54 /* ll_chat_video.png */; };
-		753D4ED2228CF7C900668B54 /* ll_chat_bj2.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC4228CF7C900668B54 /* ll_chat_bj2.png */; };
+		753D4ED2228CF7C900668B54 /* ll_chat_bj2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC4228CF7C900668B54 /* ll_chat_bj2@3x.png */; };
 		753D4ED3228CF7C900668B54 /* ll_chat_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC5228CF7C900668B54 /* ll_chat_board.png */; };
 		753D4ED4228CF7C900668B54 /* ll_chat_bell_not.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC6228CF7C900668B54 /* ll_chat_bell_not.png */; };
 		753D4ED5228CF7C900668B54 /* ll_chat_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC7228CF7C900668B54 /* ll_chat_more.png */; };
@@ -32,7 +32,7 @@
 		753D4ED7228CF7C900668B54 /* ll_chat_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4EC9228CF7C900668B54 /* ll_chat_default.png */; };
 		753D4ED8228CF7C900668B54 /* ll_chat_voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4ECA228CF7C900668B54 /* ll_chat_voice.png */; };
 		753D4ED9228CF7C900668B54 /* ll_chat_emotion.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4ECB228CF7C900668B54 /* ll_chat_emotion.png */; };
-		753D4EDA228CF7C900668B54 /* ll_chat_bj1.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4ECC228CF7C900668B54 /* ll_chat_bj1.png */; };
+		753D4EDA228CF7C900668B54 /* ll_chat_bj1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 753D4ECC228CF7C900668B54 /* ll_chat_bj1@3x.png */; };
 		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
 		75614246213F6F7B004CC91B /* EmojisList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* EmojisList.plist */; };
 		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
@@ -93,7 +93,7 @@
 		753D4EC1228CF7C800668B54 /* ll_chat_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_pic.png; sourceTree = "<group>"; };
 		753D4EC2228CF7C900668B54 /* ll_chat_transfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_transfer.png; sourceTree = "<group>"; };
 		753D4EC3228CF7C900668B54 /* ll_chat_video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_video.png; sourceTree = "<group>"; };
-		753D4EC4228CF7C900668B54 /* ll_chat_bj2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_bj2.png; sourceTree = "<group>"; };
+		753D4EC4228CF7C900668B54 /* ll_chat_bj2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll_chat_bj2@3x.png"; sourceTree = "<group>"; };
 		753D4EC5228CF7C900668B54 /* ll_chat_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_board.png; sourceTree = "<group>"; };
 		753D4EC6228CF7C900668B54 /* ll_chat_bell_not.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_bell_not.png; sourceTree = "<group>"; };
 		753D4EC7228CF7C900668B54 /* ll_chat_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_more.png; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		753D4EC9228CF7C900668B54 /* ll_chat_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_default.png; sourceTree = "<group>"; };
 		753D4ECA228CF7C900668B54 /* ll_chat_voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_voice.png; sourceTree = "<group>"; };
 		753D4ECB228CF7C900668B54 /* ll_chat_emotion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_emotion.png; sourceTree = "<group>"; };
-		753D4ECC228CF7C900668B54 /* ll_chat_bj1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ll_chat_bj1.png; sourceTree = "<group>"; };
+		753D4ECC228CF7C900668B54 /* ll_chat_bj1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ll_chat_bj1@3x.png"; sourceTree = "<group>"; };
 		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
 		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
 		75614245213F6F7B004CC91B /* EmojisList.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = EmojisList.plist; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				753D4EC6228CF7C900668B54 /* ll_chat_bell_not.png */,
-				753D4ECC228CF7C900668B54 /* ll_chat_bj1.png */,
-				753D4EC4228CF7C900668B54 /* ll_chat_bj2.png */,
+				753D4ECC228CF7C900668B54 /* ll_chat_bj1@3x.png */,
+				753D4EC4228CF7C900668B54 /* ll_chat_bj2@3x.png */,
 				753D4EC5228CF7C900668B54 /* ll_chat_board.png */,
 				753D4EC9228CF7C900668B54 /* ll_chat_default.png */,
 				753D4EC0228CF7C800668B54 /* ll_chat_delete.png */,
@@ -529,13 +529,13 @@
 				753D4ED0228CF7C900668B54 /* ll_chat_transfer.png in Resources */,
 				753D4ECD228CF7C900668B54 /* ll_chat_locaion.png in Resources */,
 				753D4ED8228CF7C900668B54 /* ll_chat_voice.png in Resources */,
-				753D4EDA228CF7C900668B54 /* ll_chat_bj1.png in Resources */,
+				753D4EDA228CF7C900668B54 /* ll_chat_bj1@3x.png in Resources */,
 				753D4ECF228CF7C900668B54 /* ll_chat_pic.png in Resources */,
 				75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */,
 				753D4ED1228CF7C900668B54 /* ll_chat_video.png in Resources */,
 				753D4ED9228CF7C900668B54 /* ll_chat_emotion.png in Resources */,
 				753D4ECE228CF7C900668B54 /* ll_chat_delete.png in Resources */,
-				753D4ED2228CF7C900668B54 /* ll_chat_bj2.png in Resources */,
+				753D4ED2228CF7C900668B54 /* ll_chat_bj2@3x.png in Resources */,
 				753D4ED7228CF7C900668B54 /* ll_chat_default.png in Resources */,
 				75614246213F6F7B004CC91B /* EmojisList.plist in Resources */,
 				753D4ED4228CF7C900668B54 /* ll_chat_bell_not.png in Resources */,
