@@ -28,10 +28,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        CGFloat key_itemW = 50;
-        if (LLCHAT_SCREEN_WIDTH <= 320) {
-            key_itemW = 40;
-        }
+        CGFloat key_itemW = 45;
         CGFloat spcing = (320-key_itemW*key_nums)/(key_nums+1);
         LLHorizontalLayout *horLayout = [[LLHorizontalLayout alloc] initWithSpacing:spcing rows:key_rows nums:key_nums];
         
@@ -81,7 +78,7 @@
         _emojisSection = _emoticons.count;
         NSString *peoplePath = [[NSBundle mainBundle] pathForResource:@"LLEmojis" ofType:@"plist"];
         NSDictionary *emojis = [NSDictionary dictionaryWithContentsOfFile:peoplePath];
-        NSArray *peopleEmojis = [emojis objectForKey:@"People"];
+        NSArray *peopleEmojis = [emojis objectForKey:@"Default"];
         //3、添加数据, 刷新表
         [_emoticons addObject:peopleEmojis];
         [_collectionView reloadData];
