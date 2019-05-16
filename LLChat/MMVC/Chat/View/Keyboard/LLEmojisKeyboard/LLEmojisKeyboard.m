@@ -162,7 +162,7 @@
             NSArray *emojis = [_emoticons objectAtIndex:indexPath.section];
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emojis.count) {
-                NSString *text = [emojis objectAtIndex:[self trueIndex:indexPath.item]];
+                NSString *text = [emojis objectAtIndex:index];
                 if ([self.delegate respondsToSelector:@selector(emojisKeyboardSelectedText:)]) {
                     [self.delegate emojisKeyboardSelectedText:text];
                 }
@@ -170,7 +170,15 @@
         }
         else {
             //图片表情
-            
+            NSDictionary *dic = [_emoticons objectAtIndex:indexPath.section];
+            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            NSInteger index = [self trueIndex:indexPath.item];
+            if (index < emoticons.count) {
+                NSDictionary *dic = [emoticons objectAtIndex:index];
+                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSelectedText:)]) {
+                    [self.delegate emojisKeyboardSelectedText:[dic objectForKey:@"chs"]];
+                }
+            }
         }
     }
 }
