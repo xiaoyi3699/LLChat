@@ -20,6 +20,8 @@
 @end
 
 @implementation LLEmojisKeyboard {
+    NSMutableArray *_btns;
+    UIButton *_selectedBtn;
     NSInteger _emojisSection;
     NSMutableArray *_emoticons;
     UICollectionView *_collectionView;
@@ -50,14 +52,34 @@
         [_collectionView registerClass:[LLEmoticonCell class] forCellWithReuseIdentifier:@"emoticon"];
         [self addSubview:_collectionView];
         
-        UIView *toolView = [[UIView alloc] initWithFrame:CGRectMake(0, _collectionView.maxY, frame.size.width, 40)];
-        toolView.backgroundColor = [UIColor colorWithRed:250/255. green:250/255. blue:250/255. alpha:1];
+        UIColor *themeColor = [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1];
+        UIView *toolView = [[UIView alloc] initWithFrame:CGRectMake(0, _collectionView.maxY, frame.size.width, 40+LLCHAT_BOTTOM_H)];
+        toolView.backgroundColor = [UIColor colorWithRed:180/255. green:180/255. blue:180/255. alpha:1];
         [self addSubview:toolView];
+        
+        _btns = [[NSMutableArray alloc] init];
+        NSArray *names = @[@"默认",@"浪小花",@"emojis"];
+        for (NSInteger i = 0; i < names.count; i ++) {
+            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            btn.tag = i;
+            btn.frame = CGRectMake(i*60, 0, 60, 40);
+            btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            [btn setTitle:[names objectAtIndex:i] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btn setTitleColor:themeColor forState:UIControlStateSelected];
+            [btn addTarget:self action:@selector(toolBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [toolView addSubview:btn];
+            [_btns addObject:btn];
+            if (i == 0) {
+                _selectedBtn = btn;
+                _selectedBtn.selected = YES;
+            }
+        }
         
         UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         sendBtn.frame = CGRectMake(frame.size.width-80, 0, 80, 40);
         sendBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        sendBtn.backgroundColor = [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1];
+        sendBtn.backgroundColor = themeColor;
         [sendBtn setTitle:@"发送" forState:UIControlStateNormal];
         [sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -178,6 +200,27 @@
     }
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x/LLCHAT_SCREEN_WIDTH;
+    NSInteger section = [self currectSection:index];
+    NSInteger page = [self currectPage:index];
+    UIButton *btn = [_btns objectAtIndex:section];
+    [self selectedBtn:btn];
+}
+
+- (void)toolBtnClick:(UIButton *)btn {
+    [self selectedBtn:btn];
+    NSInteger index = [self totalPageBeforeSection:btn.tag];
+    [_collectionView setContentOffset:CGPointMake(LLCHAT_SCREEN_WIDTH*index, 0) animated:NO];
+}
+
+- (void)selectedBtn:(UIButton *)btn {
+    if (btn.isSelected) return;
+    _selectedBtn.selected = NO;
+    _selectedBtn = btn;
+    _selectedBtn.selected = YES;
+}
+
 - (void)sendBtnClick:(UIButton *)btn {
     if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendMessage)]) {
         [self.delegate emojisKeyboardSendMessage];
@@ -204,6 +247,70 @@
     //一共需要的删除键个数
     NSInteger dc = ceil(count*1.0/(c-1));
     return dc*c;
+}
+
+//区总页数
+- (NSInteger)totalPage:(NSInteger)count {
+    NSInteger c = key_rows*key_nums;
+    return ceil(count*1.0/(c-1));
+}
+
+//获取当前区数
+- (NSInteger)currectSection:(NSInteger)index {
+    NSInteger lastPage = 0;
+    for (NSInteger i = 0; i < _emoticons.count ; i ++) {
+        if (i == _emojisSection) {
+            NSArray *emojis = [_emoticons objectAtIndex:i];
+            lastPage = [self totalPage:emojis.count]+lastPage;
+        }
+        else {
+            //图片表情
+            NSDictionary *dic = [_emoticons objectAtIndex:i];
+            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            lastPage = [self totalPage:emoticons.count]+lastPage;
+        }
+        if (index < lastPage) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+//获取在当前区中的页数
+- (NSInteger)currectPage:(NSInteger)index {
+    NSInteger page = [self currectSection:index];
+    NSInteger lastPage = 0;
+    for (NSInteger i = 0; i < page ; i ++) {
+        if (i == _emojisSection) {
+            NSArray *emojis = [_emoticons objectAtIndex:i];
+            lastPage = [self totalPage:emojis.count]+lastPage;
+        }
+        else {
+            //图片表情
+            NSDictionary *dic = [_emoticons objectAtIndex:i];
+            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            lastPage = [self totalPage:emoticons.count]+lastPage;
+        }
+    }
+    return index-lastPage;
+}
+
+//指定区之前有多少页数
+- (NSInteger)totalPageBeforeSection:(NSInteger)section {
+    NSInteger lastPage = 0;
+    for (NSInteger i = 0; i < section ; i ++) {
+        if (i == _emojisSection) {
+            NSArray *emojis = [_emoticons objectAtIndex:i];
+            lastPage = [self totalPage:emojis.count]+lastPage;
+        }
+        else {
+            //图片表情
+            NSDictionary *dic = [_emoticons objectAtIndex:i];
+            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            lastPage = [self totalPage:emoticons.count]+lastPage;
+        }
+    }
+    return lastPage;
 }
 
 @end

@@ -18,10 +18,8 @@
 @protocol LLEmojisKeyboardDelegate <NSObject>
 
 @optional
-
 - (void)emojisKeyboardDelete;
 - (void)emojisKeyboardSendMessage;
 - (void)emojisKeyboardSelectedText:(NSString *)text;
-- (void)emojisKeyboardScrollToScetion;
 
 @end

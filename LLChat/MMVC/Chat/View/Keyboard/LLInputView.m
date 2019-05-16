@@ -242,6 +242,7 @@ typedef enum : NSInteger {
     [self recoverSetting:NO];
 }
 
+#pragma mark - emojisKeyboardDelegate;
 //发送按钮
 - (void)emojisKeyboardSendMessage {
     [self sendMessage];
