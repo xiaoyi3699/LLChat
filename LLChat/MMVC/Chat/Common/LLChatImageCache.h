@@ -4,7 +4,7 @@
 //
 //  Created by zhaomengWang on 17/3/14.
 //  Copyright © 2017年 MaoChao Network Co. Ltd. All rights reserved.
-//
+//  图片存储
 
 #import <UIKit/UIKit.h>
 

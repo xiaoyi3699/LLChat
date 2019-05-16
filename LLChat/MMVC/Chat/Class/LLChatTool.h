@@ -11,11 +11,7 @@
 
 #import "LLChatHelper.h"
 
-#import "LLChatBase64.h"
 #import "LLChatImageCache.h"
 #import "LLChatSqliteManager.h"
-
-#import "UIView+LLChat.h"
-#import "NSDateFormatter+LLChat.h"
 
 #endif /* LLChatTool_h */
