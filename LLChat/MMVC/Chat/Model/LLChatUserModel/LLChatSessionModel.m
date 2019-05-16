@@ -10,15 +10,6 @@
 
 @implementation LLChatSessionModel
 
-///将字典转化为model
-+ (instancetype)modelWithDic:(NSDictionary *)dic {
-    LLChatSessionModel *model = [[LLChatSessionModel alloc] init];
-    for (NSString *key in dic.allKeys) {
-        [model setValue:[dic objectForKey:key] forKey:key];
-    }
-    return model;
-}
-
 ///时间戳排序
 - (NSComparisonResult)compareOtherModel:(LLChatSessionModel *)model {
     return self.lastTimestamp < model.lastTimestamp;

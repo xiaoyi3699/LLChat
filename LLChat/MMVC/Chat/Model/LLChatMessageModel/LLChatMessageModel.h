@@ -68,9 +68,6 @@ typedef enum : NSInteger {
 //视频封面地址
 @property (nonatomic, strong) NSString *coverUrl;
 
-///将字典转化为model
-+ (instancetype)modelWithDic:(NSDictionary *)dic;
-
 #pragma mark - 消息的自定义处理
 ///缓存model尺寸
 - (void)cacheModelSize;

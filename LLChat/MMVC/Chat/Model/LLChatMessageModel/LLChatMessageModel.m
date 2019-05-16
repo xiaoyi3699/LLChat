@@ -20,15 +20,6 @@
     return self;
 }
 
-///将字典转化为model
-+ (instancetype)modelWithDic:(NSDictionary *)dic {
-    LLChatMessageModel *model = [[LLChatMessageModel alloc] init];
-    for (NSString *key in dic.allKeys) {
-        [model setValue:[dic objectForKey:key] forKey:key];
-    }
-    return model;
-}
-
 #pragma mark - 消息的自定义处理
 ///缓存model尺寸
 - (void)cacheModelSize {
