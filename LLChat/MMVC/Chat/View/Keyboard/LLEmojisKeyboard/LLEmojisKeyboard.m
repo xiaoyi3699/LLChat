@@ -54,7 +54,7 @@
         
         UIColor *themeColor = [UIColor colorWithRed:34/255. green:207/255. blue:172/255. alpha:1];
         UIView *toolView = [[UIView alloc] initWithFrame:CGRectMake(0, _collectionView.maxY, frame.size.width, 40+LLCHAT_BOTTOM_H)];
-        toolView.backgroundColor = [UIColor colorWithRed:180/255. green:180/255. blue:180/255. alpha:1];
+        toolView.backgroundColor = [UIColor colorWithRed:220/255. green:220/255. blue:220/255. alpha:1];
         [self addSubview:toolView];
         
         _btns = [[NSMutableArray alloc] init];
@@ -205,17 +205,18 @@
     NSInteger section = [self currectSection:index];
     NSInteger page = [self currectPage:index];
     UIButton *btn = [_btns objectAtIndex:section];
+    if (btn.isSelected) return;
     [self selectedBtn:btn];
 }
 
 - (void)toolBtnClick:(UIButton *)btn {
+    if (btn.isSelected) return;
     [self selectedBtn:btn];
     NSInteger index = [self totalPageBeforeSection:btn.tag];
     [_collectionView setContentOffset:CGPointMake(LLCHAT_SCREEN_WIDTH*index, 0) animated:NO];
 }
 
 - (void)selectedBtn:(UIButton *)btn {
-    if (btn.isSelected) return;
     _selectedBtn.selected = NO;
     _selectedBtn = btn;
     _selectedBtn.selected = YES;
