@@ -244,7 +244,7 @@ typedef enum : NSInteger {
 
 #pragma mark - emojisKeyboardDelegate;
 //发送按钮
-- (void)emojisKeyboardSendMessage {
+- (void)emojisKeyboardSend {
     [self sendMessage];
 }
 
@@ -256,7 +256,7 @@ typedef enum : NSInteger {
 }
 
 //输入文本
-- (void)emojisKeyboardSelectedText:(NSString *)text {
+- (void)emojisKeyboardSendText:(NSString *)text {
     if (_textView.text.length == 0) {
         _textView.text = text;
     }

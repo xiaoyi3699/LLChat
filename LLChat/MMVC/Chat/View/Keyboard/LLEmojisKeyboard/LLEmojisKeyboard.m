@@ -180,8 +180,8 @@
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emojis.count) {
                 NSString *text = [emojis objectAtIndex:index];
-                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSelectedText:)]) {
-                    [self.delegate emojisKeyboardSelectedText:text];
+                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
+                    [self.delegate emojisKeyboardSendText:text];
                 }
             }
         }
@@ -192,8 +192,8 @@
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emoticons.count) {
                 NSDictionary *dic = [emoticons objectAtIndex:index];
-                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSelectedText:)]) {
-                    [self.delegate emojisKeyboardSelectedText:[dic objectForKey:@"chs"]];
+                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
+                    [self.delegate emojisKeyboardSendText:[dic objectForKey:@"chs"]];
                 }
             }
         }
@@ -223,8 +223,8 @@
 }
 
 - (void)sendBtnClick:(UIButton *)btn {
-    if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendMessage)]) {
-        [self.delegate emojisKeyboardSendMessage];
+    if ([self.delegate respondsToSelector:@selector(emojisKeyboardSend)]) {
+        [self.delegate emojisKeyboardSend];
     }
 }
 
