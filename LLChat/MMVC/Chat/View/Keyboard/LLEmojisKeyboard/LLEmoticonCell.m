@@ -15,7 +15,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _emoticonImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 35, 35)];
+        _emoticonImageView = [[UIImageView alloc] initWithFrame:CGRectMake(9, 5, 35, 35)];
         [self addSubview:_emoticonImageView];
     }
     return self;
