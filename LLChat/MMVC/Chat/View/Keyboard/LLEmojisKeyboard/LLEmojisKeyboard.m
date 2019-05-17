@@ -174,15 +174,13 @@
         }
     }
     else {
+        NSString *text;
         if (indexPath.section == _emojisSection) {
             //emojis表情
             NSArray *emojis = [_emoticons objectAtIndex:indexPath.section];
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emojis.count) {
-                NSString *text = [emojis objectAtIndex:index];
-                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
-                    [self.delegate emojisKeyboardSendText:text];
-                }
+                text = [emojis objectAtIndex:index];
             }
         }
         else {
@@ -192,10 +190,11 @@
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emoticons.count) {
                 NSDictionary *dic = [emoticons objectAtIndex:index];
-                if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
-                    [self.delegate emojisKeyboardSendText:[dic objectForKey:@"chs"]];
-                }
+                text = [dic objectForKey:@"chs"];
             }
+        }
+        if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
+            [self.delegate emojisKeyboardSendText:text];
         }
     }
 }
