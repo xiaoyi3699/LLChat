@@ -10,6 +10,15 @@
 
 @interface LLChatDBManager : NSObject
 
+///输入框草稿
+@property (nonatomic, strong) NSMutableDictionary *draftDic;
+///草稿
+- (NSString *)draftWithModel:(LLChatBaseModel *)model;
+///删除草稿
+- (void)removeDraftWithModel:(LLChatBaseModel *)model;
+///保存草稿
+- (void)setDraft:(NSString *)draft model:(LLChatBaseModel *)model;
+
 + (instancetype)DBManager;
 
 #pragma mark - user表操纵

@@ -18,12 +18,15 @@
 
 - (void)chatBecomeFirstResponder;
 - (void)chatResignFirstResponder;
+- (void)setText:(NSString *)text;
 
 @end
 
 @protocol LLInputViewDelegate <NSObject>
 
 @optional
+///文本变化
+- (void)inputView:(LLInputView *)inputView didChangeText:(NSString *)text;
 ///发送文本消息
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message;
 ///自定义键盘点击事件

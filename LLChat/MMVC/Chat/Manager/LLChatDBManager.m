@@ -26,12 +26,39 @@ NSString *const LL_SESSION = @"ll_session";
 - (instancetype)init {
     self = [super init];
     if (self) {
+        //输入框草稿
+        _draftDic = [[NSMutableDictionary alloc] init];
         //创建三张表 <user, group, session>
         [[LLChatSqliteManager defaultManager] createTableName:LL_USER modelClass:[LLChatUserModel class]];
         [[LLChatSqliteManager defaultManager] createTableName:LL_GROUP modelClass:[LLChatGroupModel class]];
         [[LLChatSqliteManager defaultManager] createTableName:LL_SESSION modelClass:[LLChatSessionModel class]];
     }
     return self;
+}
+
+//草稿
+- (NSString *)draftWithModel:(LLChatBaseModel *)model {
+    NSString *key = [self tableNameWithModel:model];
+    NSString *draft = [_draftDic objectForKey:key];
+    if (draft == nil || ![draft isKindOfClass:[NSString class]]) {
+        draft = @"";
+    }
+    return draft;
+}
+
+//删除草稿
+- (void)removeDraftWithModel:(LLChatBaseModel *)model {
+    NSString *key = [self tableNameWithModel:model];
+    [_draftDic removeObjectForKey:key];
+}
+
+//保存草稿
+- (void)setDraft:(NSString *)draft model:(LLChatBaseModel *)model {
+    if (draft == nil || ![draft isKindOfClass:[NSString class]]) {
+        draft = @"";
+    }
+    NSString *key = [self tableNameWithModel:model];
+    [_draftDic setObject:draft forKey:key];
 }
 
 #pragma mark - user表操纵

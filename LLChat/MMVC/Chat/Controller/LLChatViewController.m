@@ -136,11 +136,18 @@
 #pragma mark - 发送消息
 //文本消息
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
-    
+    //清空草稿
+    [[LLChatDBManager DBManager] removeDraftWithModel:self.userModel];
     LLChatMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
                                                                 message:message
                                                                isSender:YES];
     [self sendMessageModel:model];
+}
+
+//文本变化
+- (void)inputView:(LLInputView *)inputView didChangeText:(NSString *)text {
+    //保存草稿
+    [[LLChatDBManager DBManager] setDraft:text model:self.userModel];
 }
 
 //其他自定义消息, 如: 图片、视频、位置等等
@@ -297,6 +304,7 @@
     if (_inputView == nil) {
         _inputView = [[LLInputView alloc] init];
         _inputView.delegate = self;
+        [_inputView setText:[[LLChatDBManager DBManager] draftWithModel:self.userModel]];
     }
     return _inputView;
 }

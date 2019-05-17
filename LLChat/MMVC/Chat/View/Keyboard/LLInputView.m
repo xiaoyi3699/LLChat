@@ -202,6 +202,10 @@ typedef enum : NSInteger {
     [_textView resignFirstResponder];
 }
 
+- (void)setText:(NSString *)text {
+    _textView.text = text;
+}
+
 #pragma mark - private method
 - (void)sendMessage {
     if (_textView.text.length > 0) {
@@ -242,6 +246,16 @@ typedef enum : NSInteger {
     [self recoverSetting:NO];
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    [self didChangeText:textView.text];
+}
+
+- (void)didChangeText:(NSString *)text {
+    if ([self.delegate respondsToSelector:@selector(inputView:didChangeText:)]) {
+        [self.delegate inputView:self didChangeText:text];
+    }
+}
+
 #pragma mark - emojisKeyboardDelegate;
 //发送按钮
 - (void)emojisKeyboardSend {
@@ -257,12 +271,8 @@ typedef enum : NSInteger {
 
 //输入文本
 - (void)emojisKeyboardSendText:(NSString *)text {
-    if (_textView.text.length == 0) {
-        _textView.text = text;
-    }
-    else {
-        _textView.text = [NSString stringWithFormat:@"%@%@",_textView.text,text];
-    }
+    [_textView replaceRange:_textView.selectedTextRange withText:text];
+    [self didChangeText:_textView.text];
 }
 
 - (void)moreKeyboardSelectedType:(LLChatMoreType)type {
