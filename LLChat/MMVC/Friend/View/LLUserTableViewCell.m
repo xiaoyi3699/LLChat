@@ -33,7 +33,7 @@
 }
 
 - (void)setConfig:(LLChatUserModel *)model {
-    [[LLChatImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES completion:^(UIImage *image) {
+    [[LLImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES placeholder:LLCHAT_BAD_IMAGE completion:^(UIImage *image) {
         _avatarImageView.image = image;
     }];
     _nameLabel.text = model.name;

@@ -49,7 +49,7 @@
         //头像
         _avatarImageView.frame = CGRectMake(LLCHAT_SCREEN_WIDTH-50, 10, 40, 40);
         //可改成网络图片
-        [[LLChatImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES completion:^(UIImage *image) {
+        [[LLImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES placeholder:LLCHAT_BAD_IMAGE completion:^(UIImage *image) {
             _avatarImageView.image = image;
         }];
         
@@ -106,7 +106,7 @@
     else {
         _avatarImageView.frame = CGRectMake(10, 10, 40, 40);
         //可改成网络图片
-        [[LLChatImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES completion:^(UIImage *image) {
+        [[LLImageCache imageCache] getImageWithUrl:model.avatar isUseCatch:YES placeholder:LLCHAT_BAD_IMAGE completion:^(UIImage *image) {
             _avatarImageView.image = image;
         }];
         

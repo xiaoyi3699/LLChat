@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7510EA39226FFD50000B58D9 /* LLChatSqliteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */; };
-		7510EA3C226FFD5B000B58D9 /* LLChatImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA3A226FFD5B000B58D9 /* LLChatImageCache.m */; };
 		7510EA4722703F4F000B58D9 /* LLChatMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA4622703F4F000B58D9 /* LLChatMessageManager.m */; };
 		7510EA4B22704068000B58D9 /* LLChatUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA4A22704068000B58D9 /* LLChatUserModel.m */; };
 		7510EA952272E2BA000B58D9 /* LLChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA942272E2BA000B58D9 /* LLChatBaseModel.m */; };
@@ -50,8 +49,6 @@
 /* Begin PBXFileReference section */
 		7510EA37226FFD50000B58D9 /* LLChatSqliteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLChatSqliteManager.h; sourceTree = "<group>"; };
 		7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatSqliteManager.m; sourceTree = "<group>"; };
-		7510EA3A226FFD5B000B58D9 /* LLChatImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLChatImageCache.m; sourceTree = "<group>"; };
-		7510EA3B226FFD5B000B58D9 /* LLChatImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLChatImageCache.h; sourceTree = "<group>"; };
 		7510EA4522703F4F000B58D9 /* LLChatMessageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatMessageManager.h; sourceTree = "<group>"; };
 		7510EA4622703F4F000B58D9 /* LLChatMessageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatMessageManager.m; sourceTree = "<group>"; };
 		7510EA4922704068000B58D9 /* LLChatUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatUserModel.h; sourceTree = "<group>"; };
@@ -180,8 +177,6 @@
 		7525CBFF228E60F200A2A70F /* FeatureStatic */ = {
 			isa = PBXGroup;
 			children = (
-				7510EA3B226FFD5B000B58D9 /* LLChatImageCache.h */,
-				7510EA3A226FFD5B000B58D9 /* LLChatImageCache.m */,
 				7510EA37226FFD50000B58D9 /* LLChatSqliteManager.h */,
 				7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */,
 				7525CC09228E62B800A2A70F /* LLFeatureStatic.framework */,
@@ -578,7 +573,6 @@
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
 				75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */,
 				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
-				7510EA3C226FFD5B000B58D9 /* LLChatImageCache.m in Sources */,
 				75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */,
 				7510EA39226FFD50000B58D9 /* LLChatSqliteManager.m in Sources */,
 				7510EA4B22704068000B58D9 /* LLChatUserModel.m in Sources */,

@@ -99,8 +99,8 @@
         UIImage *thImage = [UIImage imageNamed:@"2_t.jpg"];
         
         //将图片保存到本地
-        [[LLChatImageCache imageCache] storeImage:orImage forKey:original];
-        [[LLChatImageCache imageCache] storeImage:thImage forKey:thumbnail];
+        [[LLImageCache imageCache] storeImage:orImage forKey:original];
+        [[LLImageCache imageCache] storeImage:thImage forKey:thumbnail];
         
         //创建图片model
         LLChatMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
@@ -170,8 +170,8 @@
         NSString *thumbnail = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
         
         //将图片保存到本地
-        [[LLChatImageCache imageCache] storeImage:orImage forKey:original];
-        [[LLChatImageCache imageCache] storeImage:thImage forKey:thumbnail];
+        [[LLImageCache imageCache] storeImage:orImage forKey:original];
+        [[LLImageCache imageCache] storeImage:thImage forKey:thumbnail];
         
         //创建图片model
         LLChatMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel

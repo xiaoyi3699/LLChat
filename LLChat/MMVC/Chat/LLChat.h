@@ -10,7 +10,6 @@
 #define LLChat_h
 
 #import "LLChatHelper.h"
-#import "LLChatImageCache.h"
 #import "LLChatSqliteManager.h"
 
 #import "LLChatUserModel.h"

@@ -28,7 +28,7 @@
     
     _contentImageView.frame = _contentRect;
     
-    [[LLChatImageCache imageCache] getImageWithUrl:model.thumbnail isUseCatch:YES completion:^(UIImage *image) {
+    [[LLImageCache imageCache] getImageWithUrl:model.thumbnail isUseCatch:YES placeholder:LLCHAT_BAD_IMAGE completion:^(UIImage *image) {
         _contentImageView.image = image;
     }];
 }
