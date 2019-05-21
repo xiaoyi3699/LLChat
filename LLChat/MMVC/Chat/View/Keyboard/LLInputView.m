@@ -231,6 +231,10 @@ typedef enum : NSInteger {
 
 #pragma mark - delegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@""]) {
+        [self emojisKeyboardDelete];
+        return NO;
+    }
     if ([text isEqualToString:@"\n"] ||
         [text isEqualToString:@"\n\n"] ||
         [text isEqualToString:@"\r"] ||
@@ -265,7 +269,25 @@ typedef enum : NSInteger {
 //删除按钮
 - (void)emojisKeyboardDelete {
     if (_textView.text.length > 0) {
-        [_textView deleteBackward];
+        NSRange range = _textView.selectedRange;
+        NSUInteger location = range.location;
+        NSUInteger length = range.length;
+        if (location == 0 && length == 0) return;
+        if (length > 0) {
+            [_textView deleteBackward];
+        }
+        else {
+            NSString *subString = [_textView.text substringToIndex:location];
+            NSString *emoticon = [[LLEmoticonManager manager] willDeleteEmoticon:subString];
+            if ([[LLEmoticonManager manager].chs containsObject:emoticon]) {
+                NSUInteger newLocation = location-emoticon.length;
+                _textView.text = [_textView.text stringByReplacingCharactersInRange:NSMakeRange(newLocation, emoticon.length) withString:@""];
+                _textView.selectedRange = NSMakeRange(newLocation, 0);
+            }
+            else {
+                [_textView deleteBackward];
+            }
+        }
     }
 }
 

@@ -27,10 +27,13 @@
 - (void)setConfig:(LLChatMessageModel *)model isShowName:(BOOL)isShowName {
     [super setConfig:model isShowName:isShowName];
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:model.message attributes:[model contentAttributes]];
+//    NSArray *emoticons = [[LLEmoticonManager manager] matchEmoticons:model.message];
+//    NSAttributedString *str = [[NSAttributedString alloc] initWithString:model.message attributes:[model contentAttributes]];
     
+    NSMutableAttributedString *att = [[LLEmoticonManager manager] attributedString:model.message];
+    [att addAttributes:[model contentAttributes] range:NSMakeRange(0, att.length)];
     _contentLabel.frame = _contentRect;
-    _contentLabel.attributedText = str;
+    _contentLabel.attributedText = att;
 }
 
 @end
