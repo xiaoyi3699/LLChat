@@ -38,11 +38,15 @@
     NSDictionary *dic2 = [[NSDictionary alloc] initWithContentsOfFile:path2];
     [emoticons addObject:dic2];
     //emojis
-    NSString *peoplePath = [[NSBundle mainBundle] pathForResource:@"LLEmojis" ofType:@"plist"];
-    NSDictionary *emojis = [NSDictionary dictionaryWithContentsOfFile:peoplePath];
-    NSArray *peopleEmojis = [emojis objectForKey:@"Default"];
-    [emoticons addObject:peopleEmojis];
+    NSString *emojisPath = [[NSBundle mainBundle] pathForResource:@"LLEmojis" ofType:@"plist"];
+    NSDictionary *emojisDic = [NSDictionary dictionaryWithContentsOfFile:emojisPath];
+    NSArray *emojis = [emojisDic objectForKey:@"Default"];
+    [emoticons addObject:emojis];
     self.emoticons = [emoticons copy];
+    
+    NSMutableArray *chs = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *cht = [[NSMutableArray alloc] initWithCapacity:0];
+    
 }
 
 @end
