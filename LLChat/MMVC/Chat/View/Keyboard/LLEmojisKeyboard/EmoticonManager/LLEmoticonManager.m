@@ -118,9 +118,6 @@
                                            range:NSMakeRange(0, [subString length])];
         for (NSTextCheckingResult *match in matchs) {
             NSString *result = [subString substringWithRange:match.range];
-            
-            
-            
             NSDictionary *dic = @{@"emoticon":result, @"range":NSStringFromRange(match.range)};
             [emoticons addObject:dic];
         }
