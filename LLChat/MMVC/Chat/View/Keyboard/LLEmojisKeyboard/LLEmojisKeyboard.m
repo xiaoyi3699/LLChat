@@ -20,16 +20,20 @@
 @end
 
 @implementation LLEmojisKeyboard {
-    NSMutableArray *_btns;
+    NSArray *_btns;
+    NSArray *_emoticons;
     UIButton *_selectedBtn;
     NSInteger _emojisSection;
-    NSMutableArray *_emoticons;
     UICollectionView *_collectionView;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        //加载表情
+        _emoticons = [LLEmoticonManager manager].emoticons;
+        _emojisSection = _emoticons.count-1;
+        
         CGFloat key_itemW = 45;
         CGFloat spcing = (320-key_itemW*key_nums)/(key_nums+1);
         LLHorizontalLayout *horLayout = [[LLHorizontalLayout alloc] initWithSpacing:spcing rows:key_rows nums:key_nums];
@@ -57,7 +61,7 @@
         toolView.backgroundColor = [UIColor colorWithRed:220/255. green:220/255. blue:220/255. alpha:1];
         [self addSubview:toolView];
         
-        _btns = [[NSMutableArray alloc] init];
+        NSMutableArray *btns = [[NSMutableArray alloc] init];
         NSArray *names = @[@"默认",@"浪小花",@"emojis"];
         for (NSInteger i = 0; i < names.count; i ++) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -69,12 +73,13 @@
             [btn setTitleColor:themeColor forState:UIControlStateSelected];
             [btn addTarget:self action:@selector(toolBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [toolView addSubview:btn];
-            [_btns addObject:btn];
+            [btns addObject:btn];
             if (i == 0) {
                 _selectedBtn = btn;
                 _selectedBtn.selected = YES;
             }
         }
+        _btns = [btns copy];
         
         UIButton *sendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         sendBtn.frame = CGRectMake(frame.size.width-80, 0, 80, 40);
@@ -84,26 +89,6 @@
         [sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [sendBtn addTarget:self action:@selector(sendBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [toolView addSubview:sendBtn];
-        
-        //1、初始化
-        _emoticons = [[NSMutableArray alloc] initWithCapacity:0];
-        //2、加载表情
-        //默认表情
-        NSString *path1 = [[NSBundle mainBundle] pathForResource:@"LLEmoticon1" ofType:@"plist"];
-        NSDictionary *dic1 = [[NSDictionary alloc] initWithContentsOfFile:path1];
-        [_emoticons addObject:dic1];
-        //浪小花
-        NSString *path2 = [[NSBundle mainBundle] pathForResource:@"LLEmoticon2" ofType:@"plist"];
-        NSDictionary *dic2 = [[NSDictionary alloc] initWithContentsOfFile:path2];
-        [_emoticons addObject:dic2];
-        //emojis
-        _emojisSection = _emoticons.count;
-        NSString *peoplePath = [[NSBundle mainBundle] pathForResource:@"LLEmojis" ofType:@"plist"];
-        NSDictionary *emojis = [NSDictionary dictionaryWithContentsOfFile:peoplePath];
-        NSArray *peopleEmojis = [emojis objectForKey:@"Default"];
-        //3、添加数据, 刷新表
-        [_emoticons addObject:peopleEmojis];
-        [_collectionView reloadData];
     }
     return self;
 }

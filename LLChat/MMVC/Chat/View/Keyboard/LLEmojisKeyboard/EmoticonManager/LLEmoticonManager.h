@@ -14,5 +14,9 @@
 @property (nonatomic, strong) NSArray *chs;
 ///所有繁体表情, 如: [愛你]
 @property (nonatomic, strong) NSArray *cht;
+///所有表情 <默认, 浪小花, emoji>
+@property (nonatomic, strong) NSArray *emoticons;
+
++ (instancetype)manager;
 
 @end
