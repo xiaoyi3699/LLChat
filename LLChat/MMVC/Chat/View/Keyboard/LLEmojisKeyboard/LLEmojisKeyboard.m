@@ -99,17 +99,8 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    //emojis表情
-    if (section == _emojisSection) {
-        NSArray *emojis = [_emoticons objectAtIndex:section];
-        return [self totalCount:emojis.count];
-    }
-    else {
-        //图片表情
-        NSDictionary *dic = [_emoticons objectAtIndex:section];
-        NSArray *emoticons = [dic objectForKey:@"emoticons"];
-        return [self totalCount:emoticons.count];
-    }
+    NSArray *emoticons = [_emoticons objectAtIndex:section];
+    return [self totalCount:emoticons.count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,36 +109,27 @@
         return cell;
     }
     else {
-        //emojis表情
-        if (indexPath.section == _emojisSection) {
-            NSArray *emojis = [_emoticons objectAtIndex:indexPath.section];
-            NSInteger index = [self trueIndex:indexPath.item];
-            if (index < emojis.count) {
+        NSArray *emojis = [_emoticons objectAtIndex:indexPath.section];
+        NSInteger index = [self trueIndex:indexPath.item];
+        if (index < emojis.count) {
+            if (indexPath.section == _emojisSection) {
+                //emojis表情
                 NSString *text = [emojis objectAtIndex:index];
                 LLEmojisCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"emojis" forIndexPath:indexPath];
                 [cell setConfig:text];
                 return cell;
             }
             else {
-                LLBlankCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"blank" forIndexPath:indexPath];
+                //图片表情
+                NSDictionary *dic = [emojis objectAtIndex:index];
+                LLEmoticonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"emoticon" forIndexPath:indexPath];
+                [cell setConfig:[dic objectForKey:@"png"]];
                 return cell;
             }
         }
         else {
-            //图片表情
-            NSDictionary *dic = [_emoticons objectAtIndex:indexPath.section];
-            NSArray *emoticons = [dic objectForKey:@"emoticons"];
-            NSInteger index = [self trueIndex:indexPath.item];
-            if (index < emoticons.count) {
-                NSDictionary *dic = [emoticons objectAtIndex:index];
-                LLEmoticonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"emoticon" forIndexPath:indexPath];
-                [cell setConfig:dic];
-                return cell;
-            }
-            else {
-                LLBlankCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"blank" forIndexPath:indexPath];
-                return cell;
-            }
+            LLBlankCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"blank" forIndexPath:indexPath];
+            return cell;
         }
     }
 }
@@ -159,29 +141,34 @@
         }
     }
     else {
-        NSString *text;
+        NSString *text = [self textWithIndexPath:indexPath];
+        if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
+            [self.delegate emojisKeyboardSendText:text];
+        }
+    }
+}
+
+- (NSString *)textWithIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section < _emoticons.count) {
         if (indexPath.section == _emojisSection) {
             //emojis表情
             NSArray *emojis = [_emoticons objectAtIndex:indexPath.section];
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emojis.count) {
-                text = [emojis objectAtIndex:index];
+                return [emojis objectAtIndex:index];
             }
         }
         else {
             //图片表情
-            NSDictionary *dic = [_emoticons objectAtIndex:indexPath.section];
-            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            NSArray *emoticons = [_emoticons objectAtIndex:indexPath.section];
             NSInteger index = [self trueIndex:indexPath.item];
             if (index < emoticons.count) {
                 NSDictionary *dic = [emoticons objectAtIndex:index];
-                text = [dic objectForKey:@"chs"];
+                return [dic objectForKey:@"chs"];
             }
         }
-        if ([self.delegate respondsToSelector:@selector(emojisKeyboardSendText:)]) {
-            [self.delegate emojisKeyboardSendText:text];
-        }
     }
+    return @"";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -250,8 +237,7 @@
         }
         else {
             //图片表情
-            NSDictionary *dic = [_emoticons objectAtIndex:i];
-            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            NSArray *emoticons = [_emoticons objectAtIndex:i];
             lastPage = [self totalPage:emoticons.count]+lastPage;
         }
         if (index < lastPage) {
@@ -272,8 +258,7 @@
         }
         else {
             //图片表情
-            NSDictionary *dic = [_emoticons objectAtIndex:i];
-            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            NSArray *emoticons = [_emoticons objectAtIndex:i];
             lastPage = [self totalPage:emoticons.count]+lastPage;
         }
     }
@@ -290,8 +275,7 @@
         }
         else {
             //图片表情
-            NSDictionary *dic = [_emoticons objectAtIndex:i];
-            NSArray *emoticons = [dic objectForKey:@"emoticons"];
+            NSArray *emoticons = [_emoticons objectAtIndex:i];
             lastPage = [self totalPage:emoticons.count]+lastPage;
         }
     }

@@ -31,12 +31,12 @@
     NSMutableArray *emoticons = [[NSMutableArray alloc] initWithCapacity:0];
     //默认表情
     NSString *path1 = [[NSBundle mainBundle] pathForResource:@"LLEmoticon1" ofType:@"plist"];
-    NSDictionary *dic1 = [[NSDictionary alloc] initWithContentsOfFile:path1];
-    [emoticons addObject:dic1];
+    NSArray *array1 = [[NSArray alloc] initWithContentsOfFile:path1];
+    [emoticons addObject:array1];
     //浪小花
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"LLEmoticon2" ofType:@"plist"];
-    NSDictionary *dic2 = [[NSDictionary alloc] initWithContentsOfFile:path2];
-    [emoticons addObject:dic2];
+    NSArray *array2 = [[NSArray alloc] initWithContentsOfFile:path2];
+    [emoticons addObject:array2];
     //emojis
     NSString *emojisPath = [[NSBundle mainBundle] pathForResource:@"LLEmojis" ofType:@"plist"];
     NSDictionary *emojisDic = [NSDictionary dictionaryWithContentsOfFile:emojisPath];

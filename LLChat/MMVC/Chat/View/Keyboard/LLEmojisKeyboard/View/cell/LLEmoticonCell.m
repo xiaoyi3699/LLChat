@@ -21,10 +21,8 @@
     return self;
 }
 
-- (void)setConfig:(NSDictionary *)dic {
-    NSString *imageName = [dic objectForKey:@"png"];
-    UIImage *image = [UIImage imageNamed:imageName];
-    _emoticonImageView.image = image;
+- (void)setConfig:(NSString *)image {
+    _emoticonImageView.image = [UIImage imageNamed:image];
 }
 
 @end

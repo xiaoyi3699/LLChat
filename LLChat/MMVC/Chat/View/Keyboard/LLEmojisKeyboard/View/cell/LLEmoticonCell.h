@@ -10,6 +10,6 @@
 
 @interface LLEmoticonCell : UICollectionViewCell
 
-- (void)setConfig:(NSDictionary *)dic;
+- (void)setConfig:(NSString *)image;
 
 @end
