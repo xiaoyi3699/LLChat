@@ -8,7 +8,9 @@
 
 #import "LLChatMessageModel.h"
 
-@implementation LLChatMessageModel
+@implementation LLChatMessageModel {
+    NSAttributedString *_attStr;
+}
 
 - (instancetype)init {
     self = [super init];
@@ -29,10 +31,10 @@
             self.modelW = LLCHAT_SCREEN_WIDTH;
         }
         else if (self.msgType == LLMessageTypeText) {
-            CGSize size = [self.message boundingRectWithSize:CGSizeMake((LLCHAT_SCREEN_WIDTH-127), CGFLOAT_MAX)
-                                                     options:NSStringDrawingUsesLineFragmentOrigin
-                                                  attributes:[self contentAttributes]
-                                                     context:nil].size;
+            
+            CGSize size = [[self attributedString] boundingRectWithSize:CGSizeMake((LLCHAT_SCREEN_WIDTH-127), CGFLOAT_MAX)
+                                                                options:NSStringDrawingUsesLineFragmentOrigin
+                                                                context:nil].size;
             self.modelH = MAX(ceil(size.height), 30);
             self.modelW = MAX(ceil(size.width), 30);
         }
@@ -50,11 +52,17 @@
     }
 }
 
-//文本样式
-- (NSDictionary<NSAttributedStringKey,id> *)contentAttributes {
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.lineSpacing = 5;
-    return @{NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:[style copy]};
+//富文本
+- (NSAttributedString *)attributedString {
+    if (_attStr == nil) {
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        style.lineSpacing = 2;
+        NSDictionary *a = @{NSFontAttributeName:[UIFont systemFontOfSize:15],NSParagraphStyleAttributeName:[style copy]};
+        NSMutableAttributedString *att = [[LLEmoticonManager manager] attributedString:self.message];
+        [att addAttributes:a range:NSMakeRange(0, att.length)];
+        _attStr = [att copy];
+    }
+    return _attStr;
 }
 
 //缓存图片尺寸

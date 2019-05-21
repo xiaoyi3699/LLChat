@@ -17,7 +17,6 @@
     if (self) {
         _contentLabel = [[UILabel alloc] init];
         _contentLabel.textColor = [UIColor darkTextColor];
-        _contentLabel.textAlignment = NSTextAlignmentLeft;
         _contentLabel.numberOfLines = 0;
         [self addSubview:_contentLabel];
     }
@@ -26,14 +25,14 @@
 
 - (void)setConfig:(LLChatMessageModel *)model isShowName:(BOOL)isShowName {
     [super setConfig:model isShowName:isShowName];
-    
-//    NSArray *emoticons = [[LLEmoticonManager manager] matchEmoticons:model.message];
-//    NSAttributedString *str = [[NSAttributedString alloc] initWithString:model.message attributes:[model contentAttributes]];
-    
-    NSMutableAttributedString *att = [[LLEmoticonManager manager] attributedString:model.message];
-    [att addAttributes:[model contentAttributes] range:NSMakeRange(0, att.length)];
     _contentLabel.frame = _contentRect;
-    _contentLabel.attributedText = att;
+    _contentLabel.attributedText = [model attributedString];
+    if (model.modelW > 30) {
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+    }
+    else {
+        _contentLabel.textAlignment = NSTextAlignmentCenter;
+    }
 }
 
 @end

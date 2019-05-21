@@ -72,7 +72,7 @@ typedef enum : NSInteger {
 ///缓存model尺寸
 - (void)cacheModelSize;
 
-//文本样式
-- (NSDictionary<NSAttributedStringKey,id> *)contentAttributes;
+///富文本
+- (NSAttributedString *)attributedString;
 
 @end
