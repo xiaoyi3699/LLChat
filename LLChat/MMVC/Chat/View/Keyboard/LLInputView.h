@@ -12,6 +12,13 @@
 
 @protocol LLInputViewDelegate;
 
+typedef enum : NSInteger {
+    LLChatRecordTypeTouchDown = 0,
+    LLChatRecordTypeTouchCancel,
+    LLChatRecordTypeTouchFinish,
+    LLChatRecordTypeTouchDragOutside,
+}LLChatRecordType;
+
 @interface LLInputView : UIView
 
 @property (nonatomic, weak) id<LLInputViewDelegate> delegate;
@@ -31,6 +38,8 @@
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message;
 ///自定义键盘点击事件
 - (void)inputView:(LLInputView *)inputView selectedType:(LLChatMoreType)type;
+///录音状态变化
+- (void)inputView:(LLInputView *)inputView didChangeRecordType:(LLChatRecordType)type;
 ///输入框frame改变
 - (void)inputView:(LLInputView *)inputView willChangeFrameWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing;
 

@@ -162,6 +162,27 @@
 }
 
 #pragma mark - 发送消息
+//文本变化
+- (void)inputView:(LLInputView *)inputView didChangeText:(NSString *)text {
+    //保存草稿
+    [[LLChatDBManager DBManager] setDraft:text model:self.userModel];
+}
+
+- (void)inputView:(LLInputView *)inputView didChangeRecordType:(LLChatRecordType)type {
+    if (type == LLChatRecordTypeTouchDown) {
+        NSLog(@"开始录音");
+    }
+    else if (type == LLChatRecordTypeTouchCancel) {
+        NSLog(@"取消录音");
+    }
+    else if (type == LLChatRecordTypeTouchFinish) {
+        NSLog(@"结束录音");
+    }
+    else {
+        NSLog(@"手指滑动到按钮的外面了");
+    }
+}
+
 //文本消息
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
     //清空草稿
@@ -170,12 +191,6 @@
                                                                 message:message
                                                                isSender:YES];
     [self sendMessageModel:model];
-}
-
-//文本变化
-- (void)inputView:(LLInputView *)inputView didChangeText:(NSString *)text {
-    //保存草稿
-    [[LLChatDBManager DBManager] setDraft:text model:self.userModel];
 }
 
 //其他自定义消息, 如: 图片、视频、位置等等

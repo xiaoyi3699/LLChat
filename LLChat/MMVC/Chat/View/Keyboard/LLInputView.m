@@ -28,6 +28,7 @@ typedef enum : NSInteger {
     LLChatBtn *_emotionBtn;
     LLChatBtn *_moreBtn;
     UITextView *_textView;
+    UIButton *_recordBtn;
     BOOL _isEditing;
 }
 
@@ -81,6 +82,18 @@ typedef enum : NSInteger {
         _textView.delegate = self;
         _textView.layer.borderColor = [UIColor colorWithRed:200/255. green:200/255. blue:200/255. alpha:1].CGColor;
         [self addSubview:_textView];
+        
+        _recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _recordBtn.frame = _textView.frame;
+        _recordBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_recordBtn setTitle:@"按住 说话" forState:UIControlStateNormal];
+        [_recordBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [_recordBtn addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
+        [_recordBtn addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchCancel];
+        [_recordBtn addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchUpOutside];
+        [_recordBtn addTarget:self action:@selector(touchFinish:) forControlEvents:UIControlEventTouchUpInside];
+        [_recordBtn addTarget:self action:@selector(touchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+        [self addSubview:_recordBtn];
         
         [self addSubview:self.moreKeyboard];
         [self addSubview:self.emojisKeyboard];
@@ -145,7 +158,6 @@ typedef enum : NSInteger {
 
 #pragma mark - 用户交互事件
 - (void)btnClick:(UIButton *)btn {
-    
     if (btn.isSelected) {
         [self chatBecomeFirstResponder];
     }
@@ -180,6 +192,37 @@ typedef enum : NSInteger {
                 [self minYWillChange:minY duration:duration isFinishEditing:NO];
             }
         }
+    }
+}
+
+#pragma mark - 录音状态变化
+- (void)touchDown:(UIButton *)btn {
+    [_recordBtn setTitle:@"松开 结束" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    [self didChangeRecordType:LLChatRecordTypeTouchDown];
+}
+
+- (void)touchCancel:(UIButton *)btn {
+    [_recordBtn setTitle:@"按住 说话" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self didChangeRecordType:LLChatRecordTypeTouchCancel];
+}
+
+- (void)touchFinish:(UIButton *)btn {
+    [_recordBtn setTitle:@"按住 说话" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self didChangeRecordType:LLChatRecordTypeTouchFinish];
+}
+
+- (void)touchDragOutside:(UIButton *)btn {
+    [_recordBtn setTitle:@"松开 结束" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    [self didChangeRecordType:LLChatRecordTypeTouchDragOutside];
+}
+
+- (void)didChangeRecordType:(LLChatRecordType)type {
+    if ([self.delegate respondsToSelector:@selector(inputView:didChangeRecordType:)]) {
+        [self.delegate inputView:self didChangeRecordType:type];
     }
 }
 
