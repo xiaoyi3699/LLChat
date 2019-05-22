@@ -29,4 +29,11 @@
                                   oriImage:(UIImage *)oriImage
                                   isSender:(BOOL)isSender;
 
+//创建视频消息
++ (LLChatMessageModel *)createVideoMessage:(LLChatUserModel *)userModel
+                                  videoUrl:(NSString *)videoUrl
+                                  coverUrl:(NSString *)coverUrl
+                                coverImage:(UIImage *)coverImage
+                                  isSender:(BOOL)isSender;
+
 @end

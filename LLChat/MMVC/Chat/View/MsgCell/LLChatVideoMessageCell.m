@@ -34,7 +34,7 @@
     _contentImageView.frame = _contentRect;
     _markImageView.center = _contentImageView.center;
     
-    [[LLImageCache imageCache] getImageWithUrl:model.thumbnail isUseCatch:YES placeholder:LLCHAT_BAD_IMAGE completion:^(UIImage *image) {
+    [[LLImageCache imageCache] getImageWithUrl:model.coverUrl isUseCatch:YES placeholder:LLCHAT_BAD_IMAGE completion:^(UIImage *image) {
         _contentImageView.image = image;
     }];
 }

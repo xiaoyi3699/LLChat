@@ -15,7 +15,6 @@
 + (LLChatMessageModel *)createSystemMessage:(LLChatUserModel *)userModel
                                     message:(NSString *)message
                                    isSender:(BOOL)isSender {
-    
     LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
     msgModel.msgType = LLMessageTypeSystem;
     msgModel.message = message;
@@ -27,7 +26,6 @@
 + (LLChatMessageModel *)createTextMessage:(LLChatUserModel *)userModel
                                   message:(NSString *)message
                                  isSender:(BOOL)isSender {
-    
     LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
     msgModel.msgType = LLMessageTypeText;
     msgModel.message = message;
@@ -42,7 +40,6 @@
                                  thumImage:(UIImage *)thumImage
                                   oriImage:(UIImage *)oriImage
                                   isSender:(BOOL)isSender {
-    
     LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
     msgModel.msgType   = LLMessageTypeImage;
     msgModel.message   = @"[图片]";
@@ -53,6 +50,25 @@
     //将图片保存到本地
     [[LLImageCache imageCache] storeImage:oriImage forKey:original];
     [[LLImageCache imageCache] storeImage:thumImage forKey:thumbnail];
+    [self setConfig:msgModel userModel:userModel isSender:isSender];
+    return msgModel;
+}
+
+//创建视频消息
++ (LLChatMessageModel *)createVideoMessage:(LLChatUserModel *)userModel
+                                  videoUrl:(NSString *)videoUrl
+                                  coverUrl:(NSString *)coverUrl
+                                coverImage:(UIImage *)coverImage
+                                  isSender:(BOOL)isSender {
+    LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
+    msgModel.msgType   = LLMessageTypeVideo;
+    msgModel.message   = @"[图片]";
+    msgModel.videoUrl = videoUrl;
+    msgModel.coverUrl  = coverUrl;
+    msgModel.imgW = coverImage.size.width;
+    msgModel.imgH = coverImage.size.height;
+    //将封面图片保存到本地
+    [[LLImageCache imageCache] storeImage:coverImage forKey:coverUrl];
     [self setConfig:msgModel userModel:userModel isSender:isSender];
     return msgModel;
 }

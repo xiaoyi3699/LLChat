@@ -172,8 +172,22 @@
         [self sendMessageModel:model];
     }
     else if (type == LLChatMoreTypeVideo) {
-        //发送视频 - 未实现
+        //发送视频
+        //选择视频的代码就不多写了, 这里假定已经选择了视频
         
+        //封面图
+        UIImage *coverImage = [UIImage imageNamed:@"1_t.jpg"];
+        
+        //将封面图上传到服务器, 获取封面图链接
+        NSString *coverUrl = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
+        
+        //创建视频model
+        LLChatMessageModel *model = [LLChatMessageManager createVideoMessage:self.userModel
+                                                                    videoUrl:@""
+                                                                    coverUrl:coverUrl
+                                                                  coverImage:coverImage
+                                                                    isSender:YES];
+        [self sendMessageModel:model];
     }
     else if (type == LLChatMoreTypeLocation) {
         //发送定位 - 未实现
@@ -246,7 +260,11 @@
             
         }
         else if (model.msgType == LLMessageTypeVideo) {
-            
+            cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];
+            if (cell == nil) {
+                cell = [[LLChatVideoMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"videoCell"];
+            }
+            [cell setConfig:model isShowName:self.isShowName];
         }
         return cell;
     }

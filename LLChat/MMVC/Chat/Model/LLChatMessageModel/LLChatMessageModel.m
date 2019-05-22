@@ -47,7 +47,9 @@
             
         }
         else if (self.msgType == LLMessageTypeVideo) {
-            
+            [self handleImageSize];
+            self.modelH = self.imgH;
+            self.modelW = self.imgW;
         }
     }
 }
