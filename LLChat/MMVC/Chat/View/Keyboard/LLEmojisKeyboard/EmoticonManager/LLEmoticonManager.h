@@ -22,10 +22,10 @@
 + (instancetype)manager;
 
 ///匹配文本中的所有表情
-- (NSArray *)matchEmoticons:(NSString *)subString;
+- (NSArray *)matchEmoticons:(NSString *)aString;
 ///匹配输入框将要删除的表情
-- (NSString *)willDeleteEmoticon:(NSString *)subString;
+- (NSString *)willDeleteEmoticon:(NSString *)aString;
 ///文本转富文本
-- (NSMutableAttributedString *)attributedString:(NSString *)subString;
+- (NSMutableAttributedString *)attributedString:(NSString *)aString;
 
 @end

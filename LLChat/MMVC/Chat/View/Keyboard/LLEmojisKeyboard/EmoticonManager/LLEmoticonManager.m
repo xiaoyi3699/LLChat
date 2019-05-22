@@ -79,21 +79,21 @@
 }
 
 ///富文本
-- (NSMutableAttributedString *)attributedString:(NSString *)subString {
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:subString];
+- (NSMutableAttributedString *)attributedString:(NSString *)aString {
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:aString];
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression
                                   regularExpressionWithPattern:@"\\[[^ \\[\\]]+?\\]"
                                   options:0
                                   error:&error];
     if (!error) {
-        NSArray *matchs = [regex matchesInString:subString
+        NSArray *matchs = [regex matchesInString:aString
                                          options:0
-                                           range:NSMakeRange(0, [subString length])];
+                                           range:NSMakeRange(0, [aString length])];
         NSUInteger offset = 0;
         for (NSTextCheckingResult *match in matchs) {
             NSUInteger newLocation = match.range.location+offset;
-            NSString *result = [subString substringWithRange:match.range];
+            NSString *result = [aString substringWithRange:match.range];
             UIImage *image = [UIImage imageNamed:[self.chsDic objectForKey:[result base64EncodedString]]];
             if (image) {
                 [attStr ll_setImage:image rect:CGRectMake(0, -4, 20, 20) range:NSMakeRange(newLocation, match.range.length)];
@@ -105,7 +105,7 @@
 }
 
 ///匹配文本中的所有表情
-- (NSArray *)matchEmoticons:(NSString *)subString {
+- (NSArray *)matchEmoticons:(NSString *)aString {
     NSMutableArray *emoticons = [[NSMutableArray alloc] initWithCapacity:0];
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression
@@ -113,11 +113,11 @@
                                   options:0
                                   error:&error];
     if (!error) {
-        NSArray *matchs = [regex matchesInString:subString
+        NSArray *matchs = [regex matchesInString:aString
                                          options:0
-                                           range:NSMakeRange(0, [subString length])];
+                                           range:NSMakeRange(0, [aString length])];
         for (NSTextCheckingResult *match in matchs) {
-            NSString *result = [subString substringWithRange:match.range];
+            NSString *result = [aString substringWithRange:match.range];
             NSDictionary *dic = @{@"emoticon":result, @"range":NSStringFromRange(match.range)};
             [emoticons addObject:dic];
         }
@@ -126,21 +126,21 @@
 }
 
 ///匹配输入框将要删除的表情
-- (NSString *)willDeleteEmoticon:(NSString *)subString {
-    if ([subString hasSuffix:@"]"]) {
+- (NSString *)willDeleteEmoticon:(NSString *)aString {
+    if ([aString hasSuffix:@"]"]) {
         NSError *error;
         NSRegularExpression *regex = [NSRegularExpression
                                       regularExpressionWithPattern:@"\\[[^ \\[\\]]+?\\]"
                                       options:0
                                       error:&error];
         if (!error) {
-            NSArray *matchs = [regex matchesInString:subString
+            NSArray *matchs = [regex matchesInString:aString
                                              options:0
-                                               range:NSMakeRange(0, [subString length])];
+                                               range:NSMakeRange(0, [aString length])];
             NSTextCheckingResult *match = matchs.lastObject;
             if (match) {
-                if (match.range.location+match.range.length == subString.length) {
-                    NSString *result = [subString substringWithRange:match.range];
+                if (match.range.location+match.range.length == aString.length) {
+                    NSString *result = [aString substringWithRange:match.range];
                     return result;
                 }
             }
