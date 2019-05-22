@@ -94,6 +94,7 @@ typedef enum : NSInteger {
         [_recordBtn addTarget:self action:@selector(touchFinish:) forControlEvents:UIControlEventTouchUpInside];
         [_recordBtn addTarget:self action:@selector(touchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
         [self addSubview:_recordBtn];
+        _recordBtn.hidden = YES;
         
         [self addSubview:self.moreKeyboard];
         [self addSubview:self.emojisKeyboard];
@@ -159,6 +160,7 @@ typedef enum : NSInteger {
 #pragma mark - 用户交互事件
 - (void)btnClick:(UIButton *)btn {
     if (btn.isSelected) {
+        _recordBtn.hidden = YES;
         [self chatBecomeFirstResponder];
     }
     else {
@@ -167,6 +169,7 @@ typedef enum : NSInteger {
             //声音按钮
             _moreBtn.selected = NO;
             _emotionBtn.selected = NO;
+            _recordBtn.hidden = NO;
             //结束编辑
             [self chatResignFirstResponder];
         }

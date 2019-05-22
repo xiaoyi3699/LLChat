@@ -22,7 +22,7 @@
         CGFloat spacing = (frame.size.width-itemW*count-left*2)/3;
         
         NSArray *images = @[@"ll_chat_pic",@"ll_chat_video",@"ll_chat_locaion",@"ll_chat_transfer"];
-        NSArray *titles = @[@"图片",@"视频",@"位置",@"互传"];
+        NSArray *titles = @[@"图片",@"视频",@"待定",@"待定"];
         for (NSInteger i = 0; i < images.count; i ++) {
             LLChatBtn *btn = [LLChatBtn chatButtonWithType:LLChatButtonTypeMoreKeyboard];
             btn.frame = CGRectMake(left+i%count*(itemW+spacing), i/count*itemH, itemW, itemH);

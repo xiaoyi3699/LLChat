@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign) BOOL isEditing;
 @property (nonatomic, assign) BOOL isShowName;
+@property (nonatomic, assign) NSInteger recordDuration;
 @property (nonatomic, strong) LLChatUserModel *userModel;
 @property (nonatomic, strong) LLChatGroupModel *groupModel;
 
@@ -80,16 +81,17 @@
 }
 
 - (void)rightItemClick {
-    static NSInteger msgType = 0;
+    static NSInteger msgType = 1;
     if (msgType == LLMessageTypeSystem) {
+        NSString *timeMessage = [LLChatHelper timeFromDate:[NSDate date]];
         LLChatMessageModel *model = [LLChatMessageManager createSystemMessage:self.userModel
-                                                                      message:@"12:00"
+                                                                      message:timeMessage
                                                                      isSender:YES];
         [self receiveMessageModel:model];
     }
     else if (msgType == LLMessageTypeText) {
         LLChatMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
-                                                                    message:@"我收到了一条文本消息"
+                                                                    message:@"[微笑]我收到了一条文本消息"
                                                                    isSender:NO];
         [self receiveMessageModel:model];
     }
@@ -142,7 +144,7 @@
                                                                     isSender:NO];
         [self sendMessageModel:model];
     }
-    msgType = msgType%5+1;
+    msgType = (msgType+1)%5;
 }
 #pragma mark -
 
@@ -170,13 +172,31 @@
 
 - (void)inputView:(LLInputView *)inputView didChangeRecordType:(LLChatRecordType)type {
     if (type == LLChatRecordTypeTouchDown) {
+        self.recordDuration = [LLChatHelper nowTimestamp]/1000;
         NSLog(@"开始录音");
     }
     else if (type == LLChatRecordTypeTouchCancel) {
         NSLog(@"取消录音");
     }
     else if (type == LLChatRecordTypeTouchFinish) {
-        NSLog(@"结束录音");
+        self.recordDuration = ([LLChatHelper nowTimestamp]/1000-self.recordDuration);
+        if (self.recordDuration > 1) {
+            //发送声音
+            //录音的代码就不多写了, 这里假定已经录音
+            
+            //将录音上传到服务器, 获取录音链接
+            NSString *voiceUrl = @"";
+            
+            //创建录音model
+            LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
+                                                                        duration:self.recordDuration
+                                                                        voiceUrl:voiceUrl
+                                                                        isSender:YES];
+            [self sendMessageModel:model];
+        }
+        else {
+            NSLog(@"录音时间过短");
+        }
     }
     else {
         NSLog(@"手指滑动到按钮的外面了");
@@ -244,19 +264,6 @@
     else if (type == LLChatMoreTypeLocation) {
         //发送定位 - 未实现
         
-        //发送声音
-        //录音的代码就不多写了, 这里假定已经录音
-        
-        //将录音上传到服务器, 获取录音链接
-        NSString *voiceUrl = @"";
-        
-        //创建录音model
-        NSInteger duration = arc4random()%60+1;
-        LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
-                                                                    duration:duration
-                                                                    voiceUrl:voiceUrl
-                                                                    isSender:YES];
-        [self sendMessageModel:model];
     }
     else if (type == LLChatMoreTypeTransfer) {
         //文件互传 - 未实现
