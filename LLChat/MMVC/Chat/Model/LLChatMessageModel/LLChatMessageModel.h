@@ -37,6 +37,8 @@ typedef enum : NSInteger {
 @property (nonatomic, strong) NSString *message;
 ///是否是自己发送
 @property (nonatomic, assign) BOOL isSender;
+///是否已读
+@property (nonatomic, assign) BOOL isRead;
 ///消息发送时间戳
 @property (nonatomic, assign) NSInteger timestamp;
 ///消息类型

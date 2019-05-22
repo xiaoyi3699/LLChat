@@ -8,7 +8,6 @@
 
 #import "LLSessionTableViewCell.h"
 
-#define rgb(r,g,b) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:1.0]
 @implementation LLSessionTableViewCell {
     UIImageView *_avatarImageView;
     UIView *_badgeView;
@@ -28,7 +27,7 @@
         [self addSubview:_avatarImageView];
         
         _badgeView = [[UIView alloc] initWithFrame:CGRectMake(_avatarImageView.maxX-5, _avatarImageView.minY-5, 10, 10)];
-        _badgeView.backgroundColor = rgb(250, 81, 81);
+        _badgeView.backgroundColor = R_G_B(250, 81, 81);
         
         [_badgeView setLLCornerRadius:5];
         _badgeView.hidden = YES;
@@ -38,7 +37,7 @@
         _badgeLabel.font = [UIFont systemFontOfSize:12];
         _badgeLabel.textColor = [UIColor whiteColor];
         _badgeLabel.textAlignment = NSTextAlignmentCenter;
-        _badgeLabel.backgroundColor = rgb(250, 81, 81);
+        _badgeLabel.backgroundColor = R_G_B(250, 81, 81);
         [_badgeLabel setLLCornerRadius:9];
         _badgeLabel.hidden = YES;
         [self addSubview:_badgeLabel];
@@ -55,7 +54,7 @@
         
         _messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(nickX, _nameLabel.maxY+7, nimeW+60, 15)];
         _messageLabel.font = [UIFont systemFontOfSize:13];
-        _messageLabel.textColor = rgb(160, 160, 160);
+        _messageLabel.textColor = R_G_B(160, 160, 160);
         _messageLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_messageLabel];
         

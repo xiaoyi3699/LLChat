@@ -10,6 +10,7 @@
 #import "LLInputView.h"
 #import "LLChatSystemCell.h"
 #import "LLChatTextMessageCell.h"
+#import "LLChatVoiceMessageCell.h"
 #import "LLChatImageMessageCell.h"
 #import "LLChatVideoMessageCell.h"
 
@@ -79,14 +80,20 @@
 }
 
 - (void)rightItemClick {
-    static BOOL isText = YES;
-    if (isText) {
+    static NSInteger msgType = 0;
+    if (msgType == LLMessageTypeSystem) {
+        LLChatMessageModel *model = [LLChatMessageManager createSystemMessage:self.userModel
+                                                                      message:@"12:00"
+                                                                     isSender:YES];
+        [self receiveMessageModel:model];
+    }
+    else if (msgType == LLMessageTypeText) {
         LLChatMessageModel *model = [LLChatMessageManager createTextMessage:self.userModel
                                                                     message:@"我收到了一条文本消息"
                                                                    isSender:NO];
         [self receiveMessageModel:model];
     }
-    else {
+    else if (msgType == LLMessageTypeImage) {
         //收到图片
         //原图和缩略图链接
         NSString *original = @"http://www.vasueyun.cn/llgit/llchat/2.jpg";
@@ -107,7 +114,35 @@
                                                                     isSender:NO];
         [self receiveMessageModel:model];
     }
-    isText = !isText;
+    else if (msgType == LLMessageTypeVoice) {
+        //接收到声音
+        //声音地址
+        NSString *voiceUrl = @"";
+        
+        //创建录音model
+        NSInteger duration = arc4random()%60+1;
+        LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
+                                                                    duration:duration
+                                                                    voiceUrl:voiceUrl
+                                                                    isSender:NO];
+        [self sendMessageModel:model];
+    }
+    else if (msgType == LLMessageTypeVideo) {
+        //收到视频
+        NSString *videoUrl = @"";
+        //封面图链接
+        NSString *coverUrl = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
+        //下载封面图
+        UIImage *coverImage = [UIImage imageNamed:@"1_t.jpg"];
+        //创建视频model
+        LLChatMessageModel *model = [LLChatMessageManager createVideoMessage:self.userModel
+                                                                    videoUrl:videoUrl
+                                                                    coverUrl:coverUrl
+                                                                  coverImage:coverImage
+                                                                    isSender:NO];
+        [self sendMessageModel:model];
+    }
+    msgType = msgType%5+1;
 }
 #pragma mark -
 
@@ -174,16 +209,18 @@
     else if (type == LLChatMoreTypeVideo) {
         //发送视频
         //选择视频的代码就不多写了, 这里假定已经选择了视频
+        //上传到服务器, 获取视频链接
+        NSString *videoUrl = @"";
         
         //封面图
-        UIImage *coverImage = [UIImage imageNamed:@"1_t.jpg"];
+        UIImage *coverImage = [UIImage imageNamed:@"2_t.jpg"];
         
         //将封面图上传到服务器, 获取封面图链接
-        NSString *coverUrl = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
+        NSString *coverUrl = @"http://www.vasueyun.cn/llgit/llchat/2_t.jpg";
         
         //创建视频model
         LLChatMessageModel *model = [LLChatMessageManager createVideoMessage:self.userModel
-                                                                    videoUrl:@""
+                                                                    videoUrl:videoUrl
                                                                     coverUrl:coverUrl
                                                                   coverImage:coverImage
                                                                     isSender:YES];
@@ -192,6 +229,19 @@
     else if (type == LLChatMoreTypeLocation) {
         //发送定位 - 未实现
         
+        //发送声音
+        //录音的代码就不多写了, 这里假定已经录音
+        
+        //将录音上传到服务器, 获取录音链接
+        NSString *voiceUrl = @"";
+        
+        //创建录音model
+        NSInteger duration = arc4random()%60+1;
+        LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
+                                                                    duration:duration
+                                                                    voiceUrl:voiceUrl
+                                                                    isSender:YES];
+        [self sendMessageModel:model];
     }
     else if (type == LLChatMoreTypeTransfer) {
         //文件互传 - 未实现
@@ -257,7 +307,11 @@
             [cell setConfig:model isShowName:self.isShowName];
         }
         else if (model.msgType == LLMessageTypeVoice) {
-            
+            cell = [tableView dequeueReusableCellWithIdentifier:@"voiceCell"];
+            if (cell == nil) {
+                cell = [[LLChatVoiceMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"voiceCell"];
+            }
+            [cell setConfig:model isShowName:self.isShowName];
         }
         else if (model.msgType == LLMessageTypeVideo) {
             cell = [tableView dequeueReusableCellWithIdentifier:@"videoCell"];

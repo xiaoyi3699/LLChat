@@ -33,6 +33,19 @@
     return msgModel;
 }
 
+//创建录音消息
++ (LLChatMessageModel *)createVoiceMessage:(LLChatUserModel *)userModel
+                                  duration:(NSInteger)duration
+                                  voiceUrl:(NSString *)voiceUrl
+                                  isSender:(BOOL)isSender {
+    LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
+    msgModel.msgType = LLMessageTypeVoice;
+    msgModel.duration = duration;
+    msgModel.voiceUrl = voiceUrl;
+    [self setConfig:msgModel userModel:userModel isSender:isSender];
+    return msgModel;
+}
+
 //创建图片消息
 + (LLChatMessageModel *)createImageMessage:(LLChatUserModel *)userModel
                                  thumbnail:(NSString *)thumbnail

@@ -31,7 +31,6 @@
             self.modelW = LLCHAT_SCREEN_WIDTH;
         }
         else if (self.msgType == LLMessageTypeText) {
-            
             CGSize size = [[self attributedString] boundingRectWithSize:CGSizeMake((LLCHAT_SCREEN_WIDTH-127), CGFLOAT_MAX)
                                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                                                 context:nil].size;
@@ -44,7 +43,28 @@
             self.modelW = self.imgW;
         }
         else if (self.msgType == LLMessageTypeVoice) {
-            
+            CGFloat minW = 60;
+            CGFloat dw = 5.2;
+            if (SCREEN_WIDTH > 375) {
+                minW = 70;
+                dw = 5.6;
+            }
+            if (self.duration < 6) {
+                self.modelW = minW+self.duration*dw;
+            }
+            else if (self.duration < 11) {
+                self.modelW = minW+dw*5+(self.duration-5)*(dw-2);
+            }
+            else if (self.duration < 21) {
+                self.modelW = minW+dw*5+(dw-2)*5+(self.duration-10)*(dw-3);
+            }
+            else  if (self.duration < 61) {
+                self.modelW = minW+dw*5+(dw-2)*5+(dw-3)*10+(self.duration-20)*(dw-4);
+            }
+            else {
+                self.modelW = minW+dw*5+(dw-2)*5+(dw-3)*10+40*(dw-4);
+            }
+            self.modelH = 30;
         }
         else if (self.msgType == LLMessageTypeVideo) {
             [self handleImageSize];
