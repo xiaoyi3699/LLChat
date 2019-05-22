@@ -25,6 +25,8 @@
 + (LLChatMessageModel *)createImageMessage:(LLChatUserModel *)userModel
                                  thumbnail:(NSString *)thumbnail
                                   original:(NSString *)original
+                                 thumImage:(UIImage *)thumImage
+                                  oriImage:(UIImage *)oriImage
                                   isSender:(BOOL)isSender;
 
 @end

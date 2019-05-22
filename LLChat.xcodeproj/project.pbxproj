@@ -23,6 +23,7 @@
 		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
 		753D4EDF228D362F00668B54 /* LLEmoticonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 753D4EDE228D362F00668B54 /* LLEmoticonCell.m */; };
 		753D4EE2228D36AD00668B54 /* LLBlankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 753D4EE1228D36AD00668B54 /* LLBlankCell.m */; };
+		7554ED082295177F00F81CB6 /* LLChatVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7554ED072295177F00F81CB6 /* LLChatVideoMessageCell.m */; };
 		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
 		75614246213F6F7B004CC91B /* LLEmojis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* LLEmojis.plist */; };
 		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
@@ -77,6 +78,8 @@
 		753D4EDE228D362F00668B54 /* LLEmoticonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLEmoticonCell.m; sourceTree = "<group>"; };
 		753D4EE0228D36AD00668B54 /* LLBlankCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLBlankCell.h; sourceTree = "<group>"; };
 		753D4EE1228D36AD00668B54 /* LLBlankCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLBlankCell.m; sourceTree = "<group>"; };
+		7554ED062295177F00F81CB6 /* LLChatVideoMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatVideoMessageCell.h; sourceTree = "<group>"; };
+		7554ED072295177F00F81CB6 /* LLChatVideoMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatVideoMessageCell.m; sourceTree = "<group>"; };
 		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
 		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
 		75614245213F6F7B004CC91B /* LLEmojis.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LLEmojis.plist; sourceTree = "<group>"; };
@@ -226,6 +229,8 @@
 				75F9E7D2213E1A0200492ED8 /* LLChatTextMessageCell.m */,
 				75F9E7E2213E71F400492ED8 /* LLChatImageMessageCell.h */,
 				75F9E7E3213E71F400492ED8 /* LLChatImageMessageCell.m */,
+				7554ED062295177F00F81CB6 /* LLChatVideoMessageCell.h */,
+				7554ED072295177F00F81CB6 /* LLChatVideoMessageCell.m */,
 			);
 			path = MsgCell;
 			sourceTree = "<group>";
@@ -572,6 +577,7 @@
 				75A6568C22782C15001138E2 /* LLUserTableViewCell.m in Sources */,
 				75F9E6FF21391B4F00492ED8 /* main.m in Sources */,
 				75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */,
+				7554ED082295177F00F81CB6 /* LLChatVideoMessageCell.m in Sources */,
 				75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */,
 				75F9E7D3213E1A0200492ED8 /* LLChatTextMessageCell.m in Sources */,
 				7510EA39226FFD50000B58D9 /* LLChatSqliteManager.m in Sources */,

@@ -20,7 +20,6 @@
     msgModel.msgType = LLMessageTypeSystem;
     msgModel.message = message;
     [self setConfig:msgModel userModel:userModel isSender:isSender];
-    
     return msgModel;
 }
 
@@ -33,7 +32,6 @@
     msgModel.msgType = LLMessageTypeText;
     msgModel.message = message;
     [self setConfig:msgModel userModel:userModel isSender:isSender];
-    
     return msgModel;
 }
 
@@ -41,15 +39,21 @@
 + (LLChatMessageModel *)createImageMessage:(LLChatUserModel *)userModel
                                  thumbnail:(NSString *)thumbnail
                                   original:(NSString *)original
+                                 thumImage:(UIImage *)thumImage
+                                  oriImage:(UIImage *)oriImage
                                   isSender:(BOOL)isSender {
     
     LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
-    msgModel.msgType = LLMessageTypeImage;
+    msgModel.msgType   = LLMessageTypeImage;
     msgModel.message   = @"[图片]";
     msgModel.thumbnail = thumbnail;
     msgModel.original  = original;
+    msgModel.imgW = oriImage.size.width;
+    msgModel.imgH = oriImage.size.height;
+    //将图片保存到本地
+    [[LLImageCache imageCache] storeImage:oriImage forKey:original];
+    [[LLImageCache imageCache] storeImage:thumImage forKey:thumbnail];
     [self setConfig:msgModel userModel:userModel isSender:isSender];
-    
     return msgModel;
 }
 

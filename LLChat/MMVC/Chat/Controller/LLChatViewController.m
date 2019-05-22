@@ -11,6 +11,7 @@
 #import "LLChatSystemCell.h"
 #import "LLChatTextMessageCell.h"
 #import "LLChatImageMessageCell.h"
+#import "LLChatVideoMessageCell.h"
 
 @interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate>
 
@@ -93,25 +94,17 @@
         
         //图片下载的代码就不多写, 这里默认下载完成
         //原图
-        UIImage *orImage = [UIImage imageNamed:@"2.jpg"];
-        
-        //缩略图, 用于展示, 优化消息滑动时的卡顿
-        UIImage *thImage = [UIImage imageNamed:@"2_t.jpg"];
-        
-        //将图片保存到本地
-        [[LLImageCache imageCache] storeImage:orImage forKey:original];
-        [[LLImageCache imageCache] storeImage:thImage forKey:thumbnail];
+        UIImage *oriImage = [UIImage imageNamed:@"2.jpg"];
+        //缩略图, 消息展示, 优化消息滑动时的卡顿
+        UIImage *thumImage = [UIImage imageNamed:@"2_t.jpg"];
         
         //创建图片model
         LLChatMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
                                                                    thumbnail:thumbnail
                                                                     original:original
+                                                                   thumImage:thumImage
+                                                                    oriImage:oriImage
                                                                     isSender:NO];
-        
-        //图片尺寸 - 为了缓存图片高度, 使消息列表滑动更流畅
-        model.imgW = orImage.size.width;
-        model.imgH = orImage.size.height;
-        
         [self receiveMessageModel:model];
     }
     isText = !isText;
@@ -156,12 +149,12 @@
         //发送图片
         //选择图片的代码就不多写了, 这里假定已经选择了图片
         
-        //原图, 用于发送
-        UIImage *orImage = [UIImage imageNamed:@"1.jpg"];
+        //原图,
+        UIImage *oriImage = [UIImage imageNamed:@"1.jpg"];
         
-        //缩略图, 用于展示, 优化消息滑动时的卡顿
+        //缩略图, 消息展示, 优化消息滑动时的卡顿
         //将原图按照一定的算法压缩处理成缩略图, 这里直接使用外部生成的缩略图,
-        UIImage *thImage = [UIImage imageNamed:@"1_t.jpg"];
+        UIImage *thumImage = [UIImage imageNamed:@"1_t.jpg"];
         
         //将图片上传到服务器, 图片消息只是把图片的链接发送过去, 接收端根据链接展示图片
         //上传图片的代码就不多写, 具体上传方式根据自身服务器api决定, 这里假定图片已经上传到服务器上了, 并且返回了两个链接, 原图和缩略图
@@ -169,20 +162,13 @@
         NSString *original = @"http://www.vasueyun.cn/llgit/llchat/1.jpg";
         NSString *thumbnail = @"http://www.vasueyun.cn/llgit/llchat/1_t.jpg";
         
-        //将图片保存到本地
-        [[LLImageCache imageCache] storeImage:orImage forKey:original];
-        [[LLImageCache imageCache] storeImage:thImage forKey:thumbnail];
-        
         //创建图片model
         LLChatMessageModel *model = [LLChatMessageManager createImageMessage:self.userModel
                                                                    thumbnail:thumbnail
                                                                     original:original
+                                                                   thumImage:thumImage
+                                                                    oriImage:oriImage
                                                                     isSender:YES];
-        
-        //图片尺寸 - 为了缓存图片高度, 使消息列表滑动更流畅
-        model.imgW = orImage.size.width;
-        model.imgH = orImage.size.height;
-        
         [self sendMessageModel:model];
     }
     else if (type == LLChatMoreTypeVideo) {
