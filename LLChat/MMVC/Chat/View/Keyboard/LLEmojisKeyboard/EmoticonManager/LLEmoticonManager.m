@@ -78,32 +78,6 @@
     self.cht = [cht copy]; self.chtDic = [chtDic copy];
 }
 
-///富文本
-- (NSMutableAttributedString *)attributedString:(NSString *)aString {
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:aString];
-    NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression
-                                  regularExpressionWithPattern:@"\\[[^ \\[\\]]+?\\]"
-                                  options:0
-                                  error:&error];
-    if (!error) {
-        NSArray *matchs = [regex matchesInString:aString
-                                         options:0
-                                           range:NSMakeRange(0, [aString length])];
-        NSUInteger offset = 0;
-        for (NSTextCheckingResult *match in matchs) {
-            NSUInteger newLocation = match.range.location+offset;
-            NSString *result = [aString substringWithRange:match.range];
-            UIImage *image = [UIImage imageNamed:[self.chsDic objectForKey:[result base64EncodedString]]];
-            if (image) {
-                [attStr ll_setImage:image rect:CGRectMake(0, -4, 20, 20) range:NSMakeRange(newLocation, match.range.length)];
-                offset += (1-match.range.length);
-            }
-        }
-    }
-    return attStr;
-}
-
 ///匹配文本中的所有表情
 - (NSArray *)matchEmoticons:(NSString *)aString {
     NSMutableArray *emoticons = [[NSMutableArray alloc] initWithCapacity:0];
@@ -147,6 +121,32 @@
         }
     }
     return nil;
+}
+
+///富文本
+- (NSMutableAttributedString *)attributedString:(NSString *)aString {
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:aString];
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression
+                                  regularExpressionWithPattern:@"\\[[^ \\[\\]]+?\\]"
+                                  options:0
+                                  error:&error];
+    if (!error) {
+        NSArray *matchs = [regex matchesInString:aString
+                                         options:0
+                                           range:NSMakeRange(0, [aString length])];
+        NSUInteger offset = 0;
+        for (NSTextCheckingResult *match in matchs) {
+            NSUInteger newLocation = match.range.location+offset;
+            NSString *result = [aString substringWithRange:match.range];
+            UIImage *image = [UIImage imageNamed:[self.chsDic objectForKey:[result base64EncodedString]]];
+            if (image) {
+                [attStr ll_setImage:image rect:CGRectMake(0, -4, 20, 20) range:NSMakeRange(newLocation, match.range.length)];
+                offset += (1-match.range.length);
+            }
+        }
+    }
+    return attStr;
 }
 
 @end
