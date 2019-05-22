@@ -74,6 +74,21 @@
     [self setRightItem];
 }
 
+- (void)loadMessage:(NSInteger)page {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        if (self.userModel) {
+            self.messageModels = [[LLChatDBManager DBManager] messagesWithUser:self.userModel];
+        }
+        else {
+            self.messageModels = [[LLChatDBManager DBManager] messagesWithGroup:self.groupModel];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self tableViewScrollToBottom:NO];
+        });
+    });
+}
+
 #pragma mark - 模拟收到消息
 - (void)setRightItem {
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"模拟收到消息" style:UIBarButtonItemStylePlain target:self action:@selector(rightItemClick)];
@@ -146,63 +161,8 @@
     }
     msgType = (msgType+1)%5;
 }
-#pragma mark -
-
-- (void)loadMessage:(NSInteger)page {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        if (self.userModel) {
-            self.messageModels = [[LLChatDBManager DBManager] messagesWithUser:self.userModel];
-        }
-        else {
-            self.messageModels = [[LLChatDBManager DBManager] messagesWithGroup:self.groupModel];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [self tableViewScrollToBottom:NO];
-        });
-    });
-}
 
 #pragma mark - 发送消息
-//文本变化
-- (void)inputView:(LLInputView *)inputView didChangeText:(NSString *)text {
-    //保存草稿
-    [[LLChatDBManager DBManager] setDraft:text model:self.userModel];
-}
-
-- (void)inputView:(LLInputView *)inputView didChangeRecordType:(LLChatRecordType)type {
-    if (type == LLChatRecordTypeTouchDown) {
-        self.recordDuration = [LLChatHelper nowTimestamp]/1000;
-        NSLog(@"开始录音");
-    }
-    else if (type == LLChatRecordTypeTouchCancel) {
-        NSLog(@"取消录音");
-    }
-    else if (type == LLChatRecordTypeTouchFinish) {
-        self.recordDuration = ([LLChatHelper nowTimestamp]/1000-self.recordDuration);
-        if (self.recordDuration > 1) {
-            //发送声音
-            //录音的代码就不多写了, 这里假定已经录音
-            
-            //将录音上传到服务器, 获取录音链接
-            NSString *voiceUrl = @"";
-            
-            //创建录音model
-            LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
-                                                                        duration:self.recordDuration
-                                                                        voiceUrl:voiceUrl
-                                                                        isSender:YES];
-            [self sendMessageModel:model];
-        }
-        else {
-            NSLog(@"录音时间过短");
-        }
-    }
-    else {
-        NSLog(@"手指滑动到按钮的外面了");
-    }
-}
-
 //文本消息
 - (void)inputView:(LLInputView *)inputView sendMessage:(NSString *)message {
     //清空草稿
@@ -268,6 +228,174 @@
     else if (type == LLChatMoreTypeTransfer) {
         //文件互传 - 未实现
         
+    }
+}
+
+//文本变化
+- (void)inputView:(LLInputView *)inputView didChangeText:(NSString *)text {
+    //保存草稿
+    [[LLChatDBManager DBManager] setDraft:text model:self.userModel];
+}
+
+//录音状态变化
+- (void)inputView:(LLInputView *)inputView didChangeRecordType:(LLChatRecordType)type {
+    if (type == LLChatRecordTypeTouchDown) {
+        self.recordDuration = [LLChatHelper nowTimestamp]/1000;
+        NSLog(@"开始录音");
+    }
+    else if (type == LLChatRecordTypeTouchCancel) {
+        NSLog(@"取消录音");
+    }
+    else if (type == LLChatRecordTypeTouchFinish) {
+        self.recordDuration = ([LLChatHelper nowTimestamp]/1000-self.recordDuration);
+        if (self.recordDuration > 1) {
+            //发送声音
+            //录音的代码就不多写了, 这里假定已经录音
+            
+            //将录音上传到服务器, 获取录音链接
+            NSString *voiceUrl = @"";
+            
+            //创建录音model
+            LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
+                                                                        duration:self.recordDuration
+                                                                        voiceUrl:voiceUrl
+                                                                        isSender:YES];
+            [self sendMessageModel:model];
+        }
+        else {
+            NSLog(@"录音时间过短");
+        }
+    }
+    else {
+        NSLog(@"手指滑动到按钮的外面了");
+    }
+}
+
+//键盘状态变化
+- (void)inputView:(LLInputView *)inputView willChangeFrameWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
+    self.isEditing = isEditing;
+    
+    CGFloat TContentH = self.tableView.contentSize.height;
+    CGFloat tableViewH = self.tableView.bounds.size.height;
+    CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
+    
+    CGFloat offsetY = 0;
+    if (TContentH < tableViewH) {
+        offsetY = TContentH+keyboardH-tableViewH;
+        if (offsetY < 0) {
+            offsetY = 0;
+        }
+    }
+    else {
+        offsetY = keyboardH;
+    }
+    
+    CGRect TRect = self.tableView.frame;
+    if (offsetY > 0) {
+        TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
+        [UIView animateWithDuration:duration animations:^{
+            self.tableView.frame = TRect;
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }];
+    }
+    else {
+        TRect.origin.y = LLCHAT_NAV_TOP_H;
+        [UIView animateWithDuration:duration animations:^{
+            self.tableView.frame = TRect;
+        }];
+    }
+}
+
+#pragma mark - private method
+//发送消息
+- (void)sendMessageModel:(LLChatMessageModel *)model {
+    [self addMessageModel:model];
+    
+    //模拟消息发送中、发送成功、发送失败
+    //根据需要可以将消息默认值设置为发送成功, 此处是为了演示效果
+    NSInteger i = arc4random()%2;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (i == 0) {
+            model.sendType = LLMessageSendTypeFailed;
+        }
+        else {
+            model.sendType = LLMessageSendTypeSuccess;
+        }
+        if (self.userModel) {
+            [[LLChatDBManager DBManager] updateMessageModel:model chatWithUser:self.userModel];
+        }
+        else {
+            [[LLChatDBManager DBManager] updateMessageModel:model chatWithGroup:self.groupModel];
+        }
+        [self.tableView reloadData];
+    });
+    
+    [LLChatNotificationManager postSessionNotification];
+}
+
+//收到消息
+- (void)receiveMessageModel:(LLChatMessageModel *)model {
+    [self addMessageModel:model];
+    
+    [LLChatNotificationManager postSessionNotification];
+}
+
+//消息存储
+- (void)addMessageModel:(LLChatMessageModel *)model {
+    [self.messageModels addObject:model];
+    [_tableView reloadData];
+    [self tableViewScrollToBottom:YES];
+    
+    if (self.userModel) {
+        [[LLChatDBManager DBManager] insertMessage:model chatWithUser:self.userModel];
+    }
+    else {
+        [[LLChatDBManager DBManager] insertMessage:model chatWithGroup:self.groupModel];
+    }
+}
+
+- (void)tableViewScrollToBottom:(BOOL)animated {
+    if (animated) {
+        if (self.isEditing) {
+            CGFloat TContentH = self.tableView.contentSize.height;
+            CGFloat tableViewH = self.tableView.bounds.size.height;
+            
+            CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
+            
+            CGFloat offsetY = 0;
+            if (TContentH < tableViewH) {
+                offsetY = TContentH+keyboardH-tableViewH;
+                if (offsetY < 0) {
+                    offsetY = 0;
+                }
+            }
+            else {
+                offsetY = keyboardH;
+            }
+            
+            if (offsetY > LLCHAT_BOTTOM_H) {
+                CGRect TRect = self.tableView.frame;
+                TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.tableView.frame = TRect;
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                }];
+            }
+        }
+        else {
+            CGFloat TContentH = self.tableView.contentSize.height;
+            CGFloat tableViewH = self.tableView.bounds.size.height;
+            if (TContentH > tableViewH) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                }];
+            }
+        }
+    }
+    else {
+        if (self.messageModels.count) {
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        }
     }
 }
 
@@ -394,134 +522,6 @@
         _messageModels = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return _messageModels;
-}
-
-#pragma mark - 键盘状态代理
-- (void)inputView:(LLInputView *)inputView willChangeFrameWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
-    self.isEditing = isEditing;
-    
-    CGFloat TContentH = self.tableView.contentSize.height;
-    CGFloat tableViewH = self.tableView.bounds.size.height;
-    CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
-
-    CGFloat offsetY = 0;
-    if (TContentH < tableViewH) {
-        offsetY = TContentH+keyboardH-tableViewH;
-        if (offsetY < 0) {
-            offsetY = 0;
-        }
-    }
-    else {
-        offsetY = keyboardH;
-    }
-    
-    CGRect TRect = self.tableView.frame;
-    if (offsetY > 0) {
-        TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
-        [UIView animateWithDuration:duration animations:^{
-            self.tableView.frame = TRect;
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        }];
-    }
-    else {
-        TRect.origin.y = LLCHAT_NAV_TOP_H;
-        [UIView animateWithDuration:duration animations:^{
-            self.tableView.frame = TRect;
-        }];
-    }
-}
-
-#pragma mark - private method
-//发送消息
-- (void)sendMessageModel:(LLChatMessageModel *)model {
-    [self addMessageModel:model];
-    
-    //模拟消息发送中、发送成功、发送失败
-    //根据需要可以将消息默认值设置为发送成功, 此处是为了演示效果
-    NSInteger i = arc4random()%2;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        if (i == 0) {
-            model.sendType = LLMessageSendTypeFailed;
-        }
-        else {
-            model.sendType = LLMessageSendTypeSuccess;
-        }
-        if (self.userModel) {
-            [[LLChatDBManager DBManager] updateMessageModel:model chatWithUser:self.userModel];
-        }
-        else {
-            [[LLChatDBManager DBManager] updateMessageModel:model chatWithGroup:self.groupModel];
-        }
-        [self.tableView reloadData];
-    });
-    
-    [LLChatNotificationManager postSessionNotification];
-}
-
-//收到消息
-- (void)receiveMessageModel:(LLChatMessageModel *)model {
-    [self addMessageModel:model];
-    
-    [LLChatNotificationManager postSessionNotification];
-}
-
-//消息存储
-- (void)addMessageModel:(LLChatMessageModel *)model {
-    [self.messageModels addObject:model];
-    [_tableView reloadData];
-    [self tableViewScrollToBottom:YES];
-    
-    if (self.userModel) {
-        [[LLChatDBManager DBManager] insertMessage:model chatWithUser:self.userModel];
-    }
-    else {
-        [[LLChatDBManager DBManager] insertMessage:model chatWithGroup:self.groupModel];
-    }
-}
-
-- (void)tableViewScrollToBottom:(BOOL)animated {
-    if (animated) {
-        if (self.isEditing) {
-            CGFloat TContentH = self.tableView.contentSize.height;
-            CGFloat tableViewH = self.tableView.bounds.size.height;
-            
-            CGFloat keyboardH = LLCHAT_SCREEN_HEIGHT-self.inputView.minY-LLCHAT_INPUT_H;
-            
-            CGFloat offsetY = 0;
-            if (TContentH < tableViewH) {
-                offsetY = TContentH+keyboardH-tableViewH;
-                if (offsetY < 0) {
-                    offsetY = 0;
-                }
-            }
-            else {
-                offsetY = keyboardH;
-            }
-            
-            if (offsetY > LLCHAT_BOTTOM_H) {
-                CGRect TRect = self.tableView.frame;
-                TRect.origin.y = LLCHAT_NAV_TOP_H-offsetY+LLCHAT_BOTTOM_H;
-                [UIView animateWithDuration:0.25 animations:^{
-                    self.tableView.frame = TRect;
-                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                }];
-            }
-        }
-        else {
-            CGFloat TContentH = self.tableView.contentSize.height;
-            CGFloat tableViewH = self.tableView.bounds.size.height;
-            if (TContentH > tableViewH) {
-                [UIView animateWithDuration:0.25 animations:^{
-                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                }];
-            }
-        }
-    }
-    else {
-        if (self.messageModels.count) {
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messageModels.count-1) inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-        }
-    }
 }
 
 - (void)dealloc {

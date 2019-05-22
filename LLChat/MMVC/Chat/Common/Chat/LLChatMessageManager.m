@@ -40,6 +40,7 @@
                                   isSender:(BOOL)isSender {
     LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
     msgModel.msgType = LLMessageTypeVoice;
+    msgModel.message = @"[语音]";
     msgModel.duration = duration;
     msgModel.voiceUrl = voiceUrl;
     [self setConfig:msgModel userModel:userModel isSender:isSender];
@@ -75,7 +76,7 @@
                                   isSender:(BOOL)isSender {
     LLChatMessageModel *msgModel = [[LLChatMessageModel alloc] init];
     msgModel.msgType   = LLMessageTypeVideo;
-    msgModel.message   = @"[图片]";
+    msgModel.message   = @"[视频]";
     msgModel.videoUrl = videoUrl;
     msgModel.coverUrl  = coverUrl;
     msgModel.imgW = coverImage.size.width;
