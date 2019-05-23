@@ -75,17 +75,22 @@ typedef enum : NSInteger {
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(40, 7, w-120, 35)];
         _textView.font = [UIFont systemFontOfSize:13];
         _textView.textColor = [UIColor darkTextColor];
+        _textView.returnKeyType = UIReturnKeySend;
+        _textView.delegate = self;
         _textView.layer.masksToBounds = YES;
         _textView.layer.cornerRadius = 2;
         _textView.layer.borderWidth = 0.5;
-        _textView.returnKeyType = UIReturnKeySend;
-        _textView.delegate = self;
         _textView.layer.borderColor = [UIColor colorWithRed:200/255. green:200/255. blue:200/255. alpha:1].CGColor;
         [self addSubview:_textView];
         
         _recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _recordBtn.frame = _textView.frame;
         _recordBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        _recordBtn.backgroundColor = [UIColor whiteColor];
+        _recordBtn.layer.masksToBounds = YES;
+        _recordBtn.layer.cornerRadius = 2;
+        _recordBtn.layer.borderWidth = 0.5;
+        _recordBtn.layer.borderColor = [UIColor colorWithRed:200/255. green:200/255. blue:200/255. alpha:1].CGColor;
         [_recordBtn setTitle:@"按住 说话" forState:UIControlStateNormal];
         [_recordBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_recordBtn addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
