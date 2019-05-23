@@ -56,7 +56,7 @@
 - (BOOL)iPhoneX {
     if (_iPhoneX == -1) {
         BOOL iPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone);
-        _iPhoneX = (iPhone && [UIScreen mainScreen].bounds.size.height==812);
+        _iPhoneX = (iPhone && [UIScreen mainScreen].bounds.size.height>=812);
     }
     return (_iPhoneX == 1);
 }
