@@ -1,7 +1,9 @@
-#效果图
+**效果图**
+
 ![Image text](https://github.com/wangzhaomeng/LLChat/blob/master/LLChat/GitImage/preview.png?raw=true)
 
-#手动集成
+**手动集成**
+
 **1、设置 Build Setting**
 搜索 `other linker flags`
 添加 `-ObjC`
