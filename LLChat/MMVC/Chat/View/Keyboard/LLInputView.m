@@ -92,6 +92,7 @@ typedef enum : NSInteger {
         [_recordBtn addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchCancel];
         [_recordBtn addTarget:self action:@selector(touchCancel:) forControlEvents:UIControlEventTouchUpOutside];
         [_recordBtn addTarget:self action:@selector(touchFinish:) forControlEvents:UIControlEventTouchUpInside];
+        [_recordBtn addTarget:self action:@selector(touchDragInside:) forControlEvents:UIControlEventTouchDragInside];
         [_recordBtn addTarget:self action:@selector(touchDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
         [self addSubview:_recordBtn];
         _recordBtn.hidden = YES;
@@ -222,6 +223,12 @@ typedef enum : NSInteger {
     [_recordBtn setTitle:@"松开 结束" forState:UIControlStateNormal];
     [_recordBtn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     [self didChangeRecordType:LLChatRecordTypeTouchDragOutside];
+}
+
+- (void)touchDragInside:(UIButton *)btn {
+    [_recordBtn setTitle:@"松开 结束" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    [self didChangeRecordType:LLChatRecordTypeTouchDragInside];
 }
 
 - (void)didChangeRecordType:(LLChatRecordType)type {

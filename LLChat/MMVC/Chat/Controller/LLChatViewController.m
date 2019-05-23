@@ -13,6 +13,7 @@
 #import "LLChatVoiceMessageCell.h"
 #import "LLChatImageMessageCell.h"
 #import "LLChatVideoMessageCell.h"
+#import "LLChatRecordAnimation.h"
 
 @interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate>
 
@@ -24,6 +25,7 @@
 @property (nonatomic, assign) NSInteger recordDuration;
 @property (nonatomic, strong) LLChatUserModel *userModel;
 @property (nonatomic, strong) LLChatGroupModel *groupModel;
+@property (nonatomic, strong) LLChatRecordAnimation *recordAnimation;
 
 @end
 
@@ -240,15 +242,31 @@
 //录音状态变化
 - (void)inputView:(LLInputView *)inputView didChangeRecordType:(LLChatRecordType)type {
     if (type == LLChatRecordTypeTouchDown) {
+        //手指按下, 开始录音
+        //此处录音计时采用的时间差
+        //若是需要限制录音时长, 可采用计时器进行计时
         self.recordDuration = [LLChatHelper nowTimestamp]/1000;
-        NSLog(@"开始录音");
+        [self.view addSubview:self.recordAnimation];
+        self.recordAnimation.volume = 1.0;
+    }
+    else if (type == LLChatRecordTypeTouchDragOutside) {
+        //手指滑动到外面
+        [self.recordAnimation showVoiceCancel];
+    }
+    else if (type == LLChatRecordTypeTouchDragInside) {
+        //手指滑动到里面
+        [self.recordAnimation showVoiceAnimation];
     }
     else if (type == LLChatRecordTypeTouchCancel) {
-        NSLog(@"取消录音");
+        //取消录音
+        [self.recordAnimation removeFromSuperview];
     }
     else if (type == LLChatRecordTypeTouchFinish) {
+        //结束录音
         self.recordDuration = ([LLChatHelper nowTimestamp]/1000-self.recordDuration);
         if (self.recordDuration > 1) {
+            //录音完成
+            [self.recordAnimation removeFromSuperview];
             //发送声音
             //录音的代码就不多写了, 这里假定已经录音
             
@@ -263,11 +281,12 @@
             [self sendMessageModel:model];
         }
         else {
-            NSLog(@"录音时间过短");
+            //录音时间太短
+            [self.recordAnimation showVoiceShort];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.recordAnimation removeFromSuperview];
+            });
         }
-    }
-    else {
-        NSLog(@"手指滑动到按钮的外面了");
     }
 }
 
@@ -522,6 +541,13 @@
         _messageModels = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return _messageModels;
+}
+
+- (LLChatRecordAnimation *)recordAnimation {
+    if (_recordAnimation == nil) {
+        _recordAnimation = [[LLChatRecordAnimation alloc] init];
+    }
+    return _recordAnimation;
 }
 
 - (void)dealloc {

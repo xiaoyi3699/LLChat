@@ -16,6 +16,7 @@ typedef enum : NSInteger {
     LLChatRecordTypeTouchDown = 0,
     LLChatRecordTypeTouchCancel,
     LLChatRecordTypeTouchFinish,
+    LLChatRecordTypeTouchDragInside,
     LLChatRecordTypeTouchDragOutside,
 }LLChatRecordType;
 
