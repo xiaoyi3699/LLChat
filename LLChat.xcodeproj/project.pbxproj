@@ -27,6 +27,7 @@
 		7554ED0B2295209000F81CB6 /* LLChatVoiceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7554ED0A2295209000F81CB6 /* LLChatVoiceMessageCell.m */; };
 		7554ED142295546600F81CB6 /* preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 7554ED132295546600F81CB6 /* preview.png */; };
 		7554ED1822962BF000F81CB6 /* LLChatRecordAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7554ED1722962BF000F81CB6 /* LLChatRecordAnimation.m */; };
+		7554ED1A2296480A00F81CB6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 7554ED192296480A00F81CB6 /* setting.png */; };
 		75614244213F6D65004CC91B /* LLHorizontalLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614242213F6D65004CC91B /* LLHorizontalLayout.m */; };
 		75614246213F6F7B004CC91B /* LLEmojis.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75614245213F6F7B004CC91B /* LLEmojis.plist */; };
 		75614249213F6F9A004CC91B /* LLEmojisKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 75614248213F6F9A004CC91B /* LLEmojisKeyboard.m */; };
@@ -88,6 +89,7 @@
 		7554ED132295546600F81CB6 /* preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview.png; sourceTree = "<group>"; };
 		7554ED1622962BF000F81CB6 /* LLChatRecordAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatRecordAnimation.h; sourceTree = "<group>"; };
 		7554ED1722962BF000F81CB6 /* LLChatRecordAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatRecordAnimation.m; sourceTree = "<group>"; };
+		7554ED192296480A00F81CB6 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		75614242213F6D65004CC91B /* LLHorizontalLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLHorizontalLayout.m; sourceTree = "<group>"; };
 		75614243213F6D65004CC91B /* LLHorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLHorizontalLayout.h; sourceTree = "<group>"; };
 		75614245213F6F7B004CC91B /* LLEmojis.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = LLEmojis.plist; sourceTree = "<group>"; };
@@ -321,12 +323,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		7554ED0C2295511E00F81CB6 /* Preview */ = {
+		7554ED0C2295511E00F81CB6 /* GitImage */ = {
 			isa = PBXGroup;
 			children = (
+				7554ED192296480A00F81CB6 /* setting.png */,
 				7554ED132295546600F81CB6 /* preview.png */,
 			);
-			path = Preview;
+			path = GitImage;
 			sourceTree = "<group>";
 		};
 		7554ED1522962BCA00F81CB6 /* recordAnimation */ = {
@@ -401,7 +404,7 @@
 			children = (
 				75F9E70621391B9B00492ED8 /* LLAppDelegate */,
 				75F9E7A821391DB800492ED8 /* MMVC */,
-				7554ED0C2295511E00F81CB6 /* Preview */,
+				7554ED0C2295511E00F81CB6 /* GitImage */,
 			);
 			path = LLChat;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				7554ED142295546600F81CB6 /* preview.png in Resources */,
 				75614246213F6F7B004CC91B /* LLEmojis.plist in Resources */,
 				7525CBF8228D46C500A2A70F /* LLEmoticon1.plist in Resources */,
+				7554ED1A2296480A00F81CB6 /* setting.png in Resources */,
 				7525CBF9228D46C500A2A70F /* LLEmoticon2.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -747,7 +751,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78Y7DBKKYD;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common",
@@ -781,7 +785,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78Y7DBKKYD;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common",
