@@ -174,6 +174,7 @@ typedef enum : NSInteger {
             [self chatResignFirstResponder];
         }
         else {
+            _recordBtn.hidden = YES;
             if (btn.tag == 1) {
                 //表情按钮
                 _voiceBtn.selected = NO;
