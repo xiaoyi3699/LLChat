@@ -22,7 +22,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.title = @"消息";
+        self.title = @"会话";
         self.isRefreshSession = NO;
     }
     return self;

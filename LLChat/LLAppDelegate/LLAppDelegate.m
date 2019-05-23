@@ -45,9 +45,9 @@
 }
 
 - (void)setConfig:(UITabBarController *)tabBarController {
-    NSArray *titles = @[@"消息",@"好友"];
-    NSArray *normalImages = @[@"chat_tabbar_msg_normal",@"chat_tabbar_friend_normal"];
-    NSArray *selectImages = @[@"chat_tabbar_msg_selected",@"chat_tabbar_friend_selected"];
+    NSArray *titles = @[@"会话",@"好友"];
+    NSArray *normalImages = @[@"chat_tabbar_session_normal",@"chat_tabbar_friend_normal"];
+    NSArray *selectImages = @[@"chat_tabbar_session_selected",@"chat_tabbar_friend_selected"];
     
     for (NSInteger i = 0; i < tabBarController.viewControllers.count; i ++) {
         
