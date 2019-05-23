@@ -17,7 +17,7 @@
 ///用户头像
 @property (nonatomic, strong) NSString *avatar;
 ///聊天界面是否显示用户昵称
-@property (nonatomic, assign) BOOL isShowName;
+@property (nonatomic, assign, getter=isShowName) BOOL showName;
 
 ///默认登录用户
 + (instancetype)shareInfo;

@@ -208,7 +208,7 @@ NSString *const LL_SESSION = @"ll_session";
         session.sid = sid;
         session.name = name;
         session.avatar = avatar;
-        session.isGroup = isGroup;
+        session.cluster = isGroup;
         [self insertSessionModel:session];
     }
     return session;
@@ -222,7 +222,7 @@ NSString *const LL_SESSION = @"ll_session";
 
 ///查询会话对应的用户或者群聊
 - (LLChatBaseModel *)selectChatModel:(LLChatSessionModel *)model {
-    if (model.isGroup) {
+    if (model.isCluster) {
         return [self selectGroupModel:model.sid];
     }
     else {
@@ -254,7 +254,7 @@ NSString *const LL_SESSION = @"ll_session";
 //private
 - (NSMutableArray *)messagesWithModel:(LLChatBaseModel *)model {
     NSString *tableName = [self tableNameWithModel:model];
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ ORDER BY timestamp DESC LIMIT 100",tableName];
+    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@ ORDER BY timestmp DESC LIMIT 100",tableName];
     NSArray *list = [[LLChatSqliteManager defaultManager] selectWithSql:sql];
     NSMutableArray *arr = [NSMutableArray arrayWithCapacity:list.count];
     for (NSDictionary *dic in list) {
@@ -278,7 +278,7 @@ NSString *const LL_SESSION = @"ll_session";
 - (void)insertMessage:(LLChatMessageModel *)message chatWithModel:(LLChatBaseModel *)model{
     LLChatSessionModel *session = [self selectSessionModel:model];
     session.lastMsg = message.message;
-    session.lastTimestamp = message.timestamp;
+    session.lastTimestmp = message.timestmp;
     [self updateSessionModel:session];
     
     NSString *tableName = [self tableNameWithModel:model];

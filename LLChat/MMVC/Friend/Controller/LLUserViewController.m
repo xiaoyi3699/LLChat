@@ -64,7 +64,7 @@
     model.uid = uid;
     model.name = [NSString stringWithFormat:@"用户:%@",uid];
     model.avatar = @"http://sqb.wowozhe.com/images/touxiangs/10026820.jpg";
-    model.isShowName = YES;
+    model.showName = YES;
     //加入列表
     [self.users addObject:model];
     [self.tableView reloadData];

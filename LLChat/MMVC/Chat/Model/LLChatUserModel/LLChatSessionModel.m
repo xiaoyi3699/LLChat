@@ -12,7 +12,7 @@
 
 ///时间戳排序
 - (NSComparisonResult)compareOtherModel:(LLChatSessionModel *)model {
-    return self.lastTimestamp < model.lastTimestamp;
+    return self.lastTimestmp < model.lastTimestmp;
 }
 
 @end

@@ -99,9 +99,9 @@
         msgModel.name   = userModel.name;
         msgModel.avatar = userModel.avatar;
     }
-    msgModel.isSender  = isSender;
+    msgModel.sender  = isSender;
     msgModel.sendType  = LLMessageSendTypeWaiting;
-    msgModel.timestamp = [LLChatHelper nowTimestamp];
+    msgModel.timestmp  = [LLChatHelper nowTimestamp];
 }
 
 @end

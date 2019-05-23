@@ -73,8 +73,8 @@
 
 - (void)setConfig:(LLChatSessionModel *)model {
     
-    BOOL isIgnore = model.isIgnore;
-    NSInteger lastTimestamp = model.lastTimestamp;
+    BOOL isIgnore = model.isSilence;
+    NSInteger lastTimestamp = model.lastTimestmp;
     NSString *unreadNum = model.unreadNum;
     NSString *lastMsg = model.lastMsg;
     

@@ -20,8 +20,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
-@property (nonatomic, assign) BOOL isEditing;
-@property (nonatomic, assign) BOOL isShowName;
+@property (nonatomic, assign, getter=isEditing) BOOL editing;
+@property (nonatomic, assign, getter=isShowName) BOOL showName;
 @property (nonatomic, assign) NSInteger recordDuration;
 @property (nonatomic, strong) LLChatUserModel *userModel;
 @property (nonatomic, strong) LLChatGroupModel *groupModel;
@@ -59,11 +59,11 @@
     self.title = @"消息";
     if ([model isKindOfClass:[LLChatUserModel class]]) {
         self.userModel = (LLChatUserModel *)model;
-        self.isShowName = self.userModel.isShowName;
+        self.showName = self.userModel.isShowName;
     }
     else {
         self.groupModel = (LLChatGroupModel *)model;
-        self.isShowName = self.groupModel.isShowName;
+        self.showName = self.groupModel.isShowName;
     }
 }
 
@@ -292,7 +292,7 @@
 
 //键盘状态变化
 - (void)inputView:(LLInputView *)inputView willChangeFrameWithDuration:(CGFloat)duration isEditing:(BOOL)isEditing {
-    self.isEditing = isEditing;
+    self.editing = isEditing;
     
     CGFloat TContentH = self.tableView.contentSize.height;
     CGFloat tableViewH = self.tableView.bounds.size.height;

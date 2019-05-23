@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) NSMutableArray *sessions;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, assign) BOOL isRefreshSession;
+@property (nonatomic, assign, getter=isRefreshSession) BOOL refreshSession;
 
 @end
 
@@ -23,7 +23,7 @@
     self = [super init];
     if (self) {
         self.title = @"会话";
-        self.isRefreshSession = NO;
+        self.refreshSession = NO;
     }
     return self;
 }
@@ -41,7 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.isRefreshSession) {
-        self.isRefreshSession = NO;
+        self.refreshSession = NO;
         [self loadSession];
     }
 }
@@ -61,7 +61,7 @@
 
 //收到刷新session的通知
 - (void)receiveSessionNotification {
-    self.isRefreshSession = YES;
+    self.refreshSession = YES;
 }
 
 #pragma mark - 模拟消息免打扰、显示未读未读消息数等
@@ -78,19 +78,19 @@
     for (LLChatSessionModel *session in self.sessions) {
         if (type == 0) {
             session.unreadNum = @"0";
-            session.isIgnore = NO;
+            session.silence = NO;
         }
         else if (type == 1) {
             session.unreadNum = @"18";
-            session.isIgnore = NO;
+            session.silence = NO;
         }
         else if (type == 2) {
             session.unreadNum = @"18";
-            session.isIgnore = YES;
+            session.silence = YES;
         }
         else if (type == 3) {
             session.unreadNum = @"100";
-            session.isIgnore = NO;
+            session.silence = NO;
         }
     }
     [self.tableView reloadData];

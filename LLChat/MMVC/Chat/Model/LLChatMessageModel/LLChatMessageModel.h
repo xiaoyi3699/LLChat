@@ -36,11 +36,11 @@ typedef enum : NSInteger {
 ///文本内容
 @property (nonatomic, strong) NSString *message;
 ///是否是自己发送
-@property (nonatomic, assign) BOOL isSender;
+@property (nonatomic, assign, getter=isSender) BOOL sender;
 ///是否已读
-@property (nonatomic, assign) BOOL isRead;
-///消息发送时间戳
-@property (nonatomic, assign) NSInteger timestamp;
+@property (nonatomic, assign ,getter=isRead) BOOL read;
+///消息发送时间戳 <该字段参与数据排序, 不要修改字段名, 为了避开数据库关键字, 故意拼错>
+@property (nonatomic, assign) NSInteger timestmp;
 ///消息类型
 @property (nonatomic, assign) LLMessageType msgType;
 ///消息发送结果
