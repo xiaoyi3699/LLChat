@@ -23,23 +23,27 @@
                     [UIImage imageNamed:@"voice_4"],
                     [UIImage imageNamed:@"voice_5"],
                     [UIImage imageNamed:@"voice_6"]];
+        _isPause = YES;
     }
     return self;
 }
 
 - (void)showVoiceCancel {
+    if (_isPause) return;
     _isPause = YES;
     [self stopAnimating];
     self.image = [UIImage imageNamed:@"voice_cancel"];
 }
 
 - (void)showVoiceShort {
+    if (_isPause) return;
     _isPause = YES;
     [self stopAnimating];
     self.image = [UIImage imageNamed:@"voice_short"];
 }
 
 - (void)showVoiceAnimation {
+    if (_isPause == NO) return;
     _isPause = NO;
     [self updateImages];
 }
@@ -80,6 +84,7 @@
 }
 
 - (void)removeFromSuperview {
+    _isPause = YES;
     self.image = nil;
     [self stopAnimating];
     self.animationImages = nil;
