@@ -22,14 +22,16 @@
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign, getter=isEditing) BOOL editing;
 @property (nonatomic, assign, getter=isShowName) BOOL showName;
-@property (nonatomic, assign) NSInteger recordDuration;
+@property (nonatomic, assign) CGFloat recordDuration;
 @property (nonatomic, strong) LLChatUserModel *userModel;
 @property (nonatomic, strong) LLChatGroupModel *groupModel;
 @property (nonatomic, strong) LLChatRecordAnimation *recordAnimation;
 
 @end
 
-@implementation LLChatViewController
+@implementation LLChatViewController {
+    BOOL _deferringSystemGestures;
+}
 
 - (instancetype)initWithUser:(LLChatUserModel *)userModel {
     self = [super init];
@@ -57,6 +59,7 @@
 
 - (void)setConfig:(LLChatBaseModel *)model {
     self.title = @"消息";
+    
     if ([model isKindOfClass:[LLChatUserModel class]]) {
         self.userModel = (LLChatUserModel *)model;
         self.showName = self.userModel.isShowName;
@@ -69,7 +72,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //屏蔽系统底部手势
+    _deferringSystemGestures = YES;
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.inputView];
     [self loadMessage:0];
@@ -245,7 +249,7 @@
         //手指按下, 开始录音
         //此处录音计时采用的时间差
         //若是需要限制录音时长, 可采用计时器进行计时
-        self.recordDuration = [LLChatHelper nowTimestamp]/1000;
+        self.recordDuration = [LLChatHelper nowTimestamp];
         [self.view addSubview:self.recordAnimation];
         self.recordAnimation.volume = 1.0;
     }
@@ -263,8 +267,8 @@
     }
     else if (type == LLChatRecordTypeTouchFinish) {
         //结束录音
-        self.recordDuration = ([LLChatHelper nowTimestamp]/1000-self.recordDuration);
-        if (self.recordDuration > 1) {
+        self.recordDuration = ([LLChatHelper nowTimestamp]-self.recordDuration);
+        if (self.recordDuration > 1000) {
             //录音完成
             [self.recordAnimation removeFromSuperview];
             //发送声音
@@ -275,17 +279,22 @@
             
             //创建录音model
             LLChatMessageModel *model = [LLChatMessageManager createVoiceMessage:self.userModel
-                                                                        duration:self.recordDuration
+                                                                        duration:(NSInteger)self.recordDuration/1000
                                                                         voiceUrl:voiceUrl
                                                                         isSender:YES];
             [self sendMessageModel:model];
         }
         else {
-            //录音时间太短
             [self.recordAnimation showVoiceShort];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.recordDuration > 200) {
+                //录音时间太短
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.recordAnimation removeFromSuperview];
+                });
+            }
+            else {
                 [self.recordAnimation removeFromSuperview];
-            });
+            }
         }
     }
 }
@@ -548,6 +557,14 @@
         _recordAnimation = [[LLChatRecordAnimation alloc] init];
     }
     return _recordAnimation;
+}
+
+//屏蔽屏幕底部的系统手势
+- (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
+    if (_deferringSystemGestures) {
+        return  UIRectEdgeBottom;
+    }
+    return UIRectEdgeNone;
 }
 
 - (void)dealloc {
