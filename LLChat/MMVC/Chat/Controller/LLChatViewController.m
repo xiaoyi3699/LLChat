@@ -59,7 +59,6 @@
 
 - (void)setConfig:(LLChatBaseModel *)model {
     self.title = @"消息";
-    
     if ([model isKindOfClass:[LLChatUserModel class]]) {
         self.userModel = (LLChatUserModel *)model;
         self.showName = self.userModel.isShowName;
