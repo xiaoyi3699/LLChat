@@ -15,23 +15,23 @@
 #import "LLChatVideoMessageCell.h"
 #import "LLChatRecordAnimation.h"
 
-@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,LLInputViewDelegate>
+@interface LLChatViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,LLInputViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) LLInputView *inputView;
 @property (nonatomic, strong) NSMutableArray *messageModels;
 @property (nonatomic, assign, getter=isEditing) BOOL editing;
 @property (nonatomic, assign, getter=isShowName) BOOL showName;
+@property (nonatomic, assign, getter=isDeferredSystemGestures) BOOL deferredSystemGestures;
 @property (nonatomic, assign) CGFloat recordDuration;
 @property (nonatomic, strong) LLChatUserModel *userModel;
 @property (nonatomic, strong) LLChatGroupModel *groupModel;
 @property (nonatomic, strong) LLChatRecordAnimation *recordAnimation;
+@property (nonatomic, weak) id<UIGestureRecognizerDelegate> recognizerDelegate;
 
 @end
 
-@implementation LLChatViewController {
-    BOOL _deferringSystemGestures;
-}
+@implementation LLChatViewController
 
 - (instancetype)initWithUser:(LLChatUserModel *)userModel {
     self = [super init];
@@ -71,14 +71,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //UI布局
+    [self createViews];
     //屏蔽系统底部手势
-    _deferringSystemGestures = YES;
-    [self.view addSubview:self.tableView];
-    [self.view addSubview:self.inputView];
+    self.deferredSystemGestures = YES;
+    //加载聊天记录
     [self loadMessage:0];
+    //模拟发送消息
     [self setRightItem];
 }
 
+- (void)createViews {
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.inputView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateRecognizerDelegate:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self updateRecognizerDelegate:NO];
+}
+
+//从数据库加载聊天记录
 - (void)loadMessage:(NSInteger)page {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         if (self.userModel) {
@@ -558,9 +576,65 @@
     return _recordAnimation;
 }
 
+#pragma mark - 录音按钮手势冲突处理
+//设置手势代理
+- (void)updateRecognizerDelegate:(BOOL)appear {
+    if (appear) {
+        if (self.recognizerDelegate == nil) {
+            self.recognizerDelegate = self.navigationController.interactivePopGestureRecognizer.delegate;
+        }
+        self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    }
+    else {
+        self.navigationController.interactivePopGestureRecognizer.delegate = self.recognizerDelegate;
+    }
+}
+
+//是否响应触摸事件
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (self.navigationController.viewControllers.count <= 1) return NO;
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGPoint point = [touch locationInView:gestureRecognizer.view];
+        if (point.y > LLCHAT_SCREEN_HEIGHT-LLCHAT_INPUT_H-LLCHAT_BOTTOM_H) {
+            return NO;
+        }
+        if (point.x <= 100) {//设置手势触发区
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGFloat tx = [(UIPanGestureRecognizer *)gestureRecognizer translationInView:gestureRecognizer.view].x;
+        if (tx < 0) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+//是否与其他手势共存，一般使用默认值(默认返回NO：不与任何手势共存)
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    
+    //UIScrollView的滑动冲突
+    if ([otherGestureRecognizer.view isKindOfClass:[UIScrollView class]]) {
+        
+        UIScrollView *scrollow = (UIScrollView *)otherGestureRecognizer.view;
+        if (scrollow.bounds.size.width >= scrollow.contentSize.width) {
+            return NO;
+        }
+        if (scrollow.contentOffset.x == 0) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 //屏蔽屏幕底部的系统手势
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
-    if (_deferringSystemGestures) {
+    if (self.isDeferredSystemGestures) {
         return  UIRectEdgeBottom;
     }
     return UIRectEdgeNone;
