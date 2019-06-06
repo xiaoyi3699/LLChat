@@ -14,10 +14,12 @@
 		7510EA9B2276A5C6000B58D9 /* LLChatDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA9A2276A5C6000B58D9 /* LLChatDBManager.m */; };
 		7510EA9E2276A704000B58D9 /* LLChatSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EA9D2276A704000B58D9 /* LLChatSessionModel.m */; };
 		7510EAA12276AAFD000B58D9 /* LLChatGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7510EAA02276AAFD000B58D9 /* LLChatGroupModel.m */; };
+		7512681C22A8AD8A00F86D7B /* LLRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7512681B22A8AD8A00F86D7B /* LLRefresh.bundle */; };
+		7512681E22A8AD9700F86D7B /* LLVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7512681D22A8AD9700F86D7B /* LLVideoPlayer.bundle */; };
+		7512682122A8ADF000F86D7B /* LLFeatureStatic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7512682022A8ADF000F86D7B /* LLFeatureStatic.framework */; };
 		7525CBF8228D46C500A2A70F /* LLEmoticon1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7525CBF6228D46C500A2A70F /* LLEmoticon1.plist */; };
 		7525CBF9228D46C500A2A70F /* LLEmoticon2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7525CBF7228D46C500A2A70F /* LLEmoticon2.plist */; };
 		7525CBFE228E5E8E00A2A70F /* LLEmoticonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7525CBFD228E5E8E00A2A70F /* LLEmoticonManager.m */; };
-		7525CC0A228E62B800A2A70F /* LLFeatureStatic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7525CC09228E62B800A2A70F /* LLFeatureStatic.framework */; };
 		7525CC0F228E638B00A2A70F /* LLSessionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7525CC0D228E638B00A2A70F /* LLSessionTableViewCell.m */; };
 		75279F8A21ED7CFD00DAE00B /* LLChatSystemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8921ED7CFD00DAE00B /* LLChatSystemCell.m */; };
 		75279F8D21ED7D3000DAE00B /* LLChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 75279F8C21ED7D3000DAE00B /* LLChatBaseCell.m */; };
@@ -67,11 +69,13 @@
 		7510EA9D2276A704000B58D9 /* LLChatSessionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatSessionModel.m; sourceTree = "<group>"; };
 		7510EA9F2276AAFD000B58D9 /* LLChatGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatGroupModel.h; sourceTree = "<group>"; };
 		7510EAA02276AAFD000B58D9 /* LLChatGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLChatGroupModel.m; sourceTree = "<group>"; };
+		7512681B22A8AD8A00F86D7B /* LLRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LLRefresh.bundle; sourceTree = "<group>"; };
+		7512681D22A8AD9700F86D7B /* LLVideoPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LLVideoPlayer.bundle; sourceTree = "<group>"; };
+		7512682022A8ADF000F86D7B /* LLFeatureStatic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LLFeatureStatic.framework; sourceTree = "<group>"; };
 		7525CBF6228D46C500A2A70F /* LLEmoticon1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LLEmoticon1.plist; sourceTree = "<group>"; };
 		7525CBF7228D46C500A2A70F /* LLEmoticon2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LLEmoticon2.plist; sourceTree = "<group>"; };
 		7525CBFC228E5E8E00A2A70F /* LLEmoticonManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLEmoticonManager.h; sourceTree = "<group>"; };
 		7525CBFD228E5E8E00A2A70F /* LLEmoticonManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLEmoticonManager.m; sourceTree = "<group>"; };
-		7525CC09228E62B800A2A70F /* LLFeatureStatic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LLFeatureStatic.framework; sourceTree = "<group>"; };
 		7525CC0D228E638B00A2A70F /* LLSessionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSessionTableViewCell.m; sourceTree = "<group>"; };
 		7525CC0E228E638B00A2A70F /* LLSessionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLSessionTableViewCell.h; sourceTree = "<group>"; };
 		75279F8821ED7CFD00DAE00B /* LLChatSystemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLChatSystemCell.h; sourceTree = "<group>"; };
@@ -139,7 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7525CC0A228E62B800A2A70F /* LLFeatureStatic.framework in Frameworks */,
+				7512682122A8ADF000F86D7B /* LLFeatureStatic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,12 +191,22 @@
 			path = LLChatBaseModel;
 			sourceTree = "<group>";
 		};
+		7512681F22A8ADA100F86D7B /* LLFramework */ = {
+			isa = PBXGroup;
+			children = (
+				7512681B22A8AD8A00F86D7B /* LLRefresh.bundle */,
+				7512681D22A8AD9700F86D7B /* LLVideoPlayer.bundle */,
+				7512682022A8ADF000F86D7B /* LLFeatureStatic.framework */,
+			);
+			path = LLFramework;
+			sourceTree = "<group>";
+		};
 		7525CBFF228E60F200A2A70F /* FeatureStatic */ = {
 			isa = PBXGroup;
 			children = (
 				7510EA37226FFD50000B58D9 /* LLChatSqliteManager.h */,
 				7510EA38226FFD50000B58D9 /* LLChatSqliteManager.m */,
-				7525CC09228E62B800A2A70F /* LLFeatureStatic.framework */,
+				7512681F22A8ADA100F86D7B /* LLFramework */,
 			);
 			path = FeatureStatic;
 			sourceTree = "<group>";
@@ -577,7 +591,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7512681E22A8AD9700F86D7B /* LLVideoPlayer.bundle in Resources */,
 				75F9E6F921391B4E00492ED8 /* Assets.xcassets in Resources */,
+				7512681C22A8AD8A00F86D7B /* LLRefresh.bundle in Resources */,
 				75614246213F6F7B004CC91B /* LLEmojis.plist in Resources */,
 				7554ED1C229650A400F81CB6 /* preview.png in Resources */,
 				7525CBF8228D46C500A2A70F /* LLEmoticon1.plist in Resources */,
@@ -756,6 +772,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common",
 					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common/FeatureStatic",
+					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common/FeatureStatic/LLFramework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LLChat/LLAppDelegate/LLPrefixHeader.pch;
@@ -790,6 +807,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common",
 					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common/FeatureStatic",
+					"$(PROJECT_DIR)/LLChat/MMVC/Chat/Common/FeatureStatic/LLFramework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LLChat/LLAppDelegate/LLPrefixHeader.pch;
