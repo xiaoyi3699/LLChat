@@ -14,13 +14,14 @@
 
 ![Image text](https://github.com/wangzhaomeng/LLChat/blob/master/LLChat/GitImage/setting.png?raw=true)
 
-**注：解释一下此处为何使用.framework文件。**
+**注：解释一下此处的.framework文件。**
 ```
 这里的.framework是我近年来总结的工具类库，完整、成熟、稳定性强，并且完全使用系统语言，未添加任何第三方。
 定义了很多快捷函数，比如：imageView.LLWidth、R_G_B(20, 20, 20)、URLEncode、base64Encode等等；
 严格按照驼峰命名法，见词知义，可读性较高；
-打包后总体积在1M左右，不必担心增加项目体积。
-为了方便集成与移植，特意打包成.framework文件。
+打包后总体积在1M左右，不必担心增加项目体积；
+为了方便集成与移植，特意打包成.framework文件；
+聊天的核心代码均为源码，并未参与.framework。
 ```
 **导入.framework文件的注意事项。**
 ```
