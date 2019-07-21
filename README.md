@@ -1,3 +1,16 @@
+重要：LLChat已更改为WZMChatUI，内部文件及资源都已更改，老版的LLChat功能一切正常，但是不会再更新了。
+LLChat最后一次更新日期为2019/7/21，此时iOS最新版本为12.3.1。
+理论上LLChat在未来很长一段时间内都可正常使用，未集成新版的同学也大可放心。
+
+若还未集成LLChat的同学请前往集成新版。
+[点击前往WZMChatUI](https://github.com/wangzhaomeng/WZMChatUI)
+
+新版本优点：
+1、采纳某位同学的意见，剔除了.framework，全部替换为开源类；
+2、表情资源使用.boundle方式加载，集成更加方便；
+3、表情键盘与聊天UI框架完全分离，可单独使用，并且使用抽象类的方式将表情键盘就行了封装，使自定义表情键盘变的非常非常非常的简单；
+4、因本人闲暇之余写过一些pod库，未避免与该聊天框架产生文件冲突，特意将该框架剥离出来。
+
 **一、效果图**
 
 ![Image text](https://github.com/wangzhaomeng/LLChat/blob/master/LLChat/GitImage/preview.png?raw=true)
